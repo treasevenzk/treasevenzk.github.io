@@ -1,7 +1,7 @@
 # Site settings
 title: Treaseven Blog
 SEOTitle: 凯的博客 | Treaseven Blog
-header-img: img/post-bg-desk.jpg
+header-img: img/bg16.jpg
 email: treaseven123456@gmail.com
 description: "Every failure is leading towards success."
 keyword: "compiler TVM"
@@ -12,7 +12,7 @@ github_repo: "https://github.com/qiubaiying/qiubaiying.github.io.git" # you code
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
 # sidebar-about-description: "Goals determine what you going to be!"
-sidebar-avatar: /img/about-BY-gentle.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
+sidebar-avatar: /img/bg4.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
 
