@@ -12,5 +12,9 @@ tags:
     - Tensor Computation
 ---
 
-#### 要解决的问题
-slkajglksj;lkga
+### 要解决的问题
+在不同的硬件平台上，设计高性能tensor program
+
+### 已有的解决方案
+1. predefined es (TVM、FlexTensor)
+2. aggressive pruning by evaluating incomplete programs (Halide auto-scheduler)
