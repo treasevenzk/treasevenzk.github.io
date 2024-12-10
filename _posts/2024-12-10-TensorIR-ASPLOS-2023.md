@@ -2,7 +2,7 @@
 layout:     post
 title:      TensorIR ASPLOS 2023
 subtitle:   TensorIR An Abstraction for Automatic Tensorized Program Optimization
-date:       2024-12-13
+date:       2024-12-10
 author:     Treaseven
 header-img: img/bg7.jpg
 catalog: true
