@@ -12,9 +12,9 @@ tags:
     - Tensor Computation
 ---
 
-### 要解决的问题
-在不同的硬件平台上，设计高性能tensor program
+### Background
+Compilers apply program transformations in order to exploit hardware parallelism and memory hierarchy. They fail to exploit the natural robustness of neural networks.<br>
+Neural architecture search(NAS) mutate networks by operations, exploiting the resilience of DNNs.
 
-### 已有的解决方案
-1. predefined es (TVM、FlexTensor)
-2. aggressive pruning by evaluating incomplete programs (Halide auto-scheduler)
+### Our Approach
+combine neural architecture and compiler optimization in a unified framework
