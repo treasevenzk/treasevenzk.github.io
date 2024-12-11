@@ -12,12 +12,12 @@ tags:
     - Tensor Computation
 ---
 
-### Background
-Compilers apply program transformations in order to exploit hardware parallelism and memory hierarchy. They fail to exploit the natural robustness of neural networks.<br>
-Neural architecture search(NAS) mutate networks by operations, exploiting the resilience of DNNs.
-
-### Our Approach
-combine neural architecture and compiler optimization in a unified framework
+### Introduction
+* 之前采用机器学习方法来搜索循环嵌套变换的程序空间不能解决自动张量程序生成
+* 作者提出使用自动编译方法来解决张量程序优化问题
+面临的挑战
+(1) ***Abstraction for Tensorized Programs***
+(2) ***Large Design Space of Possible Tensorized Program Optimizations***
 
 
 ### Reference

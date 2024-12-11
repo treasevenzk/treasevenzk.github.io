@@ -70,4 +70,31 @@ def image_preprocessing(image):
     image = image[np.newaxis, :]
     return image.astype('float32')
 x = image_preprocessing(image)
+# Compile Pre-trained Models 目前仅支持静态图操作，不支持动态图
+relay_mod, relay_params = relay.frontend.from_mxnet(model, {'data', x.shape})
+target = 'llvm'
+with relay.build_config(opt_level=3):
+    graph, mod, params = relay.build(relay_mod, target, params=relay_params)  # graph描述神经网络、mod代表编译算子、params代表权重参数
+# Inference
+ctx = tvm.context(target)
+rt = tvm.contrib.graph_runtime.create(graph, mod, ctx)
+rt.set_input(**params)
+rt.run(data=tvm.nd.array(x))
+scores = rt.get_output(0).asnumpy()[0]
+# Saving the compiled library
+name = 'resnet18'
+graph_fn, mod_fn, params_fn = [name+ext for ext in ('.json', '.tar', '.params')]
+mod.export_library(mod_fn)
+with open(graph_fn, 'w') as f:
+    f.write(graph)
+with open(params_fn, 'wb') as f:
+    f.write(relay.save_param_dict(params))
+loaded_graph = open(graph_fn).read()
+loaded_mod = tvm.runtime.load_module(mod_fn)
+loaded_params = open(params_fn, "rb").read()
+loaded_rt = tvm.contrib.graph_runtime.create(loaded_graph, loaded_mod, ctx)
+loaded_rt.load_params(loaded_params)
+loaded_rt.run(data=tvm.nd.array(x))
+loaded_scores = loaded_rt.get_output(0).asnumpy()[0]
+tvm.testing.assert_allclose(loaded_scores, scores)
 ```
