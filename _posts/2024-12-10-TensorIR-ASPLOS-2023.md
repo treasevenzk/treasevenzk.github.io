@@ -18,3 +18,7 @@ Neural architecture search(NAS) mutate networks by operations, exploiting the re
 
 ### Our Approach
 combine neural architecture and compiler optimization in a unified framework
+
+
+### Reference
+[TensorIR: An Abstraction for Automatic Tensorized Program Optimization](https://dl.acm.org/doi/pdf/10.1145/3575693.3576933)
