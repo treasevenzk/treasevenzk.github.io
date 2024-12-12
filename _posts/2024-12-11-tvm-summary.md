@@ -19,7 +19,8 @@ tags:
 ##### Vector Add
 * define the tvm computation
 * creating a schedule
-* compilation and execution
+* compilation and execution<br>
+
 ```
 # 原始程序
 import numpy as np
