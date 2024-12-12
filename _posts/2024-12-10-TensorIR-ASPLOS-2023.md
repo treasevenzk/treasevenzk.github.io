@@ -10,7 +10,7 @@ tags:
     - Machine Learning Compiler
     - Deep Neural Network
     - Tensor Computation
----
+--- 
 
 ### Introduction
 * 之前采用机器学习方法来搜索循环嵌套变换的程序空间不能解决自动张量程序生成
@@ -19,6 +19,27 @@ tags:
 (1) ***Abstraction for Tensorized Programs***
 (2) ***Large Design Space of Possible Tensorized Program Optimizations***
 
+
+### Evaluation
+#### Single Operator Evaluation
+
+
+<img width="500" height="500" src="/img/post-tensorir-single.png"/>
+
+
+<img width="500" height="500" src="/img/post-tensorir-single-platform.png"/>
+
+
+#### End-to-End Model Evaluation
+<img width="500" height="500" src="/img/post-tensorir-end-performance.png"/>
+
+
+#### ARM CPU Evaluation
+<img width="500" height="400" src="/img/post-tensorir-arm-single.png"/>
+
+
+
+<img width="500" height="400" src="/img/post-tensorir-arm-end.png"/>
 
 ### Reference
 [TensorIR: An Abstraction for Automatic Tensorized Program Optimization](https://dl.acm.org/doi/pdf/10.1145/3575693.3576933)
