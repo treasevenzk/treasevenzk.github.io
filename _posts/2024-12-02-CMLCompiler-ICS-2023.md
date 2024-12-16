@@ -11,3 +11,17 @@ tags:
     - Deep Learning
     - Compiler
 ---
+
+
+### Evaluation
+
+
+<img width="1000" height="300" src="/img/post-cmlcompiler-performance.png"/>
+
+
+
+<img width="1000" height="400" src="/img/post-cmlcompiler-execution.png"/>
+
+
+
+<img width="1000" height="400" src="/img/post-cmlcompiler-latency.png"/>
