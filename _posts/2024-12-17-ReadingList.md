@@ -26,4 +26,7 @@ Graph Optimization
 Operator Optimization
 - <img src="https://img.shields.io/badge/14-pages-green.svg" alt="14-pages" align="left" style="vertical-align: text-bottom;"> [Chimera: An Analytical Optimizing Framework for Effective Compute-intensive Operators Fusion](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10071018) - Size Zheng, Siyuan Chen, Peidi Song, Renze Chen, Xiuhong Li, Shengen Yan, Dahua Lin, Jingwen Leng, Yun Liang, HPCA, 2023
 
-- ![24-pages](https://img.shields.io/badge/24-pages-green.svg) [The Deep Learning Compiler: A Comprehensive Survey](https://arxiv.org/pdf/2002.03794) - Mingzhen Li, Yi Liu, Xiaoyan Liu, Qingxiao Sun, Xin You, Hailong Yang, Zhongzhi Luan, Lin Gan, Guangwen Yang, Depei Qian, IEEE Transactions on Parallel and Distributed Systems, 2021
+- <div style="display: inline-block; white-space: nowrap;">
+  <img src="https://img.shields.io/badge/24-pages-green.svg" alt="24-pages">
+  <span><a href="...">Chimera: An Analytical Optimizing Framework for Effective Compute-intensive Operators Fusion</a> - Size Zheng, Siyuan Chen, Peidi Song, Renze Chen, Xiuhong Li, Shengen Yan, Dahua Lin, Jingwen Leng, Yun Liang, HPCA, 2023</span>
+</div>
