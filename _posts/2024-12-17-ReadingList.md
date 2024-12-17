@@ -25,3 +25,5 @@ Graph Optimization
 
 Operator Optimization
 - <img src="https://img.shields.io/badge/14-pages-green.svg" alt="14-pages" align="top"> [Chimera: An Analytical Optimizing Framework for Effective Compute-intensive Operators Fusion](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10071018) - Size Zheng, Siyuan Chen, Peidi Song, Renze Chen, Xiuhong Li, Shengen Yan, Dahua Lin, Jingwen Leng, Yun Liang, HPCA, 2023
+
+- ![14-pages](https://img.shields.io/badge/14-pages-green.svg) [Chimera: An Analytical Optimizing Framework for Effective Compute-intensive Operators Fusion](论文链接) - Size Zheng, Siyuan Chen, Peidi Song, Renze Chen, Xiuhong Li, Shengen Yan, Dahua Lin, Jingwen Leng, Yun Liang, HPCA, 2023
