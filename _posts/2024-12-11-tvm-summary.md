@@ -99,3 +99,32 @@ loaded_rt.run(data=tvm.nd.array(x))
 loaded_scores = loaded_rt.get_output(0).asnumpy()[0]
 tvm.testing.assert_allclose(loaded_scores, scores)
 ```
+
+#### Expression for Operators
+##### Data Types
+```
+import tvm
+from tvm import te
+import numpy as np
+
+n = 100
+
+def tvm_vector_add(dtype):
+    A = te.placeholder((n,), dtype=dtype)
+    B = te.placeholder((n,), dtype=dtype)
+    C = te.compute(A.shape, lambda i: A[i] + B[i])
+    print('expressiuon dtype:', A.dtype, B.dtype, C.dtype)
+    s = te.create_schedule(C.op)
+    return tvm.build(s, [A, B, C])
+
+def test_mod(mod, dtype):
+    a, b, c = d2ltvm.get_abc(n, lambda x: tvm.nd.array(x.astype(dtype)))
+    mod(a, b, c)
+    np.testing.asser_equal(c.asnumpy(), a.asnumpy() + b.asnumpy())
+
+for dtype in ['float16', 'float64', 'int8', 'int16', 'int64']:
+    mod = tvm_vector_add(dtype)
+    test_mod(mod, dtype)
+``` 
+
+##### Converting Elements Data Types

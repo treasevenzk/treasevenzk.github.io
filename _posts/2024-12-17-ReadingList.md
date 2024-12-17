@@ -15,13 +15,17 @@ tags:
 ### Paper
 ---
 Survery
-- <img src="https://img.shields.io/badge/24-pages-green.svg" alt="24-pages" align="left" style="vertical-align: text-bottom; height: 15px;"> [The Deep Learning Compiler: A Comprehensive Survey](https://arxiv.org/pdf/2002.03794) - Mingzhen Li, Yi Liu, Xiaoyan Liu, Qingxiao Sun, Xin You, Hailong Yang, Zhongzhi Luan, Lin Gan, Guangwen Yang, Depei Qian, IEEE Transactions on Parallel and Distributed Systems, 2021
+- <img src="https://img.shields.io/badge/24-pages-green.svg" alt="24-pages" align="left" style="vertical-align: text-bottom;"> [The Deep Learning Compiler: A Comprehensive Survey](https://arxiv.org/pdf/2002.03794) - Mingzhen Li, Yi Liu, Xiaoyan Liu, Qingxiao Sun, Xin You, Hailong Yang, Zhongzhi Luan, Lin Gan, Guangwen Yang, Depei Qian, IEEE Transactions on Parallel and Distributed Systems, 2021
 
 Optimizing Tensor Program
-- <img src="https://img.shields.io/badge/6-pages-green.svg" alt="6-pages" align="left" style="vertical-align: text-bottom; height: 30px;"> [A Holistic Functionalization Approach to Optimizing Imperative Tensor Programs in Deep Learning](https://dl.acm.org/doi/pdf/10.1145/3649329.3658483) - Jinming Ma, Xiuhong Li, Zihan Wang Xingcheng Zhang, Shengen Yan, Yuting Chen, Yueqian Zhang, Minxi Jin, Lijuan Jiang, Yun (Eric) Liang, Chao Yang, Dahua Lin, DAC, 2024
+- <img src="https://img.shields.io/badge/6-pages-green.svg" alt="6-pages" align="left" style="vertical-align: text-bottom;"> [A Holistic Functionalization Approach to Optimizing Imperative Tensor Programs in Deep Learning](https://dl.acm.org/doi/pdf/10.1145/3649329.3658483) - Jinming Ma, Xiuhong Li, Zihan Wang Xingcheng Zhang, Shengen Yan, Yuting Chen, Yueqian Zhang, Minxi Jin, Lijuan Jiang, Yun (Eric) Liang, Chao Yang, Dahua Lin, DAC, 2024
 
 Graph Optimization
-- <img src="https://img.shields.io/badge/9-pages-green.svg" alt="9-pages" align="left" style="vertical-align: text-bottom; height: 10px;"> [Memory-aware Scheduling for Complex Wired Networks with Iterative Graph Optimization](https://arxiv.org/pdf/2308.13898) - Shuzhang Zhong, Meng Li, Yun Liang, Runsheng Wang, Ru Huang, ICCAD, 2023
+- <img src="https://img.shields.io/badge/9-pages-green.svg" alt="9-pages" align="left" style="vertical-align: text-bottom;"> [Memory-aware Scheduling for Complex Wired Networks with Iterative Graph Optimization](https://arxiv.org/pdf/2308.13898) - Shuzhang Zhong, Meng Li, Yun Liang, Runsheng Wang, Ru Huang, ICCAD, 2023
 
 Operator Optimization
-- <img src="https://img.shields.io/badge/14-pages-green.svg" alt="14-pages" align="left" style="vertical-align: text-bottom; height: 20px;"> [Chimera: An Analytical Optimizing Framework for Effective Compute-intensive Operators Fusion](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10071018) - Size Zheng, Siyuan Chen, Peidi Song, Renze Chen, Xiuhong Li, Shengen Yan, Dahua Lin, Jingwen Leng, Yun Liang, HPCA, 2023
+- <img src="https://img.shields.io/badge/14-pages-green.svg" alt="14-pages" align="left" style="vertical-align: text-bottom;"> [Chimera: An Analytical Optimizing Framework for Effective Compute-intensive Operators Fusion](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10071018) - Size Zheng, Siyuan Chen, Peidi Song, Renze Chen, Xiuhong Li, Shengen Yan, Dahua Lin, Jingwen Leng, Yun Liang, HPCA, 2023
+
+
+ML Optimization
+- <img src="https://img.shields.io/badge/20-pages-green.svg" alt="20-pages" align="left" style="vertical-align: text-bottom;"> [A Tensor Compiler for Unified Machine Learning Prediction Serving](https://www.usenix.org/system/files/osdi20-nakandala.pdf) - Supun Nakandalac, Karla Saurm, Gyeong-In Yus, Konstantinos Karanasosm, Carlo Curinom, Markus Weimerm, Matteo Interlandim, OSDI, 2020
