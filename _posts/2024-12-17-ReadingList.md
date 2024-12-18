@@ -29,3 +29,6 @@ Operator Optimization
 
 ML Optimization
 - <img src="https://img.shields.io/badge/20-pages-green.svg" alt="20-pages" align="left" style="vertical-align: text-bottom;"> [A Tensor Compiler for Unified Machine Learning Prediction Serving](https://www.usenix.org/system/files/osdi20-nakandala.pdf) - Supun Nakandalac, Karla Saurm, Gyeong-In Yus, Konstantinos Karanasosm, Carlo Curinom, Markus Weimerm, Matteo Interlandim, OSDI, 2020
+
+Automate
+- <img src="https://img.shields.io/badge/14-pages-green.svg" alt="14-pages" align="left" style="vertical-align: text-bottom;"> [AMOS: Enabling Automatic Mapping for Tensor Computations On Spatial Accelerators with Hardware Abstraction](https://dl.acm.org/doi/pdf/10.1145/3470496.3527440) - Size Zheng, Renze Chen, Anjiang Wei, Yicheng Jin, Qin Han, Liqiang Lu, Bingyang Wu, Xiuhong Li, Shengen Yan, Yun Liang, ISCA, 2022
