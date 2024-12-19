@@ -24,20 +24,20 @@ with tensor-oriented data analytics is how to design a high-performance library 
 
 ### Front-end Analysis and Schedule Space
 ***Static Analysis***:
-$O[i_1, i_2, \ldots, i_M] = \mathcal{F}(I_1, I_2, \ldots, I_N)$
-spatial loops: the loops without data dependency
-reduce loops: the lossp have data dependency and usually run in serial
-statistical information $\rightarrow$ graph nodes (number of spatial loops and reduce loops、trip counts of spatial loops and reduce loops、loop orders)
+$O[i_1, i_2, \ldots, i_M] = \mathcal{F}(I_1, I_2, \ldots, I_N)$ <br>
+spatial loops: the loops without data dependency <br>
+reduce loops: the lossp have data dependency and usually run in serial <br>
+statistical information $\rightarrow$ graph nodes (number of spatial loops and reduce loops、trip counts of spatial loops and reduce loops、loop orders) <br>
 structural information $\rightarrow$ graph edges (number of nodes in mini-graph、number of input tensors and output tensors of each node、number of consumer nodes of each node)
 
 ***Schedule Space Generation***
-(1) limit the depth of primitives combination
-(2) prune the parameter space
+(1) limit the depth of primitives combination <br>
+(2) prune the parameter space <br>
 (3) pre-determine certain decisions for different hardware
 
 ### Back-end Exploration and Optimization
 ***Exploration with Heuristics and Machine learning***:
-(1) which point in H is selected as the starting point for the next step (heuristic method)
+(1) which point in H is selected as the starting point for the next step (heuristic method) <br>
 (2) given the starting point p, which direction d to move along to get a new point in G (machine learning method)
 
 ***Performance Comparison***
