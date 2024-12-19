@@ -13,9 +13,9 @@ tags:
 ---
 
 ### Motivatioin
-leverage DL's well-defined unified abstractions and highly mature compilers, optimization technologies, and frameworks
-面临的挑战：
-(1) 深度学习算子关注张量，经典机器学习关注数组、矩阵、标量和表格
+leverage DL's well-defined unified abstractions and highly mature compilers, optimization technologies, and frameworks<br>
+面临的挑战：<br>
+(1) 深度学习算子关注张量，经典机器学习关注数组、矩阵、标量和表格<br>
 (2) 深度学习模型都是神经网络模型，经典机器学习模型几乎不能用神经网络表示
 
 ### The Unified Abstraction
@@ -42,7 +42,7 @@ leverage DL's well-defined unified abstractions and highly mature compilers, opt
 
 <img width="500" height="400" src="/img/post-cmlcompiler-dtype-rewriting.png"/>
 
-***Sparse operator replacing***：识别稀疏权重，将密集算子替换为稀疏实现
+***Sparse operator replacing***：识别稀疏权重，将密集算子替换为稀疏实现<br>
 ***Redundant elimination***：消除不影响最终结果的冗余算子
 
 ### Evaluation
@@ -59,8 +59,8 @@ leverage DL's well-defined unified abstractions and highly mature compilers, opt
 <img width="1000" height="400" src="/img/post-cmlcompiler-latency.png"/>
 
 ### Thinking
-(1) 支持算子有限，如矩阵分解算法(SVD相关:矩阵正交化算子、特征值计算算子、特征向量计算算子；PCA相关：协方差矩阵计算算子、降维映射算子；NMF相关)、概率模型(贝叶斯模型：条件概率计算算子、后验概率更新算子、边缘化算子；EM算法：期望计算算子、最大化算子)；降维和流形学习、时间序列算法、集成学习(Stacking: 模型组合算子、预测融合算子；Blending：权重计算算子、加权平均算子、预测集成算子)
-(2) 优化方法局限：主要依赖三种图重写优化(算子级优化：算子融合优化、内存优化、向量化优化；图级优化)、缺乏自动优化策略的研究(自动调优)、跨层优化怎么做，这个点在深度模型中目前也没有做到
+(1) 支持算子有限，如矩阵分解算法(SVD相关:矩阵正交化算子、特征值计算算子、特征向量计算算子；PCA相关：协方差矩阵计算算子、降维映射算子；NMF相关)、概率模型(贝叶斯模型：条件概率计算算子、后验概率更新算子、边缘化算子；EM算法：期望计算算子、最大化算子)；降维和流形学习、时间序列算法、集成学习(Stacking: 模型组合算子、预测融合算子；Blending：权重计算算子、加权平均算子、预测集成算子)<br>
+(2) 优化方法局限：主要依赖三种图重写优化(算子级优化：算子融合优化、内存优化、向量化优化；图级优化)、缺乏自动优化策略的研究(自动调优)、跨层优化怎么做，这个点在深度模型中目前也没有做到<br>
 (3) 评估方面的不足：基准测试数据集单一(主要使用YearPrediction数据集、缺乏在不同规模和特征的数据集上的评估、可以使用更多真实场景的数据集测试)
 
 ||CMLCompiler|Hummingbird|
