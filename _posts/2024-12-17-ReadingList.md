@@ -113,8 +113,7 @@ Automatic
 
 - <img src="https://img.shields.io/badge/18-pages-green.svg" alt="18-pages" align="left"> [GCD²: A Globally Optimizing Compiler for Mapping DNNs to Mobile DSPs](https://par.nsf.gov/servlets/purl/10417473) - Wei Niu, Jiexiong Guan, Xipeng Shen, Yanzhi Wang, Gagan Agrawal, Bin Ren, MICRO, 2022
 
-- <img src="https://img.shields.io/badge/13-pages-green.svg" alt="13-pages" align="left"> [ETO: Accelerating Optimization of DNN Operators by
-High-Performance Tensor Program Reuse](https://www.vldb.org/pvldb/vol15/p183-chen.pdf) -Jingzhi Fang, Yanyan Shen, Yue Wan, Lei Chen, VLDB, 2022
+- <img src="https://img.shields.io/badge/13-pages-green.svg" alt="13-pages" align="left"> [ETO: Accelerating Optimization of DNN Operators by High-Performance Tensor Program Reuse](https://www.vldb.org/pvldb/vol15/p183-chen.pdf) -Jingzhi Fang, Yanyan Shen, Yue Wan, Lei Chen, VLDB, 2022
 
 
 - <img src="https://img.shields.io/badge/12-pages-green.svg" alt="12-pages" align="left"> [Glow: Graph Lowering Compiler Techniques for Neural Networks](https://arxiv.org/pdf/1805.00907) -Nadav Rotem, Jordan Fix, Saleem Abdulrasool, Garret Catron, Summer Deng, Roman Dzhabarov, Nick Gibson, James Hegeman, Meghan Lele, Roman Levenstein, Jack Montgomery, Bert Maher, Satish Nadathur, Jakob Olesen, Jongsoo Park, Artem Rakhov, Misha Smelyanskiy, Man Wang, arxiv, 2019
