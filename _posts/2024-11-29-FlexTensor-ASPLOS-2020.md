@@ -24,10 +24,47 @@ with tensor-oriented data analytics is how to design a high-performance library 
 
 ### Front-end Analysis and Schedule Space
 ***Static Analysis***:
-
-O[i_1, i_2, \ldots, i_M] = \mathcal{F}(I_1, I_2, \ldots, I_N)
+$O[i_1, i_2, \ldots, i_M] = \mathcal{F}(I_1, I_2, \ldots, I_N)$
+spatial loops: the loops without data dependency
+reduce loops: the lossp have data dependency and usually run in serial
+statistical information $\rightarrow$ graph nodes (number of spatial loops and reduce loops、trip counts of spatial loops and reduce loops、loop orders)
+structural information $\rightarrow$ graph edges (number of nodes in mini-graph、number of input tensors and output tensors of each node、number of consumer nodes of each node)
 
 ***Schedule Space Generation***
+(1) limit the depth of primitives combination
+(2) prune the parameter space
+(3) pre-determine certain decisions for different hardware
+
+### Back-end Exploration and Optimization
+***Exploration with Heuristics and Machine learning***:
+(1) which point in H is selected as the starting point for the next step (heuristic method)
+(2) given the starting point p, which direction d to move along to get a new point in G (machine learning method)
+
+***Performance Comparison***
+
+***Optimized Schedule Implementation***:
+
+<img width="500" height="300" src="/img/post-flextensor-algorithm.png"/>
+
+
+<img width="1000" height="400" src="/img/post-flextensor-schedule-generation.png"/>
+
+
+### Evaluation
+#### Overall Speedups on GPUs
+
+<img width="1000" height="400" src="/img/post-flextensor-performance.png"/>
+
+
+<img width="1000" height="600" src="/img/post-flextensor-performance-2D.png"/>
+
+
+<img width="1000" height="200" src="/img/post-flextensor-exploration-time.png"/>
+
+
+### Thinking
+
+
 
 ### Reference 
 [FlexTensor: An Automatic Schedule Exploration and Optimization Framework for Tensor Computation on Heterogeneous System](https://www.cl.cam.ac.uk/~ey204/teaching/ACS/R244_2022_2023/papers/ZHENG_ASPLOS_2020.pdf)
