@@ -45,6 +45,10 @@ with Korch](https://dl.acm.org/doi/pdf/10.1145/3620666.3651383) - Muyan Hu, Ashw
 
 - <img src="https://img.shields.io/badge/14-pages-green.svg" alt="14-pages" align="left"> [Chimera: An Analytical Optimizing Framework for Effective Compute-intensive Operators Fusion](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10071018) - Size Zheng, Siyuan Chen, Peidi Song, Renze Chen, Xiuhong Li, Shengen Yan, Dahua Lin, Jingwen Leng, Yun Liang, HPCA, 2023
 
+- <img src="https://img.shields.io/badge/13-pages-green.svg" alt="13-pages" align="left"> [UNIT: Unifying tensorized instruction compilation](https://arxiv.org/pdf/2101.08458) - Jian Weng, Animesh Jain, Jie Wang, Leyuan Wang, Yida Wang, Tony Nowatzki, CGO, 2021
+
+- <img src="https://img.shields.io/badge/13-pages-green.svg" alt="13-pages" align="left"> [Tensor Program Optimization with Probabilistic Programs](https://proceedings.neurips.cc/paper_files/paper/2022/file/e894eafae43e68b4c8dfdacf742bcbf3-Paper-Conference.pdf) - Junru Shao, Xiyou Zhou, Siyuan Feng, Bohan Hou, Ruihang Lai, Hongyi Jin, Wuwei Lin, Masahiro Masuda, Cody Hao Yu, Tianqi Chen, NIPS, 2022
+
 Graph Optimization
 - <img src="https://img.shields.io/badge/9-pages-green.svg" alt="9-pages" align="left"> [Memory-aware Scheduling for Complex Wired Networks with Iterative Graph Optimization](https://arxiv.org/pdf/2308.13898) - Shuzhang Zhong, Meng Li, Yun Liang, Runsheng Wang, Ru Huang, ICCAD, 2023
 
@@ -53,6 +57,8 @@ Graph Optimization
 - <img src="https://img.shields.io/badge/16-pages-green.svg" alt="16-pages" align="left"> [TASO: Optimizing Deep Learning Computation with Automatic Generation of Graph Substitutions](https://www.cs.cmu.edu/~zhihaoj2/papers/sosp19.pdf) - Zhihao Jia, Oded Padon, James Thomas, Todd Warszawski, Matei Zaharia, Alex Aiken, SOSP, 2019
 
 - <img src="https://img.shields.io/badge/13-pages-green.svg" alt="13-pages" align="left"> [Optimizing DNN Computation with Relaxed Graph Substitutions](https://www.cs.cmu.edu/~zhihaoj2/papers/sysml19b.pdf) - Zhihao Jia, James Thomas, Todd Warszawski, Mingyu Gao, Matei Zaharia, Alex Aiken, MLSys, 2019
+
+- <img src="https://img.shields.io/badge/15-pages-green.svg" alt="15-pages" align="left"> [Alcop: Automatic load-compute pipelining in deep learning compiler for ai-gpus](https://proceedings.mlsys.org/paper_files/paper/2023/file/d6cde2c1b161daa31be560d062cf2251-Paper-mlsys2023.pdf) - Guyue Huang, Yang Bai, Liu Liu, Yuke Wang, Bei Yu, Yufei Ding, Yuan Xie, MLSys, 2023
 
 
 Performance Prediction of Tensor Programs
@@ -82,6 +88,14 @@ Autotune
 
 - <img src="https://img.shields.io/badge/13-pages-green.svg" alt="13-pages" align="left"> [Bolt: Bridging the gap between auto-tuners and hardware-native performance](https://proceedings.mlsys.org/paper_files/paper/2022/file/1f8053a67ec8e0b57455713cefdd8218-Paper.pdf) - Jiarong Xing, Leyuan Wang, Shang Zhang, Jack Chen, Ang Chen, Yibo Zhu, MLSys, 2022
 
+- <img src="https://img.shields.io/badge/14-pages-green.svg" alt="14-pages" align="left"> [Soter: Analytical Tensor-Architecture Modeling and Automatic Tensor Program Tuning for Spatial Accelerators](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10609702) - Fuyu Wang, Minghua Shen, Yufei Ding, Nong Xiao, ISCA, 2024
+
+- <img src="https://img.shields.io/badge/15-pages-green.svg" alt="15-pages" align="left"> [Felix: Optimizing Tensor Programs with Gradient Descent](https://dl.acm.org/doi/pdf/10.1145/3620666.3651348) - Yifan Zhao, Hashim Sharif, Vikram Adve, Sasa Misailovic, ASPLOS, 2024
+
+- <img src="https://img.shields.io/badge/15-pages-green.svg" alt="15-pages" align="left"> [Tlp: A deep learning-based cost model for tensor program tuning](https://arxiv.org/pdf/2211.03578) - Yi Zhai, Yu Zhang, Shuo Liu, Xiaomeng Chu, Jie Peng, Jianmin Ji, Yanyong Zhang, ASPLOS, 2023
+
+- <img src="https://img.shields.io/badge/18-pages-green.svg" alt="18-pages" align="left"> [RAMMER: Enabling Holistic Deep Learning Compiler Optimizations with rTasks](https://www.usenix.org/system/files/osdi20-ma.pdf) - Lingxiao Ma, Zhiqiang Xie, Zhi Yang, Jilong Xue, Youshan Miao, Wei Cui, Wenxiang Hu, Fan Yang, Lintao Zhang, Lidong Zhou, OSDI, 2020
+
 Automatic
 - <img src="https://img.shields.io/badge/14-pages-green.svg" alt="14-pages" align="left"> [AMOS: Enabling Automatic Mapping for Tensor Computations On Spatial Accelerators with Hardware Abstraction](https://dl.acm.org/doi/pdf/10.1145/3470496.3527440) - Size Zheng, Renze Chen, Anjiang Wei, Yicheng Jin, Qin Han, Liqiang Lu, Bingyang Wu, Xiuhong Li, Shengen Yan, Yun Liang, ISCA, 2022
 
@@ -101,3 +115,20 @@ Automatic
 
 - <img src="https://img.shields.io/badge/13-pages-green.svg" alt="13-pages" align="left"> [ETO: Accelerating Optimization of DNN Operators by
 High-Performance Tensor Program Reuse](https://www.vldb.org/pvldb/vol15/p183-chen.pdf) -Jingzhi Fang, Yanyan Shen, Yue Wan, Lei Chen, VLDB, 2022
+
+
+- <img src="https://img.shields.io/badge/12-pages-green.svg" alt="12-pages" align="left"> [Glow: Graph Lowering Compiler Techniques for Neural Networks](https://arxiv.org/pdf/1805.00907) -Nadav Rotem, Jordan Fix, Saleem Abdulrasool, Garret Catron, Summer Deng, Roman Dzhabarov, Nick Gibson, James Hegeman, Meghan Lele, Roman Levenstein, Jack Montgomery, Bert Maher, Satish Nadathur, Jakob Olesen, Jongsoo Park, Artem Rakhov, Misha Smelyanskiy, Man Wang, arxiv, 2019
+
+- <img src="https://img.shields.io/badge/15-pages-green.svg" alt="15-pages" align="left"> [Heron: Automatically constrained high-performance library generation for deep learning accelerators](https://dl.acm.org/doi/pdf/10.1145/3582016.3582061) -Jun Bi, Qi Guo, Xiaqing Li, Yongwei Zhao, Yuanbo Wen,  Yuxuan Guo, Enshuai Zhou, Xing Hu, Zidong Du, Ling Li, Huaping Chen, Tianshi Chen, ASPLOS, 2023
+
+- <img src="https://img.shields.io/badge/16-pages-green.svg" alt="16-pages" align="left"> [Hydride: A Retargetable and Extensible Synthesis-based Compiler for Modern Hardware Architectures](https://dl.acm.org/doi/pdf/10.1145/3620665.3640385) -Akash Kothari, Abdul Rafae Noor, Muchen Xu, Hassam Uddin, Dhruv Baronia, Stefanos Baziotis, Vikram Adve, Charith Mendis,  Sudipta Sengupta, ASPLOS, 2024
+
+- <img src="https://img.shields.io/badge/3-pages-green.svg" alt="3-pages" align="left"> [Intel ngraph: An intermediate representation, compiler, and executor for deep learning](https://arxiv.org/pdf/1801.08058) -Scott Cyphers, Arjun K. Bansal, Anahita Bhiwandiwalla, Jayaram Bobba, Matthew Brookhart, Avijit Chakraborty, Will Constable, Christian Convey, Leona Cook, Omar Kanawi, Robert Kimball, Jason Knight, Nikolay Korovaiko, Varun Kumar, Yixing Lao, Christopher R. Lishka, Jaikrishnan Menon, Jennifer Myers, Sandeep Aswath Narayana, Adam Procter, Tristan J. Webb, arxiv, 2018
+
+- <img src="https://img.shields.io/badge/13-pages-green.svg" alt="13-pages" align="left"> [TIRAMISU: A Polyhedral Compiler for Expressing Fast and Portable Code](https://arxiv.org/pdf/1804.10694) -Riyadh Baghdadi, Jessica Ray, Malek Ben Romdhane, Emanuele Del Sozzo, Abdurrahman Akkas, Yunming Zhang, Patricia Suriana, Shoaib Kamil, Saman Amarasinghe, CGO, 2019
+
+- <img src="https://img.shields.io/badge/14-pages-green.svg" alt="14-pages" align="left"> [TensorIR: An abstraction for automatic tensorized program optimization](https://dl.acm.org/doi/pdf/10.1145/3575693.3576933) -Siyuan Feng, Bohan Hou, Hongyi Jin, Wuwei Lin, Junru Shao, Ruihang Lai, Zihao Ye, Lianmin Zheng, Cody Hao Yu, Yong Yu, Tianqi Chen, ASPLOS, 2023
+
+- <img src="https://img.shields.io/badge/37-pages-green.svg" alt="37-pages" align="left"> [Tensor Comprehensions: Framework-Agnostic High-Performance Machine Learning Abstractions](https://dl.acm.org/doi/pdf/10.1145/3575693.3576933) - Nicolas Vasilache, Oleksandr Zinenko, Theodoros Theodoridis, Priya Goyal, Zachary DeVito, William S. Moses, Sven Verdoolaege, Andrew Adams, Albert Cohen, arxiv, 2018
+
+- <img src="https://img.shields.io/badge/16-pages-green.svg" alt="16-pages" align="left"> [TASO: Optimizing Deep Learning Computation with Automatic Generation of Graph Substitutions](https://dl.acm.org/doi/pdf/10.1145/3341301.3359630) - Zhihao Jia, Oded Padon, James Thomas, Todd Warszawski, Matei Zaharia, Alex Aiken, SOSP, 2019
