@@ -38,8 +38,7 @@ Dense Tensor Program Optimization
 
 - <img src="https://img.shields.io/badge/18-pages-green.svg" alt="18-pages" align="left"> [EINNET: Optimizing Tensor Programs with Derivation-Based Transformations](https://www.usenix.org/system/files/osdi23-zheng.pdf) - Liyan Zheng, Haojie Wang, Jidong Zhai, Muyan Hu, Zixuan Ma, Tuowei Wang, Shuhong Huang, Xupeng Miao, Shizhi Tang, Kezhao Huang, Zhihao Jia, OSDI, 2023
 
-- <img src="https://img.shields.io/badge/15-pages-green.svg" alt="15-pages" align="left"> [Optimal Kernel Orchestration for Tensor Programs
-with Korch](https://dl.acm.org/doi/pdf/10.1145/3620666.3651383) - Muyan Hu, Ashwin Venkatram, Shreyashri Biswas, Balamurugan Marimuthu, Bohan Hou, Gabriele Oliaro, Haojie Wang, Liyan Zheng, Xupeng Miao, Jidong Zhai, and Zhihao Jia, ASPLOS, 2024
+- <img src="https://img.shields.io/badge/15-pages-green.svg" alt="15-pages" align="left"> [Optimal Kernel Orchestration for Tensor Programs with Korch](https://dl.acm.org/doi/pdf/10.1145/3620666.3651383) - Muyan Hu, Ashwin Venkatram, Shreyashri Biswas, Balamurugan Marimuthu, Bohan Hou, Gabriele Oliaro, Haojie Wang, Liyan Zheng, Xupeng Miao, Jidong Zhai, and Zhihao Jia, ASPLOS, 2024
 
 - <img src="https://img.shields.io/badge/19-pages-green.svg" alt="19-pages" align="left"> [PET: Optimizing Tensor Programs with Partially Equivalent Transformations and Automated Corrections](https://www.usenix.org/system/files/osdi21-wang-haojie.pdf) - Haojie Wang, Jidong Zhai, Mingyu Gao, Zixuan Ma, Shizhi Tang, Liyan Zheng, Yuanzhi Li, Kaiyuan Rong, Yuanyong Chen, and Zhihao Jia, OSDI, 2021
 
