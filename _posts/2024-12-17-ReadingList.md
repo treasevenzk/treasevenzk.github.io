@@ -56,6 +56,8 @@ Dense Tensor Program Optimization
 
 - <img src="https://img.shields.io/badge/18-pages-green.svg" alt="18-pages" align="left"> [Uncovering Nested Data Parallelism and Data Reuse in DNN Computation with FractalTensor](https://dl.acm.org/doi/pdf/10.1145/3694715.3695961) - Siran Liu, Chengxiang Qi, Ying Cao, Chao Yang, Weifang Hu, Xuanhua Shi, Fan Yang, Mao Yang, SOSP, 2024
 
+- <img src="https://img.shields.io/badge/15-pages-green.svg" alt="15-pages" align="left"> [MCFuser: High-Performance and Rapid Fusion of Memory-Bound Compute-Intensive Operators](https://dl.acm.org/doi/pdf/10.1109/SC41406.2024.00040) - Zheng Zhang, Donglin Yang, Xiaobo Zhou, Dazhao Cheng, SC, 2024
+
 Graph Optimization
 - <img src="https://img.shields.io/badge/9-pages-green.svg" alt="9-pages" align="left"> [Memory-aware Scheduling for Complex Wired Networks with Iterative Graph Optimization](https://arxiv.org/pdf/2308.13898) - Shuzhang Zhong, Meng Li, Yun Liang, Runsheng Wang, Ru Huang, ICCAD, 2023
 
@@ -98,7 +100,9 @@ Dynamic Tensor Programs
 
 - <img src="https://img.shields.io/badge/20-pages-green.svg" alt="20-pages" align="left"> [Optimizing Dynamic Neural Networks with Brainstorm](https://www.usenix.org/system/files/osdi23-cui.pdf) - Weihao Cui, Zhenhua Han, Lingji Ouyang, Yichuan Wang, Ningxin Zheng, Lingxiao Ma, Yuqing Yang, Fan Yang, Jilong Xue, Lili Qiu, Lidong Zhou, Quan Chen, Haisheng Tan, Minyi Guo, OSDI, 2023
 
-- <img src="https://img.shields.io/badge/17-pages-green.svg" alt="17-pages" align="left"> [Optimizing Dynamic-Shape Neural Networks on Accelerators via On-the-Fly Micro-Kernel Polymerization](https://dl.acm.org/doi/pdf/10.1145/3620666.3651322) - Kun Wu, Mert Hidayetoğlu, Xiang Song, Sitao Huang, Da Zheng, Israt Nisa, Wen-Mei Hwu, ASPLOS, 2024
+- <img src="https://img.shields.io/badge/17-pages-green.svg" alt="17-pages" align="left"> [Grape: Practical and Efficient Graphed Execution for Dynamic Deep Neural Networks on GPUs](https://dl.acm.org/doi/pdf/10.1145/3620666.3651322) - Bojian Zheng, Cody Hao Yu, Jie Wang, Yaoyao Ding, Yizhi Liu, Yida Wang, Gennady Pekhimenko, ASPLOS, 2024
+
+- <img src="https://img.shields.io/badge/17-pages-green.svg" alt="17-pages" align="left"> [Optimizing Dynamic-Shape Neural Networks on Accelerators via On-the-Fly Micro-Kernel Polymerization](https://dl.acm.org/doi/pdf/10.1145/3613424.3614248) - Kun Wu, Mert Hidayetoğlu, Xiang Song, Sitao Huang, Da Zheng, Israt Nisa, Wen-Mei Hwu, MICRO, 2023
 
 Sparse Tensor Program Optimization
 - <img src="https://img.shields.io/badge/30-pages-green.svg" alt="30-pages" align="left"> [A Sparse Iteration Space Transformation Framework for Sparse Tensor Algebra](https://dl.acm.org/doi/pdf/10.1145/3428226) - Ryan Senanayake, Changwan Hong, Ziheng Wang, Amalee Wilson, Stephen Chou, Shaoaib Kamil, Saman Amarasinghe, Fredrik Kjolstad, OOPSLA, 2020
@@ -199,3 +203,5 @@ Automatic
 - <img src="https://img.shields.io/badge/15-pages-green.svg" alt="15-pages" align="left"> [Analytical Characterization and Design Space Exploration for Optimization of CNNs](https://dl.acm.org/doi/pdf/10.1145/3445814.3446759) - Rui Li, Yufan Xu, Aravind Sukumaran-Rajam, Atanas Rountev, P. Sadayappan, ASPLOS, 2021
 
 - <img src="https://img.shields.io/badge/15-pages-green.svg" alt="15-pages" align="left"> [Interstellar: Using Halide’s Scheduling Language to Analyze DNN Accelerators](https://dl.acm.org/doi/pdf/10.1145/3373376.3378514) - Xuan Yang, Mingyu Gao, Qiaoyi Liu, Jeff Setter, Jing Pu, Ankita Nayak, Steven Bell, Kaidi Cao, Heonjae Ha, Priyanka Raina, Christos Kozyrakis, Mark Horowitz, ASPLOS, 2020
+
+- <img src="https://img.shields.io/badge/17-pages-green.svg" alt="17-pages" align="left"> [Mind the Gap: Attainable Data Movement and Operational Intensity Bounds for Tensor Algorithms](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10609642) - Qijing Huang, Po-An Tsai, Joel S. Emer, Angshuman Parashar, ISCA, 2024
