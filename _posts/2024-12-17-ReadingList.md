@@ -85,6 +85,8 @@ Recursive Deep Learning Models
 GNN Optimization
 - <img src="https://img.shields.io/badge/17-pages-green.svg" alt="17-pages" align="left"> [WiseGraph: Optimizing GNN with Joint Workload Partition of Graph and Operations](https://jamesthez.github.io/files/wisegraph-eurosys24.pdf) - Kezhao Huang, Jidong Zhai, Liyan Zheng, Haojie Wang, Yuyang Jin, Qihao Zhang, Runqing Zhang, Zhen Zheng, Youngmin Yi, Xipeng Shen, Eurosys, 2024
 
+- <img src="https://img.shields.io/badge/17-pages-green.svg" alt="17-pages" align="left"> [Hector: An Efficient Programming and Compilation Framework for Implementing Relational Graph Neural Networks in GPU Architectures](https://dl.acm.org/doi/pdf/10.1145/3620666.3651322) - Kun Wu, Mert Hidayetoğlu, Xiang Song, Sitao Huang, Da Zheng, Israt Nisa, Wen-Mei Hwu, ASPLOS, 2024
+
 Dynamic Tensor Programs
 - <img src="https://img.shields.io/badge/16-pages-green.svg" alt="16-pages" align="left"> [DietCode: Automatic optimization for dynamic tensor programs](https://proceedings.mlsys.org/paper_files/paper/2022/file/f89b79c9a28d4cae22ef9e557d9fa191-Paper.pdf) - Bojian Zheng, Ziheng Jiang, Cody Hao Yu, Haichen Shen, Josh Fromm, Yizhi Liu, Yida Wang, Luis Ceze, Tianqi Chen, Gennady Pekhimenko, MLSys, 2022
 
@@ -95,6 +97,8 @@ Dynamic Tensor Programs
 - <img src="https://img.shields.io/badge/7-pages-green.svg" alt="7-pages" align="left"> [DISC : A Dynamic Shape Compiler for Machine Learning Workloads](https://arxiv.org/pdf/2103.05288) - Kai Zhu, Wenyi Zhao, Zhen Zheng, Tianyou Guo, Pengzhan Zhao, Feiwen Zhu, Junjie Bai, Jun Yang, Xiaoyong Liu, Lansong Diao, Wei Lin, MLSys, 2021
 
 - <img src="https://img.shields.io/badge/20-pages-green.svg" alt="20-pages" align="left"> [Optimizing Dynamic Neural Networks with Brainstorm](https://www.usenix.org/system/files/osdi23-cui.pdf) - Weihao Cui, Zhenhua Han, Lingji Ouyang, Yichuan Wang, Ningxin Zheng, Lingxiao Ma, Yuqing Yang, Fan Yang, Jilong Xue, Lili Qiu, Lidong Zhou, Quan Chen, Haisheng Tan, Minyi Guo, OSDI, 2023
+
+- <img src="https://img.shields.io/badge/17-pages-green.svg" alt="17-pages" align="left"> [Optimizing Dynamic-Shape Neural Networks on Accelerators via On-the-Fly Micro-Kernel Polymerization](https://dl.acm.org/doi/pdf/10.1145/3620666.3651322) - Kun Wu, Mert Hidayetoğlu, Xiang Song, Sitao Huang, Da Zheng, Israt Nisa, Wen-Mei Hwu, ASPLOS, 2024
 
 Sparse Tensor Program Optimization
 - <img src="https://img.shields.io/badge/30-pages-green.svg" alt="30-pages" align="left"> [A Sparse Iteration Space Transformation Framework for Sparse Tensor Algebra](https://dl.acm.org/doi/pdf/10.1145/3428226) - Ryan Senanayake, Changwan Hong, Ziheng Wang, Amalee Wilson, Stephen Chou, Shaoaib Kamil, Saman Amarasinghe, Fredrik Kjolstad, OOPSLA, 2020
@@ -176,8 +180,6 @@ Automatic
 
 - <img src="https://img.shields.io/badge/37-pages-green.svg" alt="37-pages" align="left"> [Tensor Comprehensions: Framework-Agnostic High-Performance Machine Learning Abstractions](https://dl.acm.org/doi/pdf/10.1145/3575693.3576933) - Nicolas Vasilache, Oleksandr Zinenko, Theodoros Theodoridis, Priya Goyal, Zachary DeVito, William S. Moses, Sven Verdoolaege, Andrew Adams, Albert Cohen, arxiv, 2018
 
-- <img src="https://img.shields.io/badge/16-pages-green.svg" alt="16-pages" align="left"> [TASO: Optimizing Deep Learning Computation with Automatic Generation of Graph Substitutions](https://dl.acm.org/doi/pdf/10.1145/3341301.3359630) - Zhihao Jia, Oded Padon, James Thomas, Todd Warszawski, Matei Zaharia, Alex Aiken, SOSP, 2019
-
 - <img src="https://img.shields.io/badge/13-pages-green.svg" alt="13-pages" align="left"> [MLIR: Scaling Compiler Infrastructure for Domain Specific Computation](https://rcs.uwaterloo.ca/~ali/cs842-s23/papers/mlir.pdf) - Chris Lattner, Mehdi Amini, Uday Bondhugula, Albert Cohen, Andy Davis, Jacques Pienaar, River Riddle, Tatiana Shpeisman, Nicolas Vasilache, Oleksandr Zinenko, CGO, 2021
 
 - <img src="https://img.shields.io/badge/12-pages-green.svg" alt="12-pages" align="left"> [AI Powered Compiler Techniques for DL Code Optimization](https://arxiv.org/pdf/2104.05573) - Sanket Tavarageri, Gagandeep Goyal, Sasikanth Avancha, Bharat Kaul, Ramakrishna Upadrasta, arxiv, 2021
@@ -185,3 +187,15 @@ Automatic
 - <img src="https://img.shields.io/badge/15-pages-green.svg" alt="15-pages" align="left"> [AStitch: Enabling a New Multi-dimensional Optimization Space for Memory-intensive ML Training and Inference on Modern SIMT Architectures](https://jamesthez.github.io/files/astitch-asplos22.pdf) - Zhen Zheng, Xuanda Yang, Pengzhan Zhao, Guoping Long, Kai Zhu, Feiwen Zhu, Wenyi Zhao, Xiaoyong Liu, Jun Yang, Jidong Zhai, Shuaiwen Leon Song, Wei Lin, ASPLOS, 2022
 
 - <img src="https://img.shields.io/badge/17-pages-green.svg" alt="17-pages" align="left"> [ROLLER: Fast and Efficient Tensor Compilation for Deep Learning](https://www.usenix.org/system/files/osdi22-zhu.pdf) - Hongyu Zhu, Ruofan Wu, Yijia Diao, Shanbin Ke, Haoyu Li, Chen Zhang, Jilong Xue, Lingxiao Ma, Yuqing Xia, Wei Cui, Fan Yang, Mao Yang, Lidong Zhou, Asaf Cidon, Gennady Pekhimenko, OSDI, 2022
+
+- <img src="https://img.shields.io/badge/16-pages-green.svg" alt="16-pages" align="left"> [Optimizing Deep Learning Inference via Global Analysis and Tensor Expressions](https://dl.acm.org/doi/pdf/10.1145/3617232.3624858) - Chunwei Xia, Jiacheng Zhao, Qianqi Sun, Zheng Wang, Yuan Wen, Teng Yu, Xiaobing Feng, Huimin Cui, ASPLOS, 2024
+
+- <img src="https://img.shields.io/badge/16-pages-green.svg" alt="16-pages" align="left"> [Mind mappings: enabling efficient algorithm-accelerator mapping space search](https://dl.acm.org/doi/pdf/10.1145/3445814.3446762) - Kartik Hegde, Po-An Tsai, Sitao Huang, Vikas Chandra, Angshuman Parashar, Christopher W. Fletcher, ASPLOS, 2021
+
+- <img src="https://img.shields.io/badge/9-pages-green.svg" alt="9-pages" align="left"> [Gamma: Automating the hw mapping of dnn models on accelerators via genetic algorithm](https://dl.acm.org/doi/pdf/10.1145/3400302.3415639) - Sheng-Chun Kao, Tushar Krishna, ICCAD, 2020
+
+- <img src="https://img.shields.io/badge/27-pages-green.svg" alt="27-pages" align="left"> [dMazeRunner: Executing Perfectly Nested Loops on Dataflow Accelerators](https://dl.acm.org/doi/pdf/10.1145/3358198) - Shail Dave, Youngbin Kim, Sasikanth Avancha, Kyoungwoo Lee, Aviral Shrivastava, TECS, 2019
+
+- <img src="https://img.shields.io/badge/15-pages-green.svg" alt="15-pages" align="left"> [Analytical Characterization and Design Space Exploration for Optimization of CNNs](https://dl.acm.org/doi/pdf/10.1145/3445814.3446759) - Rui Li, Yufan Xu, Aravind Sukumaran-Rajam, Atanas Rountev, P. Sadayappan, ASPLOS, 2021
+
+- <img src="https://img.shields.io/badge/15-pages-green.svg" alt="15-pages" align="left"> [Interstellar: Using Halide’s Scheduling Language to Analyze DNN Accelerators](https://dl.acm.org/doi/pdf/10.1145/3373376.3378514) - Xuan Yang, Mingyu Gao, Qiaoyi Liu, Jeff Setter, Jing Pu, Ankita Nayak, Steven Bell, Kaidi Cao, Heonjae Ha, Priyanka Raina, Christos Kozyrakis, Mark Horowitz, ASPLOS, 2020
