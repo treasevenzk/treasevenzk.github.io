@@ -128,3 +128,22 @@ for dtype in ['float16', 'float64', 'int8', 'int16', 'int64']:
 ``` 
 
 ##### Converting Elements Data Types
+
+
+
+#### 常用函数
+```tvm.te.placeholder```: declare the placeholders A and B for both inputs by specifying theirs shapes
+```tvm.compute```: compute
+```tvm.create_schedule```: how to execute the program, for example, the order to access data and how to do multi-threading parallelization
+```tvm.lower```
+```tvm.build```: compile them into an executable module
+```tvm.nd.array```: convert data type
+```relay_mod, relay_params = relay.fronted.from_mxnet(model {'data': x.shape})```
+```graph, mod, params = relay.build(relay_mod, target, params=relay_params)```
+```ctx = tvm.context(target)```
+```rt = tvm.contrib.graph_runtime.create(graph, mod, ctx)```
+```rt.set_input(**params)```
+```rt.run(data=tvm.nd.array(x))```
+```te.var```: create a symbolic variable for an int32 scalar
+```tvm.reduce_axis```: create an axis for reduction with range from 0 to m
+```tvm.comm_reducer```: a customized commutative reduction operator
