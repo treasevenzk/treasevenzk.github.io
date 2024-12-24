@@ -119,6 +119,14 @@ ML Tensor Operations Optimization
 
 - <img src="https://img.shields.io/badge/18-pages-green.svg" alt="18-pages" align="left"> [Treebeard: An Optimizing Compiler for Decision Tree Based ML Inference](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9923840) - Ashwin Prasad, Sampath Rajendra, Kaushik Rajan, R Govindarajan, Uday Bondhugula, MICRO, 2022
 
+- <img src="https://img.shields.io/badge/12-pages-green.svg" alt="12-pages" align="left"> [Tile Size and Loop Order Selection using Machine Learning for Multi-/Many-Core Architectures](https://dl.acm.org/doi/pdf/10.1145/3650200.3656630) - Shilpa Babalad, Shirish Shevade, Matthew Jacob Thazhuthaveetil, R Govindarajan, ICS, 2024
+
+- <img src="https://img.shields.io/badge/16-pages-green.svg" alt="16-pages" align="left"> [A Flexible Approach to Autotuning Multi-Pass Machine Learning Compilers](https://mangpo.net/papers/xla-autotuning-pact2021.pdf) - Phitchaya Mangpo Phothilimthana, Amit Sabne, Nikhil Sarda, Karthik Srinivasa Murthy, Yanqi Zhou, Christof Angermueller, Mike Burrows, Sudip Roy, Ketan Mandke, Rezsa Farahani, Yu Emma Wang, Berkin Ilbeyi, Blake Hechtman, Bjarke Roune, Shen Wang, Yuanzhong Xu, and Samuel J. Kaufman, PACT, 2024
+
+- <img src="https://img.shields.io/badge/25-pages-green.svg" alt="25-pages" align="left"> [TreeHouse: An MLIR-based Compilation Flow for Real-Time Tree-based Inference](https://dl.acm.org/doi/pdf/10.1145/3704727) - ChiaHui Su, Chia-Hua Ku, Jenq Kuen Lee, Kuan-Hsun Chen, TECS, 2024
+
+- <img src="https://img.shields.io/badge/26-pages-green.svg" alt="26-pages" align="left"> [Efficient Realization of Decision Trees for Real-Time Inference](https://dl.acm.org/doi/pdf/10.1145/3508019) - Kuan-Hsun Chen, Chiahui Su, Christian Hakert, Sebastian Buschjäger, Chao-Lin Lee, Jenq-Kuen Lee, Katharina Morik, Jian-Jia Chen, TECS, 2022
+
 Autotune
 - <img src="https://img.shields.io/badge/24-pages-green.svg" alt="24-pages" align="left"> [BaCO: A Fast and Portable Bayesian Compiler Optimization Framework](https://dl.acm.org/doi/pdf/10.1145/3623278.3624770) - Erik Hellsten, Artur Souza, Johannes Lenfers, Rubens Lacouture, Olivia Hsu, Adel Ejjeh, Fredrik Kjolstad, Michel Steuwer, Kunle Olukotun, Luigi Nardi, ASPLOS, 2023
 
