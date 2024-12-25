@@ -154,4 +154,4 @@ for dtype in ['float16', 'float64', 'int8', 'int16', 'int64']:
 #### Design and Architecture
 ```Overall Flow```: model creation、transformation、target translation、runtime execution
 
-<img width="500" height="300" src="../img/post-tvm-design.png"/>
+<img width="500" height="300" src="/img/post-tvm-design.png"/>
