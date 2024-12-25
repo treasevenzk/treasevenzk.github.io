@@ -132,21 +132,21 @@ for dtype in ['float16', 'float64', 'int8', 'int16', 'int64']:
 
 
 #### 常用函数
-```tvm.te.placeholder```: declare the placeholders A and B for both inputs by specifying theirs shapes
-```tvm.compute```: compute
-```tvm.create_schedule```: how to execute the program, for example, the order to access data and how to do multi-threading parallelization
-```tvm.lower```
-```tvm.build```: compile them into an executable module
-```tvm.nd.array```: convert data type
-```relay_mod, relay_params = relay.fronted.from_mxnet(model {'data': x.shape})```
-```graph, mod, params = relay.build(relay_mod, target, params=relay_params)```
-```ctx = tvm.context(target)```
-```rt = tvm.contrib.graph_runtime.create(graph, mod, ctx)```
-```rt.set_input(**params)```
-```rt.run(data=tvm.nd.array(x))```
-```te.var```: create a symbolic variable for an int32 scalar
-```tvm.reduce_axis```: create an axis for reduction with range from 0 to m
-```tvm.comm_reducer```: a customized commutative reduction operator
+```tvm.te.placeholder```: declare the placeholders A and B for both inputs by specifying theirs shapes  <br>
+```tvm.compute```: compute <br>
+```tvm.create_schedule```: how to execute the program, for example, the order to access data and how to do multi-threading parallelization  <br>
+```tvm.lower```:  <br>
+```tvm.build```: compile them into an executable module <br>
+```tvm.nd.array```: convert data type  <br>
+```relay_mod, relay_params = relay.fronted.from_mxnet(model {'data': x.shape})```:  <br>
+```graph, mod, params = relay.build(relay_mod, target, params=relay_params)```:  <br>
+```ctx = tvm.context(target)```:  <br>
+```rt = tvm.contrib.graph_runtime.create(graph, mod, ctx)```:  <br>
+```rt.set_input(**params)```:  <br>
+```rt.run(data=tvm.nd.array(x))```:  <br>
+```te.var```: create a symbolic variable for an int32 scalar  <br>
+```tvm.reduce_axis```: create an axis for reduction with range from 0 to m  <br>
+```tvm.comm_reducer```: a customized commutative reduction operator  <br>
 
 
 ### 官方教程
@@ -155,3 +155,10 @@ for dtype in ['float16', 'float64', 'int8', 'int16', 'int64']:
 ```Overall Flow```: model creation、transformation、target translation、runtime execution
 
 <img width="500" height="300" src="/img/post-tvm-design.png"/>
+
+* ```Key data structures```: IRModule(realx::Function、tir::PrimFunc)
+
+* ```Transformations```: relax transformations(common graph-level optimizations)、tir transformations(TensorIR schedule、Lowering Passes)、cross-level transformations
+
+* ```Targete Translation```
+* ```Runtime Execution```
