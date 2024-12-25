@@ -147,3 +147,11 @@ for dtype in ['float16', 'float64', 'int8', 'int16', 'int64']:
 ```te.var```: create a symbolic variable for an int32 scalar
 ```tvm.reduce_axis```: create an axis for reduction with range from 0 to m
 ```tvm.comm_reducer```: a customized commutative reduction operator
+
+
+### 官方教程
+
+#### Design and Architecture
+```Overall Flow```: model creation、transformation、target translation、runtime execution
+
+<img width="500" height="300" src="../img/post-tvm-design.png"/>
