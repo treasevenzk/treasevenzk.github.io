@@ -26,8 +26,6 @@ Dense Tensor Program Optimization
 
 - <img src="https://img.shields.io/badge/45-pages-green.svg" alt="45-pages" align="left"> [Modeling the Interplay between Loop Tiling and Fusion in Optimizing Compilers Using Affine Relations](https://dl.acm.org/doi/pdf/10.1145/3635305) - Jie Zhao, Jinchen Xu, Peng Di, Wang Nie, Jiahui Hu, Yanzhi Yi, Sijia Yang, Zhen Geng, Renwei Zhang, Bojie Li, Zhiliang Gan, and Xuefeng Jin, TOCS, 2024
 
-- <img src="https://img.shields.io/badge/19-pages-green.svg" alt="19-pages" align="left"> [Apollo: Automatic Partition-based Operator Fusion through Layer by Layer Optimization](https://proceedings.mlsys.org/paper_files/paper/2022/file/e175e8a86d28d935be4f43719651f86d-Paper.pdf) - Jie Zhao, Xiong Gao, Ruijie Xia, Zhaochuang Zhang, Deshi Chen, Lei Chen, Renwei Zhang, Zhen Geng, Bin Cheng, and Xuefeng Jin, MLSys, 2024
-
 - <img src="https://img.shields.io/badge/15-pages-green.svg" alt="15-pages" align="left"> [Optimizing the Memory Hierarchy by Compositing Automatic Transformations on Computations and Data](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9251965) - Jie Zhao, Peng Di, MICRO, 2020
 
 - <img src="https://img.shields.io/badge/15-pages-green.svg" alt="15-pages" align="left"> [Tensor Program Optimization with Probabilistic Programs](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9251965) - Junru Shao, Xiyou Zhou, Siyuan Feng, Bohan Hou, Ruihang Lai, Hongyi Jin, Wuwei Lin, Masahiro Masuda, Cody Hao Yu, Tianqi Chen, NIPS, 2022
@@ -71,6 +69,24 @@ Graph Optimization
 
 - <img src="https://img.shields.io/badge/9-pages-green.svg" alt="9-pages" align="left"> [AutoGraph: Optimizing DNN Computation Graph for Parallel GPU Kernel Execution](https://ojs.aaai.org/index.php/AAAI/article/view/26343) - Yuxuan Zhao, Qi Sun, Zhuolun He, Yang Bai, Bei Yu, AAAI, 2023
 
+- <img src="https://img.shields.io/badge/11-pages-green.svg" alt="11-pages" align="left"> [POET: Training Neural Networks on Tiny Devices with Integrated Rematerialization and Paging](https://ojs.aaai.org/index.php/AAAI/article/view/26343) - Shishir G. Patil, Paras Jain, Prabal Dutta, Ion Stoica, Joseph E. Gonzalez, ICML, 2022
+
+- <img src="https://img.shields.io/badge/13-pages-green.svg" alt="13-pages" align="left"> [Collage: Seamless Integration of Deep Learning Backends with Automatic Placement](https://arxiv.org/pdf/2111.00655) - Byungsoo Jeon, Sunghyun Park, Peiyuan Liao, Sheng Xu, Tianqi Chen, Zhihao Jia, PACT, 2022
+
+- <img src="https://img.shields.io/badge/19-pages-green.svg" alt="19-pages" align="left"> [Apollo: Automatic Partition-based Operator Fusion through Layer by Layer Optimization](https://proceedings.mlsys.org/paper_files/paper/2022/file/e175e8a86d28d935be4f43719651f86d-Paper.pdf) - Jie Zhao, Xiong Gao, Ruijie Xia, Zhaochuang Zhang, Deshi Chen, Lei Chen, Renwei Zhang, Zhen Geng, Bin Cheng, and Xuefeng Jin, MLSys, 2022
+
+- <img src="https://img.shields.io/badge/14-pages-green.svg" alt="14-pages" align="left"> [Equality Saturation for Tensor Graph Superoptimization](https://arxiv.org/pdf/2101.01332) - Yichen Yang, Phitchaya Mangpo Phothilimtha, Yisu Remy Wang, Max Willsey, Sudip Roy, Jacques Pienaar, MLSys, 2021
+
+- <img src="https://img.shields.io/badge/14-pages-green.svg" alt="14-pages" align="left"> [IOS: Inter-Operator Scheduler for CNN Acceleration](https://proceedings.mlsys.org/paper_files/paper/2021/file/1f8053a67ec8e0b57455713cefdd8218-Paper.pdf) - Yaoyao Ding, Ligeng Zhu, Zhihao Jia, Gennady Pekhimenko, Song Han, MLSys, 2021
+
+- <img src="https://img.shields.io/badge/13-pages-green.svg" alt="13-pages" align="left"> [Optimizing DNN computation graph using graph substitutions](https://dl.acm.org/doi/pdf/10.14778/3407790.3407857) - Jingzhi Fang, Yanyan Shen, Yue Wang, Lei Chen, VLDB, 2020
+
+- <img src="https://img.shields.io/badge/12-pages-green.svg" alt="12-pages" align="left"> [Transferable Graph Optimizers for ML Compilers](https://proceedings.neurips.cc/paper_files/paper/2020/file/9f29450d2eb58feb555078bdefe28aa5-Paper.pdf) - Yanqi Zhou, Sudip Roy, Amirali Abdolrashidi, Daniel Wong, Peter Ma, Qiumin Xu, Hanxiao Liu, Phitchaya Phothilimtha, Shen Wang, Anna Goldie, Azalia Mirhoseini, James Laudon, NIPS, 2020
+
+- <img src="https://img.shields.io/badge/14-pages-green.svg" alt="14-pages" align="left"> [FusionStitching: Boosting Memory Intensive Computations for Deep Learning Workloads](https://arxiv.org/pdf/2009.10924) - Zhen Zheng, Pengzhan Zhao, Guoping Long, Feiwen Zhu, Kai Zhu, Wenyi Zhao, Lansong Diao, Jun Yang, Wei Lin, arxiv, 2020
+
+- <img src="https://img.shields.io/badge/12-pages-green.svg" alt="12-pages" align="left"> [Nimble: Lightweight and Parallel GPU Task Scheduling for Deep Learning](https://proceedings.neurips.cc/paper_files/paper/2020/file/5f0ad4db43d8723d18169b2e4817a160-Paper.pdf) - Woosuk Kwon, Gyeong-In Yu, Eunji Jeong, Byung-Gon Chun, NIPS, 2020
+
 Performance Prediction of Tensor Programs
 - <img src="https://img.shields.io/badge/6-pages-green.svg" alt="6-pages" align="left"> [Crop: An Analytical Cost Model for Cross-Platform Performance Prediction of Tensor Programs](https://dl.acm.org/doi/pdf/10.1145/3649329.3658249) - Xinyu Sun, Yu Zhang, Shuo Liu, Yi Zhai, DAC, 2024
 
@@ -89,6 +105,13 @@ GNN Optimization
 
 - <img src="https://img.shields.io/badge/17-pages-green.svg" alt="17-pages" align="left"> [Hector: An Efficient Programming and Compilation Framework for Implementing Relational Graph Neural Networks in GPU Architectures](https://dl.acm.org/doi/pdf/10.1145/3620666.3651322) - Kun Wu, Mert Hidayetoğlu, Xiang Song, Sitao Huang, Da Zheng, Israt Nisa, Wen-Mei Hwu, ASPLOS, 2024
 
+- <img src="https://img.shields.io/badge/14-pages-green.svg" alt="14-pages" align="left"> [Graphiler: Optimizing Graph Neural Networks with Message Passing Data Flow Graph](https://proceedings.mlsys.org/paper_files/paper/2022/file/a1126573153ad7e9f44ba80e99316482-Paper.pdf) - Zhiqiang Xie, Minjie Wang, Zihao Ye, Zheng Zhang, Rui Fan, MLSys, 2022
+
+- <img src="https://img.shields.io/badge/17-pages-green.svg" alt="17-pages" align="left"> [Seastar: vertex-centric programming for graph neural networks](https://dl.acm.org/doi/pdf/10.1145/3447786.3456247) - Yidi Wu, Kaihao Ma, Zhenkun Cai, Tatiana Jin, Boyang Li, Chenguang Zheng, James Cheng, Fan Yu, EuroSys, 2021
+
+- <img src="https://img.shields.io/badge/12-pages-green.svg" alt="12-pages" align="left"> [FeatGraph: A Flexible and Efficient Backend for Graph Neural Network Systems](https://arxiv.org/pdf/2008.11359) - Yuwei Hu, Zihao Ye, Minjie Wang, Jiali Yu, Da Zheng, Mu Li, Zheng Zhang, Zhiru Zhang, Yida Wang, SC, 2020
+
+
 Dynamic Tensor Programs
 - <img src="https://img.shields.io/badge/16-pages-green.svg" alt="16-pages" align="left"> [DietCode: Automatic optimization for dynamic tensor programs](https://proceedings.mlsys.org/paper_files/paper/2022/file/f89b79c9a28d4cae22ef9e557d9fa191-Paper.pdf) - Bojian Zheng, Ziheng Jiang, Cody Hao Yu, Haichen Shen, Josh Fromm, Yizhi Liu, Yida Wang, Luis Ceze, Tianqi Chen, Gennady Pekhimenko, MLSys, 2022
 
@@ -102,7 +125,13 @@ Dynamic Tensor Programs
 
 - <img src="https://img.shields.io/badge/17-pages-green.svg" alt="17-pages" align="left"> [Grape: Practical and Efficient Graphed Execution for Dynamic Deep Neural Networks on GPUs](https://dl.acm.org/doi/pdf/10.1145/3620666.3651322) - Bojian Zheng, Cody Hao Yu, Jie Wang, Yaoyao Ding, Yizhi Liu, Yida Wang, Gennady Pekhimenko, ASPLOS, 2024
 
-- <img src="https://img.shields.io/badge/17-pages-green.svg" alt="17-pages" align="left"> [Optimizing Dynamic-Shape Neural Networks on Accelerators via On-the-Fly Micro-Kernel Polymerization](https://dl.acm.org/doi/pdf/10.1145/3613424.3614248) - Kun Wu, Mert Hidayetoğlu, Xiang Song, Sitao Huang, Da Zheng, Israt Nisa, Wen-Mei Hwu, MICRO, 2023
+- <img src="https://img.shields.io/badge/17-pages-green.svg" alt="17-pages" align="left"> [Optimizing Dynamic-Shape Neural Networks on Accelerators via On-the-Fly Micro-Kernel Polymerization](https://proceedings.mlsys.org/paper_files/paper/2021/file/5b47430e24a5a1f9fe21f0e8eb814131-Paper.pdf) - Kun Wu, Mert Hidayetoğlu, Xiang Song, Sitao Huang, Da Zheng, Israt Nisa, Wen-Mei Hwu, MICRO, 2023
+
+- <img src="https://img.shields.io/badge/15-pages-green.svg" alt="15-pages" align="left"> [Nimble: Efficiently Compiling Dynamic Neural Networks for Model Inference](https://dl.acm.org/doi/pdf/10.1145/3613424.3614248) - Haichen Shen, Jared Roesch, Zhi Chen, Wei Chen, Yong Wu, Mu Li, Vin Sharma, Zachary Tatlock, Yida Wang, MLSys, 2021
+
+- <img src="https://img.shields.io/badge/27-pages-green.svg" alt="27-pages" align="left"> [The CoRa Tensor Compiler: Compilation for Ragged Tensors with Minimal Padding](https://proceedings.mlsys.org/paper_files/paper/2022/file/afe8a4577080504b8bec07bbe4b2b9cc-Paper.pdf) - Pratik Fegade, Tianqi Chen, Phillip Gibbons, Todd Mowry, MLSys, 2022
+
+- <img src="https://img.shields.io/badge/27-pages-green.svg" alt="27-pages" align="left"> [Axon: A Language for Dynamic Shapes in Deep Learning Graphs](https://arxiv.org/pdf/2210.02374) - Alexander Collins, Vinod Grover, arxiv, 2022
 
 Sparse Tensor Program Optimization
 - <img src="https://img.shields.io/badge/30-pages-green.svg" alt="30-pages" align="left"> [A Sparse Iteration Space Transformation Framework for Sparse Tensor Algebra](https://dl.acm.org/doi/pdf/10.1145/3428226) - Ryan Senanayake, Changwan Hong, Ziheng Wang, Amalee Wilson, Stephen Chou, Shaoaib Kamil, Saman Amarasinghe, Fredrik Kjolstad, OOPSLA, 2020
