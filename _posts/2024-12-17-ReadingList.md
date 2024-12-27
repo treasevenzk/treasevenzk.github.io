@@ -15,36 +15,36 @@ tags:
 ### Paper
 ---
 Survery
-- <img src="https://img.shields.io/badge/24-pages-green.svg" alt="24-pages" align="left"> [The Deep Learning Compiler: A Comprehensive Survey](https://arxiv.org/pdf/2002.03794) - Mingzhen Li, Yi Liu, Xiaoyan Liu, Qingxiao Sun, Xin You, Hailong Yang, Zhongzhi Luan, Lin Gan, Guangwen Yang, Depei Qian, IEEE Transactions on Parallel and Distributed Systems, 2021
+- <img src="https://img.shields.io/badge/24-pages-green.svg" alt="24-pages" align="left"> [The Deep Learning Compiler: A Comprehensive Survey](https://arxiv.org/pdf/2002.03794) - Mingzhen Li, Yi Liu, Xiaoyan Liu, Qingxiao Sun, Xin You, Hailong Yang, Zhongzhi Luan, Lin Gan, Guangwen Yang, Depei Qian, IEEE Transactions on Parallel and Distributed Systems, 2021 ![Check](https://img.shields.io/badge/✓-done-green)
 
 Dense Tensor Program Optimization
 - <img src="https://img.shields.io/badge/6-pages-green.svg" alt="6-pages" align="left"> [A Holistic Functionalization Approach to Optimizing Imperative Tensor Programs in Deep Learning](https://dl.acm.org/doi/pdf/10.1145/3649329.3658483) - Jinming Ma, Xiuhong Li, Zihan Wang Xingcheng Zhang, Shengen Yan, Yuting Chen, Yueqian Zhang, Minxi Jin, Lijuan Jiang, Yun (Eric) Liang, Chao Yang, Dahua Lin, DAC, 2024
 
 - <img src="https://img.shields.io/badge/14-pages-green.svg" alt="14-pages" align="left"> [A Learned Performance Model For Tensor Processing Units](https://proceedings.mlsys.org/paper_files/paper/2021/file/6bcfac823d40046dca25ef6d6d59cc3f-Paper.pdf) - Samuel J.Kaufman, Phitchaya Mangpo Phothilimthana, Yanqi Zhou, Charith Mendis, Sudip Roy, Amit Sabne, Mike Burrows, MLSys, 2021
 
-- <img src="https://img.shields.io/badge/15-pages-green.svg" alt="15-pages" align="left"> [FlexTensor: An Automatic Schedule Exploration and Optimization Framework for Tensor Computation on Heterogeneous System](https://www.cl.cam.ac.uk/~ey204/teaching/ACS/R244_2022_2023/papers/ZHENG_ASPLOS_2020.pdf) - Size Zheng, Yun Liang, Shuo Wang, Renze Chen, Kaiwen Sheng, ASPLOS, 2020
+- <img src="https://img.shields.io/badge/15-pages-green.svg" alt="15-pages" align="left"> [FlexTensor: An Automatic Schedule Exploration and Optimization Framework for Tensor Computation on Heterogeneous System](https://www.cl.cam.ac.uk/~ey204/teaching/ACS/R244_2022_2023/papers/ZHENG_ASPLOS_2020.pdf) - Size Zheng, Yun Liang, Shuo Wang, Renze Chen, Kaiwen Sheng, ASPLOS, 2020 ![Check](https://img.shields.io/badge/✓-done-green)
 
 - <img src="https://img.shields.io/badge/45-pages-green.svg" alt="45-pages" align="left"> [Modeling the Interplay between Loop Tiling and Fusion in Optimizing Compilers Using Affine Relations](https://dl.acm.org/doi/pdf/10.1145/3635305) - Jie Zhao, Jinchen Xu, Peng Di, Wang Nie, Jiahui Hu, Yanzhi Yi, Sijia Yang, Zhen Geng, Renwei Zhang, Bojie Li, Zhiliang Gan, and Xuefeng Jin, TOCS, 2024
 
 - <img src="https://img.shields.io/badge/15-pages-green.svg" alt="15-pages" align="left"> [Optimizing the Memory Hierarchy by Compositing Automatic Transformations on Computations and Data](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9251965) - Jie Zhao, Peng Di, MICRO, 2020
 
-- <img src="https://img.shields.io/badge/15-pages-green.svg" alt="15-pages" align="left"> [Tensor Program Optimization with Probabilistic Programs](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9251965) - Junru Shao, Xiyou Zhou, Siyuan Feng, Bohan Hou, Ruihang Lai, Hongyi Jin, Wuwei Lin, Masahiro Masuda, Cody Hao Yu, Tianqi Chen, NIPS, 2022
+- <img src="https://img.shields.io/badge/15-pages-green.svg" alt="15-pages" align="left"> [Tensor Program Optimization with Probabilistic Programs](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9251965) - Junru Shao, Xiyou Zhou, Siyuan Feng, Bohan Hou, Ruihang Lai, Hongyi Jin, Wuwei Lin, Masahiro Masuda, Cody Hao Yu, Tianqi Chen, NIPS, 2022 ![Check](https://img.shields.io/badge/✓-done-green)
 
 - <img src="https://img.shields.io/badge/43-pages-green.svg" alt="43-pages" align="left"> [Composable and modular code generation in MLIR: A structured and retargetable approach to tensor compiler construction](https://arxiv.org/pdf/2202.03293) - Vasilache Nicolas, Zinenko Oleksandr, Bik Aart JC, Ravishankar Mahesh, Raoux Thomas, Belyaev  Alexander, Springer Matthias, Gysi Tobias, Caballero Diego, Herhut Stephan, Laurenzo Stella, Cohen Albert, arxiv, 2022
 
 - <img src="https://img.shields.io/badge/16-pages-green.svg" alt="16-pages" align="left"> [DNNFusion: Accelerating Deep Neural Networks Execution with Advanced Operator Fusion](https://dl.acm.org/doi/pdf/10.1145/3453483.3454083) - Wei Niu, Jiexiong Guan, Yanzhi Wang, Gagan Agrawal, Bin Ren, PLDI, 2021
 
-- <img src="https://img.shields.io/badge/18-pages-green.svg" alt="18-pages" align="left"> [EINNET: Optimizing Tensor Programs with Derivation-Based Transformations](https://www.usenix.org/system/files/osdi23-zheng.pdf) - Liyan Zheng, Haojie Wang, Jidong Zhai, Muyan Hu, Zixuan Ma, Tuowei Wang, Shuhong Huang, Xupeng Miao, Shizhi Tang, Kezhao Huang, Zhihao Jia, OSDI, 2023
+- <img src="https://img.shields.io/badge/18-pages-green.svg" alt="18-pages" align="left"> [EINNET: Optimizing Tensor Programs with Derivation-Based Transformations](https://www.usenix.org/system/files/osdi23-zheng.pdf) - Liyan Zheng, Haojie Wang, Jidong Zhai, Muyan Hu, Zixuan Ma, Tuowei Wang, Shuhong Huang, Xupeng Miao, Shizhi Tang, Kezhao Huang, Zhihao Jia, OSDI, 2023 ![Check](https://img.shields.io/badge/✓-done-green)
 
 - <img src="https://img.shields.io/badge/15-pages-green.svg" alt="15-pages" align="left"> [Optimal Kernel Orchestration for Tensor Programs with Korch](https://dl.acm.org/doi/pdf/10.1145/3620666.3651383) - Muyan Hu, Ashwin Venkatram, Shreyashri Biswas, Balamurugan Marimuthu, Bohan Hou, Gabriele Oliaro, Haojie Wang, Liyan Zheng, Xupeng Miao, Jidong Zhai, and Zhihao Jia, ASPLOS, 2024
 
-- <img src="https://img.shields.io/badge/19-pages-green.svg" alt="19-pages" align="left"> [PET: Optimizing Tensor Programs with Partially Equivalent Transformations and Automated Corrections](https://www.usenix.org/system/files/osdi21-wang-haojie.pdf) - Haojie Wang, Jidong Zhai, Mingyu Gao, Zixuan Ma, Shizhi Tang, Liyan Zheng, Yuanzhi Li, Kaiyuan Rong, Yuanyong Chen, and Zhihao Jia, OSDI, 2021
+- <img src="https://img.shields.io/badge/19-pages-green.svg" alt="19-pages" align="left"> [PET: Optimizing Tensor Programs with Partially Equivalent Transformations and Automated Corrections](https://www.usenix.org/system/files/osdi21-wang-haojie.pdf) - Haojie Wang, Jidong Zhai, Mingyu Gao, Zixuan Ma, Shizhi Tang, Liyan Zheng, Yuanzhi Li, Kaiyuan Rong, Yuanyong Chen, and Zhihao Jia, OSDI, 2021 ![Check](https://img.shields.io/badge/✓-done-green)
 
 - <img src="https://img.shields.io/badge/14-pages-green.svg" alt="14-pages" align="left"> [Chimera: An Analytical Optimizing Framework for Effective Compute-intensive Operators Fusion](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10071018) - Size Zheng, Siyuan Chen, Peidi Song, Renze Chen, Xiuhong Li, Shengen Yan, Dahua Lin, Jingwen Leng, Yun Liang, HPCA, 2023
 
 - <img src="https://img.shields.io/badge/13-pages-green.svg" alt="13-pages" align="left"> [UNIT: Unifying tensorized instruction compilation](https://arxiv.org/pdf/2101.08458) - Jian Weng, Animesh Jain, Jie Wang, Leyuan Wang, Yida Wang, Tony Nowatzki, CGO, 2021
 
-- <img src="https://img.shields.io/badge/13-pages-green.svg" alt="13-pages" align="left"> [Tensor Program Optimization with Probabilistic Programs](https://proceedings.neurips.cc/paper_files/paper/2022/file/e894eafae43e68b4c8dfdacf742bcbf3-Paper-Conference.pdf) - Junru Shao, Xiyou Zhou, Siyuan Feng, Bohan Hou, Ruihang Lai, Hongyi Jin, Wuwei Lin, Masahiro Masuda, Cody Hao Yu, Tianqi Chen, NIPS, 2022
+- <img src="https://img.shields.io/badge/13-pages-green.svg" alt="13-pages" align="left"> [Tensor Program Optimization with Probabilistic Programs](https://proceedings.neurips.cc/paper_files/paper/2022/file/e894eafae43e68b4c8dfdacf742bcbf3-Paper-Conference.pdf) - Junru Shao, Xiyou Zhou, Siyuan Feng, Bohan Hou, Ruihang Lai, Hongyi Jin, Wuwei Lin, Masahiro Masuda, Cody Hao Yu, Tianqi Chen, NIPS, 2022 ![Check](https://img.shields.io/badge/✓-done-green)
 
 - <img src="https://img.shields.io/badge/45-pages-green.svg" alt="45-pages" align="left"> [Modeling the Interplay between Loop Tiling and Fusion in Optimizing Compilers Using Affine Relations](https://dl.acm.org/doi/pdf/10.1145/3635305) - Jie Zhao, Jinchen Xu, Peng Di, Wang Nie, Jiahui Hu, Yanzhi Yi, Sijia Yang, Zhen Geng, Renwei Zhang, Bojie Li, Zhiliang Gan, Xuefeng Jin, TOCS, 2024
 
@@ -143,15 +143,15 @@ Sparse Tensor Program Optimization
 
 
 ML Tensor Operations Optimization
-- <img src="https://img.shields.io/badge/20-pages-green.svg" alt="20-pages" align="left"> [A Tensor Compiler for Unified Machine Learning Prediction Serving](https://www.usenix.org/system/files/osdi20-nakandala.pdf) - Supun Nakandalac, Karla Saurm, Gyeong-In Yus, Konstantinos Karanasosm, Carlo Curinom, Markus Weimerm, Matteo Interlandim, OSDI, 2020
+- <img src="https://img.shields.io/badge/20-pages-green.svg" alt="20-pages" align="left"> [A Tensor Compiler for Unified Machine Learning Prediction Serving](https://www.usenix.org/system/files/osdi20-nakandala.pdf) - Supun Nakandalac, Karla Saurm, Gyeong-In Yus, Konstantinos Karanasosm, Carlo Curinom, Markus Weimerm, Matteo Interlandim, OSDI, 2020 ![Check](https://img.shields.io/badge/✓-done-green)
 
-- <img src="https://img.shields.io/badge/12-pages-green.svg" alt="12-pages" align="left"> [CMLCompiler: A Unified Compiler for Classical Machine Learning](https://dl.acm.org/doi/pdf/10.1145/3577193.3593710) - Xu Wen, Wanling Gao, Anzheng Li, Lei Wang, Zihan Jiang, Jianfeng Zhan, ICS, 2023
+- <img src="https://img.shields.io/badge/12-pages-green.svg" alt="12-pages" align="left"> [CMLCompiler: A Unified Compiler for Classical Machine Learning](https://dl.acm.org/doi/pdf/10.1145/3577193.3593710) - Xu Wen, Wanling Gao, Anzheng Li, Lei Wang, Zihan Jiang, Jianfeng Zhan, ICS, 2023 ![Check](https://img.shields.io/badge/✓-done-green)
 
-- <img src="https://img.shields.io/badge/17-pages-green.svg" alt="17-pages" align="left"> [SilvanForge: A Schedule Guided Retargetable Compiler for Decision Tree Inference](https://dl.acm.org/doi/pdf/10.1145/3694715.3695958) - Ashwin Prasad, Sampath Rajendra, Kaushik Rajan, R Govindarajan, Uday Bondhugula, SOSP, 2024
+- <img src="https://img.shields.io/badge/17-pages-green.svg" alt="17-pages" align="left"> [SilvanForge: A Schedule Guided Retargetable Compiler for Decision Tree Inference](https://dl.acm.org/doi/pdf/10.1145/3694715.3695958) - Ashwin Prasad, Sampath Rajendra, Kaushik Rajan, R Govindarajan, Uday Bondhugula, SOSP, 2024 ![Check](https://img.shields.io/badge/✓-done-green)
 
-- <img src="https://img.shields.io/badge/18-pages-green.svg" alt="18-pages" align="left"> [Treebeard: An Optimizing Compiler for Decision Tree Based ML Inference](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9923840) - Ashwin Prasad, Sampath Rajendra, Kaushik Rajan, R Govindarajan, Uday Bondhugula, MICRO, 2022
+- <img src="https://img.shields.io/badge/18-pages-green.svg" alt="18-pages" align="left"> [Treebeard: An Optimizing Compiler for Decision Tree Based ML Inference](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9923840) - Ashwin Prasad, Sampath Rajendra, Kaushik Rajan, R Govindarajan, Uday Bondhugula, MICRO, 2022 ![Check](https://img.shields.io/badge/✓-done-green)
 
-- <img src="https://img.shields.io/badge/12-pages-green.svg" alt="12-pages" align="left"> [Tile Size and Loop Order Selection using Machine Learning for Multi-/Many-Core Architectures](https://dl.acm.org/doi/pdf/10.1145/3650200.3656630) - Shilpa Babalad, Shirish Shevade, Matthew Jacob Thazhuthaveetil, R Govindarajan, ICS, 2024
+- <img src="https://img.shields.io/badge/12-pages-green.svg" alt="12-pages" align="left"> [Tile Size and Loop Order Selection using Machine Learning for Multi-/Many-Core Architectures](https://dl.acm.org/doi/pdf/10.1145/3650200.3656630) - Shilpa Babalad, Shirish Shevade, Matthew Jacob Thazhuthaveetil, R Govindarajan, ICS, 2024 ![Check](https://img.shields.io/badge/✓-done-green)
 
 - <img src="https://img.shields.io/badge/16-pages-green.svg" alt="16-pages" align="left"> [A Flexible Approach to Autotuning Multi-Pass Machine Learning Compilers](https://mangpo.net/papers/xla-autotuning-pact2021.pdf) - Phitchaya Mangpo Phothilimthana, Amit Sabne, Nikhil Sarda, Karthik Srinivasa Murthy, Yanqi Zhou, Christof Angermueller, Mike Burrows, Sudip Roy, Ketan Mandke, Rezsa Farahani, Yu Emma Wang, Berkin Ilbeyi, Blake Hechtman, Bjarke Roune, Shen Wang, Yuanzhong Xu, and Samuel J. Kaufman, PACT, 2024
 
@@ -160,13 +160,13 @@ ML Tensor Operations Optimization
 - <img src="https://img.shields.io/badge/26-pages-green.svg" alt="26-pages" align="left"> [Efficient Realization of Decision Trees for Real-Time Inference](https://dl.acm.org/doi/pdf/10.1145/3508019) - Kuan-Hsun Chen, Chiahui Su, Christian Hakert, Sebastian Buschjäger, Chao-Lin Lee, Jenq-Kuen Lee, Katharina Morik, Jian-Jia Chen, TECS, 2022
 
 Autotune
-- <img src="https://img.shields.io/badge/24-pages-green.svg" alt="24-pages" align="left"> [BaCO: A Fast and Portable Bayesian Compiler Optimization Framework](https://dl.acm.org/doi/pdf/10.1145/3623278.3624770) - Erik Hellsten, Artur Souza, Johannes Lenfers, Rubens Lacouture, Olivia Hsu, Adel Ejjeh, Fredrik Kjolstad, Michel Steuwer, Kunle Olukotun, Luigi Nardi, ASPLOS, 2023
+- <img src="https://img.shields.io/badge/24-pages-green.svg" alt="24-pages" align="left"> [BaCO: A Fast and Portable Bayesian Compiler Optimization Framework](https://dl.acm.org/doi/pdf/10.1145/3623278.3624770) - Erik Hellsten, Artur Souza, Johannes Lenfers, Rubens Lacouture, Olivia Hsu, Adel Ejjeh, Fredrik Kjolstad, Michel Steuwer, Kunle Olukotun, Luigi Nardi, ASPLOS, 2023 ![Check](https://img.shields.io/badge/✓-done-green)
 
 - <img src="https://img.shields.io/badge/13-pages-green.svg" alt="13-pages" align="left"> [Bolt: Bridging the gap between auto-tuners and hardware-native performance](https://proceedings.mlsys.org/paper_files/paper/2022/file/1f8053a67ec8e0b57455713cefdd8218-Paper.pdf) - Jiarong Xing, Leyuan Wang, Shang Zhang, Jack Chen, Ang Chen, Yibo Zhu, MLSys, 2022
 
-- <img src="https://img.shields.io/badge/14-pages-green.svg" alt="14-pages" align="left"> [Soter: Analytical Tensor-Architecture Modeling and Automatic Tensor Program Tuning for Spatial Accelerators](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10609702) - Fuyu Wang, Minghua Shen, Yufei Ding, Nong Xiao, ISCA, 2024
+- <img src="https://img.shields.io/badge/14-pages-green.svg" alt="14-pages" align="left"> [Soter: Analytical Tensor-Architecture Modeling and Automatic Tensor Program Tuning for Spatial Accelerators](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10609702) - Fuyu Wang, Minghua Shen, Yufei Ding, Nong Xiao, ISCA, 2024 ![Check](https://img.shields.io/badge/✓-done-green)
 
-- <img src="https://img.shields.io/badge/15-pages-green.svg" alt="15-pages" align="left"> [Felix: Optimizing Tensor Programs with Gradient Descent](https://dl.acm.org/doi/pdf/10.1145/3620666.3651348) - Yifan Zhao, Hashim Sharif, Vikram Adve, Sasa Misailovic, ASPLOS, 2024
+- <img src="https://img.shields.io/badge/15-pages-green.svg" alt="15-pages" align="left"> [Felix: Optimizing Tensor Programs with Gradient Descent](https://dl.acm.org/doi/pdf/10.1145/3620666.3651348) - Yifan Zhao, Hashim Sharif, Vikram Adve, Sasa Misailovic, ASPLOS, 2024 ![Check](https://img.shields.io/badge/✓-done-green)
 
 - <img src="https://img.shields.io/badge/15-pages-green.svg" alt="15-pages" align="left"> [Tlp: A deep learning-based cost model for tensor program tuning](https://arxiv.org/pdf/2211.03578) - Yi Zhai, Yu Zhang, Shuo Liu, Xiaomeng Chu, Jie Peng, Jianmin Ji, Yanyong Zhang, ASPLOS, 2023
 
@@ -181,7 +181,7 @@ Across Devices for Deep Learning Tensor Programs](https://aclanthology.org/2023.
 
 - <img src="https://img.shields.io/badge/15-pages-green.svg" alt="15-pages" align="left"> [AutoGTCO: Graph and tensor co-Optimize for image recognition with transformers on GPU](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9643487) - Yang Bai, Xufeng Yao, Qi Sun, Bei Yu, ICCAD, 2021
 
-- <img src="https://img.shields.io/badge/13-pages-green.svg" alt="13-pages" align="left"> [Neural Architecture Search as Program Transformation Exploration](https://dl.acm.org/doi/pdf/10.1145/3445814.3446753) - Jack Turner, Elliot J. Crowley, Michael F. P. O’Boyle, ASPLOS, 2021
+- <img src="https://img.shields.io/badge/13-pages-green.svg" alt="13-pages" align="left"> [Neural Architecture Search as Program Transformation Exploration](https://dl.acm.org/doi/pdf/10.1145/3445814.3446753) - Jack Turner, Elliot J. Crowley, Michael F. P. O’Boyle, ASPLOS, 2021 ![Check](https://img.shields.io/badge/✓-done-green)
 
 - <img src="https://img.shields.io/badge/15-pages-green.svg" alt="15-pages" align="left"> [One-Shot Tuner for Deep Learning Compilers](https://dl.acm.org/doi/pdf/10.1145/3497776.3517774) - Jaehun Ryu, Eunhyeok Park, Hyojin Sung, CC, 2022
 
@@ -195,13 +195,15 @@ Across Devices for Deep Learning Tensor Programs](https://aclanthology.org/2023.
 
 - <img src="https://img.shields.io/badge/16-pages-green.svg" alt="16-pages" align="left"> [A Flexible Approach to Autotuning Multi-Pass Machine Learning Compilers](https://dl.acm.org/doi/pdf/10.1145/3650200.3656626) - Phitchaya Mangpo Phothilimthana, Amit Sabne, Nikhil Sarda, Karthik Srinivasa Murthy,Yanqi Zhou, Christof Angermueller, PACT, 2021
 
+- <img src="https://img.shields.io/badge/12-pages-green.svg" alt="12-pages" align="left"> [Learning to Optimize Halide with Tree Search and Random Programs](https://dl.acm.org/doi/pdf/10.1145/3650200.3656626) - Andrew Adams, Karima Ma, Luke Anderson, Riyadh Baghdadi, Tzu-Mao Li, Michaël Gharbi, Benoit Steiner, Steven Johnson, Kayvon Fatahalian, Frédo Durand, , TOG, 2019 ![Check](https://img.shields.io/badge/✓-done-green)
+
 
 Automatic
-- <img src="https://img.shields.io/badge/14-pages-green.svg" alt="14-pages" align="left"> [AMOS: Enabling Automatic Mapping for Tensor Computations On Spatial Accelerators with Hardware Abstraction](https://dl.acm.org/doi/pdf/10.1145/3470496.3527440) - Size Zheng, Renze Chen, Anjiang Wei, Yicheng Jin, Qin Han, Liqiang Lu, Bingyang Wu, Xiuhong Li, Shengen Yan, Yun Liang, ISCA, 2022
+- <img src="https://img.shields.io/badge/14-pages-green.svg" alt="14-pages" align="left"> [AMOS: Enabling Automatic Mapping for Tensor Computations On Spatial Accelerators with Hardware Abstraction](https://dl.acm.org/doi/pdf/10.1145/3470496.3527440) - Size Zheng, Renze Chen, Anjiang Wei, Yicheng Jin, Qin Han, Liqiang Lu, Bingyang Wu, Xiuhong Li, Shengen Yan, Yun Liang, ISCA, 2022 ![Check](https://img.shields.io/badge/✓-done-green)
 
 - <img src="https://img.shields.io/badge/16-pages-green.svg" alt="16-pages" align="left"> [AKG: Automatic Kernel Generation for Neural Processing Units using Polyhedral Transformations](https://01.me/files/AKG/akg-pldi21.pdf) - Jie Zhao, Bojie Li, Zhen Geng, Renwei Zhang, Xiong Gao, Bin Cheng, Chen Wu, Yun Cheng, Zheng Li, Peng Di, Kun Zhang, Xuefeng Jin, PLDI, 2021
 
-- <img src="https://img.shields.io/badge/18-pages-green.svg" alt="18-pages" align="left"> [Enabling Tensor Language Model to Assist in Generating High-Performance Tensor Programs for Deep Learning](https://www.usenix.org/system/files/osdi24-zhai.pdf) - Yi Zhai, Sijia Yang, Keyu Pan, Renwei Zhang, Shuo Liu, Chao Liu, Zichun Ye, Jianmin Ji, Jie Zhao, Yu Zhang, Yanyong Zhang, OSDI, 2024
+- <img src="https://img.shields.io/badge/18-pages-green.svg" alt="18-pages" align="left"> [Enabling Tensor Language Model to Assist in Generating High-Performance Tensor Programs for Deep Learning](https://www.usenix.org/system/files/osdi24-zhai.pdf) - Yi Zhai, Sijia Yang, Keyu Pan, Renwei Zhang, Shuo Liu, Chao Liu, Zichun Ye, Jianmin Ji, Jie Zhao, Yu Zhang, Yanyong Zhang, OSDI, 2024 ![Check](https://img.shields.io/badge/✓-done-green)
 
 - <img src="https://img.shields.io/badge/14-pages-green.svg" alt="14-pages" align="left"> [Bring Your Own Codegen to Deep Learning Compiler](https://arxiv.org/pdf/2105.03215) - Zhi Chen, Cody Hao Yu, Trevor Morris, Jorn Tuyls, Yi-Hsiang Lai, Jared Roesch, Elliott Delaye, Vin Sharma, Yida Wang, arxiv, 2021
 
@@ -226,11 +228,11 @@ Automatic
 
 - <img src="https://img.shields.io/badge/13-pages-green.svg" alt="13-pages" align="left"> [TIRAMISU: A Polyhedral Compiler for Expressing Fast and Portable Code](https://arxiv.org/pdf/1804.10694) -Riyadh Baghdadi, Jessica Ray, Malek Ben Romdhane, Emanuele Del Sozzo, Abdurrahman Akkas, Yunming Zhang, Patricia Suriana, Shoaib Kamil, Saman Amarasinghe, CGO, 2019
 
-- <img src="https://img.shields.io/badge/14-pages-green.svg" alt="14-pages" align="left"> [TensorIR: An abstraction for automatic tensorized program optimization](https://dl.acm.org/doi/pdf/10.1145/3575693.3576933) -Siyuan Feng, Bohan Hou, Hongyi Jin, Wuwei Lin, Junru Shao, Ruihang Lai, Zihao Ye, Lianmin Zheng, Cody Hao Yu, Yong Yu, Tianqi Chen, ASPLOS, 2023
+- <img src="https://img.shields.io/badge/14-pages-green.svg" alt="14-pages" align="left"> [TensorIR: An abstraction for automatic tensorized program optimization](https://dl.acm.org/doi/pdf/10.1145/3575693.3576933) -Siyuan Feng, Bohan Hou, Hongyi Jin, Wuwei Lin, Junru Shao, Ruihang Lai, Zihao Ye, Lianmin Zheng, Cody Hao Yu, Yong Yu, Tianqi Chen, ASPLOS, 2023 ![Check](https://img.shields.io/badge/✓-done-green)
 
 - <img src="https://img.shields.io/badge/37-pages-green.svg" alt="37-pages" align="left"> [Tensor Comprehensions: Framework-Agnostic High-Performance Machine Learning Abstractions](https://dl.acm.org/doi/pdf/10.1145/3575693.3576933) - Nicolas Vasilache, Oleksandr Zinenko, Theodoros Theodoridis, Priya Goyal, Zachary DeVito, William S. Moses, Sven Verdoolaege, Andrew Adams, Albert Cohen, arxiv, 2018
 
-- <img src="https://img.shields.io/badge/13-pages-green.svg" alt="13-pages" align="left"> [MLIR: Scaling Compiler Infrastructure for Domain Specific Computation](https://rcs.uwaterloo.ca/~ali/cs842-s23/papers/mlir.pdf) - Chris Lattner, Mehdi Amini, Uday Bondhugula, Albert Cohen, Andy Davis, Jacques Pienaar, River Riddle, Tatiana Shpeisman, Nicolas Vasilache, Oleksandr Zinenko, CGO, 2021
+- <img src="https://img.shields.io/badge/13-pages-green.svg" alt="13-pages" align="left"> [MLIR: Scaling Compiler Infrastructure for Domain Specific Computation](https://rcs.uwaterloo.ca/~ali/cs842-s23/papers/mlir.pdf) - Chris Lattner, Mehdi Amini, Uday Bondhugula, Albert Cohen, Andy Davis, Jacques Pienaar, River Riddle, Tatiana Shpeisman, Nicolas Vasilache, Oleksandr Zinenko, CGO, 2021 ![Check](https://img.shields.io/badge/✓-done-green)
 
 - <img src="https://img.shields.io/badge/12-pages-green.svg" alt="12-pages" align="left"> [AI Powered Compiler Techniques for DL Code Optimization](https://arxiv.org/pdf/2104.05573) - Sanket Tavarageri, Gagandeep Goyal, Sasikanth Avancha, Bharat Kaul, Ramakrishna Upadrasta, arxiv, 2021
 
