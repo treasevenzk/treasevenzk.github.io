@@ -87,6 +87,9 @@ Graph Optimization
 
 - <img src="https://img.shields.io/badge/12-pages-green.svg" alt="12-pages" align="left"> [Nimble: Lightweight and Parallel GPU Task Scheduling for Deep Learning](https://proceedings.neurips.cc/paper_files/paper/2020/file/5f0ad4db43d8723d18169b2e4817a160-Paper.pdf) - Woosuk Kwon, Gyeong-In Yu, Eunji Jeong, Byung-Gon Chun, NIPS, 2020
 
+- <img src="https://img.shields.io/badge/14-pages-green.svg" alt="14-pages" align="left"> [Stateful dataflow multigraphs: a data-centric model for performance portability on heterogeneous architectures](https://dl.acm.org/doi/pdf/10.1145/3295500.3356173) - Tal Ben-Nun, Johannes de Fine Licht, Alexandros N. Ziogas, Timo Schneider, Torsten Hoefler, SC, 2019
+
+
 Performance Prediction of Tensor Programs
 - <img src="https://img.shields.io/badge/6-pages-green.svg" alt="6-pages" align="left"> [Crop: An Analytical Cost Model for Cross-Platform Performance Prediction of Tensor Programs](https://dl.acm.org/doi/pdf/10.1145/3649329.3658249) - Xinyu Sun, Yu Zhang, Shuo Liu, Yi Zhai, DAC, 2024
 
@@ -185,6 +188,12 @@ Across Devices for Deep Learning Tensor Programs](https://aclanthology.org/2023.
 - <img src="https://img.shields.io/badge/27-pages-green.svg" alt="27-pages" align="left"> [PolyDL: Polyhedral Optimizations for Creation of High-performance DL Primitives](https://dl.acm.org/doi/pdf/10.1145/3433103) - Sanket Tavarageri, Alexander Heinecke, Sasikanth Avancha, Bharat Kaul, Gagandeep Goyal, Ramakrishna Upadrasta, TACO, 2021
 
 - <img src="https://img.shields.io/badge/11-pages-green.svg" alt="11-pages" align="left"> [Reinforcement Learning and Adaptive Sampling for Optimized DNN Compilation](https://arxiv.org/pdf/1905.12799) - Byung Hoon Ahn, Prannoy Pilligundla, Hadi Esmaeilzadeh, arxiv, 2019
+
+- <img src="https://img.shields.io/badge/13-pages-green.svg" alt="13-pages" align="left"> [Accelerated Auto-Tuning of GPU Kernels for Tensor Computations](https://dl.acm.org/doi/pdf/10.1145/3650200.3656626) - Chendi Li, Yufan Xu, Sina Mahdipour Saravani, Ponnuswamy Sadayappan, ICS, 2024
+
+- <img src="https://img.shields.io/badge/16-pages-green.svg" alt="16-pages" align="left"> [A full-stack search technique for domain optimized deep learning accelerators](https://dl.acm.org/doi/pdf/10.1145/3650200.3656626) - Dan Zhang, Safeen Huda, Ebrahim Songhori, Kartik Prabhu, Quoc Le, Anna Goldie, Azalia Mirhoseini, ASPLOS, 2022
+
+- <img src="https://img.shields.io/badge/16-pages-green.svg" alt="16-pages" align="left"> [A Flexible Approach to Autotuning Multi-Pass Machine Learning Compilers](https://dl.acm.org/doi/pdf/10.1145/3650200.3656626) - Phitchaya Mangpo Phothilimthana, Amit Sabne, Nikhil Sarda, Karthik Srinivasa Murthy,Yanqi Zhou, Christof Angermueller, PACT, 2021
 
 
 Automatic
