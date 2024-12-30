@@ -1,0 +1,22 @@
+---
+layout:     post
+title:      Weekly Schedule
+subtitle:   plan for every week
+date:       2024-12-30
+author:     Treaseven
+header-img: img/bg32.png
+catalog: true
+tags:
+    - Weekly Schedule
+---
+
+### 论文阅读计划
+* Interstellar: Using Halide’s Scheduling Language to Analyze DNN Accelerators 
+* Analytical Characterization and Design Space Exploration for Optimization of CNNs
+* Mind mappings: enabling efficient algorithm-accelerator mapping space search
+* Optimizing Deep Learning Inference via Global Analysis and Tensor Expressions
+* AStitch: Enabling a New Multi-dimensional Optimization Space for Memory-intensive ML Training and Inference on Modern SIMT Architectures 
+* Hydride: A Retargetable and Extensible Synthesis-based Compiler for Modern Hardware Architectures 
+
+
+### 论文复现工作
