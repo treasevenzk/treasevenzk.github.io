@@ -16,7 +16,7 @@ tags:
 * Mind mappings: enabling efficient algorithm-accelerator mapping space search
 * Optimizing Deep Learning Inference via Global Analysis and Tensor Expressions
 * AStitch: Enabling a New Multi-dimensional Optimization Space for Memory-intensive ML Training and Inference on Modern SIMT Architectures 
-* Hydride: A Retargetable and Extensible Synthesis-based Compiler for Modern Hardware Architectures 
+* Hidet: Task-Mapping Programming Paradigm for Deep Learning Tensor Programs
 
 
 ### 论文复现工作
