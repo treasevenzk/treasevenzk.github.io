@@ -93,7 +93,9 @@ Graph Optimization
 Performance Prediction of Tensor Programs
 - <img src="https://img.shields.io/badge/6-pages-green.svg" alt="6-pages" align="left"> [Crop: An Analytical Cost Model for Cross-Platform Performance Prediction of Tensor Programs](https://dl.acm.org/doi/pdf/10.1145/3649329.3658249) - Xinyu Sun, Yu Zhang, Shuo Liu, Yi Zhai, DAC, 2024
 
-- <img src="https://img.shields.io/badge/7-pages-green.svg" alt="7-pages" align="left"> [Moses: Efficient exploitation of cross-device transferable features for tensor program optimization](https://arxiv.org/pdf/2201.05752) - Zhihe Zhao, Xian Shuai, Yang Bai, Neiwen Ling, Nan Guan, Zhenyu Yan, Guoliang Xing, arxiv, 2022
+- <img src="https://img.shields.io/badge/7-pages-green.svg" alt="7-pages" align="left"> [Effective Performance Modeling and Domain-Specific Compiler Optimization of CNNs for GPUs](https://dl.acm.org/doi/pdf/10.1145/3559009.3569674) - Zhihe Zhao, Xian Shuai, Yang Bai, Neiwen Ling, Nan Guan, Zhenyu Yan, Guoliang Xing, arxiv, 2022
+
+- <img src="https://img.shields.io/badge/13-pages-green.svg" alt="13-pages" align="left"> [Moses: Efficient exploitation of cross-device transferable features for tensor program optimization](https://arxiv.org/pdf/2201.05752) - Yufan Xu, Qiwei Yuan, Erik Curtis Barton, Rui Li, P. Sadayappan, Aravind Sukumaran-Rajam, PACT, 2022
 
 
 Recursive Deep Learning Models
@@ -113,6 +115,8 @@ GNN Optimization
 - <img src="https://img.shields.io/badge/17-pages-green.svg" alt="17-pages" align="left"> [Seastar: vertex-centric programming for graph neural networks](https://dl.acm.org/doi/pdf/10.1145/3447786.3456247) - Yidi Wu, Kaihao Ma, Zhenkun Cai, Tatiana Jin, Boyang Li, Chenguang Zheng, James Cheng, Fan Yu, EuroSys, 2021
 
 - <img src="https://img.shields.io/badge/12-pages-green.svg" alt="12-pages" align="left"> [FeatGraph: A Flexible and Efficient Backend for Graph Neural Network Systems](https://arxiv.org/pdf/2008.11359) - Yuwei Hu, Zihao Ye, Minjie Wang, Jiali Yu, Da Zheng, Mu Li, Zheng Zhang, Zhiru Zhang, Yida Wang, SC, 2020
+
+- <img src="https://img.shields.io/badge/16-pages-green.svg" alt="16-pages" align="left"> [AutoTransfer: AutoML with Knowledge Transfer - An Application to Graph Neural Networks ](https://openreview.net/pdf?id=y81ppNf_vg) - Kaidi Cao, Jiaxuan You, Jiaju Liu, Jure Leskovec, ICLR, 2023
 
 
 Dynamic Tensor Programs
@@ -197,6 +201,10 @@ Across Devices for Deep Learning Tensor Programs](https://aclanthology.org/2023.
 
 - <img src="https://img.shields.io/badge/12-pages-green.svg" alt="12-pages" align="left"> [Learning to Optimize Halide with Tree Search and Random Programs](https://dl.acm.org/doi/pdf/10.1145/3650200.3656626) - Andrew Adams, Karima Ma, Luke Anderson, Riyadh Baghdadi, Tzu-Mao Li, Michaël Gharbi, Benoit Steiner, Steven Johnson, Kayvon Fatahalian, Frédo Durand, , TOG, 2019 ![Check](https://img.shields.io/badge/✓-done-green)
 
+- <img src="https://img.shields.io/badge/13-pages-green.svg" alt="13-pages" align="left"> [Accelerated Auto-Tuning of GPU Kernels for Tensor Computations](https://dl.acm.org/doi/pdf/10.1145/3650200.3656626) - Chendi Li, Yufan Xu, Sina Mahdipour Saravani, Ponnuswamy Sadayappan, ICS, 2024
+
+- <img src="https://img.shields.io/badge/18-pages-green.svg" alt="18-pages" align="left"> [MonoNN: Enabling a New Monolithic Optimization Space for Neural Network Inference Tasks on Modern GPU-Centric Architectures](https://jamesthez.github.io/files/mononn-osdi24.pdf) - Donglin Zhuang, Zhen Zheng, Haojun Xia, Xiafei Qiu, Junjie Bai, Wei Lin, OSDI, 2024
+
 
 Automatic
 - <img src="https://img.shields.io/badge/14-pages-green.svg" alt="14-pages" align="left"> [AMOS: Enabling Automatic Mapping for Tensor Computations On Spatial Accelerators with Hardware Abstraction](https://dl.acm.org/doi/pdf/10.1145/3470496.3527440) - Size Zheng, Renze Chen, Anjiang Wei, Yicheng Jin, Qin Han, Liqiang Lu, Bingyang Wu, Xiuhong Li, Shengen Yan, Yun Liang, ISCA, 2022 ![Check](https://img.shields.io/badge/✓-done-green)
@@ -250,6 +258,10 @@ Automatic
 
 - <img src="https://img.shields.io/badge/15-pages-green.svg" alt="15-pages" align="left"> [Analytical Characterization and Design Space Exploration for Optimization of CNNs](https://dl.acm.org/doi/pdf/10.1145/3445814.3446759) - Rui Li, Yufan Xu, Aravind Sukumaran-Rajam, Atanas Rountev, P. Sadayappan, ASPLOS, 2021
 
-- <img src="https://img.shields.io/badge/15-pages-green.svg" alt="15-pages" align="left"> [Interstellar: Using Halide’s Scheduling Language to Analyze DNN Accelerators](https://dl.acm.org/doi/pdf/10.1145/3373376.3378514) - Xuan Yang, Mingyu Gao, Qiaoyi Liu, Jeff Setter, Jing Pu, Ankita Nayak, Steven Bell, Kaidi Cao, Heonjae Ha, Priyanka Raina, Christos Kozyrakis, Mark Horowitz, ASPLOS, 2020
+- <img src="https://img.shields.io/badge/15-pages-green.svg" alt="15-pages" align="left"> [Interstellar: Using Halide’s Scheduling Language to Analyze DNN Accelerators](https://dl.acm.org/doi/pdf/10.1145/3373376.3378514) - Xuan Yang, Mingyu Gao, Qiaoyi Liu, Jeff Setter, Jing Pu, Ankita Nayak, Steven Bell, Kaidi Cao, Heonjae Ha, Priyanka Raina, Christos Kozyrakis, Mark Horowitz, ASPLOS, 2020 ![Check](https://img.shields.io/badge/✓-done-green)
 
 - <img src="https://img.shields.io/badge/17-pages-green.svg" alt="17-pages" align="left"> [Mind the Gap: Attainable Data Movement and Operational Intensity Bounds for Tensor Algorithms](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10609642) - Qijing Huang, Po-An Tsai, Joel S. Emer, Angshuman Parashar, ISCA, 2024
+
+
+Dataset
+- <img src="https://img.shields.io/badge/21-pages-green.svg" alt="21-pages" align="left"> [TpuGraphs: A Performance Prediction Dataset on Large Tensor Computational Graphs](https://arxiv.org/pdf/2308.13490) - Phitchaya Mangpo Phothilimthana, Sami Abu-El-Haija, Kaidi Cao, Bahare Fatemi, Charith Mendis, Bryan Perozzi, NIPS, 2023
