@@ -135,7 +135,7 @@ Dynamic Tensor Programs
 
 - <img src="https://img.shields.io/badge/17-pages-green.svg" alt="17-pages" align="left"> [Grape: Practical and Efficient Graphed Execution for Dynamic Deep Neural Networks on GPUs](https://dl.acm.org/doi/pdf/10.1145/3620666.3651322) - Bojian Zheng, Cody Hao Yu, Jie Wang, Yaoyao Ding, Yizhi Liu, Yida Wang, Gennady Pekhimenko, ASPLOS, 2024
 
-- <img src="https://img.shields.io/badge/17-pages-green.svg" alt="17-pages" align="left"> [Optimizing Dynamic-Shape Neural Networks on Accelerators via On-the-Fly Micro-Kernel Polymerization](https://proceedings.mlsys.org/paper_files/paper/2021/file/5b47430e24a5a1f9fe21f0e8eb814131-Paper.pdf) - Kun Wu, Mert Hidayetoğlu, Xiang Song, Sitao Huang, Da Zheng, Israt Nisa, Wen-Mei Hwu, MICRO, 2023
+- <img src="https://img.shields.io/badge/16-pages-green.svg" alt="16-pages" align="left"> [Optimizing Dynamic-Shape Neural Networks on Accelerators via On-the-Fly Micro-Kernel Polymerization](https://dl.acm.org/doi/pdf/10.1145/3620665.3640390) - Feng Yu, Guangli Li, Jiacheng Zhao, Huimin Cui, Xiaobing Feng, Jingling Xue, ASPLOS, 2024
 
 - <img src="https://img.shields.io/badge/15-pages-green.svg" alt="15-pages" align="left"> [Nimble: Efficiently Compiling Dynamic Neural Networks for Model Inference](https://dl.acm.org/doi/pdf/10.1145/3613424.3614248) - Haichen Shen, Jared Roesch, Zhi Chen, Wei Chen, Yong Wu, Mu Li, Vin Sharma, Zachary Tatlock, Yida Wang, MLSys, 2021
 

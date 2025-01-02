@@ -20,3 +20,7 @@ tags:
 
 
 ### 论文复现工作
+
+***CMLCompiler***<br>
+决策树算法sklearn转换成tvm的DL model的流程如下：<br>
+cmlcompiler.model &rightarrow; build_model &rightarrow; init_model &rightarrow; __init__ &rightarrow; __parse_params__ &rightarrow; convert_decision_tree &rightarrow; __get_algo &rightarrow; decision_tree_classifier &rightarrow;
