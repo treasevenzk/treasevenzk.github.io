@@ -23,7 +23,7 @@ tags:
 #### A Formal Dataflow Taxonomy
 提出一个基于循环变换的形式化数据流分类方法
 
-<img width="500" height="200" src="../img/post-interstellar-dataflows.png">
+<img width="500" height="200" src="/img/post-interstellar-dataflows.png">
 
 ***Output stationary***: 每个PE负责计算一个固定的输出像素位置，输入数据需要在PE间移动，而输出数据保持在原地
 ***Weight stationary***: 每个PE保存卷积核的一个权重值不变，输入和输出数据需要在PE间移动
@@ -37,10 +37,10 @@ tags:
 
 ***Observation 2***: The total energy of an efficient system should not be dominated by any individual level in the memory hierarchy
 
-<img width="500" height="600" src="../img/post-interstellar-designspace.png">
+<img width="500" height="600" src="/img/post-interstellar-designspace.png">
 
 
-<img width="1000" height="300" src="../img/post-interstellar-overall.png">
+<img width="1000" height="300" src="/img/post-interstellar-overall.png">
 
 ### 贡献
 (1) 提出一个系统化的DNN加速器描述方法，将加速器设计空间归纳为3个维度：数据流(如何在PE阵列上映射计算)、资源分配(如何分配计算和存储资源)、循环分块(如何组织数据移动和复用)<br>

@@ -22,11 +22,11 @@ tags:
 ### Key Design Methodology
 
 
-<img width="500" height="700" src="../img/post-astitch-scheme.png">
+<img width="500" height="700" src="/img/post-astitch-scheme.png">
 
 ```Operator-Stitching Scheme Abstraction```:
 
-<img width="500" height="200" src="../img/post-astitch-stitching-scheme.png">
+<img width="500" height="200" src="/img/post-astitch-stitching-scheme.png">
 
 Independent Scheme: 算子之间相互独立
 Local Scheme: 相邻算子间是元素级一对一依赖
@@ -41,7 +41,7 @@ Global Scheme: 可以处理任意复杂的依赖关系，使用全局内存
 
 ### Compiler Design and Optimizations
 
-<img width="500" height="500" src="../img/post-astitch-schedule.png">
+<img width="500" height="500" src="/img/post-astitch-schedule.png">
 
 #### Stitching Scope Identification
 
@@ -58,16 +58,16 @@ Global Scheme: 可以处理任意复杂的依赖关系，使用全局内存
 
 ### Evaluation
 
-<img width="500" height="400" src="../img/post-astitch-end-performance.png">
+<img width="500" height="400" src="/img/post-astitch-end-performance.png">
 
 
-<img width="500" height="200" src="../img/post-astitch-inference.png">
+<img width="500" height="200" src="/img/post-astitch-inference.png">
 
 
-<img width="500" height="250" src="../img/post-astitch-performance-breakdown.png">
+<img width="500" height="250" src="/img/post-astitch-performance-breakdown.png">
 
 
-<img width="500" height="200" src="../img/post-astitch-kernel-numbers.png">
+<img width="500" height="200" src="/img/post-astitch-kernel-numbers.png">
 
 
 ### Reference
