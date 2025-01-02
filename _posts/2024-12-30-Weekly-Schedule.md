@@ -11,12 +11,12 @@ tags:
 ---
 
 ### 论文阅读计划
-* Interstellar: Using Halide’s Scheduling Language to Analyze DNN Accelerators 
+* ~~Interstellar: Using Halide’s Scheduling Language to Analyze DNN Accelerators~~
 * Analytical Characterization and Design Space Exploration for Optimization of CNNs
 * Mind mappings: enabling efficient algorithm-accelerator mapping space search
 * Optimizing Deep Learning Inference via Global Analysis and Tensor Expressions
-* AStitch: Enabling a New Multi-dimensional Optimization Space for Memory-intensive ML Training and Inference on Modern SIMT Architectures 
-* Hidet: Task-Mapping Programming Paradigm for Deep Learning Tensor Programs
+* ~~AStitch: Enabling a New Multi-dimensional Optimization Space for Memory-intensive ML Training and Inference on Modern SIMT Architectures~~
+* ~~Hidet: Task-Mapping Programming Paradigm for Deep Learning Tensor Programs~~
 
 
 ### 论文复现工作
