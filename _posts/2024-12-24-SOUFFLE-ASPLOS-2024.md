@@ -21,7 +21,7 @@ tags:
 ### Motivation
 
 
-<img width="1000" height="300" src="../img/post-souffle-working-example.png"/>
+<img width="1000" height="300" src="/img/post-souffle-working-example.png"/>
 
 ***Fail to explore optimization between memory- and compute-intensive kernels***: manually crafted rules cannot cover a diverse set of computation patterns and miss the optimization opportunity in this case<br>
 ***Suboptimal fusion strategy for reduction operators***<br>
@@ -29,7 +29,7 @@ tags:
 
 post-souffle-example.png
 
-<img width="500" height="900" src="../img/post-souffle-example.png"/>
+<img width="500" height="900" src="/img/post-souffle-example.png"/>
 
 
 ### Global Computation Graph Analysis
@@ -44,11 +44,11 @@ post-souffle-example.png
 
 - Horizontal transformation for independent TEs
 
-<img width="500" height="200" src="../img/post-souffle-horizontal.png"/>
+<img width="500" height="200" src="/img/post-souffle-horizontal.png"/>
 
 - Vertical transformation for one-relies-on-one TEs
 
-<img width="500" height="200" src="../img/post-souffle-vertical.png"/>
+<img width="500" height="200" src="/img/post-souffle-vertical.png"/>
 
 - Schedule TEs
 
@@ -58,22 +58,22 @@ post-souffle-example.png
 
 - Put it all together
 
-<img width="500" height="700" src="../img/post-souffle-algorithm.png"/>
+<img width="500" height="700" src="/img/post-souffle-algorithm.png"/>
 
 ### Evaluation
 
 
 
-<img width="500" height="200" src="../img/post-souffle-end-to-end.png"/>
+<img width="500" height="200" src="/img/post-souffle-end-to-end.png"/>
 
 
 
-<img width="500" height="200" src="../img/post-souffle-execution.png"/>
+<img width="500" height="200" src="/img/post-souffle-execution.png"/>
 
 
 
-<img width="500" height="200" src="../img/post-souffle-gpu.png"/>
+<img width="500" height="200" src="/img/post-souffle-gpu.png"/>
 
 
 
-<img width="500" height="200" src="../img/post-souffle-breakdown.png"/>
+<img width="500" height="200" src="/img/post-souffle-breakdown.png"/>
