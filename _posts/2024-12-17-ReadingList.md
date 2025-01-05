@@ -143,6 +143,8 @@ Dynamic Tensor Programs
 
 - <img src="https://img.shields.io/badge/27-pages-green.svg" alt="27-pages" align="left"> [Axon: A Language for Dynamic Shapes in Deep Learning Graphs](https://arxiv.org/pdf/2210.02374) - Alexander Collins, Vinod Grover, arxiv, 2022
 
+- <img src="https://img.shields.io/badge/20-pages-green.svg" alt="20-pages" align="left"> [COCKTAILER: Analyzing and Optimizing Dynamic Control Flow in Deep Learning](https://www.usenix.org/system/files/osdi23-zhang-chen.pdf) - Chen Zhang, Lingxiao Ma, Jilong Xue, Yining Shi, Ziming Miao, Fan Yang, Jidong Zhai, Zhi Yang, Mao Yang, OSDI, 2023
+
 Sparse Tensor Program Optimization
 - <img src="https://img.shields.io/badge/30-pages-green.svg" alt="30-pages" align="left"> [A Sparse Iteration Space Transformation Framework for Sparse Tensor Algebra](https://dl.acm.org/doi/pdf/10.1145/3428226) - Ryan Senanayake, Changwan Hong, Ziheng Wang, Amalee Wilson, Stephen Chou, Shaoaib Kamil, Saman Amarasinghe, Fredrik Kjolstad, OOPSLA, 2020
 
