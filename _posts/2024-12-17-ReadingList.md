@@ -253,15 +253,15 @@ Automatic
 
 - <img src="https://img.shields.io/badge/17-pages-green.svg" alt="17-pages" align="left"> [ROLLER: Fast and Efficient Tensor Compilation for Deep Learning](https://www.usenix.org/system/files/osdi22-zhu.pdf) - Hongyu Zhu, Ruofan Wu, Yijia Diao, Shanbin Ke, Haoyu Li, Chen Zhang, Jilong Xue, Lingxiao Ma, Yuqing Xia, Wei Cui, Fan Yang, Mao Yang, Lidong Zhou, Asaf Cidon, Gennady Pekhimenko, OSDI, 2022
 
-- <img src="https://img.shields.io/badge/16-pages-green.svg" alt="16-pages" align="left"> [Optimizing Deep Learning Inference via Global Analysis and Tensor Expressions](https://dl.acm.org/doi/pdf/10.1145/3617232.3624858) - Chunwei Xia, Jiacheng Zhao, Qianqi Sun, Zheng Wang, Yuan Wen, Teng Yu, Xiaobing Feng, Huimin Cui, ASPLOS, 2024
+- <img src="https://img.shields.io/badge/16-pages-green.svg" alt="16-pages" align="left"> [Optimizing Deep Learning Inference via Global Analysis and Tensor Expressions](https://dl.acm.org/doi/pdf/10.1145/3617232.3624858) - Chunwei Xia, Jiacheng Zhao, Qianqi Sun, Zheng Wang, Yuan Wen, Teng Yu, Xiaobing Feng, Huimin Cui, ASPLOS, 2024 ![Check](https://img.shields.io/badge/✓-done-green)
 
-- <img src="https://img.shields.io/badge/16-pages-green.svg" alt="16-pages" align="left"> [Mind mappings: enabling efficient algorithm-accelerator mapping space search](https://dl.acm.org/doi/pdf/10.1145/3445814.3446762) - Kartik Hegde, Po-An Tsai, Sitao Huang, Vikas Chandra, Angshuman Parashar, Christopher W. Fletcher, ASPLOS, 2021
+- <img src="https://img.shields.io/badge/16-pages-green.svg" alt="16-pages" align="left"> [Mind mappings: enabling efficient algorithm-accelerator mapping space search](https://dl.acm.org/doi/pdf/10.1145/3445814.3446762) - Kartik Hegde, Po-An Tsai, Sitao Huang, Vikas Chandra, Angshuman Parashar, Christopher W. Fletcher, ASPLOS, 2021 ![Check](https://img.shields.io/badge/✓-done-green)
 
 - <img src="https://img.shields.io/badge/9-pages-green.svg" alt="9-pages" align="left"> [Gamma: Automating the hw mapping of dnn models on accelerators via genetic algorithm](https://dl.acm.org/doi/pdf/10.1145/3400302.3415639) - Sheng-Chun Kao, Tushar Krishna, ICCAD, 2020
 
 - <img src="https://img.shields.io/badge/27-pages-green.svg" alt="27-pages" align="left"> [dMazeRunner: Executing Perfectly Nested Loops on Dataflow Accelerators](https://dl.acm.org/doi/pdf/10.1145/3358198) - Shail Dave, Youngbin Kim, Sasikanth Avancha, Kyoungwoo Lee, Aviral Shrivastava, TECS, 2019
 
-- <img src="https://img.shields.io/badge/15-pages-green.svg" alt="15-pages" align="left"> [Analytical Characterization and Design Space Exploration for Optimization of CNNs](https://dl.acm.org/doi/pdf/10.1145/3445814.3446759) - Rui Li, Yufan Xu, Aravind Sukumaran-Rajam, Atanas Rountev, P. Sadayappan, ASPLOS, 2021
+- <img src="https://img.shields.io/badge/15-pages-green.svg" alt="15-pages" align="left"> [Analytical Characterization and Design Space Exploration for Optimization of CNNs](https://dl.acm.org/doi/pdf/10.1145/3445814.3446759) - Rui Li, Yufan Xu, Aravind Sukumaran-Rajam, Atanas Rountev, P. Sadayappan, ASPLOS, 2021 ![Check](https://img.shields.io/badge/✓-done-green)
 
 - <img src="https://img.shields.io/badge/15-pages-green.svg" alt="15-pages" align="left"> [Interstellar: Using Halide’s Scheduling Language to Analyze DNN Accelerators](https://dl.acm.org/doi/pdf/10.1145/3373376.3378514) - Xuan Yang, Mingyu Gao, Qiaoyi Liu, Jeff Setter, Jing Pu, Ankita Nayak, Steven Bell, Kaidi Cao, Heonjae Ha, Priyanka Raina, Christos Kozyrakis, Mark Horowitz, ASPLOS, 2020 ![Check](https://img.shields.io/badge/✓-done-green)
 
