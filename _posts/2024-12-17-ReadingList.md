@@ -166,6 +166,8 @@ ML Tensor Operations Optimization
 
 - <img src="https://img.shields.io/badge/26-pages-green.svg" alt="26-pages" align="left"> [Efficient Realization of Decision Trees for Real-Time Inference](https://dl.acm.org/doi/pdf/10.1145/3508019) - Kuan-Hsun Chen, Chiahui Su, Christian Hakert, Sebastian Buschjäger, Chao-Lin Lee, Jenq-Kuen Lee, Katharina Morik, Jian-Jia Chen, TECS, 2022
 
+- <img src="https://img.shields.io/badge/15-pages-green.svg" alt="15-pages" align="left"> [Bridging the Gap Between Domain-specific Frameworks and Multiple Hardware Devices](https://arxiv.org/pdf/2405.12491) - Xu Wen, Wanling Gao, Lei Wang, Jianfeng Zhan, arxiv, 2024
+
 Autotune
 - <img src="https://img.shields.io/badge/24-pages-green.svg" alt="24-pages" align="left"> [BaCO: A Fast and Portable Bayesian Compiler Optimization Framework](https://dl.acm.org/doi/pdf/10.1145/3623278.3624770) - Erik Hellsten, Artur Souza, Johannes Lenfers, Rubens Lacouture, Olivia Hsu, Adel Ejjeh, Fredrik Kjolstad, Michel Steuwer, Kunle Olukotun, Luigi Nardi, ASPLOS, 2023 ![Check](https://img.shields.io/badge/✓-done-green)
 
