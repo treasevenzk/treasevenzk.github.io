@@ -273,6 +273,12 @@ Automatic
 
 - <img src="https://img.shields.io/badge/14-pages-green.svg" alt="14-pages" align="left"> [Romou: Rapidly Generate High-Performance Tensor Kernels for Mobile GPUs](https://dl.acm.org/doi/pdf/10.1145/3495243.3517020) - Rendong Liang, Ting Cao, Jicheng Wen, Manni Wang, Yang Wang, Jianhua Zou, Yunxin Liu, MobiCom, 2022
 
+- <img src="https://img.shields.io/badge/13-pages-green.svg" alt="13-pages" align="left"> [DOPpler: Parallel Measurement Infrastructure for Auto-Tuning Deep Learning Tensor Programs](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10132048) - Damian Borowiec, Gingfung Yeung, Adrian Friday, Richard Harper, Peter Garraghan, TPDS, 2023
+
+- <img src="https://img.shields.io/badge/12-pages-green.svg" alt="12-pages" align="left"> [Transfer-Tuning: Reusing Auto-Schedules for Efficient Tensor Program Code Generation](https://dl.acm.org/doi/pdf/10.1145/3559009.3569682) - Perry Gibson, José Cano, PACT, 2022
+
+- <img src="https://img.shields.io/badge/13-pages-green.svg" alt="13-pages" align="left"> [Effective Performance Modeling and Domain-Specific Compiler Optimization of CNNs for GPUs](https://dl.acm.org/doi/pdf/10.1145/3559009.3569674) - Yufan Xu, Qiwei Yuan, Erik Curtis Barton, Rui Li, P. Sadayappan, Aravind Sukumaran-Rajam, PACT, 2022
+
 
 Dataset
 - <img src="https://img.shields.io/badge/21-pages-green.svg" alt="21-pages" align="left"> [TpuGraphs: A Performance Prediction Dataset on Large Tensor Computational Graphs](https://arxiv.org/pdf/2308.13490) - Phitchaya Mangpo Phothilimthana, Sami Abu-El-Haija, Kaidi Cao, Bahare Fatemi, Charith Mendis, Bryan Perozzi, NIPS, 2023
