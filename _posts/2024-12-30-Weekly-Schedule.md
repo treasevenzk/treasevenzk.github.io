@@ -13,12 +13,12 @@ tags:
 
 ### 12.30-1.5进度
 *** 论文阅读计划 ***
-- * ~~Interstellar: Using Halide’s Scheduling Language to Analyze DNN Accelerators~~
-- * ~~Analytical Characterization and Design Space Exploration for Optimization of CNNs~~
-- * ~~Mind mappings: enabling efficient algorithm-accelerator mapping space search~~
-- * ~~Optimizing Deep Learning Inference via Global Analysis and Tensor Expressions~~
-- * ~~AStitch: Enabling a New Multi-dimensional Optimization Space for Memory-intensive ML Training and Inference on Modern SIMT Architectures~~
-- * ~~Hidet: Task-Mapping Programming Paradigm for Deep Learning Tensor Programs~~
+- ~~Interstellar: Using Halide’s Scheduling Language to Analyze DNN Accelerators~~
+- ~~Analytical Characterization and Design Space Exploration for Optimization of CNNs~~
+- ~~Mind mappings: enabling efficient algorithm-accelerator mapping space search~~
+- ~~Optimizing Deep Learning Inference via Global Analysis and Tensor Expressions~~
+- ~~AStitch: Enabling a New Multi-dimensional Optimization Space for Memory-intensive ML Training and Inference on Modern SIMT Architectures~~
+- ~~Hidet: Task-Mapping Programming Paradigm for Deep Learning Tensor Programs~~
 
 
 *** 论文复现工作 ***
@@ -33,19 +33,33 @@ cmlcompiler.model &rightarrow; build_model &rightarrow; init_model &rightarrow; 
 
 ### 1.6-1.12进度
 *** 论文阅读计划 ***
-- ROLLER: Fast and Efficient Tensor Compilation for Deep Learning
-- SmartMem: Layout Transformation Elimination and Adaptation for Efficient DNN Execution on Mobile
-- MonoNN: Enabling a New Monolithic Optimization Space for Neural Network Inference Tasks on Modern GPU-Centric Architectures
-- Accelerated Auto-Tuning of GPU Kernels for Tensor Computations
-- A full-stack search technique for domain optimized deep learning accelerators
-- RAMMER: Enabling Holistic Deep Learning Compiler Optimizations with rTasks
-- Bridging the Gap Between Domain-specific Frameworks and Multiple Hardware Devices 
+- ~~ROLLER: Fast and Efficient Tensor Compilation for Deep Learning~~
+- ~~SmartMem: Layout Transformation Elimination and Adaptation for Efficient DNN Execution on Mobile~~
+- ~~MonoNN: Enabling a New Monolithic Optimization Space for Neural Network Inference Tasks on Modern GPU-Centric Architectures~~
+- ~~Accelerated Auto-Tuning of GPU Kernels for Tensor Computations~~
+- ~~A full-stack search technique for domain optimized deep learning accelerators~~
+- ~~RAMMER: Enabling Holistic Deep Learning Compiler Optimizations with rTasks~~
+- ~~Bridging the Gap Between Domain-specific Frameworks and Multiple Hardware Devices~~ 
 
 
 
 ### 1.13-1.19进度
-
+*** 论文阅读计划 ***
+- DOPpler: Parallel Measurement Infrastructure for Auto-Tuning Deep Learning Tensor Programs
+- Mind the Gap: Attainable Data Movement and Operational Intensity Bounds for Tensor Algorithms
+- TIRAMISU: A Polyhedral Compiler for Expressing Fast and Portable Code 
+- DISTAL: The Distributed Tensor Algebra Compiler
+- AKG: Automatic Kernel Generation for Neural Processing Units using Polyhedral Transformations
+- Tlp: A deep learning-based cost model for tensor program tuning
+- DNNFusion: Accelerating Deep Neural Networks Execution with Advanced Operator Fusion
 
 
 ### 1.20-1.22进度
-
+*** 论文阅读计划 ***
+- Chimera: An Analytical Optimizing Framework for Effective Compute-intensive Operators Fusion 
+- UNIT: Unifying tensorized instruction compilation 
+- FreeTensor: A Free-Form DSL with Holistic Optimizations for Irregular Tensor Programs
+- Uncovering Nested Data Parallelism and Data Reuse in DNN Computation with FractalTensor
+- MCFuser: High-Performance and Rapid Fusion of Memory-Bound Compute-Intensive Operators
+- Effectively Scheduling Computational Graphs of Deep Neural Networks toward Their Domain-Specific Accelerators
+- Apollo: Automatic Partition-based Operator Fusion through Layer by Layer Optimization
