@@ -41,6 +41,11 @@ cmlcompiler.model &rightarrow; build_model &rightarrow; init_model &rightarrow; 
 - ~~RAMMER: Enabling Holistic Deep Learning Compiler Optimizations with rTasks~~
 - ~~Bridging the Gap Between Domain-specific Frameworks and Multiple Hardware Devices~~ 
 
+*** 论文复现工作 ***
+- ***CMLCompiler***<br>
+测试代码编写：测试的时候在用测试集，只需利用测试集中的一行数据进行测试，关注的是单次推理的性能，减少内存占用，~~之前的想法是用整个测试集进行测试~~
+
+
 
 
 ### 1.13-1.19进度

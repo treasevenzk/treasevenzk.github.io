@@ -71,5 +71,14 @@ leverage DL's well-defined unified abstractions and highly mature compilers, opt
 |实现方式|基于TVM实现完整的编译框架，直接生成优化的计算图|通过PyTorch/ONNX等框架转换，间接使用DL框架的优化能力|
 
 
+### 补充材料
+Binaraizer:用于将数值特征转换为二值
+MinMaxScaler: 用于将特征缩放到指定范围
+MaxAbsScaler: 通过除以每个特征的最大绝对值来进行缩放
+StandScaler: 标准化缩放
+RobustScaler: 稳健缩放
+
+
+
 ### Reference 
 [CMLCompiler: A Unified Compiler for Classical Machine Learning](https://dl.acm.org/doi/pdf/10.1145/3577193.3593710)

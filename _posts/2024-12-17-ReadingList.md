@@ -194,6 +194,8 @@ Across Devices for Deep Learning Tensor Programs](https://aclanthology.org/2023.
 
 - <img src="https://img.shields.io/badge/15-pages-green.svg" alt="15-pages" align="left"> [AutoGTCO: Graph and tensor co-Optimize for image recognition with transformers on GPU](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9643487) - Yang Bai, Xufeng Yao, Qi Sun, Bei Yu, ICCAD, 2021
 
+- <img src="https://img.shields.io/badge/14-pages-green.svg" alt="14-pages" align="left"> [GTCO: Graph and Tensor Co-Design for Transformer-Based Image Recognition on Tensor Cores](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9643487) - Yang Bai, Xufeng Yao, Qi Sun, Wenqian Zhao, Shixin Chen, Zixiao Wang, TCAD, 2023
+
 - <img src="https://img.shields.io/badge/13-pages-green.svg" alt="13-pages" align="left"> [Neural Architecture Search as Program Transformation Exploration](https://dl.acm.org/doi/pdf/10.1145/3445814.3446753) - Jack Turner, Elliot J. Crowley, Michael F. P. O’Boyle, ASPLOS, 2021 ![Check](https://img.shields.io/badge/✓-done-green)
 
 - <img src="https://img.shields.io/badge/15-pages-green.svg" alt="15-pages" align="left"> [One-Shot Tuner for Deep Learning Compilers](https://dl.acm.org/doi/pdf/10.1145/3497776.3517774) - Jaehun Ryu, Eunhyeok Park, Hyojin Sung, CC, 2022
@@ -279,6 +281,9 @@ Automatic
 
 - <img src="https://img.shields.io/badge/13-pages-green.svg" alt="13-pages" align="left"> [Effective Performance Modeling and Domain-Specific Compiler Optimization of CNNs for GPUs](https://dl.acm.org/doi/pdf/10.1145/3559009.3569674) - Yufan Xu, Qiwei Yuan, Erik Curtis Barton, Rui Li, P. Sadayappan, Aravind Sukumaran-Rajam, PACT, 2022
 
+- <img src="https://img.shields.io/badge/6-pages-green.svg" alt="6-pages" align="left"> [GTuner: Tuning DNN Computations on GPU via Graph Attention Network](https://dl.acm.org/doi/pdf/10.1145/3489517.3530584) - Qi Sun, Xinyun Zhang, Hao Geng, Yuxuan Zhao, Yang Bai, Haisheng Zheng, Bei Yu, DAC, 2022
+
+- <img src="https://img.shields.io/badge/15-pages-green.svg" alt="15-pages" align="left"> [Alcop: Automatic load-compute pipelining in deep learning compiler for ai-gpus](https://proceedings.mlsys.org/paper_files/paper/2023/file/d6cde2c1b161daa31be560d062cf2251-Paper-mlsys2023.pdf) - Guyue Huang, Yang Bai, Liu Liu, Yuke Wang, Bei Yu, Yufei Ding, Yuan Xie, MLSys, 2023
 
 Dataset
 - <img src="https://img.shields.io/badge/21-pages-green.svg" alt="21-pages" align="left"> [TpuGraphs: A Performance Prediction Dataset on Large Tensor Computational Graphs](https://arxiv.org/pdf/2308.13490) - Phitchaya Mangpo Phothilimthana, Sami Abu-El-Haija, Kaidi Cao, Bahare Fatemi, Charith Mendis, Bryan Perozzi, NIPS, 2023
