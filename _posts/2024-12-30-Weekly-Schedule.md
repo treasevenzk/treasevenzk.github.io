@@ -32,7 +32,7 @@ cmlcompiler.model &rightarrow; build_model &rightarrow; init_model &rightarrow; 
 本周进度还是相对较慢，因为中间元旦放假两天，耽误了一些进度，下周还是需要更加加油！！！
 
 ### 1.6-1.12进度
-*** 论文阅读计划 ***
+***论文阅读计划***
 - ~~ROLLER: Fast and Efficient Tensor Compilation for Deep Learning~~
 - ~~SmartMem: Layout Transformation Elimination and Adaptation for Efficient DNN Execution on Mobile~~
 - ~~MonoNN: Enabling a New Monolithic Optimization Space for Neural Network Inference Tasks on Modern GPU-Centric Architectures~~
@@ -41,11 +41,20 @@ cmlcompiler.model &rightarrow; build_model &rightarrow; init_model &rightarrow; 
 - ~~RAMMER: Enabling Holistic Deep Learning Compiler Optimizations with rTasks~~
 - ~~Bridging the Gap Between Domain-specific Frameworks and Multiple Hardware Devices~~ 
 
-*** 论文复现工作 ***
+***论文复现工作***
 - ***CMLCompiler***<br>
 测试代码编写：测试的时候在用测试集，只需利用测试集中的一行数据进行测试，关注的是单次推理的性能，减少内存占用，~~之前的想法是用整个测试集进行测试~~
+CMLCompiler的代码全部阅读完，但目前发现CMLCompiler在复现的时候效果不如论文中的结果，现在考虑重新写CMLCompiler的代码
 
+- ***Heron***<br>
+CPU的实验
+config属性: out_name、method、max_trials、runner_number、runner_repeat、runner_timeout、build_timeout、in_dtype、out_dtype、cases、target_name、codegen_type、get_op、device_id、tuned
 
+***这周状态***<br>
+- 这周前四天效率还是比较高，但是后面三天效率比较低，下周还是要坚持6天效率比较高，加油
+
+***每周学习的计划***<br>
+- 这周没有制定相应的学习计划，但实际应该制定一些相应的学习计划，比如TVM源码的学习笔记，从下周开始必须整理相应的TVM源码的学习计划内容
 
 
 ### 1.13-1.19进度

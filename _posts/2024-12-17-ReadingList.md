@@ -100,6 +100,8 @@ Performance Prediction of Tensor Programs
 
 - <img src="https://img.shields.io/badge/13-pages-green.svg" alt="13-pages" align="left"> [Moses: Efficient exploitation of cross-device transferable features for tensor program optimization](https://arxiv.org/pdf/2201.05752) - Yufan Xu, Qiwei Yuan, Erik Curtis Barton, Rui Li, P. Sadayappan, Aravind Sukumaran-Rajam, PACT, 2022
 
+- <img src="https://img.shields.io/badge/14-pages-green.svg" alt="14-pages" align="left"> [A Learned Performance Model for Tensor Processing Units](https://proceedings.mlsys.org/paper_files/paper/2021/file/6bcfac823d40046dca25ef6d6d59cc3f-Paper.pdf) - Sam Kaufman, Phitchaya Phothilimthana, Yanqi Zhou, Charith Mendis, Sudip Roy, Amit Sabne, Mike Burrows, MLSys, 2021
+
 
 Recursive Deep Learning Models
 - <img src="https://img.shields.io/badge/17-pages-green.svg" alt="17-pages" align="left"> [Cortex: A compiler for recursive deep learning models](https://proceedings.mlsys.org/paper_files/paper/2021/file/eca986d585a03890a412587a2f5ccb43-Paper.pdf) - Pratik Fegade, Tianqi Chen, Phillip B.Gibbons, Todd C.Mowry, MLSys, 2021
@@ -282,5 +284,21 @@ Automatic
 
 - <img src="https://img.shields.io/badge/15-pages-green.svg" alt="15-pages" align="left"> [Alcop: Automatic load-compute pipelining in deep learning compiler for ai-gpus](https://proceedings.mlsys.org/paper_files/paper/2023/file/d6cde2c1b161daa31be560d062cf2251-Paper-mlsys2023.pdf) - Guyue Huang, Yang Bai, Liu Liu, Yuke Wang, Bei Yu, Yufei Ding, Yuan Xie, MLSys, 2023
 
+- <img src="https://img.shields.io/badge/14-pages-green.svg" alt="14-pages" align="left"> [Automatic Generation of Multi-Objective Polyhedral Compiler Transformations](http://aegjcef.unixer.de/publications/img/chelini-autopoly.pdf) - Lorenzo Chelini, Tobias Gysi, Tobias Grosser, Martin Kong, PACT, 2020
+
 Dataset
 - <img src="https://img.shields.io/badge/21-pages-green.svg" alt="21-pages" align="left"> [TpuGraphs: A Performance Prediction Dataset on Large Tensor Computational Graphs](https://arxiv.org/pdf/2308.13490) - Phitchaya Mangpo Phothilimthana, Sami Abu-El-Haija, Kaidi Cao, Bahare Fatemi, Charith Mendis, Bryan Perozzi, NIPS, 2023
+
+Code Optimization
+- <img src="https://img.shields.io/badge/17-pages-green.svg" alt="17-pages" align="left"> [Chameleon: Adaptive code optimization for expedited deep neural network compilation](https://arxiv.org/pdf/2001.08743) - Byung Hoon Ahn1, Prannoy Pilligundla1, Amir Yazdanbakhsh, Hadi Esmaeilzadeh, ICLR, 2020
+
+- <img src="https://img.shields.io/badge/13-pages-green.svg" alt="13-pages" align="left"> [A Deep Learning Based Cost Model for Automatic Code Optimization](https://proceedings.mlsys.org/paper_files/paper/2021/file/d9387b6d643efb25132be36f7b908d96-Paper.pdf) - Riyadh Baghdadi, Massinissa Merouani, Mohamed-Hicham LEGHETTAS, Kamel Abdous, Taha Arbaoui, Karima BENATCHBA, Saman amarasinghe, MLSys, 2021
+
+- <img src="https://img.shields.io/badge/21-pages-green.svg" alt="21-pages" align="left"> [LOOPer: A Learned Automatic Code Optimizer For Polyhedral Compilers](https://arxiv.org/pdf/2403.11522) - Massinissa Merouani, Khaled Afif Boudaoud, Iheb Nassim Aouadj, Nassim Tchoulak, Islem Kara Bernou, Hamza Benyamina, Fatima Benbouzid-Si Tayeb, Karima Benatchba, Hugh Leather, Riyadh Baghdadi, arxiv, 2024
+
+- <img src="https://img.shields.io/badge/16-pages-green.svg" alt="16-pages" align="left"> [FLAT: An Optimized Dataflow forMitigating Attention Bottlenecks](https://dl.acm.org/doi/pdf/10.1145/3575693.3575747) - Sheng-Chun Kao, Suvinay Subramanian, Gaurav Agrawal, Amir Yazdanbakhsh, ASPLOS, 2023
+
+- <img src="https://img.shields.io/badge/12-pages-green.svg" alt="12-pages" align="left"> [Model-Based Warp Overlapped Tiling for Image Processing Programs on GPUs](https://dl.acm.org/doi/pdf/10.1145/3410463.3414649) - Abhinav Jangda, Arjun Guha, PACT, 2020
+
+Performance and Energy efficiency
+- <img src="https://img.shields.io/badge/17-pages-green.svg" alt="17-pages" align="left"> [Inter-layer Scheduling Space Definition and Exploration for Tiled Accelerators](https://dl.acm.org/doi/pdf/10.1145/3579371.3589048) - Jingwei Cai, Yuchen Wei, Zuotong Wu, Sen Peng, ISCA, 2023
