@@ -15,7 +15,15 @@ tags:
 python run.py -p dlboost -c quick_start.json
 
 程序运行经过历程:<br>
-HeronRunner.LocalRunner &rarr; autotvm.measure_option &rarr; op_name("gemm"),case([64, 64, 64]) &rarr; 
+HeronRunner.LocalRunner &rarr; autotvm.measure_option &rarr; op_name("gemm"),case([64, 64, 64]) &rarr; Env &rarr; run &rarr; env.createTask
+&rarr; Task &rarr; self.tuner &rarr; self.tuner.buildCostModel &rarr; self.perf_buffer &rarr; env.tune &rarr; self.task.make_stage_schedules() &rarr;
+{buildContext &rarr; CPUContext &rarr; heron_dense &rarr; tvm.te.create_schedule &rarr; init_tensor_dict &rarr; sched_via_rule &rarr; ctx.updateAxisLength
+getStageNamesOrdered &rarr; ctx.addSched &rarr; self.knob_manager.sched_tups.append &rarr; get_op_methods &rarr; op_methods &rarr; action.perform
+computeAtOp.perform &rarr; compute_at &rarr; self.genAxesLength &rarr; fixAxesLength &rarr; genFuseAxisLength &rarr; printAxes &rarr; (mergeConsumer、unrollPragma、parallel、tileForCache、tensorize、generalTile、vectorize) &rarr; self.dump_constraints()} &rarr; {self.runner.measure_batch &rarr; self.dump_schedule() &rarr; self.tuner.run &rarr; self.check_feasible_exits &rarr;
+self.constrained_random_sample &rarr; constrained_random_sample_parallel &rarr; Job(constrained_random_sample_sequential, (task, work_load, config), timeout) &rarr; job.start &rarr; job.get &rarr;
+self.predict &rarr; self.UpdatePopulation &rarr; self.constrained_random_sample &rarr; self.history_topk_samples &rarr; self.repredict &rarr; self.optimize &rarr;
+self.epsilon_select &rarr; self.FilterSamples &rarr; self.RouletteWheelSelection &rarr; self.FilterSamples &rarr; self.measure} &rarr; task.apply_best &rarr; 
+
 
 config配置的属性: <br>
 target_name、verbose、measure_time_per_round、use_cost_model、out_name、parallel、parallel_num
@@ -57,5 +65,14 @@ tensorize_info:     、 knob_manager:
 
 CPUContext类 <br>
 parallel_stages:       、 cached_stages:        、 unpack_info:        、 codegen_type:         、 tensorize_info:      、 stage_organize:      
+
+schedOp类 <br>
+
+
+Job类 <br>
+func:       、 attach_info:         、 timeout:
+
+Sample类 <br>
+valid:      、 perf:        、 task:        、 knob_manager:        、 predict:         、 prob:        、 violation:       、 violations:         、 ranks:
 
 
