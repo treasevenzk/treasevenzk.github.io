@@ -286,6 +286,10 @@ Automatic
 
 - <img src="https://img.shields.io/badge/14-pages-green.svg" alt="14-pages" align="left"> [Automatic Generation of Multi-Objective Polyhedral Compiler Transformations](http://aegjcef.unixer.de/publications/img/chelini-autopoly.pdf) - Lorenzo Chelini, Tobias Gysi, Tobias Grosser, Martin Kong, PACT, 2020
 
+- <img src="https://img.shields.io/badge/19-pages-green.svg" alt="19-pages" align="left"> [Welder: Scheduling Deep Learning Memory Access via Tile-graph](https://www.usenix.org/system/files/osdi23-shi.pdf) - Yining Shi, Zhi Yang, Jilong Xue, Lingxiao Ma, Yuqing Xia, Ziming Miao, Yuxiao Guo, Fan Yang, Lidong Zhou, OSDI, 2023
+
+- <img src="https://img.shields.io/badge/21-pages-green.svg" alt="21-pages" align="left"> [Alpa: Automating Inter- and Intra-Operator Parallelism for Distributed Deep Learning](https://www.usenix.org/system/files/osdi22-zheng-lianmin.pdf) - Lianmin Zheng, Zhuohan Li, Hao Zhang, Yonghao Zhuang, Zhifeng Chen, Yanping Huang, Yida Wang, Yuanzhong Xu, Google; Danyang Zhuo, Eric P. Xing, MBZUAI, Joseph E. Gonzalez, Ion Stoica, OSDI, 2022
+
 Dataset
 - <img src="https://img.shields.io/badge/21-pages-green.svg" alt="21-pages" align="left"> [TpuGraphs: A Performance Prediction Dataset on Large Tensor Computational Graphs](https://arxiv.org/pdf/2308.13490) - Phitchaya Mangpo Phothilimthana, Sami Abu-El-Haija, Kaidi Cao, Bahare Fatemi, Charith Mendis, Bryan Perozzi, NIPS, 2023
 
