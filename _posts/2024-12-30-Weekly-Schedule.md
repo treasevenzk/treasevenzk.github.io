@@ -77,3 +77,6 @@ config属性: out_name、method、max_trials、runner_number、runner_repeat、r
 - MCFuser: High-Performance and Rapid Fusion of Memory-Bound Compute-Intensive Operators
 - Effectively Scheduling Computational Graphs of Deep Neural Networks toward Their Domain-Specific Accelerators
 - Apollo: Automatic Partition-based Operator Fusion through Layer by Layer Optimization
+
+
+### 2.5-2.9进度
