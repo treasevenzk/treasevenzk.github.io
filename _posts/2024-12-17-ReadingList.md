@@ -299,8 +299,15 @@ Automatic
 
 - <img src="https://img.shields.io/badge/21-pages-green.svg" alt="21-pages" align="left"> [Alpa: Automating Inter- and Intra-Operator Parallelism for Distributed Deep Learning](https://www.usenix.org/system/files/osdi22-zheng-lianmin.pdf) - Lianmin Zheng, Zhuohan Li, Hao Zhang, Yonghao Zhuang, Zhifeng Chen, Yanping Huang, Yida Wang, Yuanzhong Xu, Google; Danyang Zhuo, Eric P. Xing, MBZUAI, Joseph E. Gonzalez, Ion Stoica, OSDI, 2022
 
+- <img src="https://img.shields.io/badge/13-pages-green.svg" alt="13-pages" align="left"> [CoSA: Scheduling by Constrained Optimization for Spatial Accelerators](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9499855) - Qijing Huang, Minwoo Kang, Grace Dinh, Thomas Norell, Aravind Kalaiah, James Demmel, John Wawrzynek, Yakun Sophia Shao, ISCA, 2021
+
 Dataset
 - <img src="https://img.shields.io/badge/21-pages-green.svg" alt="21-pages" align="left"> [TpuGraphs: A Performance Prediction Dataset on Large Tensor Computational Graphs](https://arxiv.org/pdf/2308.13490) - Phitchaya Mangpo Phothilimthana, Sami Abu-El-Haija, Kaidi Cao, Bahare Fatemi, Charith Mendis, Bryan Perozzi, NIPS, 2023
+
+- <img src="https://img.shields.io/badge/11-pages-green.svg" alt="11-pages" align="left"> [NLTSP: A cost model for tensor program tuning using nested loop trees](https://www.sciencedirect.com/science/article/pii/S138376212400242X?via%3Dihub) - Xinghe Qin, Yunchun Li, Fengxu Lin, Wei Li, JSA, 2025
+
+- <img src="https://img.shields.io/badge/14-pages-green.svg" alt="14-pages" align="left"> [Tenset: A large-scale program performance dataset for learned tensor compilers](https://openreview.net/pdf?id=aIfp8kLuvc9) - Lianmin Zheng, Ruochen Liu, Junru Shao, Tianqi Chen, Joseph E. Gonzalez, Ion Stoica, Ameer Haj Ali, NIPS, 2021
+
 
 Code Optimization
 - <img src="https://img.shields.io/badge/17-pages-green.svg" alt="17-pages" align="left"> [Chameleon: Adaptive code optimization for expedited deep neural network compilation](https://arxiv.org/pdf/2001.08743) - Byung Hoon Ahn1, Prannoy Pilligundla1, Amir Yazdanbakhsh, Hadi Esmaeilzadeh, ICLR, 2020
