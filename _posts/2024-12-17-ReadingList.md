@@ -14,7 +14,7 @@ tags:
 
 
 
-### Paper [![number](https://img.shields.io/badge/39-138-blue.svg?style=flat)](https://github.com/home-assistant/home-assistant-iOS/blob/master/LICENSE)
+### Paper [![number](https://img.shields.io/badge/39-137-blue.svg?style=flat)](https://github.com/home-assistant/home-assistant-iOS/blob/master/LICENSE)
 
 ---
 Survery [![number](https://img.shields.io/badge/1-1-blue.svg?style=flat)](https://github.com/home-assistant/home-assistant-iOS/blob/master/LICENSE)
@@ -182,7 +182,7 @@ Inference Pipelines](https://dl.acm.org/doi/pdf/10.1145/3620678.3624656) - Hong 
 
 - <img src="https://img.shields.io/badge/5-pages-green.svg" alt="5-pages" align="left"> [Acceleration of Decision-Tree Ensemble Models on the IBM Telum Processor](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10181908) - Nikolaos Papandreou, Jan van Lunteren, Andreea Anghel, Thomas Parnell, Martin Petermann, Milos Stanisavljevic, ISCAS, 2023 ![Check](https://img.shields.io/badge/✓-done-green)
 
-Autotune [![number](https://img.shields.io/badge/9-20-blue.svg?style=flat)](https://github.com/home-assistant/home-assistant-iOS/blob/master/LICENSE)
+Autotune [![number](https://img.shields.io/badge/9-19-blue.svg?style=flat)](https://github.com/home-assistant/home-assistant-iOS/blob/master/LICENSE)
 - <img src="https://img.shields.io/badge/24-pages-green.svg" alt="24-pages" align="left"> [BaCO: A Fast and Portable Bayesian Compiler Optimization Framework](https://dl.acm.org/doi/pdf/10.1145/3623278.3624770) - Erik Hellsten, Artur Souza, Johannes Lenfers, Rubens Lacouture, Olivia Hsu, Adel Ejjeh, Fredrik Kjolstad, Michel Steuwer, Kunle Olukotun, Luigi Nardi, ASPLOS, 2023 ![Check](https://img.shields.io/badge/✓-done-green)
 
 - <img src="https://img.shields.io/badge/13-pages-green.svg" alt="13-pages" align="left"> [Bolt: Bridging the gap between auto-tuners and hardware-native performance](https://proceedings.mlsys.org/paper_files/paper/2022/file/1f8053a67ec8e0b57455713cefdd8218-Paper.pdf) - Jiarong Xing, Leyuan Wang, Shang Zhang, Jack Chen, Ang Chen, Yibo Zhu, MLSys, 2022
@@ -217,8 +217,6 @@ Across Devices for Deep Learning Tensor Programs](https://aclanthology.org/2023.
 - <img src="https://img.shields.io/badge/13-pages-green.svg" alt="13-pages" align="left"> [Accelerated Auto-Tuning of GPU Kernels for Tensor Computations](https://dl.acm.org/doi/pdf/10.1145/3650200.3656626) - Chendi Li, Yufan Xu, Sina Mahdipour Saravani, Ponnuswamy Sadayappan, ICS, 2024 ![Check](https://img.shields.io/badge/✓-done-green)
 
 - <img src="https://img.shields.io/badge/16-pages-green.svg" alt="16-pages" align="left"> [A full-stack search technique for domain optimized deep learning accelerators](https://dl.acm.org/doi/pdf/10.1145/3503222.3507767) - Dan Zhang, Safeen Huda, Ebrahim Songhori, Kartik Prabhu, Quoc Le, Anna Goldie, Azalia Mirhoseini, ASPLOS, 2022 ![Check](https://img.shields.io/badge/✓-done-green)
-
-- <img src="https://img.shields.io/badge/16-pages-green.svg" alt="16-pages" align="left"> [A Flexible Approach to Autotuning Multi-Pass Machine Learning Compilers](https://dl.acm.org/doi/pdf/10.1145/3650200.3656626) - Phitchaya Mangpo Phothilimthana, Amit Sabne, Nikhil Sarda, Karthik Srinivasa Murthy,Yanqi Zhou, Christof Angermueller, PACT, 2021
 
 - <img src="https://img.shields.io/badge/12-pages-green.svg" alt="12-pages" align="left"> [Learning to Optimize Halide with Tree Search and Random Programs](https://dl.acm.org/doi/pdf/10.1145/3650200.3656626) - Andrew Adams, Karima Ma, Luke Anderson, Riyadh Baghdadi, Tzu-Mao Li, Michaël Gharbi, Benoit Steiner, Steven Johnson, Kayvon Fatahalian, Frédo Durand, , TOG, 2019 ![Check](https://img.shields.io/badge/✓-done-green)
 
