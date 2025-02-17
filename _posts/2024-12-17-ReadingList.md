@@ -14,7 +14,7 @@ tags:
 
 
 
-### Paper [![number](https://img.shields.io/badge/41-138-blue.svg?style=flat)](https://github.com/home-assistant/home-assistant-iOS/blob/master/LICENSE)
+### Paper [![number](https://img.shields.io/badge/41-137-blue.svg?style=flat)](https://github.com/home-assistant/home-assistant-iOS/blob/master/LICENSE)
 
 ---
 Survery [![number](https://img.shields.io/badge/1-1-blue.svg?style=flat)](https://github.com/home-assistant/home-assistant-iOS/blob/master/LICENSE)
@@ -62,7 +62,7 @@ Dense Tensor Program Optimization [![number](https://img.shields.io/badge/4-20-b
 - <img src="https://img.shields.io/badge/10-pages-green.svg" alt="10-pages" align="left"> [DREW: Efficient Winograd CNN Inference with Deep Reuse](https://research.csc.ncsu.edu/picture/publications/papers/www2022.pdf) - Ruofan Wu, Feng Zhang, Jiawei Guan, Zhen Zheng, Xiaoyong Du, Xipeng Shen, WWW, 2022
 
 
-Graph Optimization [![number](https://img.shields.io/badge/1-16-blue.svg?style=flat)](https://github.com/home-assistant/home-assistant-iOS/blob/master/LICENSE)
+Graph Optimization [![number](https://img.shields.io/badge/1-15-blue.svg?style=flat)](https://github.com/home-assistant/home-assistant-iOS/blob/master/LICENSE)
 - <img src="https://img.shields.io/badge/9-pages-green.svg" alt="9-pages" align="left"> [Memory-aware Scheduling for Complex Wired Networks with Iterative Graph Optimization](https://arxiv.org/pdf/2308.13898) - Shuzhang Zhong, Meng Li, Yun Liang, Runsheng Wang, Ru Huang, ICCAD, 2023
 
 - <img src="https://img.shields.io/badge/20-pages-green.svg" alt="20-pages" align="left"> [Effectively Scheduling Computational Graphs of Deep Neural Networks toward Their Domain-Specific Accelerators](https://www.usenix.org/system/files/osdi23-zhao.pdf) - Jie Zhao, Siyuan Feng, Xiaoqiang Dan, Fei Liu, Chengke Wang, Sheng Yuan, Wenyuan Lv, Qikai Xie, OSDI, 2023
@@ -70,8 +70,6 @@ Graph Optimization [![number](https://img.shields.io/badge/1-16-blue.svg?style=f
 - <img src="https://img.shields.io/badge/16-pages-green.svg" alt="16-pages" align="left"> [TASO: Optimizing Deep Learning Computation with Automatic Generation of Graph Substitutions](https://www.cs.cmu.edu/~zhihaoj2/papers/sosp19.pdf) - Zhihao Jia, Oded Padon, James Thomas, Todd Warszawski, Matei Zaharia, Alex Aiken, SOSP, 2019 ![Check](https://img.shields.io/badge/✓-done-green)
 
 - <img src="https://img.shields.io/badge/13-pages-green.svg" alt="13-pages" align="left"> [Optimizing DNN Computation with Relaxed Graph Substitutions](https://www.cs.cmu.edu/~zhihaoj2/papers/sysml19b.pdf) - Zhihao Jia, James Thomas, Todd Warszawski, Mingyu Gao, Matei Zaharia, Alex Aiken, MLSys, 2019
-
-- <img src="https://img.shields.io/badge/15-pages-green.svg" alt="15-pages" align="left"> [Alcop: Automatic load-compute pipelining in deep learning compiler for ai-gpus](https://proceedings.mlsys.org/paper_files/paper/2023/file/d6cde2c1b161daa31be560d062cf2251-Paper-mlsys2023.pdf) - Guyue Huang, Yang Bai, Liu Liu, Yuke Wang, Bei Yu, Yufei Ding, Yuan Xie, MLSys, 2023
 
 - <img src="https://img.shields.io/badge/9-pages-green.svg" alt="9-pages" align="left"> [AutoGraph: Optimizing DNN Computation Graph for Parallel GPU Kernel Execution](https://ojs.aaai.org/index.php/AAAI/article/view/26343) - Yuxuan Zhao, Qi Sun, Zhuolun He, Yang Bai, Bei Yu, AAAI, 2023
 
