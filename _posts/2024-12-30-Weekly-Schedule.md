@@ -108,14 +108,20 @@ config属性: out_name、method、max_trials、runner_number、runner_repeat、r
 
 ### 2.17-2.23进度
 ***论文阅读计划***
-- One-Shot Tuner for Deep Learning Compilers 
-- A Flexible Approach to Autotuning Multi-Pass Machine Learning Compilers
-- Transfer-Tuning: Reusing Auto-Schedules for Efficient Tensor Program Code Generation
-- Effective Performance Modeling and Domain-Specific Compiler Optimization of CNNs for GPUs
-- Alcop: Automatic load-compute pipelining in deep learning compiler for ai-gpus 
-- Automatic Generation of Multi-Objective Polyhedral Compiler Transformations
-- Welder: Scheduling Deep Learning Memory Access via Tile-graph
-- Alpa: Automating Inter- and Intra-Operator Parallelism for Distributed Deep Learning
-- A Holistic Functionalization Approach to Optimizing Imperative Tensor Programs in Deep Learning
-- Chimera: An Analytical Optimizing Framework for Effective Compute-intensive Operators Fusion
+- ~~One-Shot Tuner for Deep Learning Compilers~~
+- ~~A Flexible Approach to Autotuning Multi-Pass Machine Learning Compilers~~
+- ~~Transfer-Tuning: Reusing Auto-Schedules for Efficient Tensor Program Code Generation~~
+- ~~Effective Performance Modeling and Domain-Specific Compiler Optimization of CNNs for GPUs~~
+- ~~Alcop: Automatic load-compute pipelining in deep learning compiler for ai-gpus~~
+- ~~Automatic Generation of Multi-Objective Polyhedral Compiler Transformations~~
+- ~~Welder: Scheduling Deep Learning Memory Access via Tile-graph~~
+- ~~Bolt: Bridging the gap between auto-tuners and hardware-native performance~~
+- ~~A Holistic Functionalization Approach to Optimizing Imperative Tensor Programs in Deep Learning~~
+- ~~Chimera: An Analytical Optimizing Framework for Effective Compute-intensive Operators Fusion~~
+- ~~Apollo: Automatic Partition-based Operator Fusion through Layer by Layer Optimization~~
+- ~~Fasor: A Fast Tensor Program Optimization Framework for Efficient DNN Deployment~~
+
+
+***论文复现工作***
+- ***One-Shot Tuner***: 
 
