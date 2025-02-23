@@ -48,8 +48,8 @@ name:   、 args:    、 opfunc:   、 target:     、 target_host:     、  bui
 ref_output:     、 config:
 
 knobManager类 <br>
-sched_tups:     、 is_building:     、 solver:      、 axis_parents:        、 axis_brother:       、 axis_ori_lenth:计算并存储轴的长度、 mems:        、 staged_fused_axes:标记已融合的数据并行轴
-knob_names:     、 solved_knob_vals_genotype:       、 solved_knob_vals_phenotype:      、 candidates:      、 _valid:      、 constraint_descs:       、 dump_descs:
+sched_tups: 调度方法+stage_name    、 is_building:     、 solver:      、 axis_parents:循环分块，原循环和分割后循环之间的关系、 axis_brother:       、 axis_ori_lenth:记录每个轴的信息 算子名+变量名+轴长度 mems:        、 staged_fused_axes: 记录cache_write的算子的轴的信息 算子名+变量名
+knob_names:调优规则(类似P#ST:dense,AX:None,PA:global_pos)、 solved_knob_vals_genotype:       、 solved_knob_vals_phenotype:      、 candidates:      、 _valid:      、 constraint_descs:       、 dump_descs:
 
 Tuner类 <br>
 config:     、 iter_no:     、 cost_model:      、 total_sample_time:       、 total_measure_time:      、 cost_model:      
@@ -58,13 +58,13 @@ perfBuffer类 <br>
 perfs:      、 data_x:      、 data_y:      、 samples:     、 measured_keys:       、 best_perf:       、 best_sample:     、 config:
 
 Context类 <br>
-sched_desc:     、 codegen_type:        、 target_name:     、 scheduled_axes:      、 build_kwargs:       、 pos_via_tag:      、 tensor_dict:将张量存储到字典中，使用张量名称作为键、 input_tensors:整个计算图的输入张量    
-axis_anotations:        、 stage_orgnize:       、 no_schedule_stages:     、  inlined_stages:     、vectorized_stages:      、 unrolled_stages:      、 general_tile_stages:
-tensorized_stages:      、 tiled_stages:      、 stile_structures:       、 rtile_structures:       、 unroll_pragma_desc:      、 compute_poses:记录已被融合的计算阶段的信息、 compute_pos_names:
+sched_desc:     、 codegen_type:        、 target_name:     、 scheduled_axes:记录循环分块的轴、 build_kwargs:       、 pos_via_tag:      、 tensor_dict:将张量存储到字典中，使用张量名称作为键、 input_tensors:整个计算图的输入张量    
+axis_anotations:记录循环分块的信息      、 stage_orgnize:       、 no_schedule_stages:     、  inlined_stages:     、vectorized_stages:      、 unrolled_stages:记录循环分块的阶段信息、 general_tile_stages:
+tensorized_stages:      、 tiled_stages:      、 stile_structures:记录循环分块的结构信息、 rtile_structures:       、 unroll_pragma_desc: 记录循环分块的信息     、 compute_poses:记录cache存放的位置、 compute_pos_names:记录cache存放位置的名字
 tensorize_info:     、 knob_manager:
 
 CPUContext类 <br>
-parallel_stages:       、 cached_stages:        、 unpack_info:        、 codegen_type:         、 tensorize_info:      、 stage_organize:      
+parallel_stages:       、 cached_stages:采用cache_write的算子 、 unpack_info:        、 codegen_type:         、 tensorize_info:      、 stage_organize:      
 
 schedOp类 <br>
 

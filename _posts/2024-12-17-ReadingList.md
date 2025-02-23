@@ -14,7 +14,7 @@ tags:
 
 
 
-### Paper [![number](https://img.shields.io/badge/51-140-blue.svg?style=flat)](https://github.com/home-assistant/home-assistant-iOS/blob/master/LICENSE)
+### Paper [![number](https://img.shields.io/badge/51-141-blue.svg?style=flat)](https://github.com/home-assistant/home-assistant-iOS/blob/master/LICENSE)
 
 ---
 Survery [![number](https://img.shields.io/badge/1-1-blue.svg?style=flat)](https://github.com/home-assistant/home-assistant-iOS/blob/master/LICENSE)
@@ -67,7 +67,7 @@ Dense Tensor Program Optimization [![number](https://img.shields.io/badge/6-22-b
 
 
 
-Graph Optimization [![number](https://img.shields.io/badge/1-15-blue.svg?style=flat)](https://github.com/home-assistant/home-assistant-iOS/blob/master/LICENSE)
+Graph Optimization [![number](https://img.shields.io/badge/1-16-blue.svg?style=flat)](https://github.com/home-assistant/home-assistant-iOS/blob/master/LICENSE)
 - <img src="https://img.shields.io/badge/9-pages-green.svg" alt="9-pages" align="left"> [Memory-aware Scheduling for Complex Wired Networks with Iterative Graph Optimization](https://arxiv.org/pdf/2308.13898) - Shuzhang Zhong, Meng Li, Yun Liang, Runsheng Wang, Ru Huang, ICCAD, 2023
 
 - <img src="https://img.shields.io/badge/20-pages-green.svg" alt="20-pages" align="left"> [Effectively Scheduling Computational Graphs of Deep Neural Networks toward Their Domain-Specific Accelerators](https://www.usenix.org/system/files/osdi23-zhao.pdf) - Jie Zhao, Siyuan Feng, Xiaoqiang Dan, Fei Liu, Chengke Wang, Sheng Yuan, Wenyuan Lv, Qikai Xie, OSDI, 2023
@@ -97,6 +97,8 @@ Graph Optimization [![number](https://img.shields.io/badge/1-15-blue.svg?style=f
 - <img src="https://img.shields.io/badge/12-pages-green.svg" alt="12-pages" align="left"> [Nimble: Lightweight and Parallel GPU Task Scheduling for Deep Learning](https://proceedings.neurips.cc/paper_files/paper/2020/file/5f0ad4db43d8723d18169b2e4817a160-Paper.pdf) - Woosuk Kwon, Gyeong-In Yu, Eunji Jeong, Byung-Gon Chun, NIPS, 2020
 
 - <img src="https://img.shields.io/badge/14-pages-green.svg" alt="14-pages" align="left"> [Stateful dataflow multigraphs: a data-centric model for performance portability on heterogeneous architectures](https://dl.acm.org/doi/pdf/10.1145/3295500.3356173) - Tal Ben-Nun, Johannes de Fine Licht, Alexandros N. Ziogas, Timo Schneider, Torsten Hoefler, SC, 2019
+
+- <img src="https://img.shields.io/badge/11-pages-green.svg" alt="11-pages" align="left"> [Exploiting Subgraph Similarities for Efficient Auto-tuning of Tensor Programs](https://dl.acm.org/doi/pdf/10.1145/3605573.3605596) - Mingzhen Li, Hailong Yang, Shanjun Zhang, Fengwei Yu, Ruihao Gong, Yi Liu, Zhongzhi Luan, Depei Qian, ICPP, 2023
 
 
 Performance Prediction of Tensor Programs [![number](https://img.shields.io/badge/0-4-blue.svg?style=flat)](https://github.com/home-assistant/home-assistant-iOS/blob/master/LICENSE)
