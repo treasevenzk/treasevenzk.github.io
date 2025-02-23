@@ -123,8 +123,9 @@ config属性: out_name、method、max_trials、runner_number、runner_repeat、r
 
 
 ***论文复现工作***
-- ***One-Shot Tuner***: 
+- ***One-Shot Tuner***: 这个还没有看，但是打算用这个代价模型融合到Heron里面
 
+treasevenzk.github.io 
 
 
 ### 2.24-3.2进度
