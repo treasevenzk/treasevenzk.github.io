@@ -124,8 +124,7 @@ config属性: out_name、method、max_trials、runner_number、runner_repeat、r
 
 ***论文复现工作***
 - ***One-Shot Tuner***: 这个还没有看，但是打算用这个代价模型融合到Heron里面
-
-treasevenzk.github.io 
+- ***Heron***: 目前在跑CPU部分的实验，本次重点了解代码中关于规则制定部分的内容，但是现在跑的实验还存在问题，就是我自己的电脑CPU和代码要求的不一致，我的电脑是不能用avx5只能用avx2,所以导致平台设置需要改变一下，另外代码要求的llvmshi 0.8版本，我的版本也不一致需要改一下
 
 
 ### 2.24-3.2进度
