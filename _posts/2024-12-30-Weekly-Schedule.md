@@ -129,13 +129,13 @@ config属性: out_name、method、max_trials、runner_number、runner_repeat、r
 
 ### 2.24-3.2进度
 ***论文阅读计划***
-- A Learned Performance Model For Tensor Processing Units
-- DNNFusion: Accelerating Deep Neural Networks Execution with Advanced Operator Fusion
-- Optimal Kernel Orchestration for Tensor Programs with Korch
-- Chimera: An Analytical Optimizing Framework for Effective Compute-intensive Operators Fusion
-- UNIT: Unifying tensorized instruction compilation 
-- Lorien: Efficient Deep Learning Workloads Delivery
-- A Practical Tile Size Selection Model for Affine Loop Nests
-- AKG: Automatic Kernel Generation for Neural Processing Units using Polyhedral Transformations 
-- Bring Your Own Codegen to Deep Learning Compiler
-- A Deep Learning Based Cost Model for Automatic Code Optimization
+- ~~A Learned Performance Model For Tensor Processing Units~~
+- ~~DNNFusion: Accelerating Deep Neural Networks Execution with Advanced Operator Fusion~~
+- ~~Optimal Kernel Orchestration for Tensor Programs with Korch~~
+- ~~Chimera: An Analytical Optimizing Framework for Effective Compute-intensive Operators Fusion~~
+- ~~UNIT: Unifying tensorized instruction compilation~~ 
+- ~~Lorien: Efficient Deep Learning Workloads Delivery~~
+- ~~A Practical Tile Size Selection Model for Affine Loop Nests~~
+- ~~AKG: Automatic Kernel Generation for Neural Processing Units using Polyhedral Transformations~~ 
+- ~~Bring Your Own Codegen to Deep Learning Compiler~~
+- ~~A Deep Learning Based Cost Model for Automatic Code Optimization~~
