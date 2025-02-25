@@ -126,6 +126,7 @@ config属性: out_name、method、max_trials、runner_number、runner_repeat、r
 - ***One-Shot Tuner***: 这个还没有看，但是打算用这个代价模型融合到Heron里面
 - ***Heron***: 目前在跑CPU部分的实验，本次重点了解代码中关于规则制定部分的内容，但是现在跑的实验还存在问题，就是我自己的电脑CPU和代码要求的不一致，我的电脑是不能用avx5只能用avx2,所以导致平台设置需要改变一下，另外代码要求的llvmshi 0.8版本，我的版本也不一致需要改一下
 
+---
 
 ### 2.24-3.2进度
 ***论文阅读计划***
@@ -139,3 +140,64 @@ config属性: out_name、method、max_trials、runner_number、runner_repeat、r
 - ~~AKG: Automatic Kernel Generation for Neural Processing Units using Polyhedral Transformations~~ 
 - ~~Bring Your Own Codegen to Deep Learning Compiler~~
 - ~~A Deep Learning Based Cost Model for Automatic Code Optimization~~
+
+***论文复现工作***
+- ***Heron***: 弄清楚ctx.compute_pos_names设置，它们都是字典形成，要弄清楚它们键值的组成，然后我觉得sched_common.py文件里面ctx.knob_manager.define_value里面key的设置都是错误，修改该文件中key
+这个作者写的字符串写的好混乱到处乱用，重点关注
+KnobManager类
+sched_tups: [(addCacheWriteGlobal, dense), (start, dense), (unrollPragma, dense), (parallel, dense)]             knob_names: {dense_global_pos}       dump_desc: False
+字典     
+axis_parents: {L#ST:dense,Ax:i.outer:L#ST:dense,Ax:i}       axis_brother: {L#ST:dense,Ax:i.outer : L#ST:dense,Ax:i.inner}         axis_ori_lenth:循环范围({'L#ST:dense,AX:i':64})
+solved_knob_vals_genotype:            solved_knob_vals_phenotype:               candidates: {dense_unroll_pragma:[0, 1, 2, 3, 4, 5]}
+字符串
+constraint_descs:
+集合
+staged_fused_axes: 'L#ST:dense_global,Ax:i' 'L#ST:dense_global,Ax:j'
+
+Solver类
+vals:字典{dense_global_pos:v}        primitives:列表 ProdTwo、EQ
+
+Context类
+tensor_dict:记录计算图中的算子名和算子  input_tensors:记录计算图开始的输入算子
+字符串
+sched_desc: "\n## Cache write global\n"  "%s = s.cache_write(%s, %s)\n"  "\n#==--------- Start schedule STAGE %s ----------==#\n"  "\n## Unroll pragma \n"    
+"%s, %s = s[%s].split(%s, nparts = %d)\n"  "s[%s].reorder(")"   "\n## Parallel \n" "\n## tile spatial \n"   "s[%s].reorder(")"  "%s = s[%s].fuse(")" "s[%s].parallel(%s)\n"
+"\n## Tile for cache \n"    "\n## tile spatial \n"
+列表
+scheduled_axes: L#ST:dense,Ax:i.outer       no_schedule_stages:
+inlined_stages:         vectorized_stages:          unrolled_stages: dense       general_tile_stages:
+tensorized_stages:          tiled_stages:           
+字典
+axis_anotations: {L#ST:dense,Ax:i.outer : unroll}
+stile_structures: {dense: ([i.outer, j.outer], unroll)}          rtile_structures:           unroll_pragma_desc: {dense: i.outer, dense_unroll_pragma}
+compute_poses:{dense_global:dense,P#ST:dense,AX:None,PA:global_pos}             compute_pos_names:{dense_global:dense}
+
+CPUContext类
+parallel_stages:        cached_stages: dense
+
+
+<img width="1000" height="600" src="../img/post-tvm-run.png">
+
+
+
+print("==== fuse ====")
+print(f"ctx.sched_desc: {ctx.sched_desc}")
+print(f"ctx.scheduled_axes: {ctx.scheduled_axes}")
+print(f"ctx.axis_anotations: {ctx.axis_anotations}")
+print(f"ctx.unrolled_stages: {ctx.unrolled_stages}")
+print(f"ctx.stile_structures: {ctx.stile_structures}")
+print(f"ctx.rtile_structures: {ctx.rtile_structures}")
+print(f"ctx.unroll_pragma_desc: {ctx.unroll_pragma_desc}")
+print(f"ctx.compute_poses: {ctx.compute_poses}")
+print(f"ctx.compute_pos_names: {ctx.compute_pos_names}")
+print(f"ctx.knob_manager.sched_tups:{ctx.knob_manager.sched_tups}")
+print(f"ctx.knob_manager.axis_parents:{ctx.knob_manager.axis_parents}")
+print(f"ctx.knob_manager.axis_brother:{ctx.knob_manager.axis_brother}")
+print(f"ctx.knob_manager.axis_ori_lenth:{ctx.knob_manager.axis_ori_lenth}")
+print(f"ctx.knob_manager.knob_names:{ctx.knob_manager.knob_names}")
+print(f"ctx.knob_manager.solved_knob_vals_genotype:{ctx.knob_manager.solved_knob_vals_genotype}")
+print(f"ctx.knob_manager.solved_knob_vals_phenotype:{ctx.knob_manager.solved_knob_vals_phenotype}")
+print(f"ctx.knob_manager.candidates:{ctx.knob_manager.candidates}")
+print("=====================")
+sys.exit(1)
+
