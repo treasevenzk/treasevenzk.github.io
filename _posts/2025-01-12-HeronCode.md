@@ -76,3 +76,111 @@ Sample类 <br>
 valid:      、 perf:        、 task:        、 knob_manager:        、 predict:         、 prob:        、 violation:       、 violations:         、 ranks:
 
 
+
+上面的信息记录如下：
+==== finish sched_via_rule ====
+ctx.sched_desc: 
+## Cache write global
+dense_global = s.cache_write(dense, global)
+
+#==--------- Start schedule STAGE dense ----------==#
+
+## Unroll pragma 
+i_o, i_i = s[dense].split(i, nparts = 1)
+j_o, j_i = s[dense].split(j, nparts = 1)
+s[dense].reorder(i_o, j_o, i_i, j_i, )
+
+## Parallel 
+
+## tile spatial 
+i_i_o, i_i_i = s[dense].split(i_i, nparts = 1)
+j_i_o, j_i_i = s[dense].split(j_i, nparts = 1)
+s[dense].reorder(i_i_o, j_i_o, i_i_i, j_i_i, )
+i_i_o_j_i_o_f = s[dense].fuse(i_i_o, j_i_o, )
+s[dense].parallel(i_i_o_j_i_o_f)
+
+## Tile for cache 
+
+## tile spatial 
+i_i_i_o, i_i_i_i = s[dense].split(i_i_i, nparts = 1)
+j_i_i_o, j_i_i_i = s[dense].split(j_i_i, nparts = 1)
+s[dense].reorder(i_i_i_o, j_i_i_o, i_i_i_i, j_i_i_i, )
+
+# Var i_o length 1
+# Var j_o length 1
+# Var i_i_o_j_i_o_f length 1
+# Var i_i_i_o length 1
+# Var j_i_i_o length 1
+# Var i_i_i_i length 1
+# Var j_i_i_i length 1
+#==--------- Start schedule STAGE dense.global ----------==#
+s[dense_global].compute_at(s[dense], j_o)
+
+# Var i_c length 1
+# Var j_c length 1
+# Var k
+## general tile 
+
+## tile 
+i_c_o, i_c_i = s[dense_global].split(i_c, nparts = 1)
+j_c_o, j_c_i = s[dense_global].split(j_c, nparts = 1)
+k_o, k_i = s[dense_global].split(k, nparts = 1)
+s[dense_global].reorder(i_c_o, j_c_o, k_o, i_c_i, j_c_i, k_i, )
+
+## tile 
+i_c_i_o, i_c_i_i = s[dense_global].split(i_c_i, nparts = 1)
+j_c_i_o, j_c_i_i = s[dense_global].split(j_c_i, nparts = 1)
+k_i_o, k_i_i = s[dense_global].split(k_i, nparts = 1)
+s[dense_global].reorder(i_c_i_o, j_c_i_o, k_i_o, i_c_i_i, j_c_i_i, k_i_i, )
+
+## tile 
+i_c_i_i_o, i_c_i_i_i = s[dense_global].split(i_c_i_i, nparts = 1)
+j_c_i_i_o, j_c_i_i_i = s[dense_global].split(j_c_i_i, nparts = 1)
+k_i_i_o, k_i_i_i = s[dense_global].split(k_i_i, nparts = 1)
+s[dense_global].reorder(i_c_i_i_o, j_c_i_i_o, k_i_i_o, i_c_i_i_i, j_c_i_i_i, k_i_i_i, )
+
+# Var i_c_o length 1
+# Var j_c_o length 1
+# Var k_o length 1
+# Var i_c_i_o length 1
+# Var j_c_i_o length 1
+# Var k_i_o length 1
+# Var i_c_i_i_o length 1
+# Var j_c_i_i_o length 1
+# Var k_i_i_o length 1
+# Var i_c_i_i_i length 1
+# Var j_c_i_i_i length 1
+# Var k_i_i_i length 1
+#==--------- Start schedule STAGE B ----------==#
+
+#==--------- Start schedule STAGE A ----------==#
+
+ctx.scheduled_axes: ['dense_i.outer', 'dense_j.outer', 'dense_i.inner.outer', 'dense_j.inner.outer', 'dense_i.inner.outer.j.inner.outer.fused', 'dense_i.inner.inner.outer', 'dense_j.inner.inner.outer', 'dense.global_i.c.outer', 'dense.global_j.c.outer', 'dense.global_k.outer', 'dense.global_i.c.inner.outer', 'dense.global_j.c.inner.outer', 'dense.global_k.inner.outer', 'dense.global_i.c.inner.inner.outer', 'dense.global_j.c.inner.inner.outer', 'dense.global_k.inner.inner.outer']
+ctx.axis_anotations: {'L#ST:dense,AX:i.outer': 'unroll', 'L#ST:dense,AX:j.outer': 'unroll'}
+ctx.stile_structres: {'dense': [(['i.outer', 'j.outer'], 'unroll'), (['i.inner.outer', 'j.inner.outer'], 'None'), (['i.inner.inner.outer', 'j.inner.inner.outer'], 'None')], 'dense.global': [(['i.c.outer', 'j.c.outer'], 'None'), (['i.c.inner.outer', 'j.c.inner.outer'], 'None'), (['i.c.inner.inner.outer', 'j.c.inner.inner.outer'], 'None')]}
+ctx.unroll_pragma_desc: {'dense': ('i.outer', 'dense_unroll_pragma')}
+ctx.compute_poses: {'dense.global': ('dense', 'dense_global_pos')}
+ctx.compute_pos_names: {'dense': ['j.outer', 'i.inner.outer.j.inner.outer.fused', 'j.inner.inner.outer', 'j.inner.inner.inner']}
+ctx.knob_manager.axis_parents: {'L#ST:dense,AX:i.outer': ['L#ST:dense,AX:i'], 'L#ST:dense,AX:i.inner': ['L#ST:dense,AX:i'], 'L#ST:dense,AX:j.outer': ['L#ST:dense,AX:j'], 'L#ST:dense,AX:j.inner': ['L#ST:dense,AX:j'], 'L#ST:dense,AX:i.inner.outer': ['L#ST:dense,AX:i.inner'], 'L#ST:dense,AX:i.inner.inner': ['L#ST:dense,AX:i.inner'], 'L#ST:dense,AX:j.inner.outer': ['L#ST:dense,AX:j.inner'], 'L#ST:dense,AX:j.inner.inner': ['L#ST:dense,AX:j.inner'], 'L#ST:dense,AX:i.inner.outer.j.inner.outer.fused': ['L#ST:dense,AX:i.inner.outer', 'L#ST:dense,AX:j.inner.outer'], 'L#ST:dense,AX:i.inner.inner.outer': ['L#ST:dense,AX:i.inner.inner'], 'L#ST:dense,AX:i.inner.inner.inner': ['L#ST:dense,AX:i.inner.inner'], 'L#ST:dense,AX:j.inner.inner.outer': ['L#ST:dense,AX:j.inner.inner'], 'L#ST:dense,AX:j.inner.inner.inner': ['L#ST:dense,AX:j.inner.inner'], 'L#ST:dense.global,AX:i.c.outer': ['L#ST:dense.global,AX:i.c'], 'L#ST:dense.global,AX:i.c.inner': ['L#ST:dense.global,AX:i.c'], 'L#ST:dense.global,AX:j.c.outer': ['L#ST:dense.global,AX:j.c'], 'L#ST:dense.global,AX:j.c.inner': ['L#ST:dense.global,AX:j.c'], 'L#ST:dense.global,AX:k.outer': ['L#ST:dense.global,AX:k'], 'L#ST:dense.global,AX:k.inner': ['L#ST:dense.global,AX:k'], 'L#ST:dense.global,AX:i.c.inner.outer': ['L#ST:dense.global,AX:i.c.inner'], 'L#ST:dense.global,AX:i.c.inner.inner': ['L#ST:dense.global,AX:i.c.inner'], 'L#ST:dense.global,AX:j.c.inner.outer': ['L#ST:dense.global,AX:j.c.inner'], 'L#ST:dense.global,AX:j.c.inner.inner': ['L#ST:dense.global,AX:j.c.inner'], 'L#ST:dense.global,AX:k.inner.outer': ['L#ST:dense.global,AX:k.inner'], 'L#ST:dense.global,AX:k.inner.inner': ['L#ST:dense.global,AX:k.inner'], 'L#ST:dense.global,AX:i.c.inner.inner.outer': ['L#ST:dense.global,AX:i.c.inner.inner'], 'L#ST:dense.global,AX:i.c.inner.inner.inner': ['L#ST:dense.global,AX:i.c.inner.inner'], 'L#ST:dense.global,AX:j.c.inner.inner.outer': ['L#ST:dense.global,AX:j.c.inner.inner'], 'L#ST:dense.global,AX:j.c.inner.inner.inner': ['L#ST:dense.global,AX:j.c.inner.inner'], 'L#ST:dense.global,AX:k.inner.inner.outer': ['L#ST:dense.global,AX:k.inner.inner'], 'L#ST:dense.global,AX:k.inner.inner.inner': ['L#ST:dense.global,AX:k.inner.inner']}
+ctx.knob_manager.axis_brother: {'L#ST:dense,AX:i.inner': 'L#ST:dense,AX:i.outer', 'L#ST:dense,AX:i.outer': 'L#ST:dense,AX:i.inner', 'L#ST:dense,AX:j.inner': 'L#ST:dense,AX:j.outer', 'L#ST:dense,AX:j.outer': 'L#ST:dense,AX:j.inner', 'L#ST:dense,AX:i.inner.inner': 'L#ST:dense,AX:i.inner.outer', 'L#ST:dense,AX:i.inner.outer': 'L#ST:dense,AX:i.inner.inner', 'L#ST:dense,AX:j.inner.inner': 'L#ST:dense,AX:j.inner.outer', 'L#ST:dense,AX:j.inner.outer': 'L#ST:dense,AX:j.inner.inner', 'L#ST:dense,AX:i.inner.inner.inner': 'L#ST:dense,AX:i.inner.inner.outer', 'L#ST:dense,AX:i.inner.inner.outer': 'L#ST:dense,AX:i.inner.inner.inner', 'L#ST:dense,AX:j.inner.inner.inner': 'L#ST:dense,AX:j.inner.inner.outer', 'L#ST:dense,AX:j.inner.inner.outer': 'L#ST:dense,AX:j.inner.inner.inner', 'L#ST:dense.global,AX:i.c.inner': 'L#ST:dense.global,AX:i.c.outer', 'L#ST:dense.global,AX:i.c.outer': 'L#ST:dense.global,AX:i.c.inner', 'L#ST:dense.global,AX:j.c.inner': 'L#ST:dense.global,AX:j.c.outer', 'L#ST:dense.global,AX:j.c.outer': 'L#ST:dense.global,AX:j.c.inner', 'L#ST:dense.global,AX:k.inner': 'L#ST:dense.global,AX:k.outer', 'L#ST:dense.global,AX:k.outer': 'L#ST:dense.global,AX:k.inner', 'L#ST:dense.global,AX:i.c.inner.inner': 'L#ST:dense.global,AX:i.c.inner.outer', 'L#ST:dense.global,AX:i.c.inner.outer': 'L#ST:dense.global,AX:i.c.inner.inner', 'L#ST:dense.global,AX:j.c.inner.inner': 'L#ST:dense.global,AX:j.c.inner.outer', 'L#ST:dense.global,AX:j.c.inner.outer': 'L#ST:dense.global,AX:j.c.inner.inner', 'L#ST:dense.global,AX:k.inner.inner': 'L#ST:dense.global,AX:k.inner.outer', 'L#ST:dense.global,AX:k.inner.outer': 'L#ST:dense.global,AX:k.inner.inner', 'L#ST:dense.global,AX:i.c.inner.inner.inner': 'L#ST:dense.global,AX:i.c.inner.inner.outer', 'L#ST:dense.global,AX:i.c.inner.inner.outer': 'L#ST:dense.global,AX:i.c.inner.inner.inner', 'L#ST:dense.global,AX:j.c.inner.inner.inner': 'L#ST:dense.global,AX:j.c.inner.inner.outer', 'L#ST:dense.global,AX:j.c.inner.inner.outer': 'L#ST:dense.global,AX:j.c.inner.inner.inner', 'L#ST:dense.global,AX:k.inner.inner.inner': 'L#ST:dense.global,AX:k.inner.inner.outer', 'L#ST:dense.global,AX:k.inner.inner.outer': 'L#ST:dense.global,AX:k.inner.inner.inner'}
+ctx.knob_manager.axis_ori_lenth: {'L#ST:dense,AX:i': 64, 'L#ST:dense,AX:j': 64, 'L#ST:dense,AX:k': 64, 'L#ST:dense.global,AX:i.c': 64, 'L#ST:dense.global,AX:j.c': 64, 'L#ST:dense.global,AX:k': 64}
+ctx.knob_manager.knob_names: ['dense_global_pos', 'dense_unroll_pragma', 'dense_tileSpatial', 'dense_vectorize', 'dense.global_tileAll']
+ctx.knob_manager.candidates: {'dense_unroll_pragma': [0, 1, 2, 3, 4, 5], 'dense_tileSpatial': [1, 2, 4, 8, 16, 32, 64], 'dense.global_tileAll': [1, 2, 4, 8, 16, 32, 64]}
+ctx.knob_manager.solver.vals: {'dense_global_pos': Var(dense_global_pos, 0, 3, 0), 'dense_unroll_pragma': Var(dense_unroll_pragma, 0, 5, 0), 'dense_i': Var(dense_i, 1, 64, 1), 'dense_i.outer': Var(dense_i.outer, 1, 64, 1), 'dense_i.inner': Var(dense_i.inner, 1, 64, 1), 'dense_j': Var(dense_j, 1, 64, 1), 'dense_j.outer': Var(dense_j.outer, 1, 64, 1), 'dense_j.inner': Var(dense_j.inner, 1, 64, 1), 'dense_tileSpatial': Var(dense_tileSpatial, 1, 64, 1), 'dense_i.inner.outer': Var(dense_i.inner.outer, 1, 64, 1), 'dense_i.inner.inner': Var(dense_i.inner.inner, 1, 64, 1), 'dense_j.inner.outer': Var(dense_j.inner.outer, 1, 64, 1), 'dense_j.inner.inner': Var(dense_j.inner.inner, 1, 64, 1), 'dense_i.inner.outer.j.inner.outer.fused': Var(dense_i.inner.outer.j.inner.outer.fused, 1, 1000000, 1), 'dense_i.inner.inner.outer': Var(dense_i.inner.inner.outer, 1, 64, 1), 'dense_i.inner.inner.inner': Var(dense_i.inner.inner.inner, 1, 64, 1), 'dense_j.inner.inner.outer': Var(dense_j.inner.inner.outer, 1, 64, 1), 'dense_j.inner.inner.inner': Var(dense_j.inner.inner.inner, 1, 64, 1), 'dense_vectorize': Var(dense_vectorize, 0, 1, 0), 'dense.global_i.c': Var(dense.global_i.c, 1, 64, 1), 'dense_global_pos_select0': Var(dense_global_pos_select0, 0, 1, 0), 'dense_global_pos_select1': Var(dense_global_pos_select1, 0, 1, 0), 'dense_global_pos_select2': Var(dense_global_pos_select2, 0, 1, 0), 'dense_global_pos_select3': Var(dense_global_pos_select3, 0, 1, 0), 'dense.global_j.c': Var(dense.global_j.c, 1, 64, 1), 'dense.global_tileAll': Var(dense.global_tileAll, 1, 64, 1), 'dense.global_i.c.outer': Var(dense.global_i.c.outer, 1, 64, 1), 'dense.global_i.c.inner': Var(dense.global_i.c.inner, 1, 64, 1), 'dense.global_j.c.outer': Var(dense.global_j.c.outer, 1, 64, 1), 'dense.global_j.c.inner': Var(dense.global_j.c.inner, 1, 64, 1), 'dense.global_k': Var(dense.global_k, 1, 64, 1), 'dense.global_k.outer': Var(dense.global_k.outer, 1, 64, 1), 'dense.global_k.inner': Var(dense.global_k.inner, 1, 64, 1), 'dense.global_i.c.inner.outer': Var(dense.global_i.c.inner.outer, 1, 64, 1), 'dense.global_i.c.inner.inner': Var(dense.global_i.c.inner.inner, 1, 64, 1), 'dense.global_j.c.inner.outer': Var(dense.global_j.c.inner.outer, 1, 64, 1), 'dense.global_j.c.inner.inner': Var(dense.global_j.c.inner.inner, 1, 64, 1), 'dense.global_k.inner.outer': Var(dense.global_k.inner.outer, 1, 64, 1), 'dense.global_k.inner.inner': Var(dense.global_k.inner.inner, 1, 64, 1), 'dense.global_i.c.inner.inner.outer': Var(dense.global_i.c.inner.inner.outer, 1, 64, 1), 'dense.global_i.c.inner.inner.inner': Var(dense.global_i.c.inner.inner.inner, 1, 64, 1), 'dense.global_j.c.inner.inner.outer': Var(dense.global_j.c.inner.inner.outer, 1, 64, 1), 'dense.global_j.c.inner.inner.inner': Var(dense.global_j.c.inner.inner.inner, 1, 64, 1), 'dense.global_k.inner.inner.outer': Var(dense.global_k.inner.inner.outer, 1, 64, 1), 'dense.global_k.inner.inner.inner': Var(dense.global_k.inner.inner.inner, 1, 64, 1)}
+
+
+print("==== finish sched_via_rule ====")
+print(f"ctx.sched_desc: {ctx.sched_desc}")
+print(f"ctx.scheduled_axes: {ctx.scheduled_axes}")
+print(f"ctx.axis_anotations: {ctx.axis_anotations}")
+print(f"ctx.stile_structres: {ctx.stile_structures}")
+print(f"ctx.unroll_pragma_desc: {ctx.unroll_pragma_desc}")
+print(f"ctx.compute_poses: {ctx.compute_poses}")
+print(f"ctx.compute_pos_names: {ctx.compute_pos_names}")
+print(f"ctx.knob_manager.axis_parents: {ctx.knob_manager.axis_parents}")
+print(f"ctx.knob_manager.axis_brother: {ctx.knob_manager.axis_brother}")
+print(f"ctx.knob_manager.axis_ori_lenth: {ctx.knob_manager.axis_ori_lenth}")
+print(f"ctx.knob_manager.knob_names: {ctx.knob_manager.knob_names}")
+print(f"ctx.knob_manager.candidates: {ctx.knob_manager.candidates}")
+print(f"ctx.knob_manager.solver.vals: {ctx.knob_manager.solver.vals}")
+print("===============================")

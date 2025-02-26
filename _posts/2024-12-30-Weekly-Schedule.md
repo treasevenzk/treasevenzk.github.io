@@ -142,62 +142,14 @@ config属性: out_name、method、max_trials、runner_number、runner_repeat、r
 - ~~A Deep Learning Based Cost Model for Automatic Code Optimization~~
 
 ***论文复现工作***
-- ***Heron***: 弄清楚ctx.compute_pos_names设置，它们都是字典形成，要弄清楚它们键值的组成，然后我觉得sched_common.py文件里面ctx.knob_manager.define_value里面key的设置都是错误，修改该文件中key
-这个作者写的字符串写的好混乱到处乱用，重点关注
-KnobManager类
-sched_tups: [(addCacheWriteGlobal, dense), (start, dense), (unrollPragma, dense), (parallel, dense)]             knob_names: {dense_global_pos}       dump_desc: False
-字典     
-axis_parents: {L#ST:dense,Ax:i.outer:L#ST:dense,Ax:i}       axis_brother: {L#ST:dense,Ax:i.outer : L#ST:dense,Ax:i.inner}         axis_ori_lenth:循环范围({'L#ST:dense,AX:i':64})
-solved_knob_vals_genotype:            solved_knob_vals_phenotype:               candidates: {dense_unroll_pragma:[0, 1, 2, 3, 4, 5]}
-字符串
-constraint_descs:
-集合
-staged_fused_axes: 'L#ST:dense_global,Ax:i' 'L#ST:dense_global,Ax:j'
+- ***Heron***: 
+重新梳理一下context类里面值的赋值问题，之前代码中存在如dense_i与P#ST:dense,AX:i互相乱用的问题，从而导致在生成schedule.py文件的时候发生字符串错乱的问题，目前该部分的代码都已经修改完整，目前是在CPU部分的实验，考虑GPU部分的实验也存在相应的问题在看GPU部分的代码需提前考虑一下；另外也了解和熟悉目前tvm存在的调度方法以及在该代码中采用的部分，目前在看部分的代码还是属于论文中的Generation部分，接下来开始看Exploration部分的代码，另外目前代码由于实验平台的限制导致不能采用tensorize调度，因为目前电脑的CPU支持avx2不支持avx512,tvm源码中关于tensorize部分的代码没有我电脑合适的张量化的方法，因此我在代码中是禁用tensorize，另外我生成的constraints.py文件中dense_global_tileAll = model.NewIntVar(1, 64, 'dense_global_tileAll')，与作者在网上提供的constraints.py有点不一致，考虑是这个原因导致后面会发生Illegal instruction (core dumped)的问题
 
-Solver类
-vals:字典{dense_global_pos:v}        primitives:列表 ProdTwo、EQ
-
-Context类
-tensor_dict:记录计算图中的算子名和算子  input_tensors:记录计算图开始的输入算子
-字符串
-sched_desc: "\n## Cache write global\n"  "%s = s.cache_write(%s, %s)\n"  "\n#==--------- Start schedule STAGE %s ----------==#\n"  "\n## Unroll pragma \n"    
-"%s, %s = s[%s].split(%s, nparts = %d)\n"  "s[%s].reorder(")"   "\n## Parallel \n" "\n## tile spatial \n"   "s[%s].reorder(")"  "%s = s[%s].fuse(")" "s[%s].parallel(%s)\n"
-"\n## Tile for cache \n"    "\n## tile spatial \n"
-列表
-scheduled_axes: L#ST:dense,Ax:i.outer       no_schedule_stages:
-inlined_stages:         vectorized_stages:          unrolled_stages: dense       general_tile_stages:
-tensorized_stages:          tiled_stages:           
-字典
-axis_anotations: {L#ST:dense,Ax:i.outer : unroll}
-stile_structures: {dense: ([i.outer, j.outer], unroll)}          rtile_structures:           unroll_pragma_desc: {dense: i.outer, dense_unroll_pragma}
-compute_poses:{dense_global:dense,P#ST:dense,AX:None,PA:global_pos}             compute_pos_names:{dense_global:dense}
-
-CPUContext类
-parallel_stages:        cached_stages: dense
-
-
-<img width="1000" height="600" src="../img/post-tvm-run.png">
-
-
-
-print("==== fuse ====")
-print(f"ctx.sched_desc: {ctx.sched_desc}")
-print(f"ctx.scheduled_axes: {ctx.scheduled_axes}")
-print(f"ctx.axis_anotations: {ctx.axis_anotations}")
-print(f"ctx.unrolled_stages: {ctx.unrolled_stages}")
-print(f"ctx.stile_structures: {ctx.stile_structures}")
-print(f"ctx.rtile_structures: {ctx.rtile_structures}")
-print(f"ctx.unroll_pragma_desc: {ctx.unroll_pragma_desc}")
-print(f"ctx.compute_poses: {ctx.compute_poses}")
-print(f"ctx.compute_pos_names: {ctx.compute_pos_names}")
-print(f"ctx.knob_manager.sched_tups:{ctx.knob_manager.sched_tups}")
-print(f"ctx.knob_manager.axis_parents:{ctx.knob_manager.axis_parents}")
-print(f"ctx.knob_manager.axis_brother:{ctx.knob_manager.axis_brother}")
-print(f"ctx.knob_manager.axis_ori_lenth:{ctx.knob_manager.axis_ori_lenth}")
-print(f"ctx.knob_manager.knob_names:{ctx.knob_manager.knob_names}")
-print(f"ctx.knob_manager.solved_knob_vals_genotype:{ctx.knob_manager.solved_knob_vals_genotype}")
-print(f"ctx.knob_manager.solved_knob_vals_phenotype:{ctx.knob_manager.solved_knob_vals_phenotype}")
-print(f"ctx.knob_manager.candidates:{ctx.knob_manager.candidates}")
-print("=====================")
-sys.exit(1)
-
+AVX是Intel和AMD处理器上的SIMD指令集扩展
+|指令集|AVX2|AVX512|
+|"---"|"---"|"---"|
+|寄存器宽度|使用256位宽的YMM寄存器|使用512位宽的ZMM寄存器，一次可处理更多数据|
+|并行处理能力|同时处理8个32位浮点数或整数|同时处理16个32位浮点数或整数|
+|指令集丰富度|比AVX512差|添加了许多新指令，包括更灵活的数据排列、更多的归约操作和更复杂的数学函数|
+|处理器支持|在第四代Core及以后的Intel处理器和较新的AMD处理器上支持|在Intel Xeon Phi|
+|功耗和频率影响|频率影响较小|导致CPU降频以保持在功耗和温度限制内|
