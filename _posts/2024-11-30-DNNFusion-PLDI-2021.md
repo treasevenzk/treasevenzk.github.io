@@ -56,3 +56,7 @@ tags:
 
 - Fusion Code Generation <br>
 <img width="500" height="280" src="../img/post-dnnfusion-code-generation.png"/>
+
+
+### Reference
+[DNNFusion: Accelerating Deep Neural Networks Execution with Advanced Operator Fusion](https://dl.acm.org/doi/pdf/10.1145/3453483.3454083)
