@@ -145,6 +145,38 @@ config属性: out_name、method、max_trials、runner_number、runner_repeat、r
 - ***Heron***: 
 重新梳理一下context类里面值的赋值问题，之前代码中存在如dense_i与P#ST:dense,AX:i互相乱用的问题，从而导致在生成schedule.py文件的时候发生字符串错乱的问题，目前该部分的代码都已经修改完整，目前是在CPU部分的实验，考虑GPU部分的实验也存在相应的问题在看GPU部分的代码需提前考虑一下；另外也了解和熟悉目前tvm存在的调度方法以及在该代码中采用的部分，目前在看部分的代码还是属于论文中的Generation部分，接下来开始看Exploration部分的代码，另外目前代码由于实验平台的限制导致不能采用tensorize调度，因为目前电脑的CPU支持avx2不支持avx512,tvm源码中关于tensorize部分的代码没有我电脑合适的张量化的方法，因此我在代码中是禁用tensorize，另外我生成的constraints.py文件中dense_global_tileAll = model.NewIntVar(1, 64, 'dense_global_tileAll')，与作者在网上提供的constraints.py有点不一致，考虑是这个原因导致后面会发生Illegal instruction (core dumped)的问题
 
+- ***CMLCompiler***: 重新分析Hummingbird中关于决策树转化为矩阵的过程，分析目前CMLCompiler中没有关注到的点，关于Hummingbird中关于决策树转化部分的代码目前还没有看(下周可以具体分析)，目前在分析后面步骤的优化，另外在其实对这个想法的优化其实是集中对于GEMM算子的优化，另外他这个转换其实也是一个小的神经网络模型，我是不是应该考虑这个步骤分别对应于计算密集型算子、内存密集型算子，另外现在的想法没有结合决策树本身的特性，以及分析一下树的结构的工作下周继续开展一下，整理一下初步的小实验
+
+***TVM源码学习***
+整理学习TVM代码库实例讲解部分，目前初步对TVM整个代码结构有一定的了解，重点学习TVM中关于C++与Python之间如何相互调用的过程，学习PackedFunc的内容，关于下周可以结合Felix项目来配合TVM的源码学习
+
+***这周状态***
+总体而言还是比较不错，不过最近稍微有点焦虑，在思考自己的课题进度以及实验idea遇到一些困难，有点太敏感外界因素的影响，其实自己应该放下包袱，你没有什么好担心，专专心心地学习才是最重要的不要被外界的事情所干扰，沉下心来学习才是最重要的，另外不要太关注别人的进度，把握好自己的进度，每天的自己比昨天的自己有进步就是很棒的，不要拿自己去任何比较，这样既不会给自己带来任何的进步反而会影响自己的学习状态，赵凯加油，坚持下来，胜利是属于能坚持到最后的人的！！！好好规划好自己的每一天，让自己每一天都过得充实，而不是忙忙碌碌的一天
+
+***学习计划***
+每周每天还是要给自己制定相应的学习计划，坚持坚持坚持！！！
+
+---
+
+### 3.3-3.9进度
+***论文阅读计划***
+- DISTAL: The Distributed Tensor Algebra Compiler 
+- Optimizing the Memory Hierarchy by Compositing Automatic Transformations on Computations and Data
+- Modeling the Interplay between Loop Tiling and Fusion in Optimizing Compilers Using Affine Relations 
+- MCFuser: High-Performance and Rapid Fusion of Memory-Bound Compute-Intensive Operators
+- Fireiron: A Data-Movement-Aware Scheduling Language for GPUs 
+- DREW: Efficient Winograd CNN Inference with Deep Reuse 
+- DeepCuts: A Deep Learning Optimization Framework for Versatile GPU Workloads 
+- HASCO: Towards Agile HArdware and Software CO-design for Tensor Computation 
+- FusionStitching: Boosting Memory Intensive Computations for Deep Learning Workloads 
+- Atomic Dataflow based Graph-Level Workload Orchestration for Scalable DNN Accelerators 
+- Nimble: Lightweight and Parallel GPU Task Scheduling for Deep Learning
+- Tlp: A deep learning-based cost model for tensor program tuning
+
+
+
+
+
 AVX是Intel和AMD处理器上的SIMD指令集扩展
 |指令集|AVX2|AVX512|
 |"---"|"---"|"---"|
