@@ -173,7 +173,9 @@ config属性: out_name、method、max_trials、runner_number、runner_repeat、r
 - Nimble: Lightweight and Parallel GPU Task Scheduling for Deep Learning
 - Tlp: A deep learning-based cost model for tensor program tuning
 
-
+***论文复现工作***
+- ***Heron***：
+目前是跑通Heron/tests/quick_start/dlboost中的实验，验证之前关于Context、KnobManager、Solver类中的变量赋值问题，之前作者代码存在字符串混用的问题，
 
 
 
