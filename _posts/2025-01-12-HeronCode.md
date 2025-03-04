@@ -73,8 +73,8 @@ Job类 <br>
 func:       、 attach_info:         、 timeout:
 
 Sample类 <br>
-valid:      、 perf:        、 task:        、 knob_manager:        、 predict:         、 prob:        、 violation:       、 violations:         、 ranks:
-
+valid: 求解是否可行、 perf:        、 task:        、 knob_manager:深拷贝复制原来的knob_manager、 predict:         、 prob:        、 violation:       、 violations:         、 ranks:         、point:求解的值(推测的)
+stmat_code: 求解的值换一种形式表示
 
 
 上面的信息记录如下：
@@ -184,3 +184,18 @@ print(f"ctx.knob_manager.knob_names: {ctx.knob_manager.knob_names}")
 print(f"ctx.knob_manager.candidates: {ctx.knob_manager.candidates}")
 print(f"ctx.knob_manager.solver.vals: {ctx.knob_manager.solver.vals}")
 print("===============================")
+
+
+调优过程：
+
+
+
+
+
+
+
+
+TVM中的内容:
+from tvm.autotvm.measure.measure import MeasureInput: MeasureInput类在TVM的AutoTVM模块中的作用是封装测量特定张量操作配置性能所需的信息；存储任务(要优化的张量操作)和要测量的特定配置、包含测量基础设施编译和运行操作特定实现所需的信息、作为输入提供给实际基准测试不同配置性能的测量模块；有助于为特定硬件目标找到张量操作的最佳实现方案
+
+
