@@ -13,40 +13,23 @@ tags:
 ---
 
 ### Motivation
-- models with more layers usually generate more intermediate results, thus increasing the memory/cache pressure
-- deep models usually have an insufficient amount of computations in each layer, thus degrading the processor's utilization, particularly for GPUs
-
-### Classification of DNN Operators and Fusion Opportunity Analysis
-
-***DNN Operators Classification***
-
-<img width="1000" height="200" src="../img/post-dnnfusion-classification.png"/>
-
-***Fusion Opportunity Analysis***
-
-<img width="500" height="400" src="../img/post-dnnfusion-mapping-type.png"/>
-
+- 过去的融合模式太局限没有考虑到各类算子和层连接
+- 针对循环融合都是以一种低级视角看待计算
+在资源受限的移动平台上高效执行更深神经网络是十分困难由于其高内存和计算要求
 
 ### DNNFusion's Design
 
 <img width="500" height="400" src="../img/post-dnnfusion-overview.png"/>
 
 ***Mathematical-Property-Based Graph Rewriting***
+优化目标：去除非必要算子、消除冗余中间数据拷贝、用高效算子来替代昂贵算子
 
 <img width="1000" height="350" src="../img/post-dnnfusion-example.png"/>
 
 <img width="1000" height="450" src="../img/post-dnnfusion-graph-rewriting.png"/>
 
 ***Light-Weight Profile-Driven Fusion Plan Exploration***<br>
-- overall idea<br>
-(1) DNNFusion selects the starting operators from our ECG to restrict the search space <br>
-(2) starting with these seed operators, DNNFusion explores fusion opportunities along the seed opeator's successors and predecessors, respectively <br>
-(3) DNNFusion creates fusion plans based on an approach that combines machine-independent mapping type analysis and a profiling result database <br>
-
-- Fusion Plan Generation Algorithm <br>
-(1) Fusion seed operator selection <br>
-(2) Propagated exploration along seed's successors <br>
-(3) Propagated exploration along seed's predecessors <br>
+算法核心：选定种子(这里论文提到要选有更少中间结果融合的算子作为起点，这样最终能融合更多算子，这一点有点反常规做法，常规都会偏向选择更多中间结果融合的算子)、后向传播融合、前向传播融合(该算法本质上是一个贪心算法)----这个想法能不能用到Heron里面
 
 <img width="500" height="350" src="../img/post-dnnfusion-fusion-plan.png"/>
 
@@ -54,7 +37,7 @@ tags:
 
 ***Fusion Code Generation and Optimizations***<br>
 
-- Fusion Code Generation <br>
+
 <img width="500" height="280" src="../img/post-dnnfusion-code-generation.png"/>
 
 
