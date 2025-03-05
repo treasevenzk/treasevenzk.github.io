@@ -201,4 +201,261 @@ from tvm.autotvm.measure.measure import MeasureInput: MeasureInput类在TVM的Au
 
 
 
+(tvm-build-venv) newuser@cx-software:~/Heron/Heron/tests/quick_start/dlboost$ python run.py -p dlboost -c quick_start.json
+Heron device  0
+[64, 64, 64]
+{'checks': {}}
+OPS/GEMM/G1 not exists, create one
+[64, 64, 64, 'int8', 'int32']
+= ---- Tuning : Trials 32, Rounds 2 ---- =
+== Current Round  0
+PMAX 1.000000, PMin 1.000000, NUM 200
+Best predicted  1.0
+INFO:numexpr.utils:Note: NumExpr detected 20 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 16.
+INFO:numexpr.utils:Note: NumExpr detected 20 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 16.
+INFO:numexpr.utils:NumExpr defaulting to 16 threads.
+INFO:numexpr.utils:NumExpr defaulting to 16 threads.
+INFO:numexpr.utils:Note: NumExpr detected 20 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 16.
+INFO:numexpr.utils:Note: NumExpr detected 20 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 16.
+INFO:numexpr.utils:NumExpr defaulting to 16 threads.
+INFO:numexpr.utils:NumExpr defaulting to 16 threads.
+INFO:numexpr.utils:Note: NumExpr detected 20 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 16.
+INFO:numexpr.utils:NumExpr defaulting to 16 threads.
+INFO:numexpr.utils:Note: NumExpr detected 20 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 16.
+INFO:numexpr.utils:NumExpr defaulting to 16 threads.
+INFO:numexpr.utils:Note: NumExpr detected 20 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 16.
+INFO:numexpr.utils:NumExpr defaulting to 16 threads.
+INFO:numexpr.utils:Note: NumExpr detected 20 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 16.
+INFO:numexpr.utils:NumExpr defaulting to 16 threads.
+INFO:numexpr.utils:Note: NumExpr detected 20 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 16.
+INFO:numexpr.utils:NumExpr defaulting to 16 threads.
+INFO:numexpr.utils:Note: NumExpr detected 20 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 16.
+INFO:numexpr.utils:NumExpr defaulting to 16 threads.
+INFO:numexpr.utils:Note: NumExpr detected 20 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 16.
+INFO:numexpr.utils:NumExpr defaulting to 16 threads.
+INFO:numexpr.utils:Note: NumExpr detected 20 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 16.
+INFO:numexpr.utils:NumExpr defaulting to 16 threads.
+INFO:numexpr.utils:Note: NumExpr detected 20 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 16.
+INFO:numexpr.utils:NumExpr defaulting to 16 threads.
+INFO:numexpr.utils:Note: NumExpr detected 20 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 16.
+INFO:numexpr.utils:NumExpr defaulting to 16 threads.
+INFO:numexpr.utils:Note: NumExpr detected 20 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 16.
+INFO:numexpr.utils:NumExpr defaulting to 16 threads.
+INFO:numexpr.utils:Note: NumExpr detected 20 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 16.
+INFO:numexpr.utils:NumExpr defaulting to 16 threads.
+INFO:numexpr.utils:Note: NumExpr detected 20 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 16.
+INFO:numexpr.utils:NumExpr defaulting to 16 threads.
+INFO:numexpr.utils:Note: NumExpr detected 20 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 16.
+INFO:numexpr.utils:NumExpr defaulting to 16 threads.
+INFO:numexpr.utils:Note: NumExpr detected 20 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 16.
+INFO:numexpr.utils:NumExpr defaulting to 16 threads.
+INFO:numexpr.utils:Note: NumExpr detected 20 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 16.
+INFO:numexpr.utils:NumExpr defaulting to 16 threads.
+INFO:numexpr.utils:Note: NumExpr detected 20 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 16.
+INFO:numexpr.utils:NumExpr defaulting to 16 threads.
+[08:38:21] /home/newuser/tvm/src/runtime/threading_backend.cc:343: Warning: more than two frequencies detected! Forced big_count_ to 16
+[08:38:22] /home/newuser/tvm/src/runtime/threading_backend.cc:343: Warning: more than two frequencies detected! Forced big_count_ to 16
+[08:38:23] /home/newuser/tvm/src/runtime/threading_backend.cc:343: Warning: more than two frequencies detected! Forced big_count_ to 16
+[08:38:23] /home/newuser/tvm/src/runtime/threading_backend.cc:343: Warning: more than two frequencies detected! Forced big_count_ to 16
+[08:38:24] /home/newuser/tvm/src/runtime/threading_backend.cc:343: Warning: more than two frequencies detected! Forced big_count_ to 16
+[08:38:24] /home/newuser/tvm/src/runtime/threading_backend.cc:343: Warning: more than two frequencies detected! Forced big_count_ to 16
+[08:38:25] /home/newuser/tvm/src/runtime/threading_backend.cc:343: Warning: more than two frequencies detected! Forced big_count_ to 16
+[08:38:25] /home/newuser/tvm/src/runtime/threading_backend.cc:343: Warning: more than two frequencies detected! Forced big_count_ to 16
+[08:38:30] /home/newuser/tvm/src/runtime/threading_backend.cc:343: Warning: more than two frequencies detected! Forced big_count_ to 16
+[08:38:30] /home/newuser/tvm/src/runtime/threading_backend.cc:343: Warning: more than two frequencies detected! Forced big_count_ to 16
+[08:38:31] /home/newuser/tvm/src/runtime/threading_backend.cc:343: Warning: more than two frequencies detected! Forced big_count_ to 16
+[08:38:31] /home/newuser/tvm/src/runtime/threading_backend.cc:343: Warning: more than two frequencies detected! Forced big_count_ to 16
+TASK G1, Cur best 11.481211
+Sample 1_3_64_1_64_64_1_64_1_1_64_1_64_1_1_64_1_64_1_64_0_1_0_0_64_4_4_16_4_16_64_4_16_4_4_4_4_4_4_4_1_4_1_4_1_
+Perf 0.000000 , Predict 1.000000, Prob 0.000000
+Sample 0_5_16_1_16_16_1_16_4_4_4_4_4_16_4_1_4_1_1_16_1_0_0_0_16_1_1_16_1_16_1_1_1_1_16_1_16_1_1_1_16_1_16_1_1_
+Perf 0.000000 , Predict 1.000000, Prob 0.000000
+Sample 0_4_2_1_2_2_1_2_1_1_2_1_2_1_1_2_1_2_0_2_1_0_0_0_2_1_1_2_1_2_1_1_1_1_2_1_2_1_1_1_2_1_2_1_1_
+Perf 0.000000 , Predict 1.000000, Prob 0.000000
+Sample 2_4_64_1_64_64_1_64_1_1_64_1_64_1_1_64_1_64_1_64_0_0_1_0_64_4_4_16_4_16_64_4_16_4_4_4_4_4_4_4_1_4_1_4_1_
+Perf 9.805451 , Predict 1.000000, Prob 0.000000
+Sample 2_4_64_1_64_64_1_64_1_1_64_1_64_1_1_64_1_64_0_64_0_0_1_0_64_4_4_16_4_16_64_4_16_4_4_4_4_4_4_4_1_4_1_4_1_
+Perf 9.815583 , Predict 1.000000, Prob 0.000000
+Sample 1_2_4_1_4_4_1_4_2_2_2_2_2_4_2_1_2_1_0_2_0_1_0_0_2_1_1_2_1_2_1_1_1_1_2_1_2_1_1_1_2_1_2_1_1_
+Perf 0.000000 , Predict 1.000000, Prob 0.000000
+Sample 0_1_2_1_2_2_1_2_1_1_2_1_2_1_1_2_1_2_0_2_1_0_0_0_2_1_1_2_1_2_1_1_1_1_2_1_2_1_1_1_2_1_2_1_1_
+Perf 0.000000 , Predict 1.000000, Prob 0.000000
+Sample 1_4_2_1_2_2_1_2_1_1_2_1_2_1_1_2_1_2_1_2_0_1_0_0_2_1_1_2_1_2_1_1_1_1_2_1_2_1_1_1_2_1_2_1_1_
+Perf 0.000000 , Predict 1.000000, Prob 0.000000
+Sample 3_3_4_1_4_4_1_4_2_2_2_2_2_4_2_1_2_1_0_1_0_0_0_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_
+Perf 0.000000 , Predict 1.000000, Prob 0.000000
+Sample 0_2_4_1_4_4_1_4_2_2_2_2_2_4_2_1_2_1_1_4_1_0_0_0_4_1_1_4_1_4_1_1_1_1_4_1_4_1_1_1_4_1_4_1_1_
+Perf 0.000000 , Predict 1.000000, Prob 0.000000
+Sample 3_2_4_1_4_4_1_4_2_2_2_2_2_4_2_1_2_1_1_1_0_0_0_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_
+Perf 0.000000 , Predict 1.000000, Prob 0.000000
+Sample 3_2_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_0_1_0_0_0_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_
+Perf 0.000000 , Predict 1.000000, Prob 0.000000
+Sample 3_3_64_1_64_64_1_64_8_8_8_8_8_64_8_1_8_1_1_1_0_0_0_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_
+Perf 0.000000 , Predict 1.000000, Prob 0.000000
+Sample 0_4_2_1_2_2_1_2_1_1_2_1_2_1_1_2_1_2_1_2_1_0_0_0_2_1_1_2_1_2_1_1_1_1_2_1_2_1_1_1_2_1_2_1_1_
+Perf 0.000000 , Predict 1.000000, Prob 0.000000
+Sample 3_2_64_1_64_64_1_64_8_8_8_8_8_64_8_1_8_1_0_1_0_0_0_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_
+Perf 0.000000 , Predict 1.000000, Prob 0.000000
+Sample 0_3_4_1_4_4_1_4_2_2_2_2_2_4_2_1_2_1_1_4_1_0_0_0_4_1_1_4_1_4_1_1_1_1_4_1_4_1_1_1_4_1_4_1_1_
+Perf 0.000000 , Predict 1.000000, Prob 0.000000
+Sample 2_0_64_1_64_64_1_64_8_8_8_8_8_64_8_1_8_1_1_1_0_0_1_0_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_
+Perf 0.000000 , Predict 1.000000, Prob 0.000000
+Sample 1_5_4_1_4_4_1_4_2_2_2_2_2_4_2_1_2_1_0_2_0_1_0_0_2_1_1_2_1_2_1_1_1_1_2_1_2_1_1_1_2_1_2_1_1_
+Perf 0.000000 , Predict 1.000000, Prob 0.000000
+Sample 1_2_32_1_32_32_1_32_4_4_8_4_8_16_4_2_4_2_1_8_0_1_0_0_8_2_2_4_2_4_8_2_4_2_2_2_2_2_2_2_1_2_1_2_1_
+Perf 11.481211 , Predict 1.000000, Prob 0.000000
+Sample 0_4_16_1_16_16_1_16_4_4_4_4_4_16_4_1_4_1_0_16_1_0_0_0_16_1_1_16_1_16_1_1_1_1_16_1_16_1_1_1_16_1_16_1_1_
+Perf 0.000000 , Predict 1.000000, Prob 0.000000
+Sample 1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_0_1_0_1_0_0_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_
+Perf 0.000000 , Predict 1.000000, Prob 0.000000
+Sample 0_3_4_1_4_4_1_4_2_2_2_2_2_4_2_1_2_1_0_4_1_0_0_0_4_1_1_4_1_4_1_1_1_1_4_1_4_1_1_1_4_1_4_1_1_
+Perf 0.000000 , Predict 1.000000, Prob 0.000000
+Sample 2_2_16_1_16_16_1_16_4_4_4_4_4_16_4_1_4_1_0_1_0_0_1_0_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_
+Perf 0.000000 , Predict 1.000000, Prob 0.000000
+Sample 2_5_2_1_2_2_1_2_1_1_2_1_2_1_1_2_1_2_0_2_0_0_1_0_2_1_1_2_1_2_1_1_1_1_2_1_2_1_1_1_2_1_2_1_1_
+Perf 0.000000 , Predict 1.000000, Prob 0.000000
+Sample 0_1_4_1_4_4_1_4_2_2_2_2_2_4_2_1_2_1_1_4_1_0_0_0_4_1_1_4_1_4_1_1_1_1_4_1_4_1_1_1_4_1_4_1_1_
+Perf 0.000000 , Predict 1.000000, Prob 0.000000
+Sample 1_5_64_1_64_64_1_64_8_8_8_8_8_64_8_1_8_1_1_8_0_1_0_0_8_2_2_4_2_4_8_2_4_2_2_2_2_2_2_2_1_2_1_2_1_
+Perf 0.000000 , Predict 1.000000, Prob 0.000000
+Sample 1_0_64_1_64_64_1_64_1_1_64_1_64_1_1_64_1_64_0_64_0_1_0_0_64_4_4_16_4_16_64_4_16_4_4_4_4_4_4_4_1_4_1_4_1_
+Perf 0.000000 , Predict 1.000000, Prob 0.000000
+Sample 1_0_1_1_1_2_1_2_1_1_1_1_2_1_1_1_1_2_0_1_0_1_0_0_2_1_1_1_1_2_1_1_1_1_1_1_2_1_1_1_1_1_2_1_1_
+Perf 0.000000 , Predict 1.000000, Prob 0.000000
+Sample 2_2_8_1_8_4_1_4_2_2_4_2_2_4_2_2_2_1_0_2_0_0_1_0_1_1_1_2_1_1_1_1_1_1_2_1_1_1_1_1_2_1_1_1_1_
+Perf 0.000000 , Predict 1.000000, Prob 0.000000
+Sample 1_4_16_1_16_16_1_16_4_4_4_4_4_16_4_1_4_1_0_4_0_1_0_0_4_1_1_4_1_4_1_1_1_1_4_1_4_1_1_1_4_1_4_1_1_
+Perf 0.000000 , Predict 1.000000, Prob 0.000000
+Sample 3_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_0_0_0_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_
+Perf 0.000000 , Predict 1.000000, Prob 0.000000
+Sample 2_2_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_0_0_1_0_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_
+Perf 0.000000 , Predict 1.000000, Prob 0.000000
+Hardware time 21.190347
+XGB iter:   0   a-recall@30: 0.038889
+Warning: Metric 'tr-a-recall@30' not found, using 'a-recall@30' instead.
+XGB iter:   1   a-recall@30: 0.038889
+Warning: Metric 'tr-a-recall@30' not found, using 'a-recall@30' instead.
+XGB iter:   2   a-recall@30: 0.038889
+Warning: Metric 'tr-a-recall@30' not found, using 'a-recall@30' instead.
+XGB iter:   3   a-recall@30: 0.038889
+Warning: Metric 'tr-a-recall@30' not found, using 'a-recall@30' instead.
+XGB iter:   4   a-recall@30: 0.038889
+Warning: Metric 'tr-a-recall@30' not found, using 'a-recall@30' instead.
+XGB iter:   5   a-recall@30: 0.038889
+Warning: Metric 'tr-a-recall@30' not found, using 'a-recall@30' instead.
+XGB iter:   6   a-recall@30: 0.038889
+Warning: Metric 'tr-a-recall@30' not found, using 'a-recall@30' instead.
+XGB iter:   7   a-recall@30: 0.038889
+Warning: Metric 'tr-a-recall@30' not found, using 'a-recall@30' instead.
+XGB iter:   8   a-recall@30: 0.038889
+Warning: Metric 'tr-a-recall@30' not found, using 'a-recall@30' instead.
+XGB iter:   9   a-recall@30: 0.038889
+Warning: Metric 'tr-a-recall@30' not found, using 'a-recall@30' instead.
+XGB iter:  10   a-recall@30: 0.038889
+Warning: Metric 'tr-a-recall@30' not found, using 'a-recall@30' instead.
+XGB iter:  11   a-recall@30: 0.038889
+Warning: Metric 'tr-a-recall@30' not found, using 'a-recall@30' instead.
+XGB iter:  12   a-recall@30: 0.038889
+Warning: Metric 'tr-a-recall@30' not found, using 'a-recall@30' instead.
+XGB iter:  13   a-recall@30: 0.038889
+Warning: Metric 'tr-a-recall@30' not found, using 'a-recall@30' instead.
+XGB iter:  14   a-recall@30: 0.038889
+Warning: Metric 'tr-a-recall@30' not found, using 'a-recall@30' instead.
+XGB iter:  15   a-recall@30: 0.038889
+Warning: Metric 'tr-a-recall@30' not found, using 'a-recall@30' instead.
+XGB iter:  16   a-recall@30: 0.038889
+Warning: Metric 'tr-a-recall@30' not found, using 'a-recall@30' instead.
+XGB iter:  17   a-recall@30: 0.038889
+Warning: Metric 'tr-a-recall@30' not found, using 'a-recall@30' instead.
+XGB iter:  18   a-recall@30: 0.038889
+Warning: Metric 'tr-a-recall@30' not found, using 'a-recall@30' instead.
+XGB iter:  19   a-recall@30: 0.038889
+Warning: Metric 'tr-a-recall@30' not found, using 'a-recall@30' instead.
+XGB iter:  20   a-recall@30: 0.038889
+Warning: Metric 'tr-a-recall@30' not found, using 'a-recall@30' instead.
+== Current Round  1
+PMAX 0.995979, PMin 0.995979, NUM 200
+Time 22.318733, MAX 0.995979, TOP5_MEAN 0.995979
+Time 22.574145, MAX 0.995979, TOP5_MEAN 0.995979
+Time 22.970009, MAX 0.995979, TOP5_MEAN 0.995979
+Time 23.378750, MAX 0.995979, TOP5_MEAN 0.995979
+Time 23.662355, MAX 0.995979, TOP5_MEAN 0.995979
+Best predicted  0.9959791
+Heron tune time spent  24.689673900604248
+[08:38:35] /home/newuser/tvm/src/runtime/threading_backend.cc:343: Warning: more than two frequencies detected! Forced big_count_ to 16
+PASS
+Case [64, 64, 64], latency 0.010276 ms.
 
+
+Heron整理流程
+
+前期准备工作
+1. 关于build_kwargs这一块的内容可以学习一下，利用claude举例说明
+2. 关于张量化操作应该怎么用，仔细调研一下
+3. 调研一下在利用cache_write原语之后，s会发生什么变化，重点关注一下轴、算子的变化
+4. python语法知识，就是返回两个列表，但是我接收的时候只有一个列表，用claude举例说明
+5. 将代码丢给claude，然后让claude帮忙写create_measure_batch、MeasureInput的例子
+
+调度原语(14个)
+split、reorder、parallel、fuse、bind、unrollPragma、vectorize、cache_read、cache_write、compute_at、set_scope、tensorize、storage_algin
+
+cache_write:  ctx.tensor_dict
+compute_at:
+vectorize: ctx.vectorized_stages、ctx.axis_anotations
+split: ctx.knob_manager.axis_parents (ctx.compute_pos_names)  ctx.scheduled_axes  添加约束条件ProdTwo、EQ knob_manager.axis_brother/constraint_descs
+reorder:
+fuse: ctx.knob_manager.axis_parents  ctx.scheduled_axes (ctx.compute_pos_names)  ctx 添加约束条件EQ、ProdTwo  knob_manager.constraint_descs
+parallel:
+tensorize: ctx.tensorized_stages   ctx.axis_anotations
+vectorize: ctx.scheduled_axes   ctx.vectorized_stages      ctx.axis_anotations
+compute_at:
+
+
+调度原语:
+addCacheWriteGlobalOp:   cache_write      ctx.cached_stages、ctx.compute_poses、ctx.compute_pos_names
+startOp:
+mergeConsumerOp: compute_at、vectorize
+unrollPragmaOp: split     ctx.knob_manager.candidates   ctx.axis_anotations  ctx.stile_structures  ctx.unroll_pragma_desc  ctx.unrolled_staged
+parallelOp->TileSpatialOp->TileAllOp->schedOp:  split、reorder、fuse、parallel   ctx.knob_manager.candidates ctx.stile_structures ctx.parallel_stages
+tileForCacheOp->TileSpatialOp->TileAllOp->schedOp: split、reorder   ctx.knob_manager.candidate ctx.stile_structures
+tensorizOp: split、reorder、tensorize       ctx.stile_structure   ctx.rtile_structure
+generalTileOp->TileAllop->schedOp: split、reorder  ctx.knob_manager.candidates   ctx.stile_structure ctx  ctx.rtile_structure
+CPUvectorizeOp: vectorize
+CPUfinishOp->finishOp: 
+startOp->computeAtOp: compute_at  添加约束条件EQ、ProdTwo/Sum
+
+Generation
+space generator: schedule generation rules(schedule template generation)、constraint generation rules(constrain generation)
+调度模板生成：在代码中利用7条规则(正好和论文中对应)
+do_merge_consumer:  compute_at、vectorize
+do_unroll: isRootStage这条规则制定的原因
+do_parallel: isRootStage
+do_tile_for_cache:
+do_tensorize:
+do_generaltile: hasDataReuse
+do_vectorize:
+
+论文中要求的规则：
+Rule name                     Condition and Application
+Always-Inline                 IsStrictInlinable(S, i)
+                              S' ← Inline(S, i); i' ← i-1
+Multi-level-Tiling            HasDataReuse(S, i)
+                              S' ← MultiLevelTiling(S, i); i' ← i-1
+Add-Cache-Stage               HasDataReuse(S, i)&
+                              ¬ HasFusibleConsumer(S, i)
+                              S' ← AddCacheWrite(S, i); i' ← i-1
+User-Defined-Rule             user-defined transformations and conditions
+Tensorize                     Tensoriable(S, i)
+                              S' ← Tensorize(S, i); i' ← i
+Add Multi-level SPM           HasDataReuse(S, i) &
+                              HasMultiLevelCache(S, i)
+                              S' ← AddMultiLevelCacheRead(S, i); i' ← i
+Add Multi-Scope SPM           HasDataReuse(S) &
+                              HasMultiScopeCache(S, i)
+                              S' ← AddCacheReadInputs(S, i);
+                              S'' ← AddCacheWrite(S', i); i' ← i-1
+
+
+
+Exploration
+space explorer--->measure--->cost model
