@@ -195,6 +195,23 @@ extra       {}
 
 
 
+### 3.10-3.16进度
+***论文阅读计划***
+- GTuner: Tuning DNN Computations on GPU via Graph Attention Network
+- Effectively Scheduling Computational Graphs of Deep Neural Networks toward Their Domain-Specific Accelerators 
+- Optimizing DNN Computation with Relaxed Graph Substitutions 
+- AutoGraph: Optimizing DNN Computation Graph for Parallel GPU Kernel Execution
+- POET: Training Neural Networks on Tiny Devices with Integrated Rematerialization and Paging 
+- Collage: Seamless Integration of Deep Learning Backends with Automatic Placement 
+- Stateful dataflow multigraphs: a data-centric model for performance portability on heterogeneous architectures 
+- Exploiting Subgraph Similarities for Efficient Auto-tuning of Tensor Programs
+- Transferable Graph Optimizers for ML Compilers 
+- Optimizing DNN computation graph using graph substitutions 
+- IOS: Inter-Operator Scheduler for CNN Acceleration
+- Equality Saturation for Tensor Graph Superoptimization
+
+
+
 
 
 AVX是Intel和AMD处理器上的SIMD指令集扩展
