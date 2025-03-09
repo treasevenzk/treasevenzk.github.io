@@ -161,15 +161,15 @@ config属性: out_name、method、max_trials、runner_number、runner_repeat、r
 ### 3.3-3.9进度
 ***论文阅读计划***
 - ~~DISTAL: The Distributed Tensor Algebra Compiler~~ 
-- Optimizing the Memory Hierarchy by Compositing Automatic Transformations on Computations and Data
+- ~~Optimizing the Memory Hierarchy by Compositing Automatic Transformations on Computations and Data~~
 - Modeling the Interplay between Loop Tiling and Fusion in Optimizing Compilers Using Affine Relations 
 - ~~MCFuser: High-Performance and Rapid Fusion of Memory-Bound Compute-Intensive Operators~~
 - Fireiron: A Data-Movement-Aware Scheduling Language for GPUs 
 - ~~DREW: Efficient Winograd CNN Inference with Deep Reuse~~ 
 - ~~DeepCuts: A Deep Learning Optimization Framework for Versatile GPU Workloads~~ 
 - ~~HASCO: Towards Agile HArdware and Software CO-design for Tensor Computation~~ 
-- FusionStitching: Boosting Memory Intensive Computations for Deep Learning Workloads 
-- Atomic Dataflow based Graph-Level Workload Orchestration for Scalable DNN Accelerators 
+- ~~FusionStitching: Boosting Memory Intensive Computations for Deep Learning Workloads~~ 
+- ~~Atomic Dataflow based Graph-Level Workload Orchestration for Scalable DNN Accelerators~~ 
 - ~~Nimble: Lightweight and Parallel GPU Task Scheduling for Deep Learning~~
 - ~~Tlp: A deep learning-based cost model for tensor program tuning~~
 
