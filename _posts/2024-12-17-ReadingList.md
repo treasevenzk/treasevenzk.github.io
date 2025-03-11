@@ -14,20 +14,20 @@ tags:
 
 
 
-### Paper [![number](https://img.shields.io/badge/78-146-blue.svg?style=flat)](https://github.com/home-assistant/home-assistant-iOS/blob/master/LICENSE)
+### Paper [![number](https://img.shields.io/badge/90-145-blue.svg?style=flat)](https://github.com/home-assistant/home-assistant-iOS/blob/master/LICENSE)
 
 ---
 Survery [![number](https://img.shields.io/badge/1-1-blue.svg?style=flat)](https://github.com/home-assistant/home-assistant-iOS/blob/master/LICENSE)
 - <img src="https://img.shields.io/badge/24-pages-green.svg" alt="24-pages" align="left"> [The Deep Learning Compiler: A Comprehensive Survey](https://arxiv.org/pdf/2002.03794) - Mingzhen Li, Yi Liu, Xiaoyan Liu, Qingxiao Sun, Xin You, Hailong Yang, Zhongzhi Luan, Lin Gan, Guangwen Yang, Depei Qian, IEEE Transactions on Parallel and Distributed Systems, 2021 ![Check](https://img.shields.io/badge/✓-done-green)
 
-Dense Tensor Program Optimization [![number](https://img.shields.io/badge/19-24-blue.svg?style=flat)](https://github.com/home-assistant/home-assistant-iOS/blob/master/LICENSE)
+Dense Tensor Program Optimization [![number](https://img.shields.io/badge/20-23-blue.svg?style=flat)](https://github.com/home-assistant/home-assistant-iOS/blob/master/LICENSE)
 - <img src="https://img.shields.io/badge/6-pages-green.svg" alt="6-pages" align="left"> [A Holistic Functionalization Approach to Optimizing Imperative Tensor Programs in Deep Learning](https://dl.acm.org/doi/pdf/10.1145/3649329.3658483) - Jinming Ma, Xiuhong Li, Zihan Wang Xingcheng Zhang, Shengen Yan, Yuting Chen, Yueqian Zhang, Minxi Jin, Lijuan Jiang, Yun (Eric) Liang, Chao Yang, Dahua Lin, DAC, 2024 ![Check](https://img.shields.io/badge/✓-done-green)
 
 - <img src="https://img.shields.io/badge/14-pages-green.svg" alt="14-pages" align="left"> [A Learned Performance Model For Tensor Processing Units](https://proceedings.mlsys.org/paper_files/paper/2021/file/6bcfac823d40046dca25ef6d6d59cc3f-Paper.pdf) - Samuel J.Kaufman, Phitchaya Mangpo Phothilimthana, Yanqi Zhou, Charith Mendis, Sudip Roy, Amit Sabne, Mike Burrows, MLSys, 2021 ![Check](https://img.shields.io/badge/✓-done-green)
 
 - <img src="https://img.shields.io/badge/15-pages-green.svg" alt="15-pages" align="left"> [FlexTensor: An Automatic Schedule Exploration and Optimization Framework for Tensor Computation on Heterogeneous System](https://www.cl.cam.ac.uk/~ey204/teaching/ACS/R244_2022_2023/papers/ZHENG_ASPLOS_2020.pdf) - Size Zheng, Yun Liang, Shuo Wang, Renze Chen, Kaiwen Sheng, ASPLOS, 2020 ![Check](https://img.shields.io/badge/✓-done-green)
 
-- <img src="https://img.shields.io/badge/15-pages-green.svg" alt="15-pages" align="left"> [Optimizing the Memory Hierarchy by Compositing Automatic Transformations on Computations and Data](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9251965) - Jie Zhao, Peng Di, MICRO, 2020
+- <img src="https://img.shields.io/badge/15-pages-green.svg" alt="15-pages" align="left"> [Optimizing the Memory Hierarchy by Compositing Automatic Transformations on Computations and Data](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9251965) - Jie Zhao, Peng Di, MICRO, 2020 ![Check](https://img.shields.io/badge/✓-done-green)
 
 - <img src="https://img.shields.io/badge/15-pages-green.svg" alt="15-pages" align="left"> [Tensor Program Optimization with Probabilistic Programs](https://proceedings.neurips.cc/paper_files/paper/2022/file/e894eafae43e68b4c8dfdacf742bcbf3-Paper-Conference.pdf) - Junru Shao, Xiyou Zhou, Siyuan Feng, Bohan Hou, Ruihang Lai, Hongyi Jin, Wuwei Lin, Masahiro Masuda, Cody Hao Yu, Tianqi Chen, NIPS, 2022 ![Check](https://img.shields.io/badge/✓-done-green)
 
@@ -44,8 +44,6 @@ Dense Tensor Program Optimization [![number](https://img.shields.io/badge/19-24-
 - <img src="https://img.shields.io/badge/14-pages-green.svg" alt="14-pages" align="left"> [Chimera: An Analytical Optimizing Framework for Effective Compute-intensive Operators Fusion](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10071018) - Size Zheng, Siyuan Chen, Peidi Song, Renze Chen, Xiuhong Li, Shengen Yan, Dahua Lin, Jingwen Leng, Yun Liang, HPCA, 2023 ![Check](https://img.shields.io/badge/✓-done-green)
 
 - <img src="https://img.shields.io/badge/13-pages-green.svg" alt="13-pages" align="left"> [UNIT: Unifying tensorized instruction compilation](https://arxiv.org/pdf/2101.08458) - Jian Weng, Animesh Jain, Jie Wang, Leyuan Wang, Yida Wang, Tony Nowatzki, CGO, 2021 ![Check](https://img.shields.io/badge/✓-done-green)
-
-- <img src="https://img.shields.io/badge/45-pages-green.svg" alt="45-pages" align="left"> [Modeling the Interplay between Loop Tiling and Fusion in Optimizing Compilers Using Affine Relations](https://dl.acm.org/doi/pdf/10.1145/3635305) - Jie Zhao, Jinchen Xu, Peng Di, Wang Nie, Jiahui Hu, Yanzhi Yi, Sijia Yang, Zhen Geng, Renwei Zhang, Bojie Li, Zhiliang Gan, Xuefeng Jin, TOCS, 2024
 
 - <img src="https://img.shields.io/badge/41-pages-green.svg" alt="41-pages" align="left"> [Relay: A High-Level IR for Deep Learning](https://d1wqtxts1xzle7.cloudfront.net/93907908/1904.08368v1-libre.pdf?1667936889=&response-content-disposition=inline%3B+filename%3DRelay_A_High_Level_IR_for_Deep_Learning.pdf&Expires=1734664090&Signature=hNNPmF5TkPbj99Lf0G4oLGpV0h87pGCppTaWbCC1HxPIUzbytjT-cc6w9zjY1Pl4GU0SDAD8wgX-vouST7CKnSrqo9razwfKblzwOmy6RBje3uqqumq8KdeMn6fUCugFTfgQF05gDcFgWBDAyCMENzhYq0PDuRfHG3qI8BbgSjBiO9FlAXyRNO~SmUXzfs9WSBJhEAljvI7majYepErc0XsPBTPSsaS2BRlqOgEaMXnosz0h7tA2iXjOisDkjXl-77Gn51ir-5ukkxKa0zvcnnMTOfTKdR8daeeT1PaQrCJ5W2zhMebVhcpjcK5yD06QtNBfae~LFr0WJ2da-uMWdg__&Key-Pair-Id=APKAJLOHF5GGSLRBV4ZA) - Jared Roesch, Steven Lyubomirsky, Marisa Kirisame, Josh Pollock, Logan Weber, Ziheng Jiang, Tianqi Chen, Thierry Moreau, Zachary Tatlock, arxiv, 2019
 
@@ -69,38 +67,38 @@ Dense Tensor Program Optimization [![number](https://img.shields.io/badge/19-24-
 
 - <img src="https://img.shields.io/badge/15-pages-green.svg" alt="15-pages" align="left"> [Atomic Dataflow based Graph-Level Workload Orchestration for Scalable DNN Accelerators](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9773218) - Shixuan Zheng, Xianjue Zhang, Leibo Liu, Shaojun Wei, Shouyi Yin, HPCA, 2022 ![Check](https://img.shields.io/badge/✓-done-green)
 
-Graph Optimization [![number](https://img.shields.io/badge/3-16-blue.svg?style=flat)](https://github.com/home-assistant/home-assistant-iOS/blob/master/LICENSE)
+Graph Optimization [![number](https://img.shields.io/badge/14-16-blue.svg?style=flat)](https://github.com/home-assistant/home-assistant-iOS/blob/master/LICENSE)
 - <img src="https://img.shields.io/badge/9-pages-green.svg" alt="9-pages" align="left"> [Memory-aware Scheduling for Complex Wired Networks with Iterative Graph Optimization](https://arxiv.org/pdf/2308.13898) - Shuzhang Zhong, Meng Li, Yun Liang, Runsheng Wang, Ru Huang, ICCAD, 2023
 
-- <img src="https://img.shields.io/badge/20-pages-green.svg" alt="20-pages" align="left"> [Effectively Scheduling Computational Graphs of Deep Neural Networks toward Their Domain-Specific Accelerators](https://www.usenix.org/system/files/osdi23-zhao.pdf) - Jie Zhao, Siyuan Feng, Xiaoqiang Dan, Fei Liu, Chengke Wang, Sheng Yuan, Wenyuan Lv, Qikai Xie, OSDI, 2023
+- <img src="https://img.shields.io/badge/20-pages-green.svg" alt="20-pages" align="left"> [Effectively Scheduling Computational Graphs of Deep Neural Networks toward Their Domain-Specific Accelerators](https://www.usenix.org/system/files/osdi23-zhao.pdf) - Jie Zhao, Siyuan Feng, Xiaoqiang Dan, Fei Liu, Chengke Wang, Sheng Yuan, Wenyuan Lv, Qikai Xie, OSDI, 2023 ![Check](https://img.shields.io/badge/✓-done-green)
 
 - <img src="https://img.shields.io/badge/16-pages-green.svg" alt="16-pages" align="left"> [TASO: Optimizing Deep Learning Computation with Automatic Generation of Graph Substitutions](https://www.cs.cmu.edu/~zhihaoj2/papers/sosp19.pdf) - Zhihao Jia, Oded Padon, James Thomas, Todd Warszawski, Matei Zaharia, Alex Aiken, SOSP, 2019 ![Check](https://img.shields.io/badge/✓-done-green)
 
-- <img src="https://img.shields.io/badge/13-pages-green.svg" alt="13-pages" align="left"> [Optimizing DNN Computation with Relaxed Graph Substitutions](https://www.cs.cmu.edu/~zhihaoj2/papers/sysml19b.pdf) - Zhihao Jia, James Thomas, Todd Warszawski, Mingyu Gao, Matei Zaharia, Alex Aiken, MLSys, 2019
+- <img src="https://img.shields.io/badge/13-pages-green.svg" alt="13-pages" align="left"> [Optimizing DNN Computation with Relaxed Graph Substitutions](https://www.cs.cmu.edu/~zhihaoj2/papers/sysml19b.pdf) - Zhihao Jia, James Thomas, Todd Warszawski, Mingyu Gao, Matei Zaharia, Alex Aiken, MLSys, 2019 ![Check](https://img.shields.io/badge/✓-done-green)
 
-- <img src="https://img.shields.io/badge/9-pages-green.svg" alt="9-pages" align="left"> [AutoGraph: Optimizing DNN Computation Graph for Parallel GPU Kernel Execution](https://ojs.aaai.org/index.php/AAAI/article/view/26343) - Yuxuan Zhao, Qi Sun, Zhuolun He, Yang Bai, Bei Yu, AAAI, 2023
+- <img src="https://img.shields.io/badge/9-pages-green.svg" alt="9-pages" align="left"> [AutoGraph: Optimizing DNN Computation Graph for Parallel GPU Kernel Execution](https://ojs.aaai.org/index.php/AAAI/article/view/26343) - Yuxuan Zhao, Qi Sun, Zhuolun He, Yang Bai, Bei Yu, AAAI, 2023 ![Check](https://img.shields.io/badge/✓-done-green)
 
-- <img src="https://img.shields.io/badge/11-pages-green.svg" alt="11-pages" align="left"> [POET: Training Neural Networks on Tiny Devices with Integrated Rematerialization and Paging](https://ojs.aaai.org/index.php/AAAI/article/view/26343) - Shishir G. Patil, Paras Jain, Prabal Dutta, Ion Stoica, Joseph E. Gonzalez, ICML, 2022
+- <img src="https://img.shields.io/badge/11-pages-green.svg" alt="11-pages" align="left"> [POET: Training Neural Networks on Tiny Devices with Integrated Rematerialization and Paging](https://ojs.aaai.org/index.php/AAAI/article/view/26343) - Shishir G. Patil, Paras Jain, Prabal Dutta, Ion Stoica, Joseph E. Gonzalez, ICML, 2022 ![Check](https://img.shields.io/badge/✓-done-green)
 
-- <img src="https://img.shields.io/badge/13-pages-green.svg" alt="13-pages" align="left"> [Collage: Seamless Integration of Deep Learning Backends with Automatic Placement](https://arxiv.org/pdf/2111.00655) - Byungsoo Jeon, Sunghyun Park, Peiyuan Liao, Sheng Xu, Tianqi Chen, Zhihao Jia, PACT, 2022
+- <img src="https://img.shields.io/badge/13-pages-green.svg" alt="13-pages" align="left"> [Collage: Seamless Integration of Deep Learning Backends with Automatic Placement](https://arxiv.org/pdf/2111.00655) - Byungsoo Jeon, Sunghyun Park, Peiyuan Liao, Sheng Xu, Tianqi Chen, Zhihao Jia, PACT, 2022 ![Check](https://img.shields.io/badge/✓-done-green)
 
 - <img src="https://img.shields.io/badge/19-pages-green.svg" alt="19-pages" align="left"> [Apollo: Automatic Partition-based Operator Fusion through Layer by Layer Optimization](https://proceedings.mlsys.org/paper_files/paper/2022/file/e175e8a86d28d935be4f43719651f86d-Paper.pdf) - Jie Zhao, Xiong Gao, Ruijie Xia, Zhaochuang Zhang, Deshi Chen, Lei Chen, Renwei Zhang, Zhen Geng, Bin Cheng, and Xuefeng Jin, MLSys, 2022 ![Check](https://img.shields.io/badge/✓-done-green)
 
-- <img src="https://img.shields.io/badge/14-pages-green.svg" alt="14-pages" align="left"> [Equality Saturation for Tensor Graph Superoptimization](https://arxiv.org/pdf/2101.01332) - Yichen Yang, Phitchaya Mangpo Phothilimtha, Yisu Remy Wang, Max Willsey, Sudip Roy, Jacques Pienaar, MLSys, 2021
+- <img src="https://img.shields.io/badge/14-pages-green.svg" alt="14-pages" align="left"> [Equality Saturation for Tensor Graph Superoptimization](https://arxiv.org/pdf/2101.01332) - Yichen Yang, Phitchaya Mangpo Phothilimtha, Yisu Remy Wang, Max Willsey, Sudip Roy, Jacques Pienaar, MLSys, 2021 ![Check](https://img.shields.io/badge/✓-done-green)
 
-- <img src="https://img.shields.io/badge/14-pages-green.svg" alt="14-pages" align="left"> [IOS: Inter-Operator Scheduler for CNN Acceleration](https://proceedings.mlsys.org/paper_files/paper/2021/file/1f8053a67ec8e0b57455713cefdd8218-Paper.pdf) - Yaoyao Ding, Ligeng Zhu, Zhihao Jia, Gennady Pekhimenko, Song Han, MLSys, 2021
+- <img src="https://img.shields.io/badge/14-pages-green.svg" alt="14-pages" align="left"> [IOS: Inter-Operator Scheduler for CNN Acceleration](https://proceedings.mlsys.org/paper_files/paper/2021/file/1f8053a67ec8e0b57455713cefdd8218-Paper.pdf) - Yaoyao Ding, Ligeng Zhu, Zhihao Jia, Gennady Pekhimenko, Song Han, MLSys, 2021 ![Check](https://img.shields.io/badge/✓-done-green)
 
-- <img src="https://img.shields.io/badge/13-pages-green.svg" alt="13-pages" align="left"> [Optimizing DNN computation graph using graph substitutions](https://dl.acm.org/doi/pdf/10.14778/3407790.3407857) - Jingzhi Fang, Yanyan Shen, Yue Wang, Lei Chen, VLDB, 2020
+- <img src="https://img.shields.io/badge/13-pages-green.svg" alt="13-pages" align="left"> [Optimizing DNN computation graph using graph substitutions](https://dl.acm.org/doi/pdf/10.14778/3407790.3407857) - Jingzhi Fang, Yanyan Shen, Yue Wang, Lei Chen, VLDB, 2020 ![Check](https://img.shields.io/badge/✓-done-green)
 
-- <img src="https://img.shields.io/badge/12-pages-green.svg" alt="12-pages" align="left"> [Transferable Graph Optimizers for ML Compilers](https://proceedings.neurips.cc/paper_files/paper/2020/file/9f29450d2eb58feb555078bdefe28aa5-Paper.pdf) - Yanqi Zhou, Sudip Roy, Amirali Abdolrashidi, Daniel Wong, Peter Ma, Qiumin Xu, Hanxiao Liu, Phitchaya Phothilimtha, Shen Wang, Anna Goldie, Azalia Mirhoseini, James Laudon, NIPS, 2020
+- <img src="https://img.shields.io/badge/12-pages-green.svg" alt="12-pages" align="left"> [Transferable Graph Optimizers for ML Compilers](https://proceedings.neurips.cc/paper_files/paper/2020/file/9f29450d2eb58feb555078bdefe28aa5-Paper.pdf) - Yanqi Zhou, Sudip Roy, Amirali Abdolrashidi, Daniel Wong, Peter Ma, Qiumin Xu, Hanxiao Liu, Phitchaya Phothilimtha, Shen Wang, Anna Goldie, Azalia Mirhoseini, James Laudon, NIPS, 2020 ![Check](https://img.shields.io/badge/✓-done-green)
 
-- <img src="https://img.shields.io/badge/14-pages-green.svg" alt="14-pages" align="left"> [FusionStitching: Boosting Memory Intensive Computations for Deep Learning Workloads](https://arxiv.org/pdf/2009.10924) - Zhen Zheng, Pengzhan Zhao, Guoping Long, Feiwen Zhu, Kai Zhu, Wenyi Zhao, Lansong Diao, Jun Yang, Wei Lin, arxiv, 2020
+- <img src="https://img.shields.io/badge/14-pages-green.svg" alt="14-pages" align="left"> [FusionStitching: Boosting Memory Intensive Computations for Deep Learning Workloads](https://arxiv.org/pdf/2009.10924) - Zhen Zheng, Pengzhan Zhao, Guoping Long, Feiwen Zhu, Kai Zhu, Wenyi Zhao, Lansong Diao, Jun Yang, Wei Lin, arxiv, 2020 ![Check](https://img.shields.io/badge/✓-done-green)
 
 - <img src="https://img.shields.io/badge/12-pages-green.svg" alt="12-pages" align="left"> [Nimble: Lightweight and Parallel GPU Task Scheduling for Deep Learning](https://proceedings.neurips.cc/paper_files/paper/2020/file/5f0ad4db43d8723d18169b2e4817a160-Paper.pdf) - Woosuk Kwon, Gyeong-In Yu, Eunji Jeong, Byung-Gon Chun, NIPS, 2020 ![Check](https://img.shields.io/badge/✓-done-green)
 
 - <img src="https://img.shields.io/badge/14-pages-green.svg" alt="14-pages" align="left"> [Stateful dataflow multigraphs: a data-centric model for performance portability on heterogeneous architectures](https://dl.acm.org/doi/pdf/10.1145/3295500.3356173) - Tal Ben-Nun, Johannes de Fine Licht, Alexandros N. Ziogas, Timo Schneider, Torsten Hoefler, SC, 2019
 
-- <img src="https://img.shields.io/badge/11-pages-green.svg" alt="11-pages" align="left"> [Exploiting Subgraph Similarities for Efficient Auto-tuning of Tensor Programs](https://dl.acm.org/doi/pdf/10.1145/3605573.3605596) - Mingzhen Li, Hailong Yang, Shanjun Zhang, Fengwei Yu, Ruihao Gong, Yi Liu, Zhongzhi Luan, Depei Qian, ICPP, 2023
+- <img src="https://img.shields.io/badge/11-pages-green.svg" alt="11-pages" align="left"> [Exploiting Subgraph Similarities for Efficient Auto-tuning of Tensor Programs](https://dl.acm.org/doi/pdf/10.1145/3605573.3605596) - Mingzhen Li, Hailong Yang, Shanjun Zhang, Fengwei Yu, Ruihao Gong, Yi Liu, Zhongzhi Luan, Depei Qian, ICPP, 2023 ![Check](https://img.shields.io/badge/✓-done-green)
 
 
 Performance Prediction of Tensor Programs [![number](https://img.shields.io/badge/1-4-blue.svg?style=flat)](https://github.com/home-assistant/home-assistant-iOS/blob/master/LICENSE)
