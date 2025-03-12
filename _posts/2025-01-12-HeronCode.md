@@ -397,7 +397,7 @@ Heron整理流程
 5. 将代码丢给claude，然后让claude帮忙写create_measure_batch、MeasureInput的例子
 
 调度原语(14个)
-split、reorder、parallel、fuse、bind、unrollPragma、vectorize、cache_read、cache_write、compute_at、set_scope、tensorize、storage_algin
+split、reorder、parallel、fuse、bind、unrollPragma、vectorize、cache_read、cache_write、compute_at、compute_inline、set_scope、tensorize、storage_algin
 
 cache_write:  ctx.tensor_dict
 compute_at:
@@ -459,3 +459,20 @@ Add Multi-Scope SPM           HasDataReuse(S) &
 
 Exploration
 space explorer--->measure--->cost model
+
+
+---
+### GPU部分的实验
+
+addCacheTensorCoreOp类中发生的改变
+ctx.shared_load_stages          ctx.default_shareload_stages        ctx.tensorize_loadA_stage       ctx.tensorize_loadB_stage
+ctx.tensorize_com_stage         ctx.tensor_store_stage              ctx.pos_via_tag
+
+
+print("prepare work")
+print(f"ctx.default_sharedload_stages: {ctx.default_sharedload_stages}")
+print(f"ctx.shared_load_stages: {ctx.shared_load_stages}")
+print(f"ctx.no_schedule_stages: {ctx.no_schedule_stages}")
+print(f"s.outputs: {s.outputs}")
+for stage in s.stages:
+    print(f"stage: {stage}")
