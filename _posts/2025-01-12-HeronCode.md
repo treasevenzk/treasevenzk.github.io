@@ -464,11 +464,6 @@ space explorer--->measure--->cost model
 ---
 ### GPU部分的实验
 
-addCacheTensorCoreOp类中发生的改变
-ctx.shared_load_stages          ctx.default_shareload_stages        ctx.tensorize_loadA_stage       ctx.tensorize_loadB_stage
-ctx.tensorize_com_stage         ctx.tensor_store_stage              ctx.pos_via_tag
-
-
 print("prepare work")
 print(f"ctx.default_sharedload_stages: {ctx.default_sharedload_stages}")
 print(f"ctx.shared_load_stages: {ctx.shared_load_stages}")
@@ -476,3 +471,143 @@ print(f"ctx.no_schedule_stages: {ctx.no_schedule_stages}")
 print(f"s.outputs: {s.outputs}")
 for stage in s.stages:
     print(f"stage: {stage}")
+
+
+prepare work
+ctx.default_sharedload_stages: ['A.shared', 'B.shared']
+ctx.shared_load_stages: ['A.shared', 'B.shared', 'dense.wmma.accumulator.shared']
+ctx.no_schedule_stages: []
+s.outputs: [compute(dense, body=[T.reduce(T.comm_reducer(lambda x, y: x + y, [T.float16(0)]), source=[A[i, k] * B[j, k]], init=[], axis=[T.iter_var(k, T.Range(0, 64), "CommReduce", "")], condition=T.bool(True), value_index=0)], axis=[T.iter_var(i, T.Range(0, 64), "DataPar", ""), T.iter_var(j, T.Range(0, 64), "DataPar", "")], reduce_axis=[T.iter_var(k, T.Range(0, 64), "CommReduce", "")], tag=batch_matmul, attrs={})]
+stage: stage(A, placeholder(A, 0x39735010))
+stage: stage(A.shared, compute(A.shared, body=[A[ax0, ax1]], axis=[T.iter_var(ax0, T.Range(0, 64), "DataPar", ""), T.iter_var(ax1, T.Range(0, 64), "DataPar", "")], reduce_axis=[], tag=, attrs={}))
+stage: stage(A.shared.wmma.matrix_a, compute(A.shared.wmma.matrix_a, body=[A.shared[ax0, ax1]], axis=[T.iter_var(ax0, T.Range(0, 64), "DataPar", ""), T.iter_var(ax1, T.Range(0, 64), "DataPar", "")], reduce_axis=[], tag=, attrs={}))
+stage: stage(B, placeholder(B, 0x39400220))
+stage: stage(B.shared, compute(B.shared, body=[B[ax0, ax1]], axis=[T.iter_var(ax0, T.Range(0, 64), "DataPar", ""), T.iter_var(ax1, T.Range(0, 64), "DataPar", "")], reduce_axis=[], tag=, attrs={}))
+stage: stage(B.shared.wmma.matrix_b, compute(B.shared.wmma.matrix_b, body=[B.shared[ax0, ax1]], axis=[T.iter_var(ax0, T.Range(0, 64), "DataPar", ""), T.iter_var(ax1, T.Range(0, 64), "DataPar", "")], reduce_axis=[], tag=, attrs={}))
+stage: stage(dense.wmma.accumulator, compute(dense.wmma.accumulator, body=[T.reduce(T.comm_reducer(lambda x, y: x + y, [T.float16(0)]), source=[A.shared.wmma.matrix_a[i_c, k] * B.shared.wmma.matrix_b[j_c, k]], init=[], axis=[T.iter_var(k, T.Range(0, 64), "CommReduce", "")], condition=T.bool(True), value_index=0)], axis=[T.iter_var(i_c, T.Range(0, 64), "DataPar", ""), T.iter_var(j_c, T.Range(0, 64), "DataPar", "")], reduce_axis=[T.iter_var(k, T.Range(0, 64), "CommReduce", "")], tag=batch_matmul, attrs={}))
+stage: stage(dense.wmma.accumulator.shared, compute(dense.wmma.accumulator.shared, body=[dense.wmma.accumulator[ax0, ax1]], axis=[T.iter_var(ax0, T.Range(0, 64), "DataPar", ""), T.iter_var(ax1, T.Range(0, 64), "DataPar", "")], reduce_axis=[], tag=, attrs={}))
+stage: stage(dense, compute(dense, body=[dense.wmma.accumulator.shared[i, j]], axis=[T.iter_var(i, T.Range(0, 64), "DataPar", ""), T.iter_var(j, T.Range(0, 64), "DataPar", "")], reduce_axis=[], tag=batch_matmul, attrs={}))
+
+
+
+addCacheTensorCoreOp类中发生的改变
+ctx.shared_load_stages          ctx.default_shareload_stages        ctx.tensorize_loadA_stage       ctx.tensorize_loadB_stage
+ctx.tensorize_com_stage         ctx.tensor_store_stage              ctx.pos_via_tag
+
+准备过程：
+
+ctx.default_sharedload_stages: ['A.shared', 'B.shared']
+ctx.shared_load_stages: ['A.shared', 'B.shared', 'dense.wmma.accumulator.shared']
+ctx.no_schedule_stages: []
+ctx.compute_poses: {'A.shared': ('dense.wmma.accumulator', 'dense.wmma.accumulator_shared_pos'), 'B.shared': ('dense.wmma.accumulator', 'dense.wmma.accumulator_shared_pos'), 'A.shared.wmma.matrix_a': ('dense.wmma.accumulator', 'dense.wmma.accumulator_local_pos'), 'B.shared.wmma.matrix_b': ('dense.wmma.accumulator', 'dense.wmma.accumulator_local_pos'), 'dense.wmma.accumulator.shared': ('dense', 'dense_shared_pos'), 'dense.wmma.accumulator': ('dense.wmma.accumulator.shared', 'dense.wmma.accumulator.shared_local_pos')}
+ctx.knob_manager.solver.vals: {'wmma_m': Var(wmma_m, 8, 32, 16), 'wmma_m_cand0': Var(wmma_m_cand0, 0, 1, 0), 'wmma_m_cand1': Var(wmma_m_cand1, 0, 1, 0), 'wmma_m_cand2': Var(wmma_m_cand2, 0, 1, 0), 'wmma_k': Var(wmma_k, 16, 16, 16), 'wmma_n': Var(wmma_n, 8, 32, 16), 'wmma_n_cand0': Var(wmma_n_cand0, 0, 1, 0), 'wmma_n_cand1': Var(wmma_n_cand1, 0, 1, 0), 'wmma_n_cand2': Var(wmma_n_cand2, 0, 1, 0), 'wmma_m_wmma_n': Var(wmma_m_wmma_n, 1, 4096, 1), 'dense.wmma.accumulator_shared_pos': Var(dense.wmma.accumulator_shared_pos, 0, 10, 0), 'dense.wmma.accumulator_local_pos': Var(dense.wmma.accumulator_local_pos, 0, 10, 0), 'dense_shared_pos': Var(dense_shared_pos, 0, 10, 0), 'dense.wmma.accumulator.shared_local_pos': Var(dense.wmma.accumulator.shared_local_pos, 0, 10, 0)}
+s.outputs: [compute(dense, body=[T.reduce(T.comm_reducer(lambda x, y: x + y, [T.float16(0)]), source=[A[i, k] * B[j, k]], init=[], axis=[T.iter_var(k, T.Range(0, 64), "CommReduce", "")], condition=T.bool(True), value_index=0)], axis=[T.iter_var(i, T.Range(0, 64), "DataPar", ""), T.iter_var(j, T.Range(0, 64), "DataPar", "")], reduce_axis=[T.iter_var(k, T.Range(0, 64), "CommReduce", "")], tag=batch_matmul, attrs={})]
+stage: stage(A, placeholder(A, 0x344dffe0))
+stage: stage(A.shared, compute(A.shared, body=[A[ax0, ax1]], axis=[T.iter_var(ax0, T.Range(0, 64), "DataPar", ""), T.iter_var(ax1, T.Range(0, 64), "DataPar", "")], reduce_axis=[], tag=, attrs={}))
+stage: stage(A.shared.wmma.matrix_a, compute(A.shared.wmma.matrix_a, body=[A.shared[ax0, ax1]], axis=[T.iter_var(ax0, T.Range(0, 64), "DataPar", ""), T.iter_var(ax1, T.Range(0, 64), "DataPar", "")], reduce_axis=[], tag=, attrs={}))
+stage: stage(B, placeholder(B, 0x3419af40))
+stage: stage(B.shared, compute(B.shared, body=[B[ax0, ax1]], axis=[T.iter_var(ax0, T.Range(0, 64), "DataPar", ""), T.iter_var(ax1, T.Range(0, 64), "DataPar", "")], reduce_axis=[], tag=, attrs={}))
+stage: stage(B.shared.wmma.matrix_b, compute(B.shared.wmma.matrix_b, body=[B.shared[ax0, ax1]], axis=[T.iter_var(ax0, T.Range(0, 64), "DataPar", ""), T.iter_var(ax1, T.Range(0, 64), "DataPar", "")], reduce_axis=[], tag=, attrs={}))
+stage: stage(dense.wmma.accumulator, compute(dense.wmma.accumulator, body=[T.reduce(T.comm_reducer(lambda x, y: x + y, [T.float16(0)]), source=[A.shared.wmma.matrix_a[i_c, k] * B.shared.wmma.matrix_b[j_c, k]], init=[], axis=[T.iter_var(k, T.Range(0, 64), "CommReduce", "")], condition=T.bool(True), value_index=0)], axis=[T.iter_var(i_c, T.Range(0, 64), "DataPar", ""), T.iter_var(j_c, T.Range(0, 64), "DataPar", "")], reduce_axis=[T.iter_var(k, T.Range(0, 64), "CommReduce", "")], tag=batch_matmul, attrs={}))
+stage: stage(dense.wmma.accumulator.shared, compute(dense.wmma.accumulator.shared, body=[dense.wmma.accumulator[ax0, ax1]], axis=[T.iter_var(ax0, T.Range(0, 64), "DataPar", ""), T.iter_var(ax1, T.Range(0, 64), "DataPar", "")], reduce_axis=[], tag=, attrs={}))
+stage: stage(dense, compute(dense, body=[dense.wmma.accumulator.shared[i, j]], axis=[T.iter_var(i, T.Range(0, 64), "DataPar", ""), T.iter_var(j, T.Range(0, 64), "DataPar", "")], reduce_axis=[], tag=batch_matmul, attrs={}))
+
+
+addCacheTensorCoreOp: cache_write、cache_read*2、cache_read*2、cache_read
+ctx.shared_load_stages: A.shared、B.shared、dense.wmma.accumulator.shared
+ctx.default_sharedload_stages: A.shared、B.shared
+ctx.compute_poses: A.shared、B.shared、A.shared.wmma.matrix_a、B.shared.wmma.matrix_b、dense.wmma.accumulator.shared、dense.wmma.accumulator
+ctx.tensorize_com_stage: dense.wmma.accumulator
+ctx.tensorize_store_stage: dense.wmma.accumulator.shared
+ctx.tensorize_loadA_stage: A.shared.wmma.matrix_a
+ctx.tensorize_loadB_stage: B.shared.wmma.matrix_b
+
+dense
+TCStartOp->startOp:
+
+unrollPragmaOp: split、reorder
+ctx.unrolled_stages: dense
+
+tileBlockOp->tileBindOp->TileSpatialOp:split、reorder、fuse、bind
+ctx.bind_block_stages: dense
+
+tileThreadOp->tileBindOp->TileSpatialOp: split、reorder、fuse、bind
+ctx.stage_warp_nums: dense
+ctx.bind_thread_stages: dense
+
+tileWarpOp->tileBindOp->TIleSpatialOp: split、reorder、fuse、bind
+ctx.bind_warp_stages: dense
+
+GPUvectorizeOp->TileSpatialOp: split、reorder、fuse、vectorize
+ctx.vectorize_stages: dense
+
+
+split里面关于dense_i是否要的问题，get_ax(ax_key) 在unrollPragma作者提供的样例是64
+
+
+
+规则生成
+my test:                                        样例
+EQ * 3                                          EQ * 3
+sum                                             sum
+EQ * 3                                          EQ * 3
+sum                                             sum
+ProdTwo * 2                                     ProdTwo * 2
+addCacheTensorCoreOp EQ、SUM、ProdTwo
+
+ProdTwo、EQ * 2                                 ProdTwo、EQ * 2
+unrollPragma: ProdTwo、EQ
+
+
+ProdTwo                                         ProdTwo
+EQ、ProdTwo * 2                                 EQ、ProdTwo * 2
+ProdTwo * 2                                     ProdTwo * 2
+EQ、ProdTwo * 2                                 EQ、ProdTwo * 2 
+ProdTow * 2                                     ProdTow * 2
+EQ、ProdTwo * 2                                 EQ、ProdTwo * 2 
+ProdTwo                                         ProdTwo
+EQ*4                                            EQ*4
+sum                                             sum
+ProdTwo、EQ * 3                                 ProdTwo、EQ * 3
+NE                                              NE
+EQ * 12                                         EQ * 4
+sum                                             sum
+EQ * 12                                         EQ * 4
+sum                                             sum
+EQ * 6                                          EQ * 6
+sum * 2                                         sum * 2
+ProdTwo、EQ * 2                                 ProdTwo、EQ * 2
+ProdTwo * 2                                     ProdTwo * 2 
+ProdTwo、EQ * 2                                 ProdTwo、EQ * 2
+EQ * 4                                          EQ * 2
+sum                                             sum
+EQ * 4                                          EQ * 2
+sum                                             sum 
+ProdTwo、EQ * 12                                ProdTwo、EQ * 12 
+LE                                              LE
+ProdTwo、EQ * 2                                 ProdTwo、EQ * 2
+EQ * 8                                          EQ * 8
+sum                                             sum
+EQ * 8                                          EQ * 8 
+sum                                             sum
+EQ * 6                                          EQ * 6
+sum * 2                                         sum * 2
+ProdTwo                                         ProdTwo
+EQ * 4                                          EQ * 4
+sum                                             sum
+EQ * 8                                          EQ * 8
+sum                                             sum
+EQ * 8                                          EQ * 8
+sum                                             sum 
+ProdTwo、EQ * 2                                 ProdTwo、EQ * 2
+EQ * 8                                          EQ * 8
+sum                                             sum
+ProTWo                                          ProdTwo
+EQ * 8                                          EQ * 8
+sum                                             sum
+EQ * 6                                          EQ * 6
+sum * 2                                         sum * 2
+ProdTwo                                         ProdTwo
+EQ * 4                                          EQ * 4
+sum                                             sum
+ProdTwo * 4                                     ProdTwo * 4

@@ -14,7 +14,7 @@ tags:
 
 
 
-### Paper [![number](https://img.shields.io/badge/90-145-blue.svg?style=flat)](https://github.com/home-assistant/home-assistant-iOS/blob/master/LICENSE)
+### Paper [![number](https://img.shields.io/badge/90-149-blue.svg?style=flat)](https://github.com/home-assistant/home-assistant-iOS/blob/master/LICENSE)
 
 ---
 Survery [![number](https://img.shields.io/badge/1-1-blue.svg?style=flat)](https://github.com/home-assistant/home-assistant-iOS/blob/master/LICENSE)
@@ -157,6 +157,8 @@ Dynamic Tensor Programs [![number](https://img.shields.io/badge/0-11-blue.svg?st
 
 - <img src="https://img.shields.io/badge/20-pages-green.svg" alt="20-pages" align="left"> [COCKTAILER: Analyzing and Optimizing Dynamic Control Flow in Deep Learning](https://www.usenix.org/system/files/osdi23-zhang-chen.pdf) - Chen Zhang, Lingxiao Ma, Jilong Xue, Yining Shi, Ziming Miao, Fan Yang, Jidong Zhai, Zhi Yang, Mao Yang, OSDI, 2023
 
+- <img src="https://img.shields.io/badge/30-pages-green.svg" alt="30-pages" align="left"> [FTuner: A Fast Dynamic Shape Tensors Program Auto-Tuner for Deep Learning Compilers](https://arxiv.org/pdf/2407.21418) - Pengyu Mu, Linquan Wei, Rui Wang, Yi Liu, arxiv, 2024
+
 Sparse Tensor Program Optimization [![number](https://img.shields.io/badge/2-2-blue.svg?style=flat)](https://github.com/home-assistant/home-assistant-iOS/blob/master/LICENSE)
 - <img src="https://img.shields.io/badge/30-pages-green.svg" alt="30-pages" align="left"> [A Sparse Iteration Space Transformation Framework for Sparse Tensor Algebra](https://dl.acm.org/doi/pdf/10.1145/3428226) - Ryan Senanayake, Changwan Hong, Ziheng Wang, Amalee Wilson, Stephen Chou, Shaoaib Kamil, Saman Amarasinghe, Fredrik Kjolstad, OOPSLA, 2020 ![Check](https://img.shields.io/badge/✓-done-green)
 
@@ -231,6 +233,12 @@ Across Devices for Deep Learning Tensor Programs](https://aclanthology.org/2023.
 - <img src="https://img.shields.io/badge/18-pages-green.svg" alt="18-pages" align="left"> [MonoNN: Enabling a New Monolithic Optimization Space for Neural Network Inference Tasks on Modern GPU-Centric Architectures](https://jamesthez.github.io/files/mononn-osdi24.pdf) - Donglin Zhuang, Zhen Zheng, Haojun Xia, Xiafei Qiu, Junjie Bai, Wei Lin, OSDI, 2024 ![Check](https://img.shields.io/badge/✓-done-green)
 
 - <img src="https://img.shields.io/badge/12-pages-green.svg" alt="12-pages" align="left"> [Reinforcement Learning and Adaptive Sampling for Optimized DNN Compilation](https://proceedings.mlsys.org/paper_files/paper/2021/file/a7e5da037a0afc90fa84386586929a26-Paper.pdf) - Benoit Steiner, Chris Cummins, Horace He, Hugh Leather, MLSys, 2021
+
+- <img src="https://img.shields.io/badge/14-pages-green.svg" alt="14-pages" align="left"> [Pruner: A Speculative Exploration Mechanism to Accelerate Tensor Program Tuning](https://arxiv.org/pdf/2402.02361) - Liang Qiao, Jun Shi, Xiaoyu Hao, Xi Fang, Minfan Zhao, Ziqi Zhu, Junshi Chen, Hong An, Bing Li, Honghui Yuan, Xinyang Wang, Xulong Tang, ASPLOS, 2025
+
+- <img src="https://img.shields.io/badge/13-pages-green.svg" alt="13-pages" align="left"> [Gensor: A Graph-based Construction Tensor Compilation Method for Deep Learning](https://arxiv.org/pdf/2502.11407) - Hangda Liu, Boyu Diao, Yu Yang, Wenxin Chen, Xiaohui Peng, Yongjun Xu, arxiv 2025
+
+- <img src="https://img.shields.io/badge/13-pages-green.svg" alt="13-pages" align="left"> [IMTP: Search-based Code Generation for In-memory Tensor Programs](https://arxiv.org/pdf/2412.19630) - Yongwon Shin, Dookyung Kang, Hyojin Sung, arxiv 2024
 
 
 Automatic [![number](https://img.shields.io/badge/27-38-blue.svg?style=flat)](https://github.com/home-assistant/home-assistant-iOS/blob/master/LICENSE)

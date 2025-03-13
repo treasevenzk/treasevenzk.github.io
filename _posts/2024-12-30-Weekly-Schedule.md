@@ -209,6 +209,7 @@ extra       {}
 - ~~Optimizing DNN computation graph using graph substitutions~~ 
 - ~~IOS: Inter-Operator Scheduler for CNN Acceleration~~
 - ~~Equality Saturation for Tensor Graph Superoptimization~~
+- ~~Pruner: A Speculative Exploration Mechanism to  Accelerate Tensor Program Tuning~~
 
 
 
