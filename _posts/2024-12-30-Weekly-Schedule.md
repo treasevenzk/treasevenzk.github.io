@@ -218,3 +218,26 @@ extra       {}
 
 
 ### 3.17进度
+vscode copilot去掉提示代码： 1. ctrl+shift+p  2. 找到preferences: open user settings 3. 找到Github->Copilot->Editor: Enable Auto Completions 去掉方框的勾选
+
+conda install pytorch==2.5.1 torchvision==0.20.1 torchaudio==2.5.1 pytorch-cuda=12.4 -c pytorch -c https://mirrors.tuna.tsinghua.edu.cn/anconda/cloud/pytorch
+
+runner = HeronRunner.LocalRunner(
+                                    number=config.runner_number,
+                                    repeat=config.runner_repeat,
+                                    min_repeat_ms=500,
+                                    timeout=config.runner_timeout, enable_cpu_cache_flush = flush)
+measure_option = autotvm.measure_option(
+            builder = autotvm.LocalBuilder(timeout=config.build_timeout),
+            runner = runner
+        ) 
+builder = measure_option["builder"]
+runner = measure_option["runner"]
+attach_objects = runner.set_task(task)
+build_kwargs = runner.get_build_kwargs()
+builder.set_task(task, build_kwargs)
+def get():
+    return build_kwargs
+get.n_parallel = builder.n_parallel
+get.attach_objects = attach_objects
+get()

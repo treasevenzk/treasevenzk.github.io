@@ -238,6 +238,8 @@ Across Devices for Deep Learning Tensor Programs](https://aclanthology.org/2023.
 
 - <img src="https://img.shields.io/badge/13-pages-green.svg" alt="13-pages" align="left"> [IMTP: Search-based Code Generation for In-memory Tensor Programs](https://arxiv.org/pdf/2412.19630) - Yongwon Shin, Dookyung Kang, Hyojin Sung, arxiv 2024
 
+- <img src="https://img.shields.io/badge/12-pages-green.svg" alt="12-pages" align="left"> [Sifter: An Efficient Operator Auto-Tuner with Speculative Design Space Exploration for Deep Learning Compiler](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10643602) - Qianhe Zhao, Rui Wang, Yi Liu, Hailong Yang, Zhongzhi Luan, Depei Qian, TC, 2024
+
 
 Automatic [![number](https://img.shields.io/badge/27-38-blue.svg?style=flat)](https://github.com/home-assistant/home-assistant-iOS/blob/master/LICENSE)
 - <img src="https://img.shields.io/badge/14-pages-green.svg" alt="14-pages" align="left"> [AMOS: Enabling Automatic Mapping for Tensor Computations On Spatial Accelerators with Hardware Abstraction](https://dl.acm.org/doi/pdf/10.1145/3470496.3527440) - Size Zheng, Renze Chen, Anjiang Wei, Yicheng Jin, Qin Han, Liqiang Lu, Bingyang Wu, Xiuhong Li, Shengen Yan, Yun Liang, ISCA, 2022 ![Check](https://img.shields.io/badge/✓-done-green)
