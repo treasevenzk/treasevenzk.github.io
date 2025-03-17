@@ -14,7 +14,7 @@ tags:
 
 
 
-### Paper [![number](https://img.shields.io/badge/90-149-blue.svg?style=flat)](https://github.com/home-assistant/home-assistant-iOS/blob/master/LICENSE)
+### Paper [![number](https://img.shields.io/badge/91-148-blue.svg?style=flat)](https://github.com/home-assistant/home-assistant-iOS/blob/master/LICENSE)
 
 ---
 Survery [![number](https://img.shields.io/badge/1-1-blue.svg?style=flat)](https://github.com/home-assistant/home-assistant-iOS/blob/master/LICENSE)
@@ -67,7 +67,7 @@ Dense Tensor Program Optimization [![number](https://img.shields.io/badge/20-23-
 
 - <img src="https://img.shields.io/badge/15-pages-green.svg" alt="15-pages" align="left"> [Atomic Dataflow based Graph-Level Workload Orchestration for Scalable DNN Accelerators](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9773218) - Shixuan Zheng, Xianjue Zhang, Leibo Liu, Shaojun Wei, Shouyi Yin, HPCA, 2022 ![Check](https://img.shields.io/badge/✓-done-green)
 
-Graph Optimization [![number](https://img.shields.io/badge/14-16-blue.svg?style=flat)](https://github.com/home-assistant/home-assistant-iOS/blob/master/LICENSE)
+Graph Optimization [![number](https://img.shields.io/badge/14-15-blue.svg?style=flat)](https://github.com/home-assistant/home-assistant-iOS/blob/master/LICENSE)
 - <img src="https://img.shields.io/badge/9-pages-green.svg" alt="9-pages" align="left"> [Memory-aware Scheduling for Complex Wired Networks with Iterative Graph Optimization](https://arxiv.org/pdf/2308.13898) - Shuzhang Zhong, Meng Li, Yun Liang, Runsheng Wang, Ru Huang, ICCAD, 2023
 
 - <img src="https://img.shields.io/badge/20-pages-green.svg" alt="20-pages" align="left"> [Effectively Scheduling Computational Graphs of Deep Neural Networks toward Their Domain-Specific Accelerators](https://www.usenix.org/system/files/osdi23-zhao.pdf) - Jie Zhao, Siyuan Feng, Xiaoqiang Dan, Fei Liu, Chengke Wang, Sheng Yuan, Wenyuan Lv, Qikai Xie, OSDI, 2023 ![Check](https://img.shields.io/badge/✓-done-green)
@@ -95,8 +95,6 @@ Graph Optimization [![number](https://img.shields.io/badge/14-16-blue.svg?style=
 - <img src="https://img.shields.io/badge/14-pages-green.svg" alt="14-pages" align="left"> [FusionStitching: Boosting Memory Intensive Computations for Deep Learning Workloads](https://arxiv.org/pdf/2009.10924) - Zhen Zheng, Pengzhan Zhao, Guoping Long, Feiwen Zhu, Kai Zhu, Wenyi Zhao, Lansong Diao, Jun Yang, Wei Lin, arxiv, 2020 ![Check](https://img.shields.io/badge/✓-done-green)
 
 - <img src="https://img.shields.io/badge/12-pages-green.svg" alt="12-pages" align="left"> [Nimble: Lightweight and Parallel GPU Task Scheduling for Deep Learning](https://proceedings.neurips.cc/paper_files/paper/2020/file/5f0ad4db43d8723d18169b2e4817a160-Paper.pdf) - Woosuk Kwon, Gyeong-In Yu, Eunji Jeong, Byung-Gon Chun, NIPS, 2020 ![Check](https://img.shields.io/badge/✓-done-green)
-
-- <img src="https://img.shields.io/badge/14-pages-green.svg" alt="14-pages" align="left"> [Stateful dataflow multigraphs: a data-centric model for performance portability on heterogeneous architectures](https://dl.acm.org/doi/pdf/10.1145/3295500.3356173) - Tal Ben-Nun, Johannes de Fine Licht, Alexandros N. Ziogas, Timo Schneider, Torsten Hoefler, SC, 2019
 
 - <img src="https://img.shields.io/badge/11-pages-green.svg" alt="11-pages" align="left"> [Exploiting Subgraph Similarities for Efficient Auto-tuning of Tensor Programs](https://dl.acm.org/doi/pdf/10.1145/3605573.3605596) - Mingzhen Li, Hailong Yang, Shanjun Zhang, Fengwei Yu, Ruihao Gong, Yi Liu, Zhongzhi Luan, Depei Qian, ICPP, 2023 ![Check](https://img.shields.io/badge/✓-done-green)
 
@@ -191,7 +189,7 @@ Inference Pipelines](https://dl.acm.org/doi/pdf/10.1145/3620678.3624656) - Hong 
 
 - <img src="https://img.shields.io/badge/5-pages-green.svg" alt="5-pages" align="left"> [Acceleration of Decision-Tree Ensemble Models on the IBM Telum Processor](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10181908) - Nikolaos Papandreou, Jan van Lunteren, Andreea Anghel, Thomas Parnell, Martin Petermann, Milos Stanisavljevic, ISCAS, 2023 ![Check](https://img.shields.io/badge/✓-done-green)
 
-Autotune [![number](https://img.shields.io/badge/14-20-blue.svg?style=flat)](https://github.com/home-assistant/home-assistant-iOS/blob/master/LICENSE)
+Autotune [![number](https://img.shields.io/badge/15-20-blue.svg?style=flat)](https://github.com/home-assistant/home-assistant-iOS/blob/master/LICENSE)
 - <img src="https://img.shields.io/badge/24-pages-green.svg" alt="24-pages" align="left"> [BaCO: A Fast and Portable Bayesian Compiler Optimization Framework](https://dl.acm.org/doi/pdf/10.1145/3623278.3624770) - Erik Hellsten, Artur Souza, Johannes Lenfers, Rubens Lacouture, Olivia Hsu, Adel Ejjeh, Fredrik Kjolstad, Michel Steuwer, Kunle Olukotun, Luigi Nardi, ASPLOS, 2023 ![Check](https://img.shields.io/badge/✓-done-green)
 
 - <img src="https://img.shields.io/badge/13-pages-green.svg" alt="13-pages" align="left"> [Bolt: Bridging the gap between auto-tuners and hardware-native performance](https://proceedings.mlsys.org/paper_files/paper/2022/file/1f8053a67ec8e0b57455713cefdd8218-Paper.pdf) - Jiarong Xing, Leyuan Wang, Shang Zhang, Jack Chen, Ang Chen, Yibo Zhu, MLSys, 2022 ![Check](https://img.shields.io/badge/✓-done-green)
@@ -234,7 +232,7 @@ Across Devices for Deep Learning Tensor Programs](https://aclanthology.org/2023.
 
 - <img src="https://img.shields.io/badge/12-pages-green.svg" alt="12-pages" align="left"> [Reinforcement Learning and Adaptive Sampling for Optimized DNN Compilation](https://proceedings.mlsys.org/paper_files/paper/2021/file/a7e5da037a0afc90fa84386586929a26-Paper.pdf) - Benoit Steiner, Chris Cummins, Horace He, Hugh Leather, MLSys, 2021
 
-- <img src="https://img.shields.io/badge/14-pages-green.svg" alt="14-pages" align="left"> [Pruner: A Speculative Exploration Mechanism to Accelerate Tensor Program Tuning](https://arxiv.org/pdf/2402.02361) - Liang Qiao, Jun Shi, Xiaoyu Hao, Xi Fang, Minfan Zhao, Ziqi Zhu, Junshi Chen, Hong An, Bing Li, Honghui Yuan, Xinyang Wang, Xulong Tang, ASPLOS, 2025
+- <img src="https://img.shields.io/badge/14-pages-green.svg" alt="14-pages" align="left"> [Pruner: A Speculative Exploration Mechanism to Accelerate Tensor Program Tuning](https://arxiv.org/pdf/2402.02361) - Liang Qiao, Jun Shi, Xiaoyu Hao, Xi Fang, Minfan Zhao, Ziqi Zhu, Junshi Chen, Hong An, Bing Li, Honghui Yuan, Xinyang Wang, Xulong Tang, ASPLOS, 2025 ![Check](https://img.shields.io/badge/✓-done-green)
 
 - <img src="https://img.shields.io/badge/13-pages-green.svg" alt="13-pages" align="left"> [Gensor: A Graph-based Construction Tensor Compilation Method for Deep Learning](https://arxiv.org/pdf/2502.11407) - Hangda Liu, Boyu Diao, Yu Yang, Wenxin Chen, Xiaohui Peng, Yongjun Xu, arxiv 2025
 

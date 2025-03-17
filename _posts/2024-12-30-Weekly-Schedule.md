@@ -203,7 +203,6 @@ extra       {}
 - ~~AutoGraph: Optimizing DNN Computation Graph for Parallel GPU Kernel Execution~~
 - ~~POET: Training Neural Networks on Tiny Devices with Integrated Rematerialization and Paging~~
 - ~~Collage: Seamless Integration of Deep Learning Backends with Automatic Placement~~ 
-- Stateful dataflow multigraphs: a data-centric model for performance portability on heterogeneous architectures 
 - ~~Exploiting Subgraph Similarities for Efficient Auto-tuning of Tensor Programs~~
 - ~~Transferable Graph Optimizers for ML Compilers~~ 
 - ~~Optimizing DNN computation graph using graph substitutions~~ 
@@ -211,20 +210,11 @@ extra       {}
 - ~~Equality Saturation for Tensor Graph Superoptimization~~
 - ~~Pruner: A Speculative Exploration Mechanism to  Accelerate Tensor Program Tuning~~
 
+***论文复现工作***
+- ***Heron***: 这周搞定Heron的GPU部分实验，目前已经跑通实验效果与作者提供的一致，发现作者代码中存在的字符串乱用bug目前已经完成修改，同时针对之前没发现CPU部分实验问题进行修改，之前存在的问题是轴区间访问问题，之前不能正确获取相应的值，对其进行修改将CPU部分实验效果进行改善，另外研究Heron中利用调度原语的作用，分析各个调度原语所带来的优化效果，对作者的调度模板生成算法进行进一步了解
+
+***学习计划***
+下周开始每晚学习一下算法进阶课，需要补一下算法方面的知识，同时下周开始每天开始写日报
 
 
-
-
-AVX是Intel和AMD处理器上的SIMD指令集扩展
-|指令集|AVX2|AVX512|
-|"---"|"---"|"---"|
-|寄存器宽度|使用256位宽的YMM寄存器|使用512位宽的ZMM寄存器，一次可处理更多数据|
-|并行处理能力|同时处理8个32位浮点数或整数|同时处理16个32位浮点数或整数|
-|指令集丰富度|比AVX512差|添加了许多新指令，包括更灵活的数据排列、更多的归约操作和更复杂的数学函数|
-|处理器支持|在第四代Core及以后的Intel处理器和较新的AMD处理器上支持|在Intel Xeon Phi|
-|功耗和频率影响|频率影响较小|导致CPU降频以保持在功耗和温度限制内|
-
-读论文的技巧：
-- 挑战：挖坑(新场景带来的新问题)、填坑(老场景老问题新思路)
-- 方法：老方法解决新问题(看完场景和挑战就能猜到)、新的数据/硬件特征带来的新的方法组合、新的方法(少见、重点关注)
-- 场景：如何对场景进行实验模拟、核心对比对象是谁，对比什么点、效果如何、那些东西没有比
+### 3.17进度
