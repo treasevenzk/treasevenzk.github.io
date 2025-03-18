@@ -396,6 +396,21 @@ tensorcoreStoreOp: ctx.stile_structures
 
 
 
+TCStartOp→startOp→computeAtOp
+defaultSharedLoadSchedOp→storageAlignOp→fuseAllOp
+defaultSchedOp→fuseAllOp
+unrollPragmaOp
+storageAlignOp
+tileBlockOp→tileBindOp→TileSpatialOp
+tileThreadOp→tileBindOp→TileSpatialOp
+tileWarpOp→tileBindOp→TileSpatialOp
+generalTileOp→TileAllOp
+tensorcoreLoadAOp
+tensorcoreLoadBOp
+tensorcoreComputeOp
+tensorcoreStoreOp
+GPUvectorizeOp→tileSpatialOp
+
 
 调度原语的作用：
 split: 将一个大的循环分解成内外两层循环，便于后续的并行化和向量化优化，通过选择split的factor大小，使内层循环的数据块大小与CPU的L1、L2缓存大小匹配，避免缓存颠簸(cache thrashing)，提高局部性，有利于硬件预取机制发挥作用，提前将即将需要的数据加载到缓存中
@@ -414,6 +429,64 @@ tensorize: 用于将计算模式映射到硬件加速指令或专用计算单元
 compute_inline: 用于将计算操作内联到它的消费者，消除中间缓冲区，合并计算操作， 与compute_at形成互补，compute_at控制计算在何处发生，而compute_inline则完全融合计算
 
 
+Heron调度模板生成的逻辑
+1. 首先检查并内联注入式算子(ctx.InlineAll(s))
+2. 根据平台特性(如Tensorcore)生成特定的内存层次结构(organize)
+3. 对更新后的计算图中的每个阶段，根据规则应用相应的调度
+
+设计上面顺序的原因： 内联→内存层次→其他优化
+1. 内联注入式算子的优先性：简化后续优化(内联后的计算图更加简洁，减少需要考虑的计算阶段)、避免冗余优化、便于识别计算模式(内联后更容易识别出张量化的计算模式)
+2. 内存层次结构的确定：硬件约束的核心部分(内存层次直接映射到硬件架构：如全局内存→共享内存→寄存器)、数据移动成本主导(在DLA上，数据移动通常比计算更耗时，因此内存层次优先确定)、影响后续所有优化(循环分块、循环顺序等都依赖于已确定的内存层次结构)
+3. 其他调度决策的依赖性: 循环分块(分块大小需要基于已确定的内存层次结构)、向量化/展开(依赖于内存访问模式，而内存访问模式又由内存层次决定)、计算位置(计算应该在哪一层内存执行，取决于内存层次结构)
+
+TensorCore计算流程：
+TensorCore的计算流程基于特殊的矩阵乘法指令(如mma.sync),这些指令要求:
+1.输入矩阵必须加载到特定的WMMA片段中
+2.结果累积到WMMA累加器中
+3.结构从WMMA累加器存储回普通内存
+
+addCacheTensorCoreOp代码对应的内存层次的建立：
+原始输入→共享内存→WMMA输入片段→WMMA计算→WMMA累加器→共享内存→全局内存
+
+cache_write和cache_read在代码中的实际用途：
+cache_write用于累积器，虽然cache_write是为计算结果创建临时缓冲区，在代码中，它创建WMMA累加器空间，作为矩阵乘法的目标，"wmma.accumulator"是特殊的存储范围，映射到TensorCore硬件的累加器
+cache_read用于多种目的，从全局内存到共享内存的加载，从共享内存到WMMA矩阵片段的加载，从WMMA累加器结果到共享内存的读取(这看起来像是存储，但在TVM中是通过cache_read实现)
 
 
+块级别：通常是较外层的循环，处理数据的较大分块
+线程级别：较内层的循环，通常对应于单个线程的工作
+更内层循环：在线程内部的循环，通常对应于单个线程内部的操作
+在TensorCore编程中，循环层次对应的典型计算位置：
+块级别循环→共享内存操作
+线程级别循环→线程私有操作
+内层循环→WMMA指令单元操作
 
+Heron调度应用的决策逻辑
+**先通用后特化**：系统首先尝试应用通用调度策略(如defaultSharedLoadSched和defaultGPUSched),如果这些不适用，才会尝试组合多个特定调度策略
+共享内存加载且没有可融合的消费者时使用defaultSharedLoadSched的原因：1.内存加载优化的特殊需求 2.无可融合消费者的情况：这个加载操作需要作为独立阶段执行，加载的数据需要完全写入共享内存后才能被后续操作使用，在加载和计算之间存在同步点
+
+TCStartOP
+当前阶段在ctx.compute_poses说明是需要在其他阶段内计算的阶段，执行compute_at操作，将其放置在指定位置，更新轴长度信息
+更新轴长度信息的原因：1.自动推导约束 2.生成更准确的约束条件：内存容量约束(共享内存大小限制)、计算单元约束(WMMA矩阵大小要求)、线程组织约束(线程块大小限制)
+
+defaultSharedLoadSched
+为共享内存加载阶段设置默认调度策略：
+1.存储对齐：确保共享内存访问是对齐的，减少bank冲突
+2.循环融合：将多个循环融合，简化后续分割
+3.向量化：利用向量直径加速内存加载
+4.线程绑定：将循环并行化到GPU线程
+
+hasFuisbleConsumer明确哪个阶段负责调度共享内存操作，避免冗余优化(不对已有明确消费者的阶段应用默认优化)
+在TensorCore编程中，共享内存加载大致有两种模式：
+模式A：直接由消费者内联(共享内存阶段与其消费者紧密耦合，消费者可以融合共享内存加载到自己的循环中、消费者负责对共享内存加载进行调度)
+模式B：独立调度(共享内存阶段相对独立、需要单独的调度策略、需要明确的内存对齐、向量化和线程绑定)
+判断算子是否与其消费者紧密耦合，依据是该算子的消费者只有一个，或者算子的消费者的生产者只有该算子
+
+defaultSchedOp：基于标签的调度选择机制提供一种灵活、可扩展的方式来为不同类型的计算操作应用不同的调度策略
+基于GPU架构特性和并行计算模型来设计通用GPU调度策略，能够有效利用GPU的并行计算能力
+调度顺序：融合(fuse)→向量化(vectorize)→线程绑定(thread binding)→块绑定(block binding) 创建一个层次化的并行执行模型，从最细粒度(向量指令)到最粗粒度(块)
+
+
+融合消费者是指能够与当前操作进行循环融合优化的下游操作
+当一个操作有"可融合的消费者"，意味着：1.消费关系明确，该操作的输出直接且唯一地被另一个操作使用 2. 一对一关系，该操作是其消费者的唯一输入来源 3.访问模式匹配，两个操作的循环迭代空间可以对齐和合并
+当一个操作没有"可融合的消费者"时，可能是因为：1.多个消费者，该操作的输出被多个下游操作使用 2.消费者有多个输入，下游操作不仅使用该操作的输出，还使用其他操作的输出 3.无消费者，该操作是最终输出，没有下游操作
