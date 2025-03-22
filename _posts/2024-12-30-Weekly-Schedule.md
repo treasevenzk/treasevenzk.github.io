@@ -217,27 +217,12 @@ extra       {}
 下周开始每晚学习一下算法进阶课，需要补一下算法方面的知识，同时下周开始每天开始写日报
 
 
-### 3.17进度
-vscode copilot去掉提示代码： 1. ctrl+shift+p  2. 找到preferences: open user settings 3. 找到Github->Copilot->Editor: Enable Auto Completions 去掉方框的勾选
-
-conda install pytorch==2.5.1 torchvision==0.20.1 torchaudio==2.5.1 pytorch-cuda=12.4 -c pytorch -c https://mirrors.tuna.tsinghua.edu.cn/anconda/cloud/pytorch
-
-runner = HeronRunner.LocalRunner(
-                                    number=config.runner_number,
-                                    repeat=config.runner_repeat,
-                                    min_repeat_ms=500,
-                                    timeout=config.runner_timeout, enable_cpu_cache_flush = flush)
-measure_option = autotvm.measure_option(
-            builder = autotvm.LocalBuilder(timeout=config.build_timeout),
-            runner = runner
-        ) 
-builder = measure_option["builder"]
-runner = measure_option["runner"]
-attach_objects = runner.set_task(task)
-build_kwargs = runner.get_build_kwargs()
-builder.set_task(task, build_kwargs)
-def get():
-    return build_kwargs
-get.n_parallel = builder.n_parallel
-get.attach_objects = attach_objects
-get()
+### 3.17-3.23进度
+***论文阅读计划***
+- IMTP: Search-based Code Generation for In-memory Tensor Programs
+- Gensor: A Graph-based Construction Tensor Compilation Method for Deep Learning
+- Optimizing Dynamic-Shape Neural Networks on Accelerators via On-the-Fly Micro-Kernel Polymerization
+- Hector: An Efficient Programming and Compilation Framework for Implementing Relational Graph Neural Networks in GPU Architectures
+- SoD2: Statically Optimizing Dynamic Deep Neural Network Execution
+- TensorMap: A Deep RL-Based Tensor Mapping Framework for Spatial Accelerators
+- Sifter An Efficient Operator Auto-Tuner with Speculative Design Space Exploration for Deep Learning Compiler
