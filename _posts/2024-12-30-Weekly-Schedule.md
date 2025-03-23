@@ -221,8 +221,19 @@ extra       {}
 ***论文阅读计划***
 - IMTP: Search-based Code Generation for In-memory Tensor Programs
 - Gensor: A Graph-based Construction Tensor Compilation Method for Deep Learning
-- Optimizing Dynamic-Shape Neural Networks on Accelerators via On-the-Fly Micro-Kernel Polymerization
+- ~~Optimizing Dynamic-Shape Neural Networks on Accelerators via On-the-Fly Micro-Kernel Polymerization~~
 - Hector: An Efficient Programming and Compilation Framework for Implementing Relational Graph Neural Networks in GPU Architectures
-- SoD2: Statically Optimizing Dynamic Deep Neural Network Execution
-- TensorMap: A Deep RL-Based Tensor Mapping Framework for Spatial Accelerators
-- Sifter An Efficient Operator Auto-Tuner with Speculative Design Space Exploration for Deep Learning Compiler
+- ~~SoD2: Statically Optimizing Dynamic Deep Neural Network Execution~~
+- ~~TensorMap: A Deep RL-Based Tensor Mapping Framework for Spatial Accelerators~~
+- ~~Sifter An Efficient Operator Auto-Tuner with Speculative Design Space Exploration for Deep Learning Compiler~~
+
+
+***论文复现工作***
+- ***Heron***: 搞清楚Heron的代码生成规则，对TVM的代码生成模板目前已经掌握，同时也了解GPU的架构，对于生成规则的GPU的约束
+- ***AMOS***: 目前成功安装，对AMOS的代码架构了解已经完成
+- ***FlexTensor***: 目前还没有看，只运行成功测试脚本，保证环境已成功完成
+本周还了解TVM的python与C++端的代码如何配合完成
+
+
+***算法学习***
+完成搜索算法的模拟退火、爬山法、bfs
