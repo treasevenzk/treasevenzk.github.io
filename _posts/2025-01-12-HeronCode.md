@@ -411,6 +411,20 @@ tensorcoreComputeOp
 tensorcoreStoreOp
 GPUvectorizeOp→tileSpatialOp
 
+tuner.run
+
+UpdatePopulation->optimize->epsilon_select->FilterSamples->measure
+
+UpdatePopulation
+constrained_random_sample->history_topk_samples
+
+constrained_random_sample
+constrainted_random_sample_parallel->self.predict
+
+constrainted_random_sample_sequential
+Sample、knob_manager.randomSample、Code
+
+
 
 调度原语的作用：
 split: 将一个大的循环分解成内外两层循环，便于后续的并行化和向量化优化，通过选择split的factor大小，使内层循环的数据块大小与CPU的L1、L2缓存大小匹配，避免缓存颠簸(cache thrashing)，提高局部性，有利于硬件预取机制发挥作用，提前将即将需要的数据加载到缓存中
