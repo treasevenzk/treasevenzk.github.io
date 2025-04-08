@@ -240,9 +240,13 @@ Across Devices for Deep Learning Tensor Programs](https://aclanthology.org/2023.
 
 - <img src="https://img.shields.io/badge/12-pages-green.svg" alt="12-pages" align="left"> [Sifter: An Efficient Operator Auto-Tuner with Speculative Design Space Exploration for Deep Learning Compiler](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10643602) - Qianhe Zhao, Rui Wang, Yi Liu, Hailong Yang, Zhongzhi Luan, Depei Qian, TC, 2024 ![Check](https://img.shields.io/badge/✓-done-green)
 
-- <img src="https://img.shields.io/badge/14-pages-green.svg" alt="14-pages" align="left"> [TensorMap: A Deep RL-Based Tensor Mapping
-Framework for Spatial Accelerators](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10527402) - Fuyu Wang, Minghua Shen, Yutong Lu, Nong Xiao, TC 2024
+- <img src="https://img.shields.io/badge/14-pages-green.svg" alt="14-pages" align="left"> [TensorMap: A Deep RL-Based Tensor Mapping Framework for Spatial Accelerators](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10527402) - Fuyu Wang, Minghua Shen, Yutong Lu, Nong Xiao, TC 2024
 
+- <img src="https://img.shields.io/badge/17-pages-green.svg" alt="17-pages" align="left"> [Mosaic: Exploiting Instruction-Level Parallelism on Deep Learning Accelerators with iTex Tessellation](https://dl.acm.org/doi/pdf/10.1145/3676641.3716262) - Ruihang Lai, Junru Shao, Siyuan Feng, Steven Lyubomirsky, Bohan Hou, Wuwei Lin, Zihao Ye, Hongyi Jin, Yuchen Jin, Jiawei Liu, , ASPLOS 2025
+
+- <img src="https://img.shields.io/badge/15-pages-green.svg" alt="15-pages" align="left"> [Optimizing Deep Learning Inference Efficiency through Block Dependency Analysis](https://dl.acm.org/doi/pdf/10.1145/3676641.3716264) - Zhanyuan Di, Leping Wang, En Shao, Zhaojia Ma, Ziyi Ren, Feng Hua, Lixian Ma, Jie Zhao, Guangming Tan, Ninghui Sun, ASPLOS 2025
+
+- <img src="https://img.shields.io/badge/16-pages-green.svg" alt="16-pages" align="left"> [Relax: Composable Abstractions for End-to-End Dynamic Machine Learning](https://dl.acm.org/doi/pdf/10.1145/3676641.3716249) - Ruihang Lai, Junru Shao, Siyuan Feng, Steven Lyubomirsky, Bohan Hou, Wuwei Lin, Zihao Ye, Hongyi Jin, Yuchen Jin, Jiawei Liu, Lesheng Jin, Yaxing Cai, Ziheng Jiang, Yong Wu, Sunghyun Park, Prakalp Srivastava, Jared Roesch, Todd C. Mowry, Tianqi Chen , ASPLOS 2025
 
 Automatic [![number](https://img.shields.io/badge/27-38-blue.svg?style=flat)](https://github.com/home-assistant/home-assistant-iOS/blob/master/LICENSE)
 - <img src="https://img.shields.io/badge/14-pages-green.svg" alt="14-pages" align="left"> [AMOS: Enabling Automatic Mapping for Tensor Computations On Spatial Accelerators with Hardware Abstraction](https://dl.acm.org/doi/pdf/10.1145/3470496.3527440) - Size Zheng, Renze Chen, Anjiang Wei, Yicheng Jin, Qin Han, Liqiang Lu, Bingyang Wu, Xiuhong Li, Shengen Yan, Yun Liang, ISCA, 2022 ![Check](https://img.shields.io/badge/✓-done-green)

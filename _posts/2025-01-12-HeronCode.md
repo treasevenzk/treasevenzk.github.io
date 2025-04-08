@@ -504,3 +504,437 @@ defaultSchedOp：基于标签的调度选择机制提供一种灵活、可扩展
 融合消费者是指能够与当前操作进行循环融合优化的下游操作
 当一个操作有"可融合的消费者"，意味着：1.消费关系明确，该操作的输出直接且唯一地被另一个操作使用 2. 一对一关系，该操作是其消费者的唯一输入来源 3.访问模式匹配，两个操作的循环迭代空间可以对齐和合并
 当一个操作没有"可融合的消费者"时，可能是因为：1.多个消费者，该操作的输出被多个下游操作使用 2.消费者有多个输入，下游操作不仅使用该操作的输出，还使用其他操作的输出 3.无消费者，该操作是最终输出，没有下游操作
+
+
+
+# from tvm.script import ir as I
+# from tvm.script import tir as T
+
+@I.ir_module
+class Module:
+    @T.prim_func
+    def main(A: T.Buffer((64, 64), "float16"), B: T.Buffer((64, 64), "float16"), dense: T.Buffer((64, 64), "float16")):
+        T.func_attr({"from_legacy_te_schedule": T.bool(True), "tir.noalias": T.bool(True)})
+        dense_wmma_accumulator_shared = T.allocate([4096], "float16", "shared")
+        with T.launch_thread("threadIdx.y", 1) as threadIdx_y:
+            dense_wmma_accumulator = T.allocate([4096], "float16", "wmma.accumulator")
+            A_shared = T.allocate([4096], "float16", "shared")
+            A_shared_wmma_matrix_a = T.allocate([4096], "float16", "wmma.matrix_a")
+            B_shared_wmma_matrix_b = T.allocate([4096], "float16", "wmma.matrix_b")
+            for i_c_inner_inner_inner_outer_init, j_c_inner_inner_inner_outer_init in T.grid(4, 4):
+                T.tvm_fill_fragment(dense_wmma_accumulator, 16, 16, 16, i_c_inner_inner_inner_outer_init * 4 + j_c_inner_inner_inner_outer_init, T.float32(0))
+            for ax0_ax1_fused_outer_outer_outer in range(4096):
+                threadIdx_y_1 = T.launch_thread("threadIdx.y", 1)
+                threadIdx_x = T.launch_thread("threadIdx.x", 1)
+                A_shared_1 = T.Buffer((4096,), "float16", data=A_shared, scope="shared")
+                A_1 = T.Buffer((4096,), "float16", data=A.data)
+                A_shared_1[ax0_ax1_fused_outer_outer_outer] = A_1[ax0_ax1_fused_outer_outer_outer]
+            for ax0_outer, ax1_outer in T.grid(4, 4):
+                T.tvm_load_matrix_sync(A_shared_wmma_matrix_a, 16, 16, 16, ax0_outer * 4 + ax1_outer, T.tvm_access_ptr(T.type_annotation("float16"), A_shared, ax0_outer * 1024 + ax1_outer * 16, 1024, 1), 64, "row_major")
+            for ax0_ax1_fused_outer_outer_outer in range(4096):
+                threadIdx_y_1 = T.launch_thread("threadIdx.y", 1)
+                threadIdx_x = T.launch_thread("threadIdx.x", 1)
+                A_shared_1 = T.Buffer((4096,), "float16", data=A_shared, scope="shared")
+                B_1 = T.Buffer((4096,), "float16", data=B.data)
+                A_shared_1[ax0_ax1_fused_outer_outer_outer] = B_1[ax0_ax1_fused_outer_outer_outer]
+            for ax0_outer, ax1_outer in T.grid(4, 4):
+                T.tvm_load_matrix_sync(B_shared_wmma_matrix_b, 16, 16, 16, ax0_outer * 4 + ax1_outer, T.tvm_access_ptr(T.type_annotation("float16"), A_shared, ax0_outer * 1024 + ax1_outer * 16, 1024, 1), 64, "col_major")
+            for i_c_inner_inner_inner_outer, j_c_inner_inner_inner_outer, k_inner_inner_inner_outer in T.grid(4, 4, 4):
+                cse_var_2: T.int32 = i_c_inner_inner_inner_outer * 4
+                cse_var_1: T.int32 = cse_var_2 + j_c_inner_inner_inner_outer
+                T.tvm_mma_sync(dense_wmma_accumulator, cse_var_1, A_shared_wmma_matrix_a, cse_var_2 + k_inner_inner_inner_outer, B_shared_wmma_matrix_b, j_c_inner_inner_inner_outer * 4 + k_inner_inner_inner_outer, dense_wmma_accumulator, cse_var_1)
+            for ax0_inner_outer, ax1_inner_outer in T.grid(4, 4):
+                T.tvm_store_matrix_sync(dense_wmma_accumulator, 16, 16, 16, ax0_inner_outer * 4 + ax1_inner_outer, T.tvm_access_ptr(T.type_annotation("float16"), dense_wmma_accumulator_shared, ax0_inner_outer * 1024 + ax1_inner_outer * 16, 1024, 2), 64, "row_major")
+        blockIdx_x = T.launch_thread("blockIdx.x", 1)
+        threadIdx_y = T.launch_thread("threadIdx.y", 1)
+        threadIdx_x = T.launch_thread("threadIdx.x", 1)
+        dense_1 = T.Buffer((4096,), "float16", data=dense.data)
+        dense_wmma_accumulator_shared_1 = T.Buffer((4096,), "float16", data=dense_wmma_accumulator_shared, scope="shared")
+        dense_1[0:4096] = dense_wmma_accumulator_shared_1[0:4096]
+
+
+
+
+# from tvm.script import ir as I
+# from tvm.script import tir as T
+
+@I.ir_module
+class Module:
+    @T.prim_func
+    def main(A: T.Buffer((64, 64), "float16"), B: T.Buffer((64, 64), "float16"), dense: T.Buffer((64, 64), "float16")):
+        T.func_attr({"from_legacy_te_schedule": T.bool(True), "tir.noalias": T.bool(True)})
+        blockIdx_x = T.launch_thread("blockIdx.x", 4)
+        dense_wmma_accumulator = T.allocate([512], "float16", "wmma.accumulator")
+        A_shared = T.allocate([512], "float16", "shared")
+        B_shared = T.allocate([2048], "float16", "shared")
+        A_shared_wmma_matrix_a = T.allocate([256], "float16", "wmma.matrix_a")
+        B_shared_wmma_matrix_b = T.allocate([256], "float16", "wmma.matrix_b")
+        threadIdx_y = T.launch_thread("threadIdx.y", 2)
+        with T.launch_thread("threadIdx.y", 2) as threadIdx_y_1:
+            for j_c_inner_inner_inner_outer_init in T.unroll(2):
+                T.tvm_fill_fragment(dense_wmma_accumulator, 16, 16, 16, j_c_inner_inner_inner_outer_init, T.float32(0))
+            for k_outer in T.unroll(4):
+                cse_var_1: T.int32 = k_outer * 16
+                with T.launch_thread("threadIdx.y", 2) as threadIdx_y_2:
+                    threadIdx_x = T.launch_thread("threadIdx.x", 32)
+                    A_shared_1 = T.Buffer((512,), "float16", data=A_shared, scope="shared")
+                    A_1 = T.Buffer((4096,), "float16", data=A.data)
+                    A_shared_1[threadIdx_y_2 * 256 + threadIdx_x * 8:threadIdx_y_2 * 256 + threadIdx_x * 8 + 8] = A_1[blockIdx_x // 2 * 2048 + threadIdx_y_2 * 1024 + threadIdx_x // 2 * 64 + cse_var_1 + threadIdx_x % 2 * 8:blockIdx_x // 2 * 2048 + threadIdx_y_2 * 1024 + threadIdx_x // 2 * 64 + cse_var_1 + threadIdx_x % 2 * 8 + 8]
+                with T.launch_thread("threadIdx.y", 2) as threadIdx_y_2:
+                    threadIdx_x = T.launch_thread("threadIdx.x", 32)
+                    B_shared_1 = T.Buffer((1536,), "float16", data=B_shared, scope="shared")
+                    B_1 = T.Buffer((4096,), "float16", data=B.data)
+                    B_shared_1[threadIdx_y_2 * 768 + threadIdx_x // 2 * 48 + threadIdx_x % 2 * 8:threadIdx_y_2 * 768 + threadIdx_x // 2 * 48 + threadIdx_x % 2 * 8 + 8] = B_1[blockIdx_x % 2 * 2048 + threadIdx_y_2 * 1024 + threadIdx_x // 2 * 64 + cse_var_1 + threadIdx_x % 2 * 8:blockIdx_x % 2 * 2048 + threadIdx_y_2 * 1024 + threadIdx_x // 2 * 64 + cse_var_1 + threadIdx_x % 2 * 8 + 8]
+                for j_c_inner_inner_inner_outer in T.unroll(2):
+                    T.tvm_load_matrix_sync(A_shared_wmma_matrix_a, 16, 16, 16, 0, T.tvm_access_ptr(T.type_annotation("float16"), A_shared, threadIdx_y_1 * 256, 256, 1), 16, "row_major")
+                    T.tvm_load_matrix_sync(B_shared_wmma_matrix_b, 16, 16, 16, 0, T.tvm_access_ptr(T.type_annotation("float16"), B_shared, j_c_inner_inner_inner_outer * 768, 768, 1), 48, "col_major")
+                    T.tvm_mma_sync(dense_wmma_accumulator, j_c_inner_inner_inner_outer, A_shared_wmma_matrix_a, 0, B_shared_wmma_matrix_b, 0, dense_wmma_accumulator, j_c_inner_inner_inner_outer)
+            for ax1_inner_outer in T.unroll(2):
+                T.tvm_store_matrix_sync(dense_wmma_accumulator, 16, 16, 16, ax1_inner_outer, T.tvm_access_ptr(T.type_annotation("float16"), B_shared, threadIdx_y_1 * 1024 + ax1_inner_outer * 16, 1024, 2), 64, "row_major")
+        threadIdx_x = T.launch_thread("threadIdx.x", 32)
+        for i_inner_inner_inner_inner_outer in T.unroll(4):
+            for j_inner_inner_inner_inner_outer in T.unroll(2):
+                cse_var_3: T.int32 = i_inner_inner_inner_inner_outer * 64
+                cse_var_2: T.int32 = j_inner_inner_inner_inner_outer * 2
+                dense_1 = T.Buffer((4096,), "float16", data=dense.data)
+                B_shared_1 = T.Buffer((2048,), "float16", data=B_shared, scope="shared")
+                dense_1[blockIdx_x // 2 * 2048 + threadIdx_x // 4 * 256 + cse_var_3 + blockIdx_x % 2 * 32 + threadIdx_y * 16 + threadIdx_x % 4 * 4 + cse_var_2:blockIdx_x // 2 * 2048 + threadIdx_x // 4 * 256 + cse_var_3 + blockIdx_x % 2 * 32 + threadIdx_y * 16 + threadIdx_x % 4 * 4 + cse_var_2 + 2] = B_shared_1[threadIdx_x // 4 * 256 + cse_var_3 + threadIdx_y * 16 + threadIdx_x % 4 * 4 + cse_var_2:threadIdx_x // 4 * 256 + cse_var_3 + threadIdx_y * 16 + threadIdx_x % 4 * 4 + cse_var_2 + 2]
+
+
+
+修改Heron过程
+
+sched_cand:
+
+{'wmma_m_cand0': 1, 'wmma_m_cand1': 1, 'wmma_m_cand2': 1, 'wmma_n_cand0': 1, 'wmma_n_cand1': 1, 'wmma_n_cand2': 1, 'wmma_m_wmma_n': 1, 'dense_vectorize_cand0': 1, 'dense_vectorize_cand1': 1, 'dense_vectorize_cand2': 1, 'dense_vectorize_cand3': 1, 'dense_shared_pos_select0': 1, 'dense_shared_pos_select1': 1, 'dense_shared_pos_select2': 1, 'dense_shared_pos_select3': 1, 'dense_shared_pos_select4': 1, 'dense_shared_pos_select5': 1, 'dense.wmma.accumulator.shared_offset_cand0': 1, 'dense.wmma.accumulator.shared_offset_cand1': 1, 'dense.wmma.accumulator.shared_offset_cand2': 1, 'dense.wmma.accumulator.shared_offset_cand3': 1, 'dense.wmma.accumulator.shared_offset_cand4': 1, 'dense.wmma.accumulator.shared_offset_cand5': 1, 'dense.wmma.accumulator.shared_local_pos_select0': 1, 'dense.wmma.accumulator.shared_local_pos_select1': 1, 'dense.wmma.accumulator_shared_pos_select0': 1, 'dense.wmma.accumulator_shared_pos_select1': 1, 'dense.wmma.accumulator_shared_pos_select2': 1, 'dense.wmma.accumulator_shared_pos_select3': 1, 'B.shared_offset_cand0': 1, 'B.shared_offset_cand1': 1, 'B.shared_offset_cand2': 1, 'B.shared_offset_cand3': 1, 'B.shared_offset_cand4': 1, 'B.shared_offset_cand5': 1, 'B.shared_vectorize_cand0': 1, 'B.shared_vectorize_cand1': 1, 'B.shared_vectorize_cand2': 1, 'B.shared_vectorize_cand3': 1, 'dense.wmma.accumulator_local_pos_select0': 1, 'dense.wmma.accumulator_local_pos_select1': 1, 'dense.wmma.accumulator_local_pos_select2': 1, 'dense.wmma.accumulator_local_pos_select3': 1, 'A.shared_offset_cand0': 1, 'A.shared_offset_cand1': 1, 'A.shared_offset_cand2': 1, 'A.shared_offset_cand3': 1, 'A.shared_offset_cand4': 1, 'A.shared_offset_cand5': 1, 'A.shared_vectorize_cand0': 1, 'A.shared_vectorize_cand1': 1, 'A.shared_vectorize_cand2': 1, 'A.shared_vectorize_cand3': 1}
+
+
+
+{'dense.wmma.accumulator.shared_offset_cand5', 'dense_j.inner.inner', 'dense.wmma.accumulator.shared_shared_mem_size', 'dense.wmma.accumulator_k.inner.inner', 'dense_shared_pos_select5', 'dense_vectorize_cand3', 'dense_vectorize_cand0', 'wmma_n_cand0', 'dense_shared_pos_select1', 'dense.wmma.accumulator_local_pos_select2', 'wmma_m_cand2', 'dense.wmma.accumulator.shared_offset_cand0', 'dense.wmma.accumulator_shared_pos_select3', 'dense_i.inner', 'dense.wmma.accumulator_j.c.inner.inner', 'dense.wmma.accumulator_shared_pos_select2', 'B.shared_ax0.ax1.fused', 'dense_j.inner.inner.outer', 'dense_i.inner.outer', 'B.shared_offset_cand1', 'A.shared_align_size', 'dense.wmma.accumulator.shared_local_pos_select1', 'B.shared_shared_mem_size', 'dense_vectorize_cand1', 'dense_j.inner', 'dense_i.inner.inner.inner.inner.inner', 'B.shared_offset_cand0', 'A.shared_offset_cand4', 'dense.wmma.accumulator.shared_ax1.inner', 'A.shared_vectorize_cand0', 'B.shared_vectorize_cand1', 'dense_j.inner.inner.inner.inner', 'A.shared_shared_mem_size', 'A.shared_ax0.ax1.fused', 'A.shared_offset_cand2', 'dense_i.inner.inner.inner', 'dense_shared_pos_select3', 'dense.wmma.accumulator_i.c.inner.inner.inner', 'dense_j.inner.outer', 'wmma_m_wmma_n', 'dense_i.inner.inner.inner.outer', 'dense.wmma.accumulator_i.c.inner', 'dense.wmma.accumulator_shared_pos_select0', 'dense.wmma.accumulator_local_pos_select0', 'dense.wmma.accumulator_j.c.inner.inner.inner', 'dense.wmma.accumulator.shared_offset_cand1', 'dense.wmma.accumulator.shared_align_size', 'dense_vectorize', 'B.shared_offset_cand5', 'dense_i.inner.inner.inner.inner', 'A.shared_vectorize_cand2', 'dense.wmma.accumulator_shared_pos_select1', 'dense.wmma.accumulator.shared_ax1.outer', 'A.shared_offset_cand3', 'dense_j.inner.inner.inner.outer', 'wmma_n_cand1', 'wmma_m_cand1', 'dense.wmma.accumulator_local_pos_select3', 'dense_i.inner.inner.outer', 'B.shared_offset_cand4', 'dense.wmma.accumulator.shared_offset_cand4', 'A.shared_vectorize_cand3', 'dense.wmma.accumulator.shared_ax0.inner', 'B.shared_vectorize_cand0', 'wmma_m_cand0', 'dense_j.inner.inner.inner.inner.inner', 'blockIdx.x', 'B.shared_offset_cand2', 'threads', 'B.shared_align_size', 'dense.wmma.accumulator_j.c.inner', 'dense_vectorize_cand2', 'wmma_n_cand2', 'dense_shared_pos_select4', 'A.shared_vectorize_cand1', 'dense.wmma.accumulator_k.inner', 'dense.wmma.accumulator.shared_local_pos_select0', 'dense.wmma.accumulator_i.c.inner.inner', 'dense.wmma.accumulator.shared_offset_cand3', 'dense.wmma.accumulator_k.inner.inner.inner', 'dense_shared_pos_select0', 'B.shared_offset_cand3', 'A.shared_tmp_ax0', 'dense.wmma.accumulator.shared_ax0.outer', 'dense.wmma.accumulator.shared_offset_cand2', 'dense_j.inner.inner.inner', 'A.shared_offset_cand1', 'dense.wmma.accumulator_local_pos_select1', 'A.shared_offset_cand0', 'B.shared_vectorize_cand3', 'dense_i.inner.inner', 'B.shared_tmp_ax0', 'B.shared_vectorize_cand2', 'A.shared_offset_cand5', 'dense_shared_pos_select2'}
+
+
+
+{'densei.innertileSpatial': 1, 'densej.innertileSpatial': 1, 'densei.inner.innertileSpatial': 1, 'densej.inner.innertileSpatial': 1, 'densei.inner.inner.innertileSpatial': 1, 'densej.inner.inner.innertileSpatial': 1, 'densei.inner.inner.inner.innertileSpatial': 1, 'densej.inner.inner.inner.innertileSpatial': 1, 'dense_i.outer': 1, 'dense_j.outer': 1, 'dense_i.inner.outer.j.inner.outer.fused': 1, 'dense_i.inner.inner.outer.j.inner.inner.outer.fused': 1, 'dense_i.inner.inner.inner.outer.j.inner.inner.inner.outer.fused': 1, 'dense_i.inner.inner.inner.inner.outer': 1, 'dense_j.inner.inner.inner.inner.outer': 1, 'dense_i.inner.inner.inner.inner.inner.j.inner.inner.inner.inner.inner.fused': 1, 'dense_shared_pos': 1, 'dense.wmma.accumulator.shared_ax0': 1, 'dense.wmma.accumulator.shared_ax1': 1, 'dense.wmma.accumulator.shared_offset': 1, 'dense.wmma.accumulator.sharedax0tileSpatial': 1, 'dense.wmma.accumulator.sharedax1tileSpatial': 1, 'wmma_m': 1, 'wmma_k': 1, 'wmma_n': 1, 'dense.wmma.accumulator.shared_ax0.outer.ax1.outer.fused': 1, 'dense.wmma.accumulator.shared_ax0.inner.outer': 1, 'dense.wmma.accumulator.shared_ax1.inner.outer': 1, 'dense.wmma.accumulator.shared_ax0.inner.inner': 1, 'dense.wmma.accumulator.shared_ax1.inner.inner': 1, 'dense.wmma.accumulator.shared_local_pos': 1, 'dense.wmma.accumulator_i.c': 1, 'dense.wmma.accumulator_j.c': 1, 'dense.wmma.accumulatori.ctileAll': 1, 'dense.wmma.accumulatorj.ctileAll': 1, 'dense.wmma.accumulatorktileAll': 1, 'dense.wmma.accumulatori.c.innertileAll': 1, 'dense.wmma.accumulatorj.c.innertileAll': 1, 'dense.wmma.accumulatork.innertileAll': 1, 'dense.wmma.accumulatori.c.inner.innertileAll': 1, 'dense.wmma.accumulatorj.c.inner.innertileAll': 1, 'dense.wmma.accumulatork.inner.innertileAll': 1, 'dense.wmma.accumulator_i.c.outer': 1, 'dense.wmma.accumulator_j.c.outer': 1, 'dense.wmma.accumulator_k.outer': 1, 'dense.wmma.accumulator_i.c.inner.outer': 1, 'dense.wmma.accumulator_j.c.inner.outer': 1, 'dense.wmma.accumulator_k.inner.outer': 1, 'dense.wmma.accumulator_i.c.inner.inner.outer': 1, 'dense.wmma.accumulator_j.c.inner.inner.outer': 1, 'dense.wmma.accumulator_k.inner.inner.outer': 1, 'dense.wmma.accumulator_i.c.inner.inner.inner.outer': 1, 'dense.wmma.accumulator_j.c.inner.inner.inner.outer': 1, 'dense.wmma.accumulator_k.inner.inner.inner.outer': 1, 'dense.wmma.accumulator_i.c.inner.inner.inner.inner': 1, 'dense.wmma.accumulator_j.c.inner.inner.inner.inner': 1, 'dense.wmma.accumulator_k.inner.inner.inner.inner': 1, 'dense.wmma.accumulator_local_pos': 1, 'B.shared.wmma.matrix_b_ax0': 1, 'B.shared.wmma.matrix_b_ax1': 1, 'B.shared.wmma.matrix_b_ax0.outer': 1, 'B.shared.wmma.matrix_b_ax1.outer': 1, 'B.shared.wmma.matrix_b_ax0.inner': 1, 'B.shared.wmma.matrix_b_ax1.inner': 1, 'dense.wmma.accumulator_shared_pos': 1, 'B.shared_ax0': 1, 'B.shared_ax1': 1, 'B.shared_offset': 1, 'B.shared_vectorize': 1, 'threadIdx.x': 1, 'threadIdx.y': 1, 'A.shared.wmma.matrix_a_ax0': 1, 'A.shared.wmma.matrix_a_ax1': 1, 'A.shared.wmma.matrix_a_ax0.outer': 1, 'A.shared.wmma.matrix_a_ax1.outer': 1, 'A.shared.wmma.matrix_a_ax0.inner': 1, 'A.shared.wmma.matrix_a_ax1.inner': 1, 'A.shared_ax0': 1, 'A.shared_ax1': 1, 'A.shared_offset': 1, 'A.shared_vectorize': 1, 'dense_unroll_pragma': 1}
+
+
+{'dense_i.inner.inner.inner', 'dense.wmma.accumulator.shared_shared_mem_size', 'A.shared_vectorize_cand0', 'dense_i.inner.inner.inner.inner.inner', 'dense.wmma.accumulator.shared_ax1.inner', 'B.shared_offset_cand3', 'blockIdx.x', 'dense.wmma.accumulator.shared_local_pos_select1', 'dense.wmma.accumulator.shared_align_size', 'dense.wmma.accumulator.shared_ax0.inner', 'wmma_n_cand1', 'dense.wmma.accumulator_k.inner.inner', 'dense_shared_pos_select5', 'A.shared_offset_cand4', 'dense.wmma.accumulator.shared_offset_cand5', 'dense_j.inner.inner', 'dense.wmma.accumulator_j.c.inner.inner.inner', 'A.shared_offset_cand2', 'B.shared_offset_cand0', 'A.shared_vectorize_cand2', 'B.shared_vectorize_cand3', 'A.shared_vectorize_cand1', 'dense.wmma.accumulator_k.inner', 'dense.wmma.accumulator_i.c.inner', 'dense_vectorize_cand3', 'wmma_m_cand1', 'B.shared_shared_mem_size', 'dense_i.inner.inner.inner.inner', 'dense.wmma.accumulator.shared_offset_cand0', 'dense_j.inner.inner.inner.inner.inner', 'B.shared_vectorize_cand0', 'B.shared_vectorize_cand2', 'dense.wmma.accumulator_local_pos_select0', 'dense_j.inner.outer', 'dense_shared_pos_select0', 'B.shared_offset_cand5', 'dense.wmma.accumulator_i.c.inner.inner.inner', 'dense_i.inner.inner.outer', 'A.shared_offset_cand5', 'wmma_m_cand2', 'dense.wmma.accumulator_k.inner.inner.inner', 'dense.wmma.accumulator_shared_pos_select1', 'dense.wmma.accumulator.shared_offset_cand1', 'dense.wmma.accumulator_local_pos_select1', 'dense.wmma.accumulator_j.c.inner.inner', 'B.shared_ax0.ax1.fused', 'dense_shared_pos_select4', 'wmma_n_cand0', 'dense_j.inner.inner.inner', 'A.shared_offset_cand0', 'A.shared_shared_mem_size', 'dense.wmma.accumulator_j.c.inner', 'B.shared_vectorize_cand1', 'dense_i.inner', 'dense.wmma.accumulator.shared_offset_cand2', 'B.shared_offset_cand4', 'A.shared_ax0.ax1.fused', 'dense_i.inner.outer', 'dense_vectorize_cand2', 'dense.wmma.accumulator.shared_ax1.outer', 'B.shared_offset_cand1', 'wmma_n_cand2', 'A.shared_tmp_ax0', 'dense_shared_pos_select1', 'threads', 'A.shared_align_size', 'dense.wmma.accumulator.shared_local_pos_select0', 'dense_vectorize', 'dense.wmma.accumulator.shared_ax0.outer', 'dense.wmma.accumulator_local_pos_select2', 'dense_shared_pos_select3', 'dense_j.inner.inner.inner.inner', 'A.shared_offset_cand3', 'dense_shared_pos_select2', 'dense_j.inner.inner.inner.outer', 'dense_j.inner.inner.outer', 'dense_vectorize_cand1', 'dense.wmma.accumulator_local_pos_select3', 'dense.wmma.accumulator_shared_pos_select3', 'dense_i.inner.inner.inner.outer', 'dense.wmma.accumulator.shared_offset_cand3', 'wmma_m_wmma_n', 'wmma_m_cand0', 'A.shared_vectorize_cand3', 'dense_i.inner.inner', 'B.shared_align_size', 'dense.wmma.accumulator.shared_offset_cand4', 'B.shared_tmp_ax0', 'dense.wmma.accumulator_shared_pos_select0', 'A.shared_offset_cand1', 'dense_j.inner', 'dense_vectorize_cand0', 'dense.wmma.accumulator_i.c.inner.inner', 'B.shared_offset_cand2', 'dense.wmma.accumulator_shared_pos_select2'}
+
+
+
+{'gpu': {'max_shared_memory_per_block': 49152, 'max_threads_per_block': 1024, 'max_thread_x': 1024, 'max_thread_y': 1024, 'max_thread_z': 64}}
+
+
+{'densei.innertileSpatial': 1, 'densej.innertileSpatial': 1, 'densei.inner.innertileSpatial': 1, 'densej.inner.innertileSpatial': 1, 'densei.inner.inner.innertileSpatial': 1, 'densej.inner.inner.innertileSpatial': 1, 'densei.inner.inner.inner.innertileSpatial': 1, 'densej.inner.inner.inner.innertileSpatial': 1, 'dense_shared_pos': 1, 'dense.wmma.accumulator.shared_ax1': 1, 'dense.wmma.accumulator.shared_offset': 1, 'dense.wmma.accumulator.sharedax0tileSpatial': 1, 'dense.wmma.accumulator.sharedax1tileSpatial': 1, 'wmma_m': 1, 'wmma_k': 1, 'wmma_n': 1, 'dense.wmma.accumulator.shared_local_pos': 1, 'dense.wmma.accumulatori.ctileAll': 1, 'dense.wmma.accumulatorj.ctileAll': 1, 'dense.wmma.accumulatorktileAll': 1, 'dense.wmma.accumulatori.c.innertileAll': 1, 'dense.wmma.accumulatorj.c.innertileAll': 1, 'dense.wmma.accumulatork.innertileAll': 1, 'dense.wmma.accumulatori.c.inner.innertileAll': 1, 'dense.wmma.accumulatorj.c.inner.innertileAll': 1, 'dense.wmma.accumulatork.inner.innertileAll': 1, 'dense.wmma.accumulator_local_pos': 1, 'dense.wmma.accumulator_shared_pos': 1, 'B.shared_ax1': 1, 'B.shared_offset': 1, 'B.shared_vectorize': 1, 'threadIdx.x': 1, 'threadIdx.y': 1, 'A.shared_ax1': 1, 'A.shared_offset': 1, 'A.shared_vectorize': 1, 'dense_unroll_pragma': 1}
+
+
+
+请问一下就是我在做tvm做编译优化，我要写prompt来做调度参数优化，我做一个类似于下面这样的prompt
+
+prefix = f"The following are examples of performance of a DecisionTree measured in accuracy and the corresponding model hyperparameter configurations."
+prefix += f" The tabular dataste contains 120 samples and 4 features (0 categorical, 4 numerical)"
+prefix += f" The allowable ranges for the hyperparameters are:\n"
+prefix += f"- max_depth: [1, 15] (int)"
+prefix += f"- max_features: [0.01, 0.99] (float, precise to 2 decimals)\n"
+prefix += f"- min_impurity_decrease: [0, 0] (float, precise to 0 decimals)\n"
+prefix += f"- min_samples_leaf: [0.01, 0.49] (float, precise to 2 decimals)\n"
+prefix += f"- min_samples_split: [0.01, 0.99] (float, precise to 2 decimals)\n"
+prefix += f"- min_weight_fraction_leaf: [0.01, 0.49] (float, precise to 2 decimals)\n"
+
+prefix += f"Recommend a configuration that achieve the target performance of 0.95833. Do not recommend values at the minimum or maximum of allowable range, do not recommend rounded values. Recommend values with highest precision, as requestedd by the allowed ranges. "
+prefix += f" Your response must only contain the predicted configuration, in the format ## configuration ##.\n"
+
+上面这个prompt我修改，我运行的平台是NVIDIA GPU platforms是the NVIDIA RTX3080，我平台的硬件约束是'gpu': {'max_shared_memory_per_block': 49152, 'max_threads_per_block': 1024, 'max_thread_x': 1024, 'max_thread_y': 1024, 'max_thread_z': 64}，然后我评价指标是perf，perf是越大越好，下面是一些调度参数设置的例子
+few_shot_examples = [{'Q': '## densei.innertileSpatial: 1, densej.innertileSpatial: 1, densei.inner.innertileSpatial: 8, densej.inner.innertileSpatial: 1, densei.inner.inner.innertileSpatial: 1, densej.inner.inner.innertileSpatial: 32, densei.inner.inner.inner.innertileSpatial: 2, densej.inner.inner.inner.innertileSpatial: 1, dense_shared_pos: 1, dense.wmma.accumulator.shared_ax1: 64, dense.wmma.accumulator.shared_offset: 48, dense.wmma.accumulator.sharedax0tileSpatial: 1, dense.wmma.accumulator.sharedax1tileSpatial: 8, wmma_m: 32, wmma_k: 16, wmma_n: 8, dense.wmma.accumulator.shared_local_pos: 0, dense.wmma.accumulatori.ctileAll: 1, dense.wmma.accumulatorj.ctileAll: 1, dense.wmma.accumulatorktileAll: 2, dense.wmma.accumulatori.c.innertileAll: 1, dense.wmma.accumulatorj.c.innertileAll: 1, dense.wmma.accumulatork.innertileAll: 1, dense.wmma.accumulatori.c.inner.innertileAll: 2, dense.wmma.accumulatorj.c.inner.innertileAll: 1, dense.wmma.accumulatork.inner.innertileAll: 2, dense.wmma.accumulator_local_pos: 3, dense.wmma.accumulator_shared_pos: 2, B.shared_ax1: 16, B.shared_offset: 32, B.shared_vectorize: 2, threadIdx.x: 32, threadIdx.y: 8, A.shared_ax1: 16, A.shared_offset: 8, A.shared_vectorize: 8, dense_unroll_pragma: 4 ##', 'A': '0.0'}, 
+{'Q': '## densei.innertileSpatial: 1, densej.innertileSpatial: 1, densei.inner.innertileSpatial: 16, densej.inner.innertileSpatial: 1, densei.inner.inner.innertileSpatial: 1, densej.inner.inner.innertileSpatial: 32, densei.inner.inner.inner.innertileSpatial: 2, densej.inner.inner.inner.innertileSpatial: 2, dense_shared_pos: 1, dense.wmma.accumulator.shared_ax1: 64, dense.wmma.accumulator.shared_offset: 32, dense.wmma.accumulator.sharedax0tileSpatial: 8, dense.wmma.accumulator.sharedax1tileSpatial: 2, wmma_m: 8, wmma_k: 16, wmma_n: 32, dense.wmma.accumulator.shared_local_pos: 0, dense.wmma.accumulatori.ctileAll: 1, dense.wmma.accumulatorj.ctileAll: 1, dense.wmma.accumulatorktileAll: 1, dense.wmma.accumulatori.c.innertileAll: 1, dense.wmma.accumulatorj.c.innertileAll: 1, dense.wmma.accumulatork.innertileAll: 1, dense.wmma.accumulatori.c.inner.innertileAll: 1, dense.wmma.accumulatorj.c.inner.innertileAll: 1, dense.wmma.accumulatork.inner.innertileAll: 4, dense.wmma.accumulator_local_pos: 3, dense.wmma.accumulator_shared_pos: 3, B.shared_ax1: 16, B.shared_offset: 0, B.shared_vectorize: 2, threadIdx.x: 32, threadIdx.y: 16, A.shared_ax1: 16, A.shared_offset: 48, A.shared_vectorize: 2, dense_unroll_pragma: 4 ##', 'A': '12.541613'}, 
+{'Q': '## densei.innertileSpatial: 1, densej.innertileSpatial: 1, densei.inner.innertileSpatial: 1, densej.inner.innertileSpatial: 1, densei.inner.inner.innertileSpatial: 8, densej.inner.inner.innertileSpatial: 4, densei.inner.inner.inner.innertileSpatial: 8, densej.inner.inner.inner.innertileSpatial: 16, dense_shared_pos: 2, dense.wmma.accumulator.shared_ax1: 64, dense.wmma.accumulator.shared_offset: 24, dense.wmma.accumulator.sharedax0tileSpatial: 1, dense.wmma.accumulator.sharedax1tileSpatial: 1, wmma_m: 32, wmma_k: 16, wmma_n: 8, dense.wmma.accumulator.shared_local_pos: 0, dense.wmma.accumulatori.ctileAll: 2, dense.wmma.accumulatorj.ctileAll: 8, dense.wmma.accumulatorktileAll: 4, dense.wmma.accumulatori.c.innertileAll: 1, dense.wmma.accumulatorj.c.innertileAll: 1, dense.wmma.accumulatork.innertileAll: 1, dense.wmma.accumulatori.c.inner.innertileAll: 1, dense.wmma.accumulatorj.c.inner.innertileAll: 1, dense.wmma.accumulatork.inner.innertileAll: 1, dense.wmma.accumulator_local_pos: 0, dense.wmma.accumulator_shared_pos: 0, B.shared_ax1: 16, B.shared_offset: 24, B.shared_vectorize: 4, threadIdx.x: 32, threadIdx.y: 1, A.shared_ax1: 16, A.shared_offset: 8, A.shared_vectorize: 2, dense_unroll_pragma: 3 ##', 'A': '11.630533'}, 
+{'Q': '## densei.innertileSpatial: 2, densej.innertileSpatial: 1, densei.inner.innertileSpatial: 4, densej.inner.innertileSpatial: 1, densei.inner.inner.innertileSpatial: 1, densej.inner.inner.innertileSpatial: 32, densei.inner.inner.inner.innertileSpatial: 2, densej.inner.inner.inner.innertileSpatial: 2, dense_shared_pos: 1, dense.wmma.accumulator.shared_ax1: 64, dense.wmma.accumulator.shared_offset: 48, dense.wmma.accumulator.sharedax0tileSpatial: 4, dense.wmma.accumulator.sharedax1tileSpatial: 1, wmma_m: 8, wmma_k: 16, wmma_n: 32, dense.wmma.accumulator.shared_local_pos: 0, dense.wmma.accumulatori.ctileAll: 1, dense.wmma.accumulatorj.ctileAll: 2, dense.wmma.accumulatorktileAll: 1, dense.wmma.accumulatori.c.innertileAll: 1, dense.wmma.accumulatorj.c.innertileAll: 1, dense.wmma.accumulatork.innertileAll: 2, dense.wmma.accumulatori.c.inner.innertileAll: 1, dense.wmma.accumulatorj.c.inner.innertileAll: 1, dense.wmma.accumulatork.inner.innertileAll: 2, dense.wmma.accumulator_local_pos: 2, dense.wmma.accumulator_shared_pos: 2, B.shared_ax1: 16, B.shared_offset: 8, B.shared_vectorize: 8, threadIdx.x: 32, threadIdx.y: 4, A.shared_ax1: 16, A.shared_offset: 24, A.shared_vectorize: 1, dense_unroll_pragma: 1 ##', 'A': '12.792116'}, 
+{'Q': '## densei.innertileSpatial: 1, densej.innertileSpatial: 1, densei.inner.innertileSpatial: 8, densej.inner.innertileSpatial: 1, densei.inner.inner.innertileSpatial: 8, densej.inner.inner.innertileSpatial: 4, densei.inner.inner.inner.innertileSpatial: 1, densej.inner.inner.inner.innertileSpatial: 2, dense_shared_pos: 1, dense.wmma.accumulator.shared_ax1: 64, dense.wmma.accumulator.shared_offset: 24, dense.wmma.accumulator.sharedax0tileSpatial: 4, dense.wmma.accumulator.sharedax1tileSpatial: 2, wmma_m: 8, wmma_k: 16, wmma_n: 32, dense.wmma.accumulator.shared_local_pos: 1, dense.wmma.accumulatori.ctileAll: 1, dense.wmma.accumulatorj.ctileAll: 1, dense.wmma.accumulatorktileAll: 1, dense.wmma.accumulatori.c.innertileAll: 1, dense.wmma.accumulatorj.c.innertileAll: 1, dense.wmma.accumulatork.innertileAll: 1, dense.wmma.accumulatori.c.inner.innertileAll: 1, dense.wmma.accumulatorj.c.inner.innertileAll: 1, dense.wmma.accumulatork.inner.innertileAll: 4, dense.wmma.accumulator_local_pos: 2, dense.wmma.accumulator_shared_pos: 0, B.shared_ax1: 64, B.shared_offset: 0, B.shared_vectorize: 4, threadIdx.x: 32, threadIdx.y: 8, A.shared_ax1: 64, A.shared_offset: 32, A.shared_vectorize: 2, dense_unroll_pragma: 3 ##', 'A': '12.266978'},
+{'Q': '## densei.innertileSpatial: 1, densej.innertileSpatial: 1, densei.inner.innertileSpatial: 16, densej.inner.innertileSpatial: 1, densei.inner.inner.innertileSpatial: 1, densej.inner.inner.innertileSpatial: 32, densei.inner.inner.inner.innertileSpatial: 4, densej.inner.inner.inner.innertileSpatial: 1, dense_shared_pos: 1, dense.wmma.accumulator.shared_ax1: 64, dense.wmma.accumulator.shared_offset: 32, dense.wmma.accumulator.sharedax0tileSpatial: 4, dense.wmma.accumulator.sharedax1tileSpatial: 4, wmma_m: 16, wmma_k: 16, wmma_n: 16, dense.wmma.accumulator.shared_local_pos: 1, dense.wmma.accumulatori.ctileAll: 1, dense.wmma.accumulatorj.ctileAll: 1, dense.wmma.accumulatorktileAll: 1, dense.wmma.accumulatori.c.innertileAll: 1, dense.wmma.accumulatorj.c.innertileAll: 1, dense.wmma.accumulatork.innertileAll: 2, dense.wmma.accumulatori.c.inner.innertileAll: 1, dense.wmma.accumulatorj.c.inner.innertileAll: 1, dense.wmma.accumulatork.inner.innertileAll: 2, dense.wmma.accumulator_local_pos: 3, dense.wmma.accumulator_shared_pos: 3, B.shared_ax1: 16, B.shared_offset: 0, B.shared_vectorize: 2, threadIdx.x: 32, threadIdx.y: 16, A.shared_ax1: 16, A.shared_offset: 24, A.shared_vectorize: 1, dense_unroll_pragma: 5 ##', 'A': '12.672532'},
+{'Q': '## densei.innertileSpatial: 1, densej.innertileSpatial: 8, densei.inner.innertileSpatial: 1, densej.inner.innertileSpatial: 1, densei.inner.inner.innertileSpatial: 8, densej.inner.inner.innertileSpatial: 4, densei.inner.inner.inner.innertileSpatial: 1, densej.inner.inner.inner.innertileSpatial: 2, dense_shared_pos: 2, dense.wmma.accumulator.shared_ax1: 8, dense.wmma.accumulator.shared_offset: 0, dense.wmma.accumulator.sharedax0tileSpatial: 1, dense.wmma.accumulator.sharedax1tileSpatial: 1, wmma_m: 32, wmma_k: 16, wmma_n: 8, dense.wmma.accumulator.shared_local_pos: 0, dense.wmma.accumulatori.ctileAll: 1, dense.wmma.accumulatorj.ctileAll: 1, dense.wmma.accumulatorktileAll: 1, dense.wmma.accumulatori.c.innertileAll: 1, dense.wmma.accumulatorj.c.innertileAll: 1, dense.wmma.accumulatork.innertileAll: 4, dense.wmma.accumulatori.c.inner.innertileAll: 2, dense.wmma.accumulatorj.c.inner.innertileAll: 1, dense.wmma.accumulatork.inner.innertileAll: 1, dense.wmma.accumulator_local_pos: 3, dense.wmma.accumulator_shared_pos: 2, B.shared_ax1: 16, B.shared_offset: 32, B.shared_vectorize: 4, threadIdx.x: 32, threadIdx.y: 1, A.shared_ax1: 16, A.shared_offset: 8, A.shared_vectorize: 8, dense_unroll_pragma: 2 ##', 'A': '0.00000'},
+{'Q': '## densei.innertileSpatial: 2, densej.innertileSpatial: 1, densei.inner.innertileSpatial: 1, densej.inner.innertileSpatial: 1, densei.inner.inner.innertileSpatial: 1, densej.inner.inner.innertileSpatial: 32, densei.inner.inner.inner.innertileSpatial: 32, densej.inner.inner.inner.innertileSpatial: 2, dense_shared_pos: 2, dense.wmma.accumulator.shared_ax1: 64, dense.wmma.accumulator.shared_offset: 0, dense.wmma.accumulator.sharedax0tileSpatial: 1, dense.wmma.accumulator.sharedax1tileSpatial: 1, wmma_m: 8, wmma_k: 16, wmma_n: 32, dense.wmma.accumulator.shared_local_pos: 0, dense.wmma.accumulatori.ctileAll: 1, dense.wmma.accumulatorj.ctileAll: 2, dense.wmma.accumulatorktileAll: 4, dense.wmma.accumulatori.c.innertileAll: 1, dense.wmma.accumulatorj.c.innertileAll: 1, dense.wmma.accumulatork.innertileAll: 1, dense.wmma.accumulatori.c.inner.innertileAll: 4, dense.wmma.accumulatorj.c.inner.innertileAll: 1, dense.wmma.accumulatork.inner.innertileAll: 1, dense.wmma.accumulator_local_pos: 2, dense.wmma.accumulator_shared_pos: 2, B.shared_ax1: 16, B.shared_offset: 16, B.shared_vectorize: 2, threadIdx.x: 32, threadIdx.y: 1, A.shared_ax1: 16, A.shared_offset: 48, A.shared_vectorize: 2, dense_unroll_pragma: 0 ##', 'A': '12.110779'},
+{'Q': '## densei.innertileSpatial: 1, densej.innertileSpatial: 1, densei.inner.innertileSpatial: 1, densej.inner.innertileSpatial: 8, densei.inner.inner.innertileSpatial: 8, densej.inner.inner.innertileSpatial: 4, densei.inner.inner.inner.innertileSpatial: 8, densej.inner.inner.inner.innertileSpatial: 1, dense_shared_pos: 1, dense.wmma.accumulator.shared_ax1: 64, dense.wmma.accumulator.shared_offset: 8, dense.wmma.accumulator.sharedax0tileSpatial: 8, dense.wmma.accumulator.sharedax1tileSpatial: 1, wmma_m: 8, wmma_k: 16, wmma_n: 32, dense.wmma.accumulator.shared_local_pos: 0, dense.wmma.accumulatori.ctileAll: 1, dense.wmma.accumulatorj.ctileAll: 1, dense.wmma.accumulatorktileAll: 2, dense.wmma.accumulatori.c.innertileAll: 1, dense.wmma.accumulatorj.c.innertileAll: 1, dense.wmma.accumulatork.innertileAll: 1, dense.wmma.accumulatori.c.inner.innertileAll: 1, dense.wmma.accumulatorj.c.inner.innertileAll: 2, dense.wmma.accumulatork.inner.innertileAll: 2, dense.wmma.accumulator_local_pos: 1, dense.wmma.accumulator_shared_pos: 0, B.shared_ax1: 32, B.shared_offset: 16, B.shared_vectorize: 2, threadIdx.x: 32, threadIdx.y: 8, A.shared_ax1: 32, A.shared_offset: 48, A.shared_vectorize: 2, dense_unroll_pragma: 5 ##', 'A': '12.681599'},
+{'Q': '## densei.innertileSpatial: 1, densej.innertileSpatial: 2, densei.inner.innertileSpatial: 1, densej.inner.innertileSpatial: 1, densei.inner.inner.innertileSpatial: 2, densej.inner.inner.innertileSpatial: 16, densei.inner.inner.inner.innertileSpatial: 16, densej.inner.inner.inner.innertileSpatial: 2, dense_shared_pos: 1, dense.wmma.accumulator.shared_ax1: 32, dense.wmma.accumulator.shared_offset: 48, dense.wmma.accumulator.sharedax0tileSpatial: 1, dense.wmma.accumulator.sharedax1tileSpatial: 1, wmma_m: 8, wmma_k: 16, wmma_n: 32, dense.wmma.accumulator.shared_local_pos: 0, dense.wmma.accumulatori.ctileAll: 1, dense.wmma.accumulatorj.ctileAll: 1, dense.wmma.accumulatorktileAll: 4, dense.wmma.accumulatori.c.innertileAll: 8, dense.wmma.accumulatorj.c.innertileAll: 1, dense.wmma.accumulatork.innertileAll: 1, dense.wmma.accumulatori.c.inner.innertileAll: 1, dense.wmma.accumulatorj.c.inner.innertileAll: 1, dense.wmma.accumulatork.inner.innertileAll: 1, dense.wmma.accumulator_local_pos: 1, dense.wmma.accumulator_shared_pos: 1, B.shared_ax1: 16, B.shared_offset: 48, B.shared_vectorize: 8, threadIdx.x: 32, threadIdx.y: 1, A.shared_ax1: 16, A.shared_offset: 32, A.shared_vectorize: 2, dense_unroll_pragma: 3 ##', 'A': '11.961652'}
+]
+这些调度参数的范围如下
+prefix += f"- densei.innertileSpatial: [1, 64] (int)"
+prefix += f"- densej.innertileSpatial: [1, 64] (int)\n"
+prefix += f"- densei.inner.innertileSpatial: [1, 64] (int)\n"
+prefix += f"- densej.inner.innertileSpatial: [1, 64] (int)\n"
+prefix += f"- densei.inner.inner.innertileSpatial: [1, 64] (int)\n"
+prefix += f"- densej.inner.inner.innertileSpatial: [1, 64] (int)\n"
+prefix += f"- densei.inner.inner.inner.innertileSpatial: [1, 64] (int)\n"
+prefix += f"- densej.inner.inner.inner.innertileSpatial: [1, 64] (int)\n"
+prefix += f"- dense_shared_pos: [1, 5](int)\n"
+prefix += f"- dense.wmma.accumulator.shared_ax1: [1, 64] (int)\n"
+prefix += f"- dense.wmma.accumulator.shared_offset: [0, 48] (int)\n"
+prefix += f"- dense.wmma.accumulator.sharedax0tileSpatial: [1, 64] (int)\n"
+prefix += f"- dense.wmma.accumulator.sharedax1tileSpatial: [1, 64] (int)\n"
+prefix += f"- wmma_m: [8, 32] (int)\n"
+prefix += f"- wmma_k: [16, 16] (int)\n"
+prefix += f"- wmma_n: [8, 32] (int)\n"
+prefix += f"- dense.wmma.accumulator.shared_local_pos: [0, 1] (int)\n"
+prefix += f"- dense.wmma.accumulatori.ctileAll: [1, 64] (int)\n"
+prefix += f"- dense.wmma.accumulatorj.ctileAll: [1, 64] (int)\n"
+prefix += f"- dense.wmma.accumulatorktileAll: [1, 64] (int)\n"
+prefix += f"- dense.wmma.accumulatori.c.innertileAll: [1, 64] (int)\n"
+prefix += f"- dense.wmma.accumulatorj.c.innertileAll: [1, 64] (int)\n"
+prefix += f"- dense.wmma.accumulatork.innertileAll: [1, 64] (int)\n"
+prefix += f"- dense.wmma.accumulatori.c.inner.innertileAll: [1, 64] (int)\n"
+prefix += f"- dense.wmma.accumulatorj.c.inner.innertileAll: [1, 64] (int)\n"
+prefix += f"- dense.wmma.accumulatork.inner.innertileAll: [1, 64] (int)\n"
+prefix += f"- dense.wmma.accumulator_local_pos: [0, 3] (int)\n"
+prefix += f"- dense.wmma.accumulator_shared_pos: [0, 3] (int)\n"
+prefix += f"- B.shared_ax1: [1, 64] (int)\n"
+prefix += f"- B.shared_offset: [0, 48] (int)\n"
+prefix += f"- B.shared_vectorize: [1, 8] (int)\n"
+prefix += f"- threadIdx.x: [32, 32] (int)\n"
+prefix += f"- threadIdx.y: [1, 1024] (int)\n"
+prefix += f"- A.shared_ax1: [1, 64] (int)\n"
+prefix += f"- A.shared_offset: [0, 48] (int)\n"
+prefix += f"- A.shared_vectorize: [1, 8] (int)\n"
+prefix += f"- dense_unroll_pragma: [0, 5] (int)\n"
+
+
+
+prefix = f"The following are examples of TVM schedule parameter configurations and their corresponding performance metrics (perf) on an NVIDIA RTX3080 GPU. Higher perf values are better."
+prefix += f"\n\nHardware constraints for NVIDIA RTX3080:"
+prefix += f"\n- max_shared_memory_per_block: 49152"
+prefix += f"\n- max_threads_per_block: 1024"
+prefix += f"\n- max_thread_x: 1024"
+prefix += f"\n- max_thread_y: 1024"
+prefix += f"\n- max_thread_z: 64"
+
+prefix += f"\n\nThe allowable ranges for the schedule parameters are:"
+prefix += f"\n- densei.innertileSpatial: [1, 64] (int)"
+prefix += f"\n- densej.innertileSpatial: [1, 64] (int)"
+prefix += f"\n- densei.inner.innertileSpatial: [1, 64] (int)"
+prefix += f"\n- densej.inner.innertileSpatial: [1, 64] (int)"
+prefix += f"\n- densei.inner.inner.innertileSpatial: [1, 64] (int)"
+prefix += f"\n- densej.inner.inner.innertileSpatial: [1, 64] (int)"
+prefix += f"\n- densei.inner.inner.inner.innertileSpatial: [1, 64] (int)"
+prefix += f"\n- densej.inner.inner.inner.innertileSpatial: [1, 64] (int)"
+prefix += f"\n- dense_shared_pos: [1, 5] (int)"
+prefix += f"\n- dense.wmma.accumulator.shared_ax1: [1, 64] (int)"
+prefix += f"\n- dense.wmma.accumulator.shared_offset: [0, 48] (int)"
+prefix += f"\n- dense.wmma.accumulator.sharedax0tileSpatial: [1, 64] (int)"
+prefix += f"\n- dense.wmma.accumulator.sharedax1tileSpatial: [1, 64] (int)"
+prefix += f"\n- wmma_m: [8, 32] (int)"
+prefix += f"\n- wmma_k: [16, 16] (int)" 
+prefix += f"\n- wmma_n: [8, 32] (int)"
+prefix += f"\n- dense.wmma.accumulator.shared_local_pos: [0, 1] (int)"
+prefix += f"\n- dense.wmma.accumulatori.ctileAll: [1, 64] (int)"
+prefix += f"\n- dense.wmma.accumulatorj.ctileAll: [1, 64] (int)"
+prefix += f"\n- dense.wmma.accumulatorktileAll: [1, 64] (int)"
+prefix += f"\n- dense.wmma.accumulatori.c.innertileAll: [1, 64] (int)"
+prefix += f"\n- dense.wmma.accumulatorj.c.innertileAll: [1, 64] (int)"
+prefix += f"\n- dense.wmma.accumulatork.innertileAll: [1, 64] (int)"
+prefix += f"\n- dense.wmma.accumulatori.c.inner.innertileAll: [1, 64] (int)"
+prefix += f"\n- dense.wmma.accumulatorj.c.inner.innertileAll: [1, 64] (int)"
+prefix += f"\n- dense.wmma.accumulatork.inner.innertileAll: [1, 64] (int)"
+prefix += f"\n- dense.wmma.accumulator_local_pos: [0, 3] (int)"
+prefix += f"\n- dense.wmma.accumulator_shared_pos: [0, 3] (int)"
+prefix += f"\n- B.shared_ax1: [1, 64] (int)"
+prefix += f"\n- B.shared_offset: [0, 48] (int)"
+prefix += f"\n- B.shared_vectorize: [1, 8] (int)"
+prefix += f"\n- threadIdx.x: [32, 32] (int)"
+prefix += f"\n- threadIdx.y: [1, 1024] (int)"
+prefix += f"\n- A.shared_ax1: [1, 64] (int)"
+prefix += f"\n- A.shared_offset: [0, 48] (int)"
+prefix += f"\n- A.shared_vectorize: [1, 8] (int)"
+prefix += f"\n- dense_unroll_pragma: [0, 5] (int)"
+
+prefix += f"\n\nBelow are examples of configurations and their corresponding performance (perf) values:"
+prefix += f"\n\nConfiguration 1 (perf: 0.0):"
+prefix += f"\ndensei.innertileSpatial: 1, densej.innertileSpatial: 1, densei.inner.innertileSpatial: 8, densej.inner.innertileSpatial: 1, densei.inner.inner.innertileSpatial: 1, densej.inner.inner.innertileSpatial: 32, densei.inner.inner.inner.innertileSpatial: 2, densej.inner.inner.inner.innertileSpatial: 1, dense_shared_pos: 1, dense.wmma.accumulator.shared_ax1: 64, dense.wmma.accumulator.shared_offset: 48, dense.wmma.accumulator.sharedax0tileSpatial: 1, dense.wmma.accumulator.sharedax1tileSpatial: 8, wmma_m: 32, wmma_k: 16, wmma_n: 8, dense.wmma.accumulator.shared_local_pos: 0, dense.wmma.accumulatori.ctileAll: 1, dense.wmma.accumulatorj.ctileAll: 1, dense.wmma.accumulatorktileAll: 2, dense.wmma.accumulatori.c.innertileAll: 1, dense.wmma.accumulatorj.c.innertileAll: 1, dense.wmma.accumulatork.innertileAll: 1, dense.wmma.accumulatori.c.inner.innertileAll: 2, dense.wmma.accumulatorj.c.inner.innertileAll: 1, dense.wmma.accumulatork.inner.innertileAll: 2, dense.wmma.accumulator_local_pos: 3, dense.wmma.accumulator_shared_pos: 2, B.shared_ax1: 16, B.shared_offset: 32, B.shared_vectorize: 2, threadIdx.x: 32, threadIdx.y: 8, A.shared_ax1: 16, A.shared_offset: 8, A.shared_vectorize: 8, dense_unroll_pragma: 4"
+
+prefix += f"\n\nConfiguration 2 (perf: 12.541613):"
+prefix += f"\ndensei.innertileSpatial: 1, densej.innertileSpatial: 1, densei.inner.innertileSpatial: 16, densej.inner.innertileSpatial: 1, densei.inner.inner.innertileSpatial: 1, densej.inner.inner.innertileSpatial: 32, densei.inner.inner.inner.innertileSpatial: 2, densej.inner.inner.inner.innertileSpatial: 2, dense_shared_pos: 1, dense.wmma.accumulator.shared_ax1: 64, dense.wmma.accumulator.shared_offset: 32, dense.wmma.accumulator.sharedax0tileSpatial: 8, dense.wmma.accumulator.sharedax1tileSpatial: 2, wmma_m: 8, wmma_k: 16, wmma_n: 32, dense.wmma.accumulator.shared_local_pos: 0, dense.wmma.accumulatori.ctileAll: 1, dense.wmma.accumulatorj.ctileAll: 1, dense.wmma.accumulatorktileAll: 1, dense.wmma.accumulatori.c.innertileAll: 1, dense.wmma.accumulatorj.c.innertileAll: 1, dense.wmma.accumulatork.innertileAll: 1, dense.wmma.accumulatori.c.inner.innertileAll: 1, dense.wmma.accumulatorj.c.inner.innertileAll: 1, dense.wmma.accumulatork.inner.innertileAll: 4, dense.wmma.accumulator_local_pos: 3, dense.wmma.accumulator_shared_pos: 3, B.shared_ax1: 16, B.shared_offset: 0, B.shared_vectorize: 2, threadIdx.x: 32, threadIdx.y: 16, A.shared_ax1: 16, A.shared_offset: 48, A.shared_vectorize: 2, dense_unroll_pragma: 4"
+
+prefix += f"\n\nConfiguration 3 (perf: 12.792116):"
+prefix += f"\ndensei.innertileSpatial: 2, densej.innertileSpatial: 1, densei.inner.innertileSpatial: 4, densej.inner.innertileSpatial: 1, densei.inner.inner.innertileSpatial: 1, densej.inner.inner.innertileSpatial: 32, densei.inner.inner.inner.innertileSpatial: 2, densej.inner.inner.inner.innertileSpatial: 2, dense_shared_pos: 1, dense.wmma.accumulator.shared_ax1: 64, dense.wmma.accumulator.shared_offset: 48, dense.wmma.accumulator.sharedax0tileSpatial: 4, dense.wmma.accumulator.sharedax1tileSpatial: 1, wmma_m: 8, wmma_k: 16, wmma_n: 32, dense.wmma.accumulator.shared_local_pos: 0, dense.wmma.accumulatori.ctileAll: 1, dense.wmma.accumulatorj.ctileAll: 2, dense.wmma.accumulatorktileAll: 1, dense.wmma.accumulatori.c.innertileAll: 1, dense.wmma.accumulatorj.c.innertileAll: 1, dense.wmma.accumulatork.innertileAll: 2, dense.wmma.accumulatori.c.inner.innertileAll: 1, dense.wmma.accumulatorj.c.inner.innertileAll: 1, dense.wmma.accumulatork.inner.innertileAll: 2, dense.wmma.accumulator_local_pos: 2, dense.wmma.accumulator_shared_pos: 2, B.shared_ax1: 16, B.shared_offset: 8, B.shared_vectorize: 8, threadIdx.x: 32, threadIdx.y: 4, A.shared_ax1: 16, A.shared_offset: 24, A.shared_vectorize: 1, dense_unroll_pragma: 1"
+
+prefix += f"\n\nConfiguration 4 (perf: 12.681599):"
+prefix += f"\ndensei.innertileSpatial: 1, densej.innertileSpatial: 1, densei.inner.innertileSpatial: 1, densej.inner.innertileSpatial: 8, densei.inner.inner.innertileSpatial: 8, densej.inner.inner.innertileSpatial: 4, densei.inner.inner.inner.innertileSpatial: 8, densej.inner.inner.inner.innertileSpatial: 1, dense_shared_pos: 1, dense.wmma.accumulator.shared_ax1: 64, dense.wmma.accumulator.shared_offset: 8, dense.wmma.accumulator.sharedax0tileSpatial: 8, dense.wmma.accumulator.sharedax1tileSpatial: 1, wmma_m: 8, wmma_k: 16, wmma_n: 32, dense.wmma.accumulator.shared_local_pos: 0, dense.wmma.accumulatori.ctileAll: 1, dense.wmma.accumulatorj.ctileAll: 1, dense.wmma.accumulatorktileAll: 2, dense.wmma.accumulatori.c.innertileAll: 1, dense.wmma.accumulatorj.c.innertileAll: 1, dense.wmma.accumulatork.innertileAll: 1, dense.wmma.accumulatori.c.inner.innertileAll: 1, dense.wmma.accumulatorj.c.inner.innertileAll: 2, dense.wmma.accumulatork.inner.innertileAll: 2, dense.wmma.accumulator_local_pos: 1, dense.wmma.accumulator_shared_pos: 0, B.shared_ax1: 32, B.shared_offset: 16, B.shared_vectorize: 2, threadIdx.x: 32, threadIdx.y: 8, A.shared_ax1: 32, A.shared_offset: 48, A.shared_vectorize: 2, dense_unroll_pragma: 5"
+
+prefix += f"\n\nBased on the examples above, recommend a new TVM schedule parameter configuration that will achieve a high performance value (perf > 12.8). The configuration should respect all hardware constraints and parameter ranges specified above. Do not recommend values at minimum or maximum of allowable ranges unless necessary, and ensure the configuration is optimal for the NVIDIA RTX3080 GPU architecture."
+
+prefix += f"\n\nYour response must only contain the predicted configuration, in the format ## configuration ##."
+
+
+假设先生成一个，先不考虑生成问题
+
+
+
+ # from tvm.script import ir as I
+# from tvm.script import tir as T
+
+@I.ir_module
+class Module:
+    @T.prim_func
+    def main(A: T.Buffer((64, 64), "float16"), B: T.Buffer((64, 64), "float16"), dense: T.Buffer((64, 64), "float16")):
+        T.func_attr({"from_legacy_te_schedule": T.bool(True), "tir.noalias": T.bool(True)})
+        dense_wmma_accumulator_shared = T.allocate([4096], "float16", "shared")
+        with T.launch_thread("threadIdx.y", 1) as threadIdx_y:
+            dense_wmma_accumulator = T.allocate([4096], "float16", "wmma.accumulator")
+            A_shared = T.allocate([4096], "float16", "shared")
+            A_shared_wmma_matrix_a = T.allocate([4096], "float16", "wmma.matrix_a")
+            B_shared_wmma_matrix_b = T.allocate([4096], "float16", "wmma.matrix_b")
+            for i_c_inner_inner_inner_outer_init, j_c_inner_inner_inner_outer_init in T.grid(4, 4):
+                T.tvm_fill_fragment(dense_wmma_accumulator, 16, 16, 16, i_c_inner_inner_inner_outer_init * 4 + j_c_inner_inner_inner_outer_init, T.float32(0))
+            for ax0_ax1_fused_outer_outer_outer in range(4096):
+                threadIdx_y_1 = T.launch_thread("threadIdx.y", 1)
+                threadIdx_x = T.launch_thread("threadIdx.x", 1)
+                A_shared_1 = T.Buffer((4096,), "float16", data=A_shared, scope="shared")
+                A_1 = T.Buffer((4096,), "float16", data=A.data)
+                A_shared_1[ax0_ax1_fused_outer_outer_outer] = A_1[ax0_ax1_fused_outer_outer_outer]
+            for ax0_outer, ax1_outer in T.grid(4, 4):
+                T.tvm_load_matrix_sync(A_shared_wmma_matrix_a, 16, 16, 16, ax0_outer * 4 + ax1_outer, T.tvm_access_ptr(T.type_annotation("float16"), A_shared, ax0_outer * 1024 + ax1_outer * 16, 1024, 1), 64, "row_major")
+            for ax0_ax1_fused_outer_outer_outer in range(4096):
+                threadIdx_y_1 = T.launch_thread("threadIdx.y", 1)
+                threadIdx_x = T.launch_thread("threadIdx.x", 1)
+                A_shared_1 = T.Buffer((4096,), "float16", data=A_shared, scope="shared")
+                B_1 = T.Buffer((4096,), "float16", data=B.data)
+                A_shared_1[ax0_ax1_fused_outer_outer_outer] = B_1[ax0_ax1_fused_outer_outer_outer]
+            for ax0_outer, ax1_outer in T.grid(4, 4):
+                T.tvm_load_matrix_sync(B_shared_wmma_matrix_b, 16, 16, 16, ax0_outer * 4 + ax1_outer, T.tvm_access_ptr(T.type_annotation("float16"), A_shared, ax0_outer * 1024 + ax1_outer * 16, 1024, 1), 64, "col_major")
+            for i_c_inner_inner_inner_outer, j_c_inner_inner_inner_outer, k_inner_inner_inner_outer in T.grid(4, 4, 4):
+                cse_var_2: T.int32 = i_c_inner_inner_inner_outer * 4
+                cse_var_1: T.int32 = cse_var_2 + j_c_inner_inner_inner_outer
+                T.tvm_mma_sync(dense_wmma_accumulator, cse_var_1, A_shared_wmma_matrix_a, cse_var_2 + k_inner_inner_inner_outer, B_shared_wmma_matrix_b, j_c_inner_inner_inner_outer * 4 + k_inner_inner_inner_outer, dense_wmma_accumulator, cse_var_1)
+            for ax0_inner_outer, ax1_inner_outer in T.grid(4, 4):
+                T.tvm_store_matrix_sync(dense_wmma_accumulator, 16, 16, 16, ax0_inner_outer * 4 + ax1_inner_outer, T.tvm_access_ptr(T.type_annotation("float16"), dense_wmma_accumulator_shared, ax0_inner_outer * 1024 + ax1_inner_outer * 16, 1024, 2), 64, "row_major")
+        blockIdx_x = T.launch_thread("blockIdx.x", 1)
+        threadIdx_y = T.launch_thread("threadIdx.y", 1)
+        threadIdx_x = T.launch_thread("threadIdx.x", 1)
+        dense_1 = T.Buffer((4096,), "float16", data=dense.data)
+        dense_wmma_accumulator_shared_1 = T.Buffer((4096,), "float16", data=dense_wmma_accumulator_shared, scope="shared")
+        dense_1[0:4096] = dense_wmma_accumulator_shared_1[0:4096]
+
+
+# from tvm.script import ir as I
+# from tvm.script import tir as T
+
+@I.ir_module
+class Module:
+    @T.prim_func
+    def main(A: T.Buffer((64, 64), "float16"), B: T.Buffer((64, 64), "float16"), dense: T.Buffer((64, 64), "float16")):
+        T.func_attr({"from_legacy_te_schedule": T.bool(True), "tir.noalias": T.bool(True)})
+        blockIdx_x = T.launch_thread("blockIdx.x", 8)
+        dense_wmma_accumulator = T.allocate([256], "float16", "wmma.accumulator")
+        A_shared = T.allocate([2560], "float16", "shared")
+        A_shared_wmma_matrix_a = T.allocate([512], "float16", "wmma.matrix_a")
+        B_shared_wmma_matrix_b = T.allocate([128], "float16", "wmma.matrix_b")
+        with T.launch_thread("threadIdx.y", 2) as threadIdx_y:
+            T.tvm_fill_fragment(dense_wmma_accumulator, 32, 8, 16, 0, T.float32(0))
+            for k_outer in range(4):
+                for ax0_ax1_fused_outer_outer_outer in T.unroll(4):
+                    threadIdx_y_1 = T.launch_thread("threadIdx.y", 2)
+                    threadIdx_x = T.launch_thread("threadIdx.x", 32)
+                    A_shared_1 = T.Buffer((2560,), "float16", data=A_shared, scope="shared")
+                    A_1 = T.Buffer((4096,), "float16", data=A.data)
+                    A_shared_1[ax0_ax1_fused_outer_outer_outer * 640 + threadIdx_y_1 * 320 + threadIdx_x // 4 * 40 + threadIdx_x % 4 * 4:ax0_ax1_fused_outer_outer_outer * 640 + threadIdx_y_1 * 320 + threadIdx_x // 4 * 40 + threadIdx_x % 4 * 4 + 4] = A_1[ax0_ax1_fused_outer_outer_outer * 1024 + threadIdx_y_1 * 512 + threadIdx_x // 4 * 64 + k_outer * 16 + threadIdx_x % 4 * 4:ax0_ax1_fused_outer_outer_outer * 1024 + threadIdx_y_1 * 512 + threadIdx_x // 4 * 64 + k_outer * 16 + threadIdx_x % 4 * 4 + 4]
+                T.tvm_load_matrix_sync(A_shared_wmma_matrix_a, 32, 8, 16, 0, T.tvm_access_ptr(T.type_annotation("float16"), A_shared, threadIdx_y * 1280, 1280, 1), 40, "row_major")
+                with T.launch_thread("threadIdx.y", 2) as threadIdx_y_1:
+                    threadIdx_x = T.launch_thread("threadIdx.x", 32)
+                    A_shared_1 = T.Buffer((256,), "float16", data=A_shared, scope="shared")
+                    B_1 = T.Buffer((4096,), "float16", data=B.data)
+                    A_shared_1[threadIdx_y_1 * 128 + threadIdx_x // 8 * 32 + threadIdx_x % 8 * 2:threadIdx_y_1 * 128 + threadIdx_x // 8 * 32 + threadIdx_x % 8 * 2 + 2] = B_1[blockIdx_x * 512 + threadIdx_y_1 * 256 + threadIdx_x // 8 * 64 + k_outer * 16 + threadIdx_x % 8 * 2:blockIdx_x * 512 + threadIdx_y_1 * 256 + threadIdx_x // 8 * 64 + k_outer * 16 + threadIdx_x % 8 * 2 + 2]
+                T.tvm_load_matrix_sync(B_shared_wmma_matrix_b, 32, 8, 16, 0, T.tvm_access_ptr(T.type_annotation("float16"), A_shared, 0, 256, 1), 32, "col_major")
+                T.tvm_mma_sync(dense_wmma_accumulator, 0, A_shared_wmma_matrix_a, 0, B_shared_wmma_matrix_b, 0, dense_wmma_accumulator, 0)
+            T.tvm_store_matrix_sync(dense_wmma_accumulator, 32, 8, 16, 0, T.tvm_access_ptr(T.type_annotation("float16"), A_shared, threadIdx_y * 1024, 1024, 2), 32, "row_major")
+        threadIdx_y = T.launch_thread("threadIdx.y", 2)
+        threadIdx_x = T.launch_thread("threadIdx.x", 32)
+        dense_1 = T.Buffer((4096,), "float16", data=dense.data)
+        A_shared_1 = T.Buffer((2048,), "float16", data=A_shared, scope="shared")
+        dense_1[threadIdx_y * 2048 + threadIdx_x * 64 + blockIdx_x * 8:threadIdx_y * 2048 + threadIdx_x * 64 + blockIdx_x * 8 + 8] = A_shared_1[threadIdx_y * 1024 + threadIdx_x * 32:threadIdx_y * 1024 + threadIdx_x * 32 + 8]
+
+
+
+{'wmma_m': {'min': 8, 'max': 32}, 'wmma_k': {'min': 16, 'max': 16}, 'wmma_n': {'min': 8, 'max': 32}, 'dense.wmma.accumulator_shared_pos': {'min': 0, 'max': 10}, 'dense.wmma.accumulator_local_pos': {'min': 0, 'max': 10}, 'dense_shared_pos': {'min': 0, 'max': 10}, 'dense.wmma.accumulator.shared_local_pos': {'min': 0, 'max': 10}, 'dense_unroll_pragma': {'min': 0, 'max': 5}, 'densei.innertileSpatial': {'min': 1, 'max': 64}, 'densej.innertileSpatial': {'min': 1, 'max': 64}, 'densei.inner.innertileSpatial': {'min': 1, 'max': 64}, 'densej.inner.innertileSpatial': {'min': 1, 'max': 64}, 'threadIdx.y': {'min': 1, 'max': 1024}, 'densei.inner.inner.innertileSpatial': {'min': 1, 'max': 64}, 'densej.inner.inner.innertileSpatial': {'min': 1, 'max': 64}, 'threadIdx.x': {'min': 1, 'max': 1024}, 'densei.inner.inner.inner.innertileSpatial': {'min': 1, 'max': 64}, 'densej.inner.inner.inner.innertileSpatial': {'min': 1, 'max': 64}, 'dense.wmma.accumulator.shared_offset': {'min': 0, 'max': 48}, 'dense.wmma.accumulator.sharedax0tileSpatial': {'min': 1, 'max': 64}, 'dense.wmma.accumulator.sharedax1tileSpatial': {'min': 1, 'max': 64}, 'dense.wmma.accumulatori.ctileAll': {'min': 1, 'max': 64}, 'dense.wmma.accumulatorj.ctileAll': {'min': 1, 'max': 64}, 'dense.wmma.accumulatorktileAll': {'min': 1, 'max': 64}, 'dense.wmma.accumulatori.c.innertileAll': {'min': 1, 'max': 64}, 'dense.wmma.accumulatorj.c.innertileAll': {'min': 1, 'max': 64}, 'dense.wmma.accumulatork.innertileAll': {'min': 1, 'max': 64}, 'dense.wmma.accumulatori.c.inner.innertileAll': {'min': 1, 'max': 64}, 'dense.wmma.accumulatorj.c.inner.innertileAll': {'min': 1, 'max': 64}, 'dense.wmma.accumulatork.inner.innertileAll': {'min': 1, 'max': 64}, 'B.shared_offset': {'min': 0, 'max': 48}, 'B.shared_vectorize': {'min': 1, 'max': 8}, 'A.shared_offset': {'min': 0, 'max': 48}, 'A.shared_vectorize': {'min': 1, 'max': 8}}
+
+
+{'densei.innertileSpatial': 1, 'densej.innertileSpatial': 1, 'densei.inner.innertileSpatial': 1, 'densej.inner.innertileSpatial': 1, 'densei.inner.inner.innertileSpatial': 1, 'densej.inner.inner.innertileSpatial': 1, 'densei.inner.inner.inner.innertileSpatial': 1, 'densej.inner.inner.inner.innertileSpatial': 1, 'dense_shared_pos': 1, 'dense.wmma.accumulator.shared_ax1': 1, 'dense.wmma.accumulator.shared_offset': 1, 'dense.wmma.accumulator.sharedax0tileSpatial': 1, 'dense.wmma.accumulator.sharedax1tileSpatial': 1, 'wmma_m': 1, 'wmma_k': 1, 'wmma_n': 1, 'dense.wmma.accumulator.shared_local_pos': 1, 'dense.wmma.accumulatori.ctileAll': 1, 'dense.wmma.accumulatorj.ctileAll': 1, 'dense.wmma.accumulatorktileAll': 1, 'dense.wmma.accumulatori.c.innertileAll': 1, 'dense.wmma.accumulatorj.c.innertileAll': 1, 'dense.wmma.accumulatork.innertileAll': 1, 'dense.wmma.accumulatori.c.inner.innertileAll': 1, 'dense.wmma.accumulatorj.c.inner.innertileAll': 1, 'dense.wmma.accumulatork.inner.innertileAll': 1, 'dense.wmma.accumulator_local_pos': 1, 'dense.wmma.accumulator_shared_pos': 1, 'B.shared_ax1': 1, 'B.shared_offset': 1, 'B.shared_vectorize': 1, 'threadIdx.x': 1, 'threadIdx.y': 1, 'A.shared_ax1': 1, 'A.shared_offset': 1, 'A.shared_vectorize': 1, 'dense_unroll_pragma': 1}
+
+
+
+
+参数量设置
+C2D
+[16, 56, 56, 64, 64, 3, 3, 1, 1, 1, 'float16', 'float16']   38
+
+
+bmm 
+[12, 512, 64, 512, 'float16', 'float16'] 45
+
+
+C1D
+[16, 892, 512, 512, 3, 1, 4, 1, 'float16', 'float16']   38
+
+C3D
+                38
+
+dil
+[16, 56, 56, 64, 64, 3, 3, 1, 1, 2, 'float16', 'float16'] 59
+
+gemm
+[1024, 1024, 1024, 'float16', 'float16'] 37
+
+
+scan
+[16, 512, 128, 'float16', 'float16'] 37
+
+
+t2d
+[16, 56, 56, 64, 64, 3, 3, 1, 1, 1, 0, 'float16', 'float16']  38
+
+
+
+
+
+
+
+task.py     apply_best
+
+print(f"self.knob_manager.knob_names: {self.knob_manager.knob_names}")
+print(f"self.knob_manager.solver.vals: {self.knob_manager.solver.vals}")
+print(f"self.knob_manager.candidates: {self.knob_manager.candidates}")
+print(f"self.knob_manager.sched_cand: {self.knob_manager.sched_cand}")
+print(f"number solver.vals: {len(self.knob_manager.solver.vals)}")
+print(f"number candidates: {len(self.knob_manager.candidates)}")
+print(f"number sched_cand: {len(self.knob_manager.sched_cand)}")
+print(f"self.knob_manager.sched_tups: {self.knob_manager.sched_tups}")
+self.knob_manager.sched_val_state = True
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
