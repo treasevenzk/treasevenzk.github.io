@@ -119,6 +119,7 @@ optimizer:绑定的优化器对象(如SGD、Adam)     milestones:预设的epoch�
 类变量、实例变量：类变量是所有的实例都共享，实例变量定义在dataclass装饰器下，会被自动添加到__init__方法中
 @classmethod装饰器：用于定义类方法而不是实例方法，类方法的第一个参数通常命名为cls(而不是self),表示类本身，类方法可以通过类名直接调用，而不需要先创建类的实例
 
+ctypes.byref()是python中的ctypes库中的一个函数，用于高效地传递C函数参数中所需的指针
 
 setattr()函数的作用是设置对象的属性值，接受三个参数：对象(要设置属性的对象)、属性名(要设置的属性名称)、属性值(要为属性设置的值)
 setattr(object, name, value)
