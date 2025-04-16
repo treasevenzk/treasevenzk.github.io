@@ -124,6 +124,10 @@ ctypes.byref()是python中的ctypes库中的一个函数，用于高效地传递
 setattr()函数的作用是设置对象的属性值，接受三个参数：对象(要设置属性的对象)、属性名(要设置的属性名称)、属性值(要为属性设置的值)
 setattr(object, name, value)
 
+extern "C" {} :解决C++与C之间的符号链接兼容性问题，强制C++以C的规则编译函数，禁止名称修饰
+
+#ifndef/#else/#endif :实现条件编译，根据宏定义决定代码是否参与编译，#ifndef MACRO: 如果未定义MACRO，编译后续代码； #else: 否则编译另一段代码； #endif ：结束条件编译块
+
 362+235+546+70=1213
 207+1072+1072+30+263+640+100+280+81=3745
 92+201+308+183+181+357+123+73+425+1617+307+409=4276
@@ -140,8 +144,12 @@ tvm._ffi._init_api("felix", __name__)
 
 
 
+felix的src内容：
+注册的全局函数felix： GetFeaturePerk、LinearExprAsPrimExpr、GenerateAllSymSketches、ExtractBackbone、PrintTrSteop、GenerateCodeForState、ExtractConfigDict、StateFromConfig、MeasurePerformance
 
 
 
 
-felix.extract_tasks
+felix的python内容：
+
+logging.py init_logging(用于初始化Python的日志记录系统，配置同时输出到控制台和日志文件)
