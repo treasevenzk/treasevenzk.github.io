@@ -237,3 +237,86 @@ extra       {}
 
 ***算法学习***
 完成搜索算法的模拟退火、爬山法、bfs
+
+
+### 4.21-4.27进度
+***论文阅读计划***
+- MapZero: Mapping for Coarse-grained Reconfigurable Architectures with Refinforcement Learning and Monte-Carlo Tree Search
+- WACO: Learning Workload-Aware Co-optimization of the Format and Schedule of a Sparse Tensor Program
+- SparseTIR: Composable Abstractions for Sparse Compilation in Deep Learning
+- vMCU: Coordinated Memory Management and Kernel Optimization for DNN Inference on MCUs
+- Automatic Generation of Vectorizing Compilers for Customizable Digital Signal Processors
+- Graphene: An IR for Optimized Tensor Computations on GPUs
+- Hydride: A Retargetable and Extensible Synthesis-based Compiler for Modern Hardware Architectures
+- EVT: Accelerating Deep Learning Training with Epilogue Visitor Tree
+
+
+Bayesian Optimization
+(ICLR-2025)
+Latent Bayesian Optimization via Autoregressive Normalizing Flows
+Standard Gaussian Process is All You Need for High-Dimensional Bayesian Optimization
+Second-Order Min-Max Optimization with Lazy Hessians
+AFlow: Automating Agentic Workflow Generation
+Test-time Alignment of Diffusion Models without Reward Over-optimization
+Bayesian Optimization via Continual Variational Last Layer Training
+PABBO: Preferential Amortized Black-Box Optimization
+Bayesian Optimization of Antibodies Informed by a Generative Model of Evolving Sequences
+Nesterov acceleration in benignly non-convex landscapes
+Mitigating Information Loss in Tree-Based Reinforcement Learning via Direct Optimization
+Bayesian Experimental Design Via Contrastive Diffusions
+Adaptive backtracking for faster optimization
+Searching for Optimal Solutions with LLMs via Bayesian Optimization
+Pareto Prompt Optimization
+Complexity Lower Bounds of Adaptive Gradient Algorithms for Non-convex Stochastic Optimization under Relaxed Smoothness
+Sharpness-Aware Black-Box Optimization
+Optimizing Posterior Samples for Bayesian Optimization via Rootfinding
+Causal Discovery via Bayesian Optimization
+Selective Task Group Updates for Multi-Task Optimization
+Few for Many: Tchebycheff Set Scalarization for Many-Objective Optimization
+ParetoFlow: Guided Flows in Multi-Objective Optimization
+BOFormer: Learning to Solve Multi-Objective Bayesian Optimization via Non-Markovian RL
+Multi-objective antibody design with constrained preference optimization
+
+
+ICML-2024
+Principled Preferential Bayesian Optimization
+High-Dimensional Bayesian Optimization via Semi-Supervised Learning with Optimized Unlabeled Data Sampling
+MALIBO: Meta-learning for Likelihood-free Bayesian Optimization
+In-Context Freeze-Thaw Bayesian Optimization for Hyperparameter Optimization
+BRAIn: Bayesian Reward-conditioned Amortized Inference for natural language generation from feedback
+BOtied: Multi-objective Bayesian optimization with tied multivariate ranks
+Bayesian Knowledge Distillation: A Bayesian Perspective of Distillation with Uncertainty Quantification
+Random Exploration in Bayesian Optimization: Order-Optimal Regret and Computational Efficiency
+Is In-Context Learning in Large Language Models Bayesian? A Martingale Perspective
+Probability Distribution of Hypervolume Improvement in Bi-objective Bayesian Optimization
+A Unified View of FANOVA: A Comprehensive Bayesian Framework for Component Selection and Estimation
+Bayesian Exploration Networks
+Bayesian Uncertainty for Gradient Aggregation in Multi-Task Learning
+A Bayesian Approach to Online Planning
+Deep Functional Factor Models: Forecasting High-Dimensional Functional Time Series via Bayesian Nonparametric Factorization
+Accelerating Look-ahead in Bayesian Optimization: Multilevel Monte Carlo is All you Need
+More Flexible PAC-Bayesian Meta-Learning by Learning Learning Algorithms
+Bayesian Design Principles for Offline-to-Online Reinforcement Learning
+Accelerating Convergence in Bayesian Few-Shot Classification
+PAC-Bayesian Generalization Bounds for Knowledge Graph Representation Learning
+Boundary Exploration for Bayesian Optimization With Unknown Physical Constraints
+Efficient Black-box Adversarial Attacks via Bayesian Optimization Guided by a Function Prior
+A Sober Look at LLMs for Material Discovery: Are They Actually Good for Bayesian Optimization Over Molecules
+
+
+NeurIPS-2024
+Sample-efficient Bayesian Optimisation Using Known Invariances
+Improved Bayes Regret Bounds for Multi-Task Hierarchical Bayesian Bandit Algorithms
+Online Bayesian Persuasion Without a Clue
+Bayesian Optimisation with Unknown Hyperparameters: Regret Bounds Logarithmically Closer to Optimal
+Bayesian Domain Adaptation with Gaussian Mixture Domain-Indexing
+Transition Constrained Bayesian Optimization via Markov Decision Processes
+Stopping Bayesian Optimization with Probabilistic Regret Bounds
+Principled Bayesian Optimization in Collaboration with Human Experts
+Amortized Bayesian Experimental Design for Decision-Making
+Bayesian Strategic Classification
+Cost-aware Bayesian Optimization via the Pandora's Box Gittins Index
+Conjugate Bayesian Two-step Change Point Detection for Hawkes Process
+General bounds on the quality of Bayesian coresets
+Minimizing UCB: a Better Local Search Strategy in Local Bayesian Optimization
+A survey and benchmark of high-dimensional Bayesian optimization of discrete sequences

@@ -139,6 +139,7 @@ extern "C" {} :解决C++与C之间的符号链接兼容性问题，强制C++以C
 92+201+308+183+181+357+123+73+425+1617+307+409=4276
 
 
+
 from tvm import felix经历过程
 import tvm._ffi
 模块加载，加载python/tvm/_ffi/__init__.py文件；
@@ -151,10 +152,12 @@ tvm._ffi._init_api("felix", __name__)
 
 
 felix的src内容：
-注册的全局函数felix： GetFeaturePerk、LinearExprAsPrimExpr、GenerateAllSymSketches、ExtractBackbone、PrintTrSteop、GenerateCodeForState、ExtractConfigDict、StateFromConfig、MeasurePerformance
-
-
-
+注册的全局函数
+***feat_transform.cc***: ~~GetFeaturePack(get_feature_pack---Sketch.fetch_features)~~、LinearExprAsPrimExpr(LinearExpr---RandConfigMaker)
+***utils.cc***: ~~ExtractBackbone(extract_backbone---Sketch)~~、~~PrintTrStep(print_state_tr_steps---Sketch)~~、~~GenerateCodeForState(generate_code_for_state---Sketch)~~、**GetLoopBounds(get_loop_bounds)**、ExtractConfigDict(extract_config_dict---add_to_dataset_builder)、~~StateFromConfig(state_from_config---SketchPerfFunc)~~、~~MeasurePerformance(measure_performance---measure_configs_latency_)~~
+***sketch_rules.cc***: ~~GenerateAllSymSketches(generate_all_sym_sketches---SymTask)~~
+注册的节点： 
+***feat_transform***: FeaturePackPyNode、LinearExprNode
 
 编译流程
 ```
@@ -751,24 +754,51 @@ pytorch_lightning.LightningModule是Pytorch Lightning框架中的一个基类，
 sym_dag.py文件的内容
 
 
+RELAY_BUILDERS: Conv、DepthwiseConv2d、GroupConv2d、TransposeConv2d、Conv2dTensorCore、Conv2dWinograd、Dense、BatchMatmul、OnePool、TwoOPsPool、ThreeOPsPool、AdaptiveAvgPool、Softmax、Mean、ConstScalar、Elemwise、Broadcast
+
+
+extract_tasks 经历的过程
+sym_tasks.py->utils.py->sym_dag.py
+
+
+optim.tune 经历的过程
+Optimzer->TaskPerfFunc->SketchPerfFunc
+SingleTaskOptimizer
+
+_do_one_task_one_round
+MLPModelPLWrapper(train_self)->optimizer_round
 
 
 
+batch_create_tasks: 
+tasks(tasks, task_weights)
+task.compute_dag 是访问每个任务的计算图属性
+
+调用全局函数的顺序
+SymTask(ffi.generate_all_sym_sketches)
+Sketch(ffi.generate_code_for_state、ffi.extract_backbone、ffi.print_state_for_state)
+Sketch.fetch_features(ffi.get_feature_pack)--->felix.FeaturePackPy
+SketchPerfFunc.make_measure_inputs(ffi.state_from_config)
+measure_configs_latency_(ffi.measure_performance)
+
+sym_task
+extrac_tasks->extract_tasks_->extract_ansor_tasks->batch_create_tasks->SymbolicDAG.from_ansor->TaskInstance->SymTask(Sketch)->SymTaskAndInstances
+
+utils
+
+sym_dag
+
+optim
+MLModelPLWrapper->Timer->TaskPerfFunc(SketchPerfFunc->TorchFeatures-TorchExprRunner)->DatasetBuilder
+
+SingleTaskOptimizer->_do_one_task_one_round->optimize_round(optimize_step -> self.task_f.rounded_sorted_configs->ConfigInfor) -> measure_configs -> measure_config_latency_ -> get_measure_input -> sketch_f.make_measure_inputs
+
+cost_model
+
+features
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+sym_task ---> utils ---> sym_dag ---> optim ---> cost_model ---> features
 
 
 
