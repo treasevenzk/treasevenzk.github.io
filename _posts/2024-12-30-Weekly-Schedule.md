@@ -241,14 +241,14 @@ extra       {}
 
 ### 4.21-4.27进度
 ***论文阅读计划***
-- MapZero: Mapping for Coarse-grained Reconfigurable Architectures with Refinforcement Learning and Monte-Carlo Tree Search
-- WACO: Learning Workload-Aware Co-optimization of the Format and Schedule of a Sparse Tensor Program
-- SparseTIR: Composable Abstractions for Sparse Compilation in Deep Learning
-- vMCU: Coordinated Memory Management and Kernel Optimization for DNN Inference on MCUs
-- Automatic Generation of Vectorizing Compilers for Customizable Digital Signal Processors
-- Graphene: An IR for Optimized Tensor Computations on GPUs
-- Hydride: A Retargetable and Extensible Synthesis-based Compiler for Modern Hardware Architectures
-- EVT: Accelerating Deep Learning Training with Epilogue Visitor Tree
+- ~~MapZero: Mapping for Coarse-grained Reconfigurable Architectures with Refinforcement Learning and Monte-Carlo Tree Search~~
+- ~~WACO: Learning Workload-Aware Co-optimization of the Format and Schedule of a Sparse Tensor Program~~
+- ~~SparseTIR: Composable Abstractions for Sparse Compilation in Deep Learning~~
+- ~~vMCU: Coordinated Memory Management and Kernel Optimization for DNN Inference on MCUs~~
+- ~~Automatic Generation of Vectorizing Compilers for Customizable Digital Signal Processors~~
+- ~~Graphene: An IR for Optimized Tensor Computations on GPUs~~
+- ~~Hydride: A Retargetable and Extensible Synthesis-based Compiler for Modern Hardware Architectures~~
+- ~~EVT: Accelerating Deep Learning Training with Epilogue Visitor Tree~~
 
 
 Bayesian Optimization
@@ -258,8 +258,7 @@ Standard Gaussian Process is All You Need for High-Dimensional Bayesian Optimiza
 Second-Order Min-Max Optimization with Lazy Hessians
 AFlow: Automating Agentic Workflow Generation
 Test-time Alignment of Diffusion Models without Reward Over-optimization
-Bayesian Optimization via Continual Variational Last Layer Training
-PABBO: Preferential Amortized Black-Box Optimization
+**PABBO: Preferential Amortized Black-Box Optimization**
 Bayesian Optimization of Antibodies Informed by a Generative Model of Evolving Sequences
 Nesterov acceleration in benignly non-convex landscapes
 Mitigating Information Loss in Tree-Based Reinforcement Learning via Direct Optimization
@@ -274,7 +273,7 @@ Causal Discovery via Bayesian Optimization
 Selective Task Group Updates for Multi-Task Optimization
 Few for Many: Tchebycheff Set Scalarization for Many-Objective Optimization
 ParetoFlow: Guided Flows in Multi-Objective Optimization
-BOFormer: Learning to Solve Multi-Objective Bayesian Optimization via Non-Markovian RL
+**BOFormer: Learning to Solve Multi-Objective Bayesian Optimization via Non-Markovian RL**
 Multi-objective antibody design with constrained preference optimization
 
 
@@ -302,6 +301,8 @@ PAC-Bayesian Generalization Bounds for Knowledge Graph Representation Learning
 Boundary Exploration for Bayesian Optimization With Unknown Physical Constraints
 Efficient Black-box Adversarial Attacks via Bayesian Optimization Guided by a Function Prior
 A Sober Look at LLMs for Material Discovery: Are They Actually Good for Bayesian Optimization Over Molecules
+Partially Stochastic Infinitely Deep Bayesian Neural Networks
+Vanilla Bayesian Optimization Performs Great in High Dimensions
 
 
 NeurIPS-2024
