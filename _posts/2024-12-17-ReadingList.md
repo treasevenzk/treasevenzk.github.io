@@ -67,6 +67,11 @@ Dense Tensor Program Optimization [![number](https://img.shields.io/badge/20-23-
 
 - <img src="https://img.shields.io/badge/15-pages-green.svg" alt="15-pages" align="left"> [Atomic Dataflow based Graph-Level Workload Orchestration for Scalable DNN Accelerators](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9773218) - Shixuan Zheng, Xianjue Zhang, Leibo Liu, Shaojun Wei, Shouyi Yin, HPCA, 2022 ![Check](https://img.shields.io/badge/✓-done-green)
 
+- <img src="https://img.shields.io/badge/12-pages-green.svg" alt="12-pages" align="left"> [Graphene: An IR for Optimized Tensor Computations on GPUs](https://dl.acm.org/doi/pdf/10.1145/3582016.3582018) - Bastian Hagedorn, Bin Fan, Hanfeng Chen, Cris Cecka, Michael Garland, Vinod Grover, ASPLOS, 2023 ![Check](https://img.shields.io/badge/✓-done-green)
+
+- <img src="https://img.shields.io/badge/16-pages-green.svg" alt="16-pages" align="left"> [Hydride: A Retargetable and Extensible Synthesis-based Compiler for Modern Hardware Architectures](https://dl.acm.org/doi/pdf/10.1145/3620665.3640385) - Akash Kothari, Abdul Rafae Noor, Muchen Xu, Hassam Uddin, Dhruv Baronia, Stefanos Baziotis, Vikram Adve, Charith Mendis, Sudipta Sengupta, ASPLOS, 2024 ![Check](https://img.shields.io/badge/✓-done-green)
+
+
 Graph Optimization [![number](https://img.shields.io/badge/14-15-blue.svg?style=flat)](https://github.com/home-assistant/home-assistant-iOS/blob/master/LICENSE)
 - <img src="https://img.shields.io/badge/9-pages-green.svg" alt="9-pages" align="left"> [Memory-aware Scheduling for Complex Wired Networks with Iterative Graph Optimization](https://arxiv.org/pdf/2308.13898) - Shuzhang Zhong, Meng Li, Yun Liang, Runsheng Wang, Ru Huang, ICCAD, 2023
 
@@ -162,6 +167,11 @@ Sparse Tensor Program Optimization [![number](https://img.shields.io/badge/2-2-b
 
 - <img src="https://img.shields.io/badge/30-pages-green.svg" alt="30-pages" align="left"> [Autoscheduling for Sparse Tensor Algebra with an Asymptotic Cost Model](https://dl.acm.org/doi/pdf/10.1145/3519939.3523442) - Willow Ahrens, Fredrik Kjolstad, Saman Amarasinghe, PLDI, 2022 ![Check](https://img.shields.io/badge/✓-done-green)
 
+- <img src="https://img.shields.io/badge/19-pages-green.svg" alt="19-pages" align="left"> [SparseTIR: Composable Abstractions for Sparse Compilation in Deep Learning](https://dl.acm.org/doi/pdf/10.1145/3582016.3582047) - Zihao Ye, Ruihang Lai, Junru Shao, Tianqi Chen, Luis Ceze, ASPLOS, 2023 ![Check](https://img.shields.io/badge/✓-done-green)
+
+- <img src="https://img.shields.io/badge/15-pages-green.svg" alt="15-pages" align="left"> [WACO: Learning Workload-Aware Co-optimization of the Format and Schedule of a Sparse Tensor Program](https://dl.acm.org/doi/pdf/10.1145/3575693.3575742) - Jaeyeon Won, Charith Mendis, Joel S. Emer, Saman Amarasinghe, ASPLOS, 2023 ![Check](https://img.shields.io/badge/✓-done-green)
+
+
 
 ML Tensor Operations Optimization [![number](https://img.shields.io/badge/10-10-blue.svg?style=flat)](https://github.com/home-assistant/home-assistant-iOS/blob/master/LICENSE)
 - <img src="https://img.shields.io/badge/20-pages-green.svg" alt="20-pages" align="left"> [A Tensor Compiler for Unified Machine Learning Prediction Serving](https://www.usenix.org/system/files/osdi20-nakandala.pdf) - Supun Nakandalac, Karla Saurm, Gyeong-In Yus, Konstantinos Karanasosm, Carlo Curinom, Markus Weimerm, Matteo Interlandim, OSDI, 2020 ![Check](https://img.shields.io/badge/✓-done-green)
@@ -247,6 +257,12 @@ Across Devices for Deep Learning Tensor Programs](https://aclanthology.org/2023.
 - <img src="https://img.shields.io/badge/15-pages-green.svg" alt="15-pages" align="left"> [Optimizing Deep Learning Inference Efficiency through Block Dependency Analysis](https://dl.acm.org/doi/pdf/10.1145/3676641.3716264) - Zhanyuan Di, Leping Wang, En Shao, Zhaojia Ma, Ziyi Ren, Feng Hua, Lixian Ma, Jie Zhao, Guangming Tan, Ninghui Sun, ASPLOS 2025
 
 - <img src="https://img.shields.io/badge/16-pages-green.svg" alt="16-pages" align="left"> [Relax: Composable Abstractions for End-to-End Dynamic Machine Learning](https://dl.acm.org/doi/pdf/10.1145/3676641.3716249) - Ruihang Lai, Junru Shao, Siyuan Feng, Steven Lyubomirsky, Bohan Hou, Wuwei Lin, Zihao Ye, Hongyi Jin, Yuchen Jin, Jiawei Liu, Lesheng Jin, Yaxing Cai, Ziheng Jiang, Yong Wu, Sunghyun Park, Prakalp Srivastava, Jared Roesch, Todd C. Mowry, Tianqi Chen , ASPLOS 2025
+
+- <img src="https://img.shields.io/badge/14-pages-green.svg" alt="14-pages" align="left"> [FlashTensor: Optimizing Tensor Programs by  Leveraging Fine-grained Tensor Property](https://dl.acm.org/doi/pdf/10.1145/3710848.3710864) - Runxin Zhong, Yuyang Jin, Chen Zhang, Kinman Lei, Shuangyu Li, Jidong Zhai, PPoPP 2025
+
+- <img src="https://img.shields.io/badge/14-pages-green.svg" alt="14-pages" align="left"> [MapZero: Mapping for Coarse-grained Reconfigurable Architectures with Reinforcement Learning and Monte-Carlo Tree Search](https://dl.acm.org/doi/pdf/10.1145/3579371.3589081) - Xiangyu Kong, Yi Huang, Jianfeng Zhu, Xingchen Man, Yang Liu, Chunyang Feng, Pengfei Gou, Minggui Tang, Shaojun Wei, Leibo Liu, ISCA 2023
+
+- <img src="https://img.shields.io/badge/16-pages-green.svg" alt="16-pages" align="left"> [IntelliGen: Instruction-Level Auto-tuning for Tensor  Program with Monotonic Memory Optimization](https://dl.acm.org/doi/pdf/10.1145/3696443.3708967) - Zixuan Ma, Haojie Wang, Jingze Xing, Shuhong Huang, Liyan Zheng, Chen Zhang, Huanqi Cao, Kezhao Huang, Mingshu Zhai, Shizhi Tang, Penghan Wang, Jidong Zhai, CGO 2025
 
 Automatic [![number](https://img.shields.io/badge/27-38-blue.svg?style=flat)](https://github.com/home-assistant/home-assistant-iOS/blob/master/LICENSE)
 - <img src="https://img.shields.io/badge/14-pages-green.svg" alt="14-pages" align="left"> [AMOS: Enabling Automatic Mapping for Tensor Computations On Spatial Accelerators with Hardware Abstraction](https://dl.acm.org/doi/pdf/10.1145/3470496.3527440) - Size Zheng, Renze Chen, Anjiang Wei, Yicheng Jin, Qin Han, Liqiang Lu, Bingyang Wu, Xiuhong Li, Shengen Yan, Yun Liang, ISCA, 2022 ![Check](https://img.shields.io/badge/✓-done-green)
@@ -353,3 +369,14 @@ Performance and Energy efficiency [![number](https://img.shields.io/badge/0-2-bl
 - <img src="https://img.shields.io/badge/17-pages-green.svg" alt="17-pages" align="left"> [Inter-layer Scheduling Space Definition and Exploration for Tiled Accelerators](https://dl.acm.org/doi/pdf/10.1145/3579371.3589048) - Jingwei Cai, Yuchen Wei, Zuotong Wu, Sen Peng, ISCA, 2023
 
 - <img src="https://img.shields.io/badge/27-pages-green.svg" alt="27-pages" align="left"> [DLAS: A Conceptual Model for Across-Stack Deep Learning Acceleration](https://dl.acm.org/doi/pdf/10.1145/3688609) - Perry Gibson, Jose Cano, Elliot Crowley, Amos Storkey, Michael O'Boyle, TACO, 2024
+
+Compilers for Mobile and Edge
+- <img src="https://img.shields.io/badge/6-pages-green.svg" alt="6-pages" align="left"> [MoteNN: Memory Optimization via Fine-grained Scheduling for Deep Neural Networks on Tiny Devices](https://dl.acm.org/doi/pdf/10.1145/3649329.3655922) - Renze Chen, Zijian Ding, Size Zheng, Meng Li, Yun Liang, DAC, 2024
+
+- <img src="https://img.shields.io/badge/16-pages-green.svg" alt="16-pages" align="left"> [Automatic Generation of Vectorizing Compilers for  Customizable Digital Signal Processors](https://dl.acm.org/doi/pdf/10.1145/3617232.3624873) - Samuel Thomas, James Bornholt, ASPLOS, 2024
+
+
+Deep Learning Training
+- <img src="https://img.shields.io/badge/16-pages-green.svg" alt="16-pages" align="left"> [EVT: Accelerating Deep Learning Training with Epilogue Visitor Tree](https://dl.acm.org/doi/pdf/10.1145/3620666.3651369) - Zhaodong Chen, Andrew Kerr, Richard Cai, Jack Kosaian, Haicheng Wu, Yufei Ding, Yuan Xie, ASPLOS, 2024
+
+- <img src="https://img.shields.io/badge/13-pages-green.svg" alt="13-pages" align="left"> [vMCU: Coordinated Memory Management and Kernel Optimization for DNN Inference on MCUs](https://proceedings.mlsys.org/paper_files/paper/2024/file/d5a655b8b373737b4f2aea8f78e5e754-Paper-Conference.pdf) - Size Zheng, Renze Chen, Meng Li, Zihao Ye, Luis Ceze, Yun Liang, MLSys, 2024
