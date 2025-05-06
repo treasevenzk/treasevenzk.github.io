@@ -480,3 +480,89 @@ python
 ```
 
 
+从relay_integration.py文件中
+grc.codegen -> GraphRuntimeCodegen.Codegen -> heads_ = VisitExpr(func->body) -> std::vector<GraphNodeRef> VisitExpr_(const CallNode* call_node) -> GraphAddCallNode -> CachedFunc lowered_func = (*pf1)(compile_engine_, key)
+
+
+在compile_engine.cc文件中
+relay.backend._CompileEngineLower -> self.Lower -> LowerInternal -> CreateSchedule -> ScheduleGetter.Create -> 调用python端的auto_scheduler.relay_integration.auto_scheduler_topi_compute
+
+一个问题就是
+self._mod = _build_module._GraphRuntimeCodegen()
+self._init = self._mod["init"]
+上面这两行代码里面会涉及到去调用C++运行文件graph_runtime_codegen.cc文件类GraphRuntimeCodegenModule中的GetFunction方法从而保证上面两行代码的正确性
+这是因为在TVM的python里面tvm/_ffi/_ctypes/moudle.py文件中 Python Module类中def __getitem__(self, name): return self.get_function(name)
+
+
+
+self.callbacks = [PrintTableInfo(), LogEstimatedLatency("total_latency.tsv")]
+
+python中namedtuple和OrderedDict
+namedtuple: 用于创建一个带有命名字段的元组，普通的元组只能通过索引访问其元素，元组是不可变的，创建后不能修改、添加或删除元素
+OrderedDict: 特殊的字典类型，记住了键值对添加的顺序，普通的字典不保证元素的顺序
+
+
+PAMModel
+predict函数
+get_per_store_features_from_states_pam -> _ffi_api.GetPerStoreFeaturesFromStatesPAM -> unpack_feature_apm -> PAMDataset.create_one_task -> load_task_data -> self.model.predict -> self._predict_a_dataset -> self._predict_a_task -> PAMDataLoader
+
+update函数
+PAMDataset.update_from_measure_pairs -> get_per_store_features_from_measure_pairs_pam -> _ffi_api.GetPerStoreFeaturesFromMeasurePairsPAM -> unpack_feature_pam -> self.model.fit_base -> self._fit_a_model -> self.register_new_task -> PAMDataLoader -> self.make_net -> PAMModule
+
+
+auto_scheduler.GetPerStoreFeaturesFromStatesPAM
+GetPerStoreFeatureFromStatesPAM -> ExtractAndPaddingFeaturePAM -> GetPerStoreFeaturesWorkerFuncPAM -> GetPerStoreFeaturePAM -> PerStoreFatureExtractorPAM -> KMP -> FeatureSetPAM -> AnnotationPosTypePAM -> BufferAccessTypePAM -> ReuseTypePAM -> BufferFeatureSetPAM -> BufferAccessFeaturePAM -> LocationTypePAM -> 
+
+GetPerStoreFeatureworkerFuncPAM函数的作用
+用于在TVM中为自动调度提取每个存储操作特征
+
+GetPerStoreFeaturePAM函数的作用
+从TVM语句中提取性能相关特征，这些特征会被用于性能模型，以预测TVM调度的执行时间
+
+SerializeFeaturesPAM函数
+将提取的特征数据序列化为字节数组，以便在C++和Python之间传递数据
+
+
+
+GetPerStoreFeaturePAM
+PerStoreFeatureExtractorPAM(类)、KMP、FeatureSetPAM(结构体)、AnnotationPosTypePAM(类)、BufferAccessTypePAM(类)、ReuseTypePAM(类)、BufferFeatureSetPAM(结构体)、BufferAccessFeaturePAM(结构体)、LocationTypePAM(类)、
+
+
+ComputeRegionPAM、ComputeReusePAM、ComputeStridePAM、CoefficientExtractorPAM、BufferAccessExtractorPAM、MathOpCounterPAM(类)、GetLoopExtentPAM(函数)、GetAnnotationPosEncodingPAM、VarInExprPAM、BufferAccessPAM
+
+
+feature_pam.cc文件
+PerStoreFeatureExtractorPAM:
+VisitStmt_(BufferRealizeNode):
+StorageScope -> runtime::DefaultStorageRank/StorageScope::Create -> StmtExprVisitor::VisitStmt_(node) -> ExtractAllocationFeature
+
+VisitStmt_(BufferStoreNode):
+MathOpCounterPAM -> ExtractComputationFeature -> ExtractBufferAccessFeature -> ExtractArithmeticIntensityFeature -> ExtractOuterScopeFeature
+
+VisitStmt_(ForNode):
+GetLoopExtentPAM -> StmtExprVisitor::VisitStmt_
+
+VisitStmt_(AttrStmtNode):
+StmtExprVisitor::VisitStmt_
+
+Pruner的网络模型架构
+平常特征
+self.segment_encoder
+
+矩阵乘特征
+self.gemm_encoder
+self.attention
+
+output = torch.cat([segment_sum, gemm_mha_output], dim=1)
+self.fuse
+
+decoder
+self.norm
+self.l0
+self.l1
+self.decoder
+
+
+sketch_rules:
+rule_add_cache_read_stage、rule_special_compute_location_gpu、rule_always_inline、rule_simplify_compute_with_const_tensor、rule_cross_thread_reduction、rule_add_cache_write_stage、rule_multi_level_tiling_with_fusion、rule_multi_level_tiling、rule_skip_stage
+
