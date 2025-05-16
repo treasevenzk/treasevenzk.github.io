@@ -10,3 +10,5 @@ tags:
     - CodeReproduction
 ---
 
+GPU过程
+schedule space: spatial, reduce, fuse, reorder, inline, unroll, merge, special

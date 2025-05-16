@@ -566,3 +566,4 @@ self.decoder
 sketch_rules:
 rule_add_cache_read_stage、rule_special_compute_location_gpu、rule_always_inline、rule_simplify_compute_with_const_tensor、rule_cross_thread_reduction、rule_add_cache_write_stage、rule_multi_level_tiling_with_fusion、rule_multi_level_tiling、rule_skip_stage
 
+gdb --args python tune_network.py --network resnet_50 --n-trials 200 --cost-model pam --target "cuda --model=a100" --psa a100_40
