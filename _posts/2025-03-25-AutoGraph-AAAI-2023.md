@@ -1,7 +1,7 @@
 ---
 layout:     post
-title:      MetaFlow MLSys 2019
-subtitle:   Optimizing DNN Computation with Relaxed Graph Substitutions
+title:      AutoGraph AAAI 2023
+subtitle:   AutoGraph Optimizing DNN Computation Graph for Parallel GPU Kernel Execution
 date:       2025-03-25
 author:     Treaseven
 header-img: img/bg2.jpg

@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      FractalTensor SOSP 2024
-subtitle:   FlexTensorCode
+subtitle:   Uncovering Nested Data Parallelism and Data Reuse in DNN Computation with FractalTensor
 date:       2025-01-13
 author:     Treaseven
 header-img: img/bg18.jpg

@@ -290,6 +290,12 @@ Layout、LayoutNode、LayoutAxis、BijectiveLayoutNode、BijectiveLayout
 ```
 
 ```
+function.h
+PrimFuncNode、PrimFunc、LinkedParamNode、LinkedParam
+```
+
+
+```
 expr_functor.h
 ExprFunctor、ExprVisitor、ExprMutator
 ```
@@ -312,11 +318,6 @@ StmtFunctor、StmtVisitor、StmtMutator、StmtExprVisitor、StmtExprMutator
 ```
 stmt.h
 StmtNode、Stmt、LetStmtNode、LetStmt、AttrStmtNode、AttrStmt、AssertStmtNode、AssertStmt、StoreNode、Store、BufferStoreNode、BufferStore、BufferRealizeNode、BufferRealize、ProducerStoreNode、ProducerStore、ProducerRealizeNode、ProducerRealize、AllocateNode、Allocate、SeqStmtNode、SeqStmt、IfThenElseNode、IfThenElse、EvaluateNode、Evaluate、ForKind、ForNode、For、WhileNode、While、PrefetchNode、Prefetch、BufferRegionNode、BufferRegion、MatchBufferRegionNode、MatchBufferRegion、BlockNode、Block、BlockRealizeNode、BlockRealize
-```
-
-```
-op_attr_types.h
-CallEffectKind
 ```
 
 
@@ -574,3 +575,84 @@ $5 = (const tvm::auto_scheduler::FeatureSet &) @0x71eaa400c0c0: {float_mad = 0, 
   threadIdx_x_len = 32, threadIdx_y_len = 1, threadIdx_z_len = 1, vthread_len = 1, access_feas = {<std::_Vector_base<tvm::auto_scheduler::BufferAccessFeature, std::allocator<tvm::auto_scheduler::BufferAccessFeature> >> = {
       _M_impl = {<std::allocator<tvm::auto_scheduler::BufferAccessFeature>> = {<__gnu_cxx::new_allocator<tvm::auto_scheduler::BufferAccessFeature>> = {<No data fields>}, <No data fields>}, <std::_Vector_base<tvm::auto_scheduler::BufferAccessFeature, std::allocator<tvm::auto_scheduler::BufferAccessFeature> >::_Vector_impl_data> = {_M_start = 0x71eaa403c010, _M_finish = 0x71eaa403c118, _M_end_of_storage = 0x71eaa403c118}, <No data fields>}}, <No data fields>}, arith_intensity_curve = {0.582413673, 0.582413673, 0.582413673, 
     0.582413673, 0.582413673, 0.613152564, 0.643891394, 0.674630284, 0.705369115, 0.736108005}, alloc_size = 4000, alloc_outer_prod = 1, alloc_inner_prod = 1024, alloc_prod = 1000, outer_prod = 1024, num_loops = 2, auto_unroll_max_step = 0}
+
+
+PerStoreFeatureExtractor extractor(cache_line_size)
+extractor(stmt)
+
+
+PerStoreFeatureExtractor → StmtExprVisitor → StmtVisitor、ExprVisitor
+StmtVisitor → StmtFunctor
+ExprVisitor → ExprFunctor
+
+
+StmtVisitor
+LetStmtNode、AttrStmtNode
+ForNode、
+WhileNode、
+AllocateNode、
+StoreNode、
+BufferStoreNode、
+BufferRealizeNode、
+IfThenElseNode、
+AssertStmtNode、
+ProducerStoreNode、
+ProducerRealizeNode、
+PrefetchNode、
+SeqStmtNode、
+EvaluateNode、
+BlockNode、
+BlockRealizeNode
+
+
+ExprVisitor
+VarNode、AnyNode
+SizeVarNode、
+LoadNode、
+BufferLoadNode、ProducerLoadNode、
+LetNode、
+CallNode、
+AddNode、SubNode、MulNode、DivNode、ModNode、FloorDivNode、FloorModNode、MinNode、MaxNode、EQNode、NENode、LTNode、LENode、GTNode、GENode、AndNode、OrNode、
+ReduceNode、
+CastNode、
+NotNode、
+SelectNode、
+RampNode、
+BroadcastNode、
+ShuffleNode、
+IntImmNode、FloatImmNode、StringImmNode
+
+
+placeholder = PLACEHOLDER [1, 2048]
+placeholder = PLACEHOLDER [1000, 2048]
+T_dense(i, j) += (placeholder[i, k]*placeholder[j, k])
+placeholder = PLACEHOLDER [1000]
+T_add(ax0, ax1) = (T_dense[ax0, ax1] + placeholder[ax1])
+
+
+特征提取工作
+ExtractComputationFeature
+计算操作特征(统计各种数学运算的总执行次数、区分浮点、整数、布尔运算类型)、循环优化特征(向量化、展开、并行化)、GPU特征(GPU执行的线程组织信息、用于GPU代码生成和优化)
+float: mad、addsub、mul、divmod、cmp、math_func、other_func
+int: mad、addsub、mul、divmod、cmp、math_func、other_func
+bool_op、select_op
+vec_len、unroll_len、parallel_len
+vec_type、unroll_type、parallel_type
+vec_num、unroll_num、parallel_num
+is_gpu、blockIdx_x_len、blockIdx_y_len、blockIdz_z_len、threadIdx_x_len、threadIdx_y_len、threadIdx_z_len、vthread_len
+
+ExtractBufferAccessFeature
+分析缓冲区的访问模式(缓冲区名称、访问类型、步长、访问字节数、缓存行数、重用类型、距离、次数)
+access_feas
+
+ExtractArithmeticIntensityFeature
+计算算术强度曲线，衡量计算密集度，算术强度=计算操作数(FLOPS)/内存访问字节数(Bytes)
+arith_intensity_curve
+
+ExtractOuterScopeFeature
+计算执行规模、循环嵌套的深度、循环展开的配置
+alloc_size、alloc_prod、alloc_outer_prod、alloc_inner_prod
+
+ExtractAllocationFeature
+提取与内存分配相关的特征(缓冲区占用的内存字节数、缓冲区分配的总工作量、分配点外层循环的规模、分配点内层循环的规模)
+outer_prod、num_loops、auto_unroll_max_step

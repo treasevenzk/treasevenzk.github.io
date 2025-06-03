@@ -353,6 +353,8 @@ Dataset [![number](https://img.shields.io/badge/0-3-blue.svg?style=flat)](https:
 
 - <img src="https://img.shields.io/badge/14-pages-green.svg" alt="14-pages" align="left"> [Tenset: A large-scale program performance dataset for learned tensor compilers](https://openreview.net/pdf?id=aIfp8kLuvc9) - Lianmin Zheng, Ruochen Liu, Junru Shao, Tianqi Chen, Joseph E. Gonzalez, Ion Stoica, Ameer Haj Ali, NIPS, 2021
 
+- <img src="https://img.shields.io/badge/7-pages-green.svg" alt="7-pages" align="left"> [Poros: One-Level Architecture-Mapping Co-Exploration for Tensor Algorithms](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10992589) - Fuyu Wang,  Minghua Shen, DATE, 2025
+
 
 Code Optimization [![number](https://img.shields.io/badge/1-5-blue.svg?style=flat)](https://github.com/home-assistant/home-assistant-iOS/blob/master/LICENSE)
 - <img src="https://img.shields.io/badge/17-pages-green.svg" alt="17-pages" align="left"> [Chameleon: Adaptive code optimization for expedited deep neural network compilation](https://arxiv.org/pdf/2001.08743) - Byung Hoon Ahn1, Prannoy Pilligundla1, Amir Yazdanbakhsh, Hadi Esmaeilzadeh, ICLR, 2020
