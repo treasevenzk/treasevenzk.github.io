@@ -567,3 +567,138 @@ sketch_rules:
 rule_add_cache_read_stage、rule_special_compute_location_gpu、rule_always_inline、rule_simplify_compute_with_const_tensor、rule_cross_thread_reduction、rule_add_cache_write_stage、rule_multi_level_tiling_with_fusion、rule_multi_level_tiling、rule_skip_stage
 
 gdb --args python tune_network.py --network resnet_50 --n-trials 200 --cost-model pam --target "cuda --model=a100" --psa a100_40
+
+arg.target_host: None      arg.result_file: results.tsv     arg.transfer_tune: None     args.search_type: default
+
+network_args = {
+    "network": resnet_50,
+    "batch_size": 1
+}
+
+tuning_args = {
+    "eval_only": false,
+    "continue_tuning": false,
+    "n_trials": 200
+    "num_measures_per_round": 10
+    "log_file": resnet_50-B1-cuda-a100.json
+    "run_timeout": 25,
+    "cost_model": pam,
+    "load_model": None,
+    "n_lines": None,
+    "psa_model_type": a100_40
+}
+
+
+TaskScheduler
+tasks: tasks        objective_func = lambda costs: sum(c * w for c, w in zip(costs, task_weights))      strategy: gradient      load_log_file: None     load_model_file: None          alpha: 0.2       beta: 2         gamma: 0.5      backward_window_size: 3
+callbacks: [PrintTableInfo(), LogEstimateLatency("total_latency.tsv")]
+task_cts = [0 for _ in range(len(self.tasks))]  记录任务i被调优多少次
+task_best_cts = [0 for _ in range(len(self.tasks))] 记录任务i当前最佳延迟
+task_costs_history = [[] for _ in range(len(self.tasks))] 记录任务i历史延迟记录
+best_costs = 1e10 * np.ones(len(self.tasks)) 记录任务i最佳延迟
+cur_score = self._compute_score(self.best_costs)
+tune_option、measurer、search_policies、ct、best_ct、best_score、tic、num_measures_per_round: None
+dead_tasks = set()
+
+task_tags、tag_to_groud_id、group_task_ids、flop_cts
+
+search_policy = 'sketch.pam'      psa_model_type = a100_40      search_policy_params = None     num_measure_per_round = 10      tune_option.verbose = 1     load_model_file = None      load_log_file = None        adaptive_training = false
+disable_cost_model_update = false
+
+cost_model = PAMModel(disable_update, few_shot_learning)       cost_model_psa = PSAModel(peak_performance=19490, glbmem_bandwidth=1555, vec_len=11, activate_blocks_per_sm=1, sm_nums=108, arm_sm_partition=4, arch_warp_size=32)
+init_search_callbacks = [PreloadMeasuredStates(load_log_file)]
+search_policies = [SketchPolicy(task, cost_model, cost_model_psa, params, verbose, init_search_callbacks) for task in tasks]
+
+PAMModel
+BufferNameMap、BufferCache
+PerStoreFeatureExtractorPAM: VisitStmt_(AttrStmtNode)、VisitStmt_(BufferRealizeNode)
+
+
+
+========== Task 0  (workload key: ["9847f8cc0b305137f4...) ==========
+placeholder = PLACEHOLDER [1, 2048]
+placeholder = PLACEHOLDER [1000, 2048]
+T_dense(i, j) += (placeholder[i, k]*placeholder[j, k])
+placeholder = PLACEHOLDER [1000]
+T_add(ax0, ax1) = (T_dense[ax0, ax1] + placeholder[ax1])
+
+*ret = SerializeFeaturePAM(features, fea_sizes, kmp_indexes, normalized_throughputs, task_ids, min_costs, byte_data)
+
+features: 三维特征向量数组(N*buffer_seq*Buffer_Embedding_Dim)
+
+
+pam_model.update
+dataset.update_from_measure_pairs → get_per_store_features_from_measure_pairs_pam → load_task_data
+fit_base → _fit_a_model → register_new_task → make_net
+
+
+
+pytorch版本问题的解决
+按照pruner的要求下载相应的pytorch，但是原来下载也是pruner要求的但是运行的时候在training model会报错，然后用下面的指令下载pruner指定的版本则不会报错
+pip install torch==1.8.1+cu111 torchvision==0.9.1+cu111 -f https://download.pytorch.org/whl/torch_stable.html
+
+
+
+best_costs[i]: 任务i的当前最佳延迟
+task_cts[i]: 任务i被调优的次数
+task_costs_history[i]: 任务i的历史延迟记录
+flop_cts[i]: 任务i的浮点运算次数
+alpha: 历史vs预期权重参数
+beta: 相似任务性能差异阈值
+FLOPS = flop_cts / best_costs
+task_best_cts[i]: 记录任务i发现最佳结果的轮次
+
+TaskScheduler的tune方法
+梯度策略的核心： 在有限时间内，应该优先调优哪个任务，才能让任务整体性能提升最大
+Chain Gradient(链式梯度): 评估该任务对整体目标的重要性
+Backward Gradient(向后梯度): 评估该任务最近的表现
+Forward Gradient(向前梯度): 评估该任务改进空间
+
+
+task_tag: 任务标签
+tag_to_group_id: 标签到group ID的映射
+group_task_ids: 每个组包含的任务ID映射
+
+
+segment_sizes_normal: 记录每个样本的特征段长度
+flatten_normal_features: 存储所有普通特征
+flatten_gemm_features: 存储GEMM相关的缓冲区特征
+
+
+extractor(stmt) → 调用operator()
+operator() → 调用VisitStmt()
+VisitStmt() → 初始化vtable，调用vtable()
+vtable() → 根据type_index查找函数
+type_index() → 返回180(AttrStmtNode的ID)
+func_[180] → 调用对应的lambda函数
+lambda函数 → 类型转换并调用VisitStmt_
+VisitStmt_(AttrStmtNode*) → 目标函数
+
+
+
+te::InferBound
+前馈图FeedGraph: 张量→消费者操作的映射
+附加路径AttachPath: 操作→附加点的映射
+
+
+
+PerStoreFeatureExtractorPAM类
+ExtractBufferAccessFeature方法: 
+cur_compute_ops: 当前计算操作数
+compute_ops_list: 输出参数，各层循环的计算操作数列表
+mem_bytes_list: 输出参数，各层循环的内存访问字节数列表
+for_touch_regions_: 存储每个for循环的内存访问区域信息
+buffer_regions_map: 当前循环层的buffer区域映射
+tuple<BufferAccessTypePAM, int64_t, int>: 访问类型，访问元素数，单元素字节数
+
+
+ComputeRegionPAM
+ElementProduct
+GetLoopExtentPAM
+ComputeStridePAM
+ComputeReusePAM
+
+
+PAMDataLoader:
+
+

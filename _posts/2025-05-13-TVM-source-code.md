@@ -570,13 +570,6 @@ enum class BufferAccessType : int { kRead = 0, kWrite = 1, kReadWrite = 2, kUnkn
 enum class ReuseType : int { kLoopMultipleRead = 0, kSerialMultipleReadWrite = 1, kNoReuse = 2 };
 
 
-$5 = (const tvm::auto_scheduler::FeatureSet &) @0x71eaa400c0c0: {float_mad = 0, float_addsub = 1024, float_mul = 0, float_divmod = 0, float_cmp = 0, float_math_func = 0, float_other_func = 0, int_mad = 0, int_addsub = 2048, int_mul = 2048, int_divmod = 0, int_cmp = 0, int_math_func = 0, int_other_func = 0, bool_op = 0, select_op = 0, vec_num = 0, vec_prod = 0, vec_len = 0, vec_type = tvm::auto_scheduler::AnnotationPosType::kPosNone, unroll_num = 0, unroll_prod = 0, unroll_len = 0, 
-  unroll_type = tvm::auto_scheduler::AnnotationPosType::kPosNone, parallel_num = 0, parallel_prod = 0, parallel_len = 0, parallel_type = tvm::auto_scheduler::AnnotationPosType::kPosNone, is_gpu = 1, blockIdx_x_len = 32, blockIdx_y_len = 1, blockIdx_z_len = 1, 
-  threadIdx_x_len = 32, threadIdx_y_len = 1, threadIdx_z_len = 1, vthread_len = 1, access_feas = {<std::_Vector_base<tvm::auto_scheduler::BufferAccessFeature, std::allocator<tvm::auto_scheduler::BufferAccessFeature> >> = {
-      _M_impl = {<std::allocator<tvm::auto_scheduler::BufferAccessFeature>> = {<__gnu_cxx::new_allocator<tvm::auto_scheduler::BufferAccessFeature>> = {<No data fields>}, <No data fields>}, <std::_Vector_base<tvm::auto_scheduler::BufferAccessFeature, std::allocator<tvm::auto_scheduler::BufferAccessFeature> >::_Vector_impl_data> = {_M_start = 0x71eaa403c010, _M_finish = 0x71eaa403c118, _M_end_of_storage = 0x71eaa403c118}, <No data fields>}}, <No data fields>}, arith_intensity_curve = {0.582413673, 0.582413673, 0.582413673, 
-    0.582413673, 0.582413673, 0.613152564, 0.643891394, 0.674630284, 0.705369115, 0.736108005}, alloc_size = 4000, alloc_outer_prod = 1, alloc_inner_prod = 1024, alloc_prod = 1000, outer_prod = 1024, num_loops = 2, auto_unroll_max_step = 0}
-
-
 PerStoreFeatureExtractor extractor(cache_line_size)
 extractor(stmt)
 
@@ -586,23 +579,323 @@ StmtVisitor → StmtFunctor
 ExprVisitor → ExprFunctor
 
 
-StmtVisitor
-LetStmtNode、AttrStmtNode
-ForNode、
-WhileNode、
-AllocateNode、
-StoreNode、
-BufferStoreNode、
-BufferRealizeNode、
-IfThenElseNode、
-AssertStmtNode、
-ProducerStoreNode、
-ProducerRealizeNode、
-PrefetchNode、
-SeqStmtNode、
-EvaluateNode、
-BlockNode、
-BlockRealizeNode
+StmtVisitor<br>
+LetStmtNode: 将一个变量绑定到一个值，然后在绑定的作用域内执行后续语句 <br>
+作用: 变量作用域管理(为临时计算结果创建命名变量、管理变量的生命周期和作用域、避免重复计算，提高代码效率)、代码优化(公共子表达式提取、中间结果缓存、代码重组和简化)
+```
+class LetStmtNode : public StmtNode {
+  public:
+  Var var;          // 要绑定的变量
+  PrimExpr value;   // 绑定的值/表达式
+  Stmt body;        // 在绑定作用域内执行的语句体
+};
+
+let var = value in
+  body
+
+公共子表达式提取
+// 原始代码: (a+b)*(a+b)
+// 优化后使用LetStmt
+let temp = a + b in
+  temp * temp
+```
+
+AttrStmtNode: 为语句体定义特定的辅助属性，这些属性为IR变换过程提供关键的元信息 <br>
+线程管理属性: thread_extent(标记线程启动范围，用于GPU编程)、virtual_thread(标记虚拟线程的启动) <br>
+存储管理属性: realize_scope(标记存储作用域)、buffer_bind_scope(缓冲区绑定作用域)、double_buffer_scope(双缓冲作用域)、buffer_dim_align(缓冲区维度对齐信息) <br>
+并行和协处理器属性: coproc_scope(标记协处理器处理区域)、coproc_uop_scope(协处理器微操作作用域) <br>
+```
+class AttrStmeNode: public StmtNode {
+  public:
+  ObjectRef node;     // 属性关联的节点对象 (如变量、缓冲区、迭代变量等)
+  String attr_key;    // 属性的类型键 (如thread_extent、virtual_thread、pipeline_exec_scope、realize_scope等)
+  PrimExpr value;     // 属性值
+  Stmt body;          // 在该属性作用域内执行的语句体
+};
+
+// attr [node] attr_key = value
+{
+  body    // 在属性作用域内执行
+}
+
+// attr [threadIdx.x] thread_extent = 32
+for (int i = 0; i < 32; ++i) {
+  // 线程并行执行的代码
+}
+
+// attr [buffer] realize_scope = "shared"
+{
+  // 在共享内存作用域内的操作
+}
+```
+AssertStmtNode: 在运行时检查特定条件，如果条件不满足则报告错误信息，然后继续执行后续语句
+边界检查、内存对齐验证、GPU代码约束检查、数值范围验证
+```
+class AssertStmtNode : public StmtNode {
+  public:
+  PrimExpr condition;   // 要检查的条件
+  PrimExpr message;     // 错误时显示的信息
+  Stmt body;            // 断言通过后执行的语句体
+};
+
+if (!condition) {
+  // 报告错误: message
+  // 可能终止执行或抛出异常
+}
+// 继续执行 body
+```
+
+StoreNode: 向指定的缓冲区地址写入数据值，支持向量化操作和条件写入
+```
+class StoreNode : public StmtNode {
+  public:
+  Var buffer_var;     // 缓冲区变量
+  PrimExpr value;     // 要存储的值
+  PrimExpr index;     // 存储位置的索引
+  PrimExpr predicate; // 存储条件 (掩码)
+};
+
+//基本形式
+((DType*)buffer_var)[index] = value;
+
+//向量化形式
+auto buffer = static_cast<float*>(buffer_var);
+buffer[index.v0] = value.v0;
+buffer[index.v1] = value.v1;
+buffer[index.v2] = value.v2;
+```
+
+BufferStoreNode: 向多缓冲区的指定位置写入数据值，提供高级的、语义化的缓冲区访问接口
+```
+class BufferStoreNode : public StmtNode {
+  public:
+  Buffer buffer;            // 高级缓冲区对象
+  PrimExpr value;           // 要存储的值
+  Array<PrimExpr> indices;  // 多维索引数组
+};
+
+buffer[i, j] = value;
+
+矩阵计算
+// C[i, j] = A[i, k] * B[k, j]
+BufferStore(C, mul_result, {i, j})
+```
+
+BufferRealizeNode: 注解缓冲区在特定区域内需要被读写的范围，编译器只需要为相应区域分配内存空间 <br>
+BufferRealizeNode最终会被lowered为AllocateNode
+```
+class BufferRealizeNode : public StmtNode {
+  public:
+  Buffer buffer;        // 要实现的缓冲区
+  Array<Range> bound;   // 要实现的边界范围
+  PrimExpr condition;   // 实现条件
+  Stmt body;            // 实现体语句
+};
+
+buffer_realize buffer_name([min0, extent0], [min1, extent1], ...) if condition {
+  body
+}
+
+buffer_realize A([0, 100], [0, 50]) {
+  // 在A[0:100, 0:50]区域内的操作
+}
+
+张量计算优化
+// 只为实际时可用的tile分配内存
+BufferRealize shared_A([tile_i, tile_size], [tile_k, tile_size]) {
+  // shared memory 中的矩阵乘法tile
+}
+```
+
+ProducerStoreNode: 将值存储到由DataProducer生产的多维数组，供该生产者的消费者读取 <br>
+ProducerStore只存在于高级DSL中，不应该出现在有效的TIR PrimFunc中，必须在TIR变换之前被lowered
+```
+class ProducerStoreNode : public StmtNode {
+  public:
+  DataProducer producer;    // 数据生产者
+  PrimExpr value;           // 要存储的值
+  Array<PrimExpr> indices;  // 函数的索引参数
+};
+
+高级DSL阶段
+// 使用DataProducer (如Tensor)
+ProducerStore(tensor_A, computation_result, {i, j})
+Lowering后的TIR
+// 转换为BufferStore或Store
+BufferStore(buffer_A, computation_result, {i, j})
+// 或
+Store(buffer_A_data, computation_result, flattened_index, predicate)
+```
+
+ProducerRealizeNode: 注解数据生产者需要在body中被写入和读取的边界，编译器将为相应区域分配内存空间 <br>
+ProducerRealize只存在于高级DSL中，不应该出现在有效的TIR PrimFunc中，必须在TIR变换之前被lowered
+```
+class ProducerRealizeNode: public StmtNode {
+  public:
+  DataProducer producer;    // 生产数据的数据生产者
+  Region bounds;            // 要实现的边界
+  PrimExpr condition;       // 实现的条件
+  Stmt body;                // 实现体语句
+};
+
+高级DSL阶段
+// 使用DataProducer (如Tensor)
+ProducerRealize(tensor_A, bounds, condition, body)
+Lowering后的TIR
+// 转换为BufferRealize
+BufferRealize(buffer_A, bounds, condition, body)
+
+张量计算DSL:
+// 在Tensor Expression (TE) DSL中
+ProducerRealize(output_tensor, output_bounds, condition) {
+  // 计算和存储操作
+  ProducerStore(output_tensor, computed_value, {i, j})
+}
+```
+
+AllocateNode: 表示缓冲区的内存分配操作
+```
+class AllocateNode: public StmtNode {
+  public:
+  Var buffer_var;           // 缓冲区变量
+  DataType dtype;           // 缓冲区的数据类型
+  Array<PrimExpr> extents;  // 缓冲区的维度大小
+  PrimExpr condition;       // 分配条件(只有满足条件才分配)
+  Stmt body;                // 在分配的缓冲区中执行的语句体
+}
+```
+
+SeqStmtNode: 表示语句序列，用于将多个语句组织成一个有序的执行序列
+```
+class SeqStmtNode: public StmtNode {
+  public:
+  Array<Stmt> seq;  // 内部语句序列内容
+};
+```
+
+IfThenElseNode: 表示条件分支语句
+```
+class IfThenElseNode: public StmtNode {
+  public:
+  PrimExpr condition;   // 条件表达式
+  Stmt then_case;       // 条件为真时执行的语句
+  Stmt else_case;       // 条件为假时执行的语句
+};
+```
+
+EvaluateNode: 评估一个表达式并忽略其返回值，将表达式转换为语句的桥梁<br>
+将call节点转换为语句，使其能够在语句上下文中执行，处理有副作用的表达式，如果表达式没有副作用，节点可以被安全移除
+```
+class EvaluateNode: public StmtNode {
+  public:
+  PrimExpr value; //需要被评估的表达式
+}
+```
+
+ForNode: 表示各种类型的for循环
+```
+class ForNode: public StmtNode {
+  public:
+  Var loop_var;                       // 循环变量
+  PrimExpr min;                       // 迭代的最小值
+  PrimExpr extent;                    // 迭代的范围大小
+  ForKind kind;                       // 循环的类型
+  Stmt body;                          // 循环体
+  Optional<IterVar> thread_binding;   // 线程绑定(仅当kind为kThreadBinding时有效)
+  Map<String, ObjectRef> annotations; // 附加注解
+}
+
+// for (loop_var = min; loop_var < min + extent; ++loop_var) {
+//  body
+//}
+```
+
+
+WhileNode: 表示while循环
+```
+class WhileNode: public StmtNode {
+  public:
+  PrimExpr condition;   // 终止条件
+  Stmt body;            // 循环体
+}
+```
+
+
+PrefetchNode: 表示内存预取提示，指导硬件或编译器提前将数据加载到缓存中，以减少内存访问延迟
+```
+class PrefetchNode: public StmtNode {
+  public:
+  Buffer buffer;        // 要预取的缓冲区
+  Array<Range> bounds;  // 要预取的边界范围
+}
+```
+
+
+BufferRegionNode: 表示多维缓冲区的访问区域，用于描述对缓冲区特定区域的访问模式 <br>
+精确描述缓冲区的哪个子区域被访问、通过Range数组支持多维缓冲区
+```
+class BufferRegionNode: public object {
+  public:
+  Buffer buffer;        // 缓冲区引用
+  Array<Range> region;  // 区域范围数组，每个维度一个Range
+}
+
+# 目标代码
+# 访问矩阵A的子区域: A[0:4, 2:6]
+# 访问矩阵B的子区域: B[2:6, 1:5]
+TIR表示
+Buffer A = decl_buffer({8, 8}, DataType::Float(32), "A")
+Buffer B = decl_buffer({8, 8}, DataType::Float(32), "B")
+
+Array<Range> A_region = {
+  Range::FromMinExtent(0, 4),
+  Range::FromMinExtent(2, 6)
+}
+BufferRegion A_access(A, A_region)
+
+Array<Range> B_region = {
+  Range::FromMinExtent(0, 4),
+  Range::FromMinExtent(1, 5)
+}
+BufferRegion B_access(B, B_region)
+
+BufferRegion A_full = BufferRegion::FullRegion(A)
+```
+
+MatchBufferRegionNode: 表示缓冲区映射约束
+```
+class MatchBufferRegionNode: public Object {
+  public:
+  Buffer buffer;
+  BufferRegion source;
+}
+```
+
+BlockNode: 表示一个独立的计算块
+```
+class BlockNode: public StmtNode {
+  public:
+  Array<IterVar> iter_var;                  // 块的迭代变量
+  Array<BufferRegion> reads;                // 读取的缓冲区区域
+  Array<BufferRegion> writes;               // 写入的缓冲区区域
+  String name_hint;                         // 块的名称提示
+  Stmt body;                                // 块的主体语句
+  Optional<Stmt> init;                      // 初始化语句
+  Array<Buffer> alloc_buffers;              // 在块中分配的缓冲区
+  Array<MatchBufferRegion> match_buffers;   // 匹配的缓冲区区域
+  Map<String, ObjectRef> annotations;       // 块的注解
+}
+```
+
+BlockRealizeNode: 在特定绑定值下执行Block的实现节点
+```
+class BlockRealizeNode : public StmtNode {
+  public:
+  Array<PrimExpr> iter_values;  // 迭代变量的对应值
+  PrimExpr predicate;           // Block实现的谓词条件
+  Block block;                  // 要被实现的Block
+}
+```
 
 
 ExprVisitor
@@ -656,3 +949,66 @@ alloc_size、alloc_prod、alloc_outer_prod、alloc_inner_prod
 ExtractAllocationFeature
 提取与内存分配相关的特征(缓冲区占用的内存字节数、缓冲区分配的总工作量、分配点外层循环的规模、分配点内层循环的规模)
 outer_prod、num_loops、auto_unroll_max_step
+
+
+ReuseTypePAM:
+返回值: 重用类型、重用距离-迭代器、重用距离-字节数、重用计数
+
+
+Analyzer::Bind
+Canonical Simplification(标准化化简)：将表达式转换为标准形式 eg: 将x+1+2简化为x+3;将2*x+3*x简化为5*x
+Rewrite Simplification(重写简化): 基于模式匹配和重写规则的简化 eg: 将x*0简化为0; 将x+0简化为x; 将x/1简化为x
+Const Int Bound(更新常量整数边界分析器): 将变量var的整数边界信息更新为表达式的边界 eg: expr=x+5且x的范围是[0,10],则var的边界更新为[5, 15]
+Modular set(更新模运算集合分析器): 将变量var的模运算集合信息更新为表达式的模信息 模运算集合({coeff * x + base | x ∈ Z}) eg: expr = 4 * x,则var的模信息为系数4，基数0
+Rewrite Simplify(更新重写简化器): 在重写简化器中记录变量var绑定到new_var,后续简化过程中，遇到var时可以直接替换为new_var
+Canonical Simplify(更新标准化简化器): 在标准化简化器中记录变量var绑定到new_var,缓存变量的标准化表示，避免重复标准化计算
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
