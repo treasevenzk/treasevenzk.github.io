@@ -802,14 +802,44 @@ sym_task ---> utils ---> sym_dag ---> optim ---> cost_model ---> features
 
 
 
+def batch_create_tasks(
+    tasks: List[utils.AnsorTaskWeight],
+    hash_match: bool = True,
+    print_tasks: bool = True,
+    progress: bool = True,
+):
+    tasks_ = tqdm(tasks) if progress else tasks
+    for i, (task, weight) in enumerate(tasks_):
+        concrete_dag = task.compute_dag
+        dag_result = SymbolicDAG.from_ansor(concrete_dag, hash_match)
+        sym_dag, size_dict = dag_result
+        grouped[sym_dag].append(TaskInstance(i, weight, size_dict, task))
+    grouped_ = tqdm(grouped.items(), total=len(grouped)) if progress else grouped.items()
+    for sym_dag, instances in grouped_:
+        indices = [instance.idx for instance in instances]
+        size_params, _ = utils.coalesce_dicts([instance.sizes for instance in instances])
+        ansor_dag = sym_dag.make_ansor_compute_dag(None)
+        task = SymTask(sym_dag, ansor_dag)
+        ret_groups.append(SymTaskAndInstances(task, instances))
+    return ret_groups
+
+TaskInstance类: idx、weight、sizes、ansor_task
+SymTask类: sym_dag、ansor_task、sketches、backbone_to_sketch
+Sketch类: parent_task、state_repr、tr_steps、code（生成TIR module）、context、backbone（转换步骤）
+Optimizer类: timer、tasks(TaskPerfFunc,weight,idx)、perf_model、n_measure、n_rounds、data_builder、output_file
+TaskPerfFunc类: sym_task、sizes、ansor_task、_sketches、perf_model、flops
+SketchPerfFunc类: sketch、task_perf_f、features、cost_f
+DatasetBuilder类: features、labels、conf_meta
+SingleTaskOpitimizer类: task_f、n_seeds、configs、optim、lr_sched、least_lat_history、_dict_conf_hist
+ConfigInfo类: config、sketch_f、pred_perf、measure_input、measure_result
 
 
 
-
-
-
-
-
+ffi.generate_all_sym_sketches(ansor_policy)     SymTask类
+ffi.generate_code_for_state(task.ansor_task, sym_state, True)   Sketch类
+ffi.extract_backbone
+ffi.subst_by_name       SymTask类中的get_flops方法 TaskPerfFunc类
+ffi.get_feature_pack    Sketch类中的fetch_features方法 SketchPerfFunc类
 
 
 
