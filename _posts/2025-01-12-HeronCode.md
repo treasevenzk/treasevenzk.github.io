@@ -389,3 +389,491 @@ dense_wmma_accumulator_shared_shared_mem_size -> (dense_wmma_accumulator_shared_
 
 77,8.906950110460233,   16,16,16, 3,3, 1,0,5, 4,16,16,1,16, 1,32,32,16,1, 64,8, 16,1, 1,4,32, 1,1,1, 1,1,1, 16,0,1, 16,24,2
 1190,10.284423285696588,16,16,16, 0,1, 1,0,5, 4,16,16,1,16, 1,32,32,16,1, 64,0, 16,1, 1,1,32, 1,1,1, 1,4,2, 32,24,8, 32,8,8
+
+
+def main(A: T.Buffer((64, 64), "float16"), B: T.Buffer((64, 64), "float16"), dense: T.Buffer((64, 64), "float16")):
+        T.func_attr({"from_legacy_te_schedule": T.bool(True), "tir.noalias": T.bool(True)})
+        dense_wmma_accumulator_shared = T.allocate([4096], "float16", "shared")
+        with T.launch_thread("threadIdx.y", 1) as threadIdx_y:
+            dense_wmma_accumulator = T.allocate([4096], "float16", "wmma.accumulator")
+            A_shared = T.allocate([4096], "float16", "shared")
+            A_shared_wmma_matrix_a = T.allocate([4096], "float16", "wmma.matrix_a")
+            B_shared_wmma_matrix_b = T.allocate([4096], "float16", "wmma.matrix_b")
+            for i_c_inner_inner_inner_outer_init, j_c_inner_inner_inner_outer_init in T.grid(4, 4):
+                T.tvm_fill_fragment(dense_wmma_accumulator, 16, 16, 16, i_c_inner_inner_inner_outer_init * 4 + j_c_inner_inner_inner_outer_init, T.float32(0))
+            for ax0_ax1_fused_outer_outer_outer in range(4096):
+                threadIdx_y_1 = T.launch_thread("threadIdx.y", 1)
+                threadIdx_x = T.launch_thread("threadIdx.x", 1)
+                A_shared_1 = T.Buffer((4096,), "float16", data=A_shared, scope="shared")
+                A_1 = T.Buffer((4096,), "float16", data=A.data)
+                A_shared_1[ax0_ax1_fused_outer_outer_outer] = A_1[ax0_ax1_fused_outer_outer_outer]
+            for ax0_outer, ax1_outer in T.grid(4, 4):
+                T.tvm_load_matrix_sync(A_shared_wmma_matrix_a, 16, 16, 16, ax0_outer * 4 + ax1_outer, T.tvm_access_ptr(T.type_annotation("float16"), A_shared, ax0_outer * 1024 + ax1_outer * 16, 1024, 1), 64, "row_major")
+            for ax0_ax1_fused_outer_outer_outer in range(4096):
+                threadIdx_y_1 = T.launch_thread("threadIdx.y", 1)
+                threadIdx_x = T.launch_thread("threadIdx.x", 1)
+                A_shared_1 = T.Buffer((4096,), "float16", data=A_shared, scope="shared")
+                B_1 = T.Buffer((4096,), "float16", data=B.data)
+                A_shared_1[ax0_ax1_fused_outer_outer_outer] = B_1[ax0_ax1_fused_outer_outer_outer]
+            for ax0_outer, ax1_outer in T.grid(4, 4):
+                T.tvm_load_matrix_sync(B_shared_wmma_matrix_b, 16, 16, 16, ax0_outer * 4 + ax1_outer, T.tvm_access_ptr(T.type_annotation("float16"), A_shared, ax0_outer * 1024 + ax1_outer * 16, 1024, 1), 64, "col_major")
+            for i_c_inner_inner_inner_outer, j_c_inner_inner_inner_outer, k_inner_inner_inner_outer in T.grid(4, 4, 4):
+                cse_var_2: T.int32 = i_c_inner_inner_inner_outer * 4
+                cse_var_1: T.int32 = cse_var_2 + j_c_inner_inner_inner_outer
+                T.tvm_mma_sync(dense_wmma_accumulator, cse_var_1, A_shared_wmma_matrix_a, cse_var_2 + k_inner_inner_inner_outer, B_shared_wmma_matrix_b, j_c_inner_inner_inner_outer * 4 + k_inner_inner_inner_outer, dense_wmma_accumulator, cse_var_1)
+            for ax0_inner_outer, ax1_inner_outer in T.grid(4, 4):
+                T.tvm_store_matrix_sync(dense_wmma_accumulator, 16, 16, 16, ax0_inner_outer * 4 + ax1_inner_outer, T.tvm_access_ptr(T.type_annotation("float16"), dense_wmma_accumulator_shared, ax0_inner_outer * 1024 + ax1_inner_outer * 16, 1024, 2), 64, "row_major")
+        blockIdx_x = T.launch_thread("blockIdx.x", 1)
+        threadIdx_y = T.launch_thread("threadIdx.y", 1)
+        threadIdx_x = T.launch_thread("threadIdx.x", 1)
+        dense_1 = T.Buffer((4096,), "float16", data=dense.data)
+        dense_wmma_accumulator_shared_1 = T.Buffer((4096,), "float16", data=dense_wmma_accumulator_shared, scope="shared")
+        dense_1[0:4096] = dense_wmma_accumulator_shared_1[0:4096]
+
+
+'wmma_m', 'wmma_k', 'wmma_n', 
+'dense.wmma.accumulator_shared_pos', 'dense.wmma.accumulator_local_pos', 'dense_shared_pos', 'dense.wmma.accumulator.shared_local_pos', 'dense_unroll_pragma', 
+'densei.innertileSpatial', 'densej.innertileSpatial', 'densei.inner.innertileSpatial', 'densej.inner.innertileSpatial', 'threadIdx.y', 
+'densei.inner.inner.innertileSpatial', 'densej.inner.inner.innertileSpatial', 'threadIdx.x', 
+'densei.inner.inner.inner.innertileSpatial', 'densej.inner.inner.inner.innertileSpatial', 
+'dense.wmma.accumulator.shared_ax1', 'dense.wmma.accumulator.shared_offset', 
+'dense.wmma.accumulator.sharedax0tileSpatial', 'dense.wmma.accumulator.sharedax1tileSpatial', 
+'dense.wmma.accumulatori.ctileAll', 'dense.wmma.accumulatorj.ctileAll', 'dense.wmma.accumulatorktileAll', 'dense.wmma.accumulatori.c.innertileAll', 'dense.wmma.accumulatorj.c.innertileAll', 'dense.wmma.accumulatork.innertileAll', 'dense.wmma.accumulatori.c.inner.innertileAll', 'dense.wmma.accumulatorj.c.inner.innertileAll', 
+'dense.wmma.accumulatork.inner.innertileAll', 
+'B.shared_ax1', 'B.shared_offset', 'B.shared_vectorize', 'A.shared_ax1', 'A.shared_offset', 'A.shared_vectorize'
+
+
+
+GPU GEMM调度参数优化Prompt
+任务背景
+你是一个GPU计算优化专家，需要为GEMM算子(矩阵乘法)确定最优的调度参数组合。目标是优化一个1024x1024x1024的float16 GEMM运算，使其在GPU TensorCore上达到最佳性能。
+TVM调度代码 (schedule.py)
+以下是当前的调度代码，参数通过变量控制，请分析代码结构来理解参数影响：
+python## Cache Tensor Core
+dense_wmma_accumulator = s.cache_write(dense, wmma.accumulator)
+
+## Cache read shared  
+# 设置内存层次：全局内存 → 共享内存 → WMMA片段 → TensorCore计算
+A_shared = s.cache_read(A, shared, dense.wmma.accumulator)
+B_shared = s.cache_read(B, shared, dense.wmma.accumulator)
+A_shared_wmma_matrix_a = s.cache_read(A_shared, wmma.matrix_a, dense.wmma.accumulator)
+B_shared_wmma_matrix_b = s.cache_read(B_shared, wmma.matrix_b, dense.wmma.accumulator)
+
+## Cache read shared
+dense_wmma_accumulator_shared = s.cache_read(dense_wmma_accumulator, shared, dense)
+
+#==--------- Start schedule STAGE dense ----------==#
+
+## Unroll pragma 
+i_o, i_i = s[dense].split(i, nparts = 1)
+j_o, j_i = s[dense].split(j, nparts = 1)
+s[dense].reorder(i_o, j_o, i_i, j_i, )
+
+## Bind blockIdx.x
+## tile spatial - 第一级分块 (Grid-level tiling)
+# 参数：densei.innertileSpatial, densej.innertileSpatial
+# 作用：将整个矩阵分配给不同的GPU block
+i_i_o, i_i_i = s[dense].split(i_i, nparts = 1)  # nparts = densei.innertileSpatial
+j_i_o, j_i_i = s[dense].split(j_i, nparts = 1)  # nparts = densej.innertileSpatial
+s[dense].reorder(i_i_o, j_i_o, i_i_i, j_i_i, )
+i_i_o_j_i_o_f = s[dense].fuse(i_i_o, j_i_o, )
+s[dense].bind(i_i_o_j_i_o_f, te.thread_axis("blockIdx.x"))
+
+## Bind threadIdx.y
+## tile spatial - 第二级分块 (Block-level tiling) 
+# 参数：densei.inner.innertileSpatial, densej.inner.innertileSpatial
+# 作用：每个block内部的子矩阵分割，绑定到threadIdx.y
+i_i_i_o, i_i_i_i = s[dense].split(i_i_i, nparts = 1)  # nparts = densei.inner.innertileSpatial
+j_i_i_o, j_i_i_i = s[dense].split(j_i_i, nparts = 1)  # nparts = densej.inner.innertileSpatial
+s[dense].reorder(i_i_i_o, j_i_i_o, i_i_i_i, j_i_i_i, )
+i_i_i_o_j_i_i_o_f = s[dense].fuse(i_i_i_o, j_i_i_o, )
+s[dense].bind(i_i_i_o_j_i_i_o_f, te.thread_axis("threadIdx.y"))  # 参数：threadIdx.y
+
+## Bind threadIdx.x
+## tile spatial - 第三级分块 (Warp-level tiling)
+# 参数：densei.inner.inner.innertileSpatial, densej.inner.inner.innertileSpatial  
+# 作用：warp级别的分块，绑定到threadIdx.x (建议=32，内存合并访问)
+i_i_i_i_o, i_i_i_i_i = s[dense].split(i_i_i_i, nparts = 1)  # nparts = densei.inner.inner.innertileSpatial
+j_i_i_i_o, j_i_i_i_i = s[dense].split(j_i_i_i, nparts = 1)  # nparts = densej.inner.inner.innertileSpatial
+s[dense].reorder(i_i_i_i_o, j_i_i_i_o, i_i_i_i_i, j_i_i_i_i, )
+i_i_i_i_o_j_i_i_i_o_f = s[dense].fuse(i_i_i_i_o, j_i_i_i_o, )
+s[dense].bind(i_i_i_i_o_j_i_i_i_o_f, te.thread_axis("threadIdx.x"))  # 参数：threadIdx.x
+
+## Vectorize - 第四级分块 (Thread-level tiling)
+## tile spatial 
+# 参数：densei.inner.inner.inner.innertileSpatial, densej.inner.inner.inner.innertileSpatial
+# 作用：线程级最细粒度分块，转换为向量操作
+i_i_i_i_i_o, i_i_i_i_i_i = s[dense].split(i_i_i_i_i, nparts = 1)  # nparts = densei.inner.inner.inner.innertileSpatial
+j_i_i_i_i_o, j_i_i_i_i_i = s[dense].split(j_i_i_i_i, nparts = 1)  # nparts = densej.inner.inner.inner.innertileSpatial
+s[dense].reorder(i_i_i_i_i_o, j_i_i_i_i_o, i_i_i_i_i_i, j_i_i_i_i_i, )
+i_i_i_i_i_i_j_i_i_i_i_i_f = s[dense].fuse(i_i_i_i_i_i, j_i_i_i_i_i, )
+s[dense].vectorize(i_i_i_i_i_i_j_i_i_i_i_i_f)
+
+#==--------- Start schedule STAGE dense.wmma.accumulator.shared ----------==#
+# 参数：dense_shared_pos 控制compute_at的位置
+# dense_shared_pos=0 → j_o, =1 → j_i, =2 → j_i_i, 依此类推
+# 作用：控制累加器共享内存的计算位置，影响数据局部性
+s[dense_wmma_accumulator_shared].compute_at(s[dense], j_o)
+
+## Storage align - 内存对齐优化
+# 参数：dense.wmma.accumulator.shared_offset (0-15)
+# 作用：避免共享内存bank conflict，提高内存访问效率
+s[dense_wmma_accumulator_shared].storage_align(ax0, 0.000000, 1.000000)  # offset参数
+
+## Bind threadIdx.y
+## tile spatial 
+# 参数：dense.wmma.accumulator.sharedax0tileSpatial, dense.wmma.accumulator.sharedax1tileSpatial
+# 作用：累加器共享内存的空间分块
+ax0_o, ax0_i = s[dense_wmma_accumulator_shared].split(ax0, nparts = 1)  # nparts = sharedax0tileSpatial
+ax1_o, ax1_i = s[dense_wmma_accumulator_shared].split(ax1, nparts = 1)  # nparts = sharedax1tileSpatial
+s[dense_wmma_accumulator_shared].reorder(ax0_o, ax1_o, ax0_i, ax1_i, )
+ax0_o_ax1_o_f = s[dense_wmma_accumulator_shared].fuse(ax0_o, ax1_o, )
+s[dense_wmma_accumulator_shared].bind(ax0_o_ax1_o_f, te.thread_axis("threadIdx.y"))
+
+## Tensor core store - TensorCore存储指令
+# 参数：wmma_m, wmma_n 决定TensorCore矩阵尺寸 (16x16, 32x8, 8x32等)
+ax0_i_o, ax0_i_i = s[dense_wmma_accumulator_shared].split(ax0_i, factor = 16)  # factor = wmma_m
+ax1_i_o, ax1_i_i = s[dense_wmma_accumulator_shared].split(ax1_i, factor = 16)  # factor = wmma_n
+s[dense_wmma_accumulator_shared].reorder(ax0_i_o, ax1_i_o, ax0_i_i, ax1_i_i, )
+s[dense_wmma_accumulator_shared].tensorize(ax0_i_i, intrin_wmma_store_matrix(
+[sc_n0, 1], [lc_n0, 1], (16, 16, 16), float16, [16, 16], [16, 16], 
+))
+
+#==--------- Start schedule STAGE dense.wmma.accumulator ----------==#
+# 参数：dense.wmma.accumulator.shared_local_pos 控制本地计算位置 (通常=1)
+s[dense_wmma_accumulator].compute_at(s[dense_wmma_accumulator_shared], ax0_o_ax1_o_f)
+
+## general tile - K维分块优化
+## tile 
+# 参数：dense.wmma.accumulatori.ctileAll, dense.wmma.accumulatorj.ctileAll, dense.wmma.accumulatorktileAll
+# 作用：第一级K维分块，影响计算和内存访问的粒度
+i_c_o, i_c_i = s[dense_wmma_accumulator].split(i_c, nparts = 1)  # nparts = accumulatori.ctileAll
+j_c_o, j_c_i = s[dense_wmma_accumulator].split(j_c, nparts = 1)  # nparts = accumulatorj.ctileAll
+k_o, k_i = s[dense_wmma_accumulator].split(k, nparts = 1)        # nparts = accumulatorktileAll
+s[dense_wmma_accumulator].reorder(i_c_o, j_c_o, k_o, i_c_i, j_c_i, k_i, )
+
+## tile 
+# 参数：dense.wmma.accumulatori.c.innertileAll, dense.wmma.accumulatorj.c.innertileAll, dense.wmma.accumulatork.innertileAll
+# 作用：第二级K维分块
+i_c_i_o, i_c_i_i = s[dense_wmma_accumulator].split(i_c_i, nparts = 1)  # nparts = accumulatori.c.innertileAll
+j_c_i_o, j_c_i_i = s[dense_wmma_accumulator].split(j_c_i, nparts = 1)  # nparts = accumulatorj.c.innertileAll
+k_i_o, k_i_i = s[dense_wmma_accumulator].split(k_i, nparts = 1)        # nparts = accumulatork.innertileAll
+s[dense_wmma_accumulator].reorder(i_c_i_o, j_c_i_o, k_i_o, i_c_i_i, j_c_i_i, k_i_i, )
+
+## tile 
+# 参数：dense.wmma.accumulatori.c.inner.innertileAll, dense.wmma.accumulatorj.c.inner.innertileAll, dense.wmma.accumulatork.inner.innertileAll
+# 作用：第三级K维分块
+i_c_i_i_o, i_c_i_i_i = s[dense_wmma_accumulator].split(i_c_i_i, nparts = 1)  # nparts = accumulatori.c.inner.innertileAll
+j_c_i_i_o, j_c_i_i_i = s[dense_wmma_accumulator].split(j_c_i_i, nparts = 1)  # nparts = accumulatorj.c.inner.innertileAll
+k_i_i_o, k_i_i_i = s[dense_wmma_accumulator].split(k_i_i, nparts = 1)        # nparts = accumulatork.inner.innertileAll
+s[dense_wmma_accumulator].reorder(i_c_i_i_o, j_c_i_i_o, k_i_i_o, i_c_i_i_i, j_c_i_i_i, k_i_i_i, )
+
+## Tensor core compute - TensorCore计算指令
+# 参数：wmma_m, wmma_n, wmma_k 决定TensorCore GEMM指令的矩阵尺寸
+# 可选组合：(16,16,16), (32,8,16), (8,32,16) 等
+i_c_i_i_i_o, i_c_i_i_i_i = s[dense_wmma_accumulator].split(i_c_i_i_i, factor = 16)  # factor = wmma_m
+j_c_i_i_i_o, j_c_i_i_i_i = s[dense_wmma_accumulator].split(j_c_i_i_i, factor = 16)  # factor = wmma_n
+k_i_i_i_o, k_i_i_i_i = s[dense_wmma_accumulator].split(k_i_i_i, factor = 16)        # factor = wmma_k
+s[dense_wmma_accumulator].reorder(i_c_i_i_i_o, j_c_i_i_i_o, k_i_i_i_o, i_c_i_i_i_i, j_c_i_i_i_i, k_i_i_i_i, )
+s[dense_wmma_accumulator].tensorize(i_c_i_i_i_i, intrin_wmma_gemm(
+Tensor(shape=[16, 16], op.name=wmma_A), Tensor(shape=[16, 16], op.name=wmma_B), Tensor(shape=[16, 16], op.name=wmma_C), [la_k0, 1], [lb_k0, 1], [lc_n0, 1], (16, 16, 16), 
+))
+
+#==--------- Start schedule STAGE B.shared.wmma.matrix_b ----------==#
+# 参数：dense.wmma.accumulator_local_pos 控制WMMA片段的计算位置
+# 取值影响：=0→k_o, =1→k_i, =2→k_i_i, =3→k_i_i_i
+s[B_shared_wmma_matrix_b].compute_at(s[dense_wmma_accumulator], k_o)
+
+## Tensor core loadB - TensorCore B矩阵加载指令
+ax0_o, ax0_i = s[B_shared_wmma_matrix_b].split(ax0, factor = 16)  # factor = wmma_k
+ax1_o, ax1_i = s[B_shared_wmma_matrix_b].split(ax1, factor = 16)  # factor = wmma_n
+s[B_shared_wmma_matrix_b].reorder(ax0_o, ax1_o, ax0_i, ax1_i, )
+s[B_shared_wmma_matrix_b].tensorize(ax0_i, intrin_wmma_load_matrix_W(
+[lb_k0, 1], [sb_k0, 1], (16, 16, 16), col_major, [16, 16], [16, 16], float16, 
+))
+
+#==--------- Start schedule STAGE B.shared ----------==#
+# 参数：dense.wmma.accumulator_shared_pos 控制B共享内存的计算位置
+s[B_shared].compute_at(s[dense_wmma_accumulator], k_o)
+
+## Storage align - B矩阵共享内存对齐
+# 参数：B.shared_offset (0-15) 用于避免bank conflict
+s[B_shared].storage_align(ax0, 0.000000, 1.000000)  # offset = B.shared_offset
+ax0_ax1_f = s[B_shared].fuse(ax0, ax1, )
+ax0_ax1_f_o, ax0_ax1_f_i = s[B_shared].split(ax0_ax1_f, factor = 1)
+# 参数：B.shared_vectorize 控制向量化因子 (1,2,4,8)
+s[B_shared].vectorize(ax0_ax1_f_i)  # factor = B.shared_vectorize
+ax0_ax1_f_o_o, ax0_ax1_f_o_i = s[B_shared].split(ax0_ax1_f_o, factor = 1)
+s[B_shared].bind(ax0_ax1_f_o_i, te.thread_axis("threadIdx.x"))
+ax0_ax1_f_o_o_o, ax0_ax1_f_o_o_i = s[B_shared].split(ax0_ax1_f_o_o, factor = 1)
+s[B_shared].bind(ax0_ax1_f_o_o_i, te.thread_axis("threadIdx.y"))
+
+#==--------- Start schedule STAGE A.shared.wmma.matrix_a ----------==#
+s[A_shared_wmma_matrix_a].compute_at(s[dense_wmma_accumulator], k_o)
+
+## Tensor core loadA - TensorCore A矩阵加载指令
+ax0_o, ax0_i = s[A_shared_wmma_matrix_a].split(ax0, factor = 16)  # factor = wmma_m
+ax1_o, ax1_i = s[A_shared_wmma_matrix_a].split(ax1, factor = 16)  # factor = wmma_k
+s[A_shared_wmma_matrix_a].reorder(ax0_o, ax1_o, ax0_i, ax1_i, )
+s[A_shared_wmma_matrix_a].tensorize(ax0_i, intrin_wmma_load_matrix_A(
+[la_k0, 1], [sa_k0, 1], (16, 16, 16), row_major, [16, 16], [16, 16], float16, 
+))
+
+#==--------- Start schedule STAGE A.shared ----------==#
+# A矩阵共享内存调度，与B矩阵类似
+s[A_shared].compute_at(s[dense_wmma_accumulator], k_o)
+
+## Storage align - A矩阵共享内存对齐
+# 参数：A.shared_offset (0-15) 用于避免bank conflict
+s[A_shared].storage_align(ax0, 0.000000, 1.000000)  # offset = A.shared_offset
+ax0_ax1_f = s[A_shared].fuse(ax0, ax1, )
+ax0_ax1_f_o, ax0_ax1_f_i = s[A_shared].split(ax0_ax1_f, factor = 1)
+# 参数：A.shared_vectorize 控制向量化因子 (1,2,4,8)
+s[A_shared].vectorize(ax0_ax1_f_i)  # factor = A.shared_vectorize
+ax0_ax1_f_o_o, ax0_ax1_f_o_i = s[A_shared].split(ax0_ax1_f_o, factor = 1)
+s[A_shared].bind(ax0_ax1_f_o_i, te.thread_axis("threadIdx.x"))
+ax0_ax1_f_o_o_o, ax0_ax1_f_o_o_i = s[A_shared].split(ax0_ax1_f_o_o, factor = 1)
+s[A_shared].bind(ax0_ax1_f_o_o_i, te.thread_axis("threadIdx.y"))
+硬件约束
+
+GPU: 支持TensorCore的GPU(如V100/A100)
+内存层次: 全局内存 → 共享内存 → 寄存器/WMMA片段
+TensorCore支持的矩阵尺寸: 16x16x16, 32x8x16, 8x32x16等组合
+线程块限制: threadIdx.x建议为32(内存合并访问), threadIdx.y*threadIdx.x ≤ 1024
+
+
+优化目标
+基于上述调度代码和示例性能数据，请分析并推荐最优的参数组合，目标是:
+
+最小化执行时间 (主要目标)
+最大化TensorCore利用率
+最小化内存访问冲突
+最优化缓存局部性
+
+分析要求
+请基于调度代码结构进行分析:
+
+TensorCore效率: 分析不同wmma尺寸对TensorCore利用率的影响
+内存访问模式: 分析分块策略对内存带宽和共享内存使用的影响
+线程组织: 分析threadIdx配置对warp效率和内存合并的影响
+数据局部性: 分析compute_at位置对数据重用的影响
+Bank冲突: 分析storage_align参数对共享内存访问的影响
+
+输出格式
+请提供:
+1. 最优参数组合
+wmma_m=?, wmma_k=?, wmma_n=?
+densei.innertileSpatial=?, densej.innertileSpatial=?
+densei.inner.innertileSpatial=?, densej.inner.innertileSpatial=?
+densei.inner.inner.innertileSpatial=?, densej.inner.inner.innertileSpatial=?
+densei.inner.inner.inner.innertileSpatial=?, densej.inner.inner.inner.innertileSpatial=?
+threadIdx.y=?, threadIdx.x=?
+dense_shared_pos=?, dense.wmma.accumulator_shared_pos=?, dense.wmma.accumulator_local_pos=?
+dense.wmma.accumulator.shared_offset=?, A.shared_offset=?, B.shared_offset=?
+A.shared_vectorize=?, B.shared_vectorize=?
+dense.wmma.accumulator.sharedax0tileSpatial=?, dense.wmma.accumulator.sharedax1tileSpatial=?
+dense.wmma.accumulatori.ctileAll=?, dense.wmma.accumulatorj.ctileAll=?, dense.wmma.accumulatorktileAll=?
+dense.wmma.accumulatori.c.innertileAll=?, dense.wmma.accumulatorj.c.innertileAll=?, dense.wmma.accumulatork.innertileAll=?
+dense.wmma.accumulatori.c.inner.innertileAll=?, dense.wmma.accumulatorj.c.inner.innertileAll=?, dense.wmma.accumulatork.inner.innertileAll=?
+
+
+请根据我上传Heron项目，现在我运行/Heron/tests/figure6/run.py文件，使用/Heron/test/figure6/configs/gemm.json，使用python run.py -c gemm.json运行，然后它会生成schedule.py，这是一个调度示例，Heron采用约束遗传算法来改变里面调度参数，来生成优化的代码使其性能达到最优，上面这个schedule.py的示例是优化一个GEMM算子，输入维度是m=1024、n=1024、k=1024、in_dtype=float16、out_dtype=float16，里面调度参数是我上传的param_names.txt文件里面这些,我帮你解释param_names.txt对应的参数与schedule.py的关系wmma_m、wmma_k、wmma_n对应schedule.py文件中的s[dense_wmma_accumulator].tensorize(i_c_i_i_i_i, intrin_wmma_gemm( Tensor(shape=[16, 16], op.name=wmma_A), Tensor(shape=[16, 16], op.name=wmma_B), Tensor(shape=[16, 16], op.name=wmma_C), [la_k0, 1], [lb_k0, 1], [lc_n0, 1], (16, 16, 16), ))GPU平台tensorcore指令，给的schedule.py指令是16、16、16还可以是其他的组合，然后这个schedule.py的写法是按照GPU的对应的内存层次进行写原始输入→共享内存→WMMA输入片段→WMMA计算→WMMA累加器→共享内存→全局内存；然后就是'densei.innertileSpatial', 'densej.innertileSpatial', 'densei.inner.innertileSpatial', 'densej.inner.innertileSpatial','densei.inner.inner.innertileSpatial', 'densej.inner.inner.innertileSpatial','densei.inner.inner.inner.innertileSpatial', 'densej.inner.inner.inner.innertileSpatial',这些参数分别schedule.py文件中的i_i_o、j_i_o、i_i_i_o、j_i_i_o、i_i_i_i_o、j_i_i_i_o、i_i_i_i_i_o、j_i_i_i_i_o，这些都是有关分块参数，分块技术是一种将大矩阵分割成能够放入缓存的小块的优化技术，通过提高数据局部性来减少内存访问延迟，最大化缓存命中率，需要多级分块策略以适应GPU的内存层次：1.Grid-level tiling: 将整个矩阵分配给不同的block 2.Block-level tiling: 每个block处理一个子矩阵 3.Warp-level tiling: 每个warp处理更小的子块 4.Thread-level tiling: 每个线程处理最小单元，threadIdx.y、threadIdx.x要考虑gpu硬件的限制，threadIdx.x最好是32，因为内存合并访问要求，连续的32个线程访问连续内存，dense_shared_pos、dense.wmma.accumulator.shared_ax1对应于schedule.py文件中的s[dense_wmma_accumulator_shared].compute_at(s[dense], j_o)，dense_shared_pos的值取决于上一阶段j进行多少次分割，比如在schedule.py文件里面可以取0-5，当dense_shared_pos=0时，dense.wmma.accumulator.shared_ax1=j_i;dense_shared_pos=1, 时dense.wmma.accumulator.shared_ax1=j_i_i;dense_shared_pos=2, 时dense.wmma.accumulator.shared_ax1=j_i_i_i;dense_shared_pos=3, 时dense.wmma.accumulator.shared_ax1=j_i_i_i_i;dense_shared_pos=4 时dense.wmma.accumulator.shared_ax1=j_i_i_i_i_i;dense_shared_pos=5, 时dense.wmma.accumulator.shared_ax1=1;在提供schedule.py文件中这个示例dense_shared_pos=0,dense.wmma.accumulator.shared_ax1=j_i这里注意考虑计算局部性优化，减少中间结果的存储需求，dense.wmma.accumulator.shared_ax1要等于j_i/j_i_i/j_i_i_i/j_i_i_i_i/j_i_i_i_i_i/1要考虑生产者和消费者要恰好耦合，dense.wmma.accumulator.shared_offset考虑数据对齐，减少bank conflict,对应于schedule.py文件中s[dense_wmma_accumulator_shared].storage_align(ax0, 0.000000, 1.000000)；然后就是dense.wmma.accumulator.sharedax0tileSpatial, dense.wmma.accumulator.sharedax1tileSpatial分别对应于schedule.py文件中的ax0_o、ax1_o,然后dense.wmma.accumulator.shared_local_pos对应于schedule.py文件s[dense_wmma_accumulator].compute_at(s[dense_wmma_accumulator_shared], ax0_o_ax1_o_f)，这个dense.wmma.accumulator.shared_local_pos只能等于1，所以导致schedule.py文件中i_c=ax0_i,j_c=ax1_i;然后就是'dense.wmma.accumulator.sharedax0tileSpatial', 'dense.wmma.accumulator.sharedax1tileSpatial',  'dense.wmma.accumulatori.ctileAll', 'dense.wmma.accumulatorj.ctileAll', 'dense.wmma.accumulatorktileAll', 'dense.wmma.accumulatori.c.innertileAll', 'dense.wmma.accumulatorj.c.innertileAll', 'dense.wmma.accumulatork.innertileAll', 'dense.wmma.accumulatori.c.inner.innertileAll', 'dense.wmma.accumulatorj.c.inner.innertileAll',  'dense.wmma.accumulatork.inner.innertileAll', 这些分块参数分别对应与schedule.py文件中的i_c_0、j_c_o、k_o、i_c_i_o、j_c_i_o、k_i_o、i_c_i_i_o、j_c_i_i_o、k_i_i_o；然后就是dense.wmma.accumulator_local_pos对应于schedule.py文件中的s[B_shared_wmma_matrix_b].compute_at(s[dense_wmma_accumulator], k_o)、s[A_shared_wmma_matrix_a].compute_at(s[dense_wmma_accumulator], k_o)，dense.wmma.accumulator_local_pos的取值范围也是取决于刚刚分割次数，比如在schedule.py文件中dense.wmma.accumulator_local_pos=0时， 对应STAGE B.shared中ax0=j_c_i,ax1=k_i,STAGE A.shared中ax_o=i_c_i, ax1=k_i;dense.wmma.accumulator_local_pos=1时， 对应STAGE B.shared中ax0=j_c_i_i,ax1=k_i_i,STAGE A.shared中ax_o=i_c_i_i, ax1=k_i_i;dense.wmma.accumulator_local_pos=2时， 对应STAGE B.shared中ax0=j_c_i_i_i,ax1=k_i_i_o,STAGE A.shared中ax_o=i_c_i_i_i, ax1=k_i_i_i;dense.wmma.accumulator_local_pos=3时， 对应STAGE B.shared中ax0=j_c_i_i_i_i,ax1=k_i_i_i_i,STAGE A.shared中ax_o=i_c_i_i_i_i, ax1=k_i_i_i_i;同理dense.wmma.accumulator_shared_pos也和dense.wmma.accumulator_local_pos是一样的的，只不过是B.shared_ax1=k_i/k_i_i/k_i_i_i/k_i_i_i_i,dense.wmma_accumulator_shared_pos对应于schedule.py文件中的s[B_shared].compute_at(s[dense_wmma_accumulator], k_o)、s[A_shared].compute_at(s[dense_wmma_accumulator], k_o)、然后就是B.shared_offset、A.shared_offset分别对应schedule.py文件中的s[B_shared].storage_align(ax0, 0.000000, 1.000000)、s[A_shared].storage_align(ax0, 0.000000, 1.000000)，然后B.shared_vectorize、A.shared_vectorize分别对应于s[A_shared].vectorize(ax0_ax1_f_i)，这里主要是将循环转换为向量操作，利用SIMD，好了我现在介绍完这些变量的意义，然后我说我接下来要干的事情，就是在Heron项目是利用约束遗传算法来找到这些调度参数的最优值从而是算子的性能达到最优，我现在就是在想不用约束遗传算法因为这个方法需要多次测试才能找到最优值，我现在想的是利用大模型，我将schedule.py改成prompt，然后结合上面调度参数的介绍与schedule.py的关系，然后我上传的params.xlsx里面有10组对应调度参数配置以及相应性能perf值，perf值越大越好，perf为0表示该配置无法正确运行，变成prompt给gpt，然后让gpt帮助我确定这每个调度参数组合的最优值，可以给3-5组，所以想你帮我设计一下这个prompt应该怎么设计，请你先继续思考一下，然后在告诉我
+
+
+
+GPU GEMM调度参数优化Prompt
+任务背景
+你是一个GPU计算优化专家，需要为GEMM算子(矩阵乘法)确定最优的调度参数组合。目标是优化一个1024x1024x1024的float16 GEMM运算，使其在GPU TensorCore上达到最佳性能。
+TVM调度代码 (schedule.py)
+以下是当前的调度代码，参数通过变量控制，请分析代码结构来理解参数影响：
+python## Cache Tensor Core
+dense_wmma_accumulator = s.cache_write(dense, wmma.accumulator)
+
+## Cache read shared  
+# 设置内存层次：全局内存 → 共享内存 → WMMA片段 → TensorCore计算
+A_shared = s.cache_read(A, shared, dense.wmma.accumulator)
+B_shared = s.cache_read(B, shared, dense.wmma.accumulator)
+A_shared_wmma_matrix_a = s.cache_read(A_shared, wmma.matrix_a, dense.wmma.accumulator)
+B_shared_wmma_matrix_b = s.cache_read(B_shared, wmma.matrix_b, dense.wmma.accumulator)
+
+## Cache read shared
+dense_wmma_accumulator_shared = s.cache_read(dense_wmma_accumulator, shared, dense)
+
+#==--------- Start schedule STAGE dense ----------==#
+
+## Unroll pragma 
+i_o, i_i = s[dense].split(i, nparts = 1)
+j_o, j_i = s[dense].split(j, nparts = 1)
+s[dense].reorder(i_o, j_o, i_i, j_i, )
+
+## Bind blockIdx.x
+## tile spatial - 第一级分块 (Grid-level tiling)
+# 参数：densei.innertileSpatial, densej.innertileSpatial
+# 作用：将整个矩阵分配给不同的GPU block
+i_i_o, i_i_i = s[dense].split(i_i, nparts = 1)  # nparts = densei.innertileSpatial
+j_i_o, j_i_i = s[dense].split(j_i, nparts = 1)  # nparts = densej.innertileSpatial
+s[dense].reorder(i_i_o, j_i_o, i_i_i, j_i_i, )
+i_i_o_j_i_o_f = s[dense].fuse(i_i_o, j_i_o, )
+s[dense].bind(i_i_o_j_i_o_f, te.thread_axis("blockIdx.x"))
+
+## Bind threadIdx.y
+## tile spatial - 第二级分块 (Block-level tiling) 
+# 参数：densei.inner.innertileSpatial, densej.inner.innertileSpatial
+# 作用：每个block内部的子矩阵分割，绑定到threadIdx.y
+i_i_i_o, i_i_i_i = s[dense].split(i_i_i, nparts = 1)  # nparts = densei.inner.innertileSpatial
+j_i_i_o, j_i_i_i = s[dense].split(j_i_i, nparts = 1)  # nparts = densej.inner.innertileSpatial
+s[dense].reorder(i_i_i_o, j_i_i_o, i_i_i_i, j_i_i_i, )
+i_i_i_o_j_i_i_o_f = s[dense].fuse(i_i_i_o, j_i_i_o, )
+s[dense].bind(i_i_i_o_j_i_i_o_f, te.thread_axis("threadIdx.y"))  # 参数：threadIdx.y
+
+## Bind threadIdx.x
+## tile spatial - 第三级分块 (Warp-level tiling)
+# 参数：densei.inner.inner.innertileSpatial, densej.inner.inner.innertileSpatial  
+# 作用：warp级别的分块，绑定到threadIdx.x (建议=32，内存合并访问)
+i_i_i_i_o, i_i_i_i_i = s[dense].split(i_i_i_i, nparts = 1)  # nparts = densei.inner.inner.innertileSpatial
+j_i_i_i_o, j_i_i_i_i = s[dense].split(j_i_i_i, nparts = 1)  # nparts = densej.inner.inner.innertileSpatial
+s[dense].reorder(i_i_i_i_o, j_i_i_i_o, i_i_i_i_i, j_i_i_i_i, )
+i_i_i_i_o_j_i_i_i_o_f = s[dense].fuse(i_i_i_i_o, j_i_i_i_o, )
+s[dense].bind(i_i_i_i_o_j_i_i_i_o_f, te.thread_axis("threadIdx.x"))  # 参数：threadIdx.x
+
+## Vectorize - 第四级分块 (Thread-level tiling)
+## tile spatial 
+# 参数：densei.inner.inner.inner.innertileSpatial, densej.inner.inner.inner.innertileSpatial
+# 作用：线程级最细粒度分块，转换为向量操作
+i_i_i_i_i_o, i_i_i_i_i_i = s[dense].split(i_i_i_i_i, nparts = 1)  # nparts = densei.inner.inner.inner.innertileSpatial
+j_i_i_i_i_o, j_i_i_i_i_i = s[dense].split(j_i_i_i_i, nparts = 1)  # nparts = densej.inner.inner.inner.innertileSpatial
+s[dense].reorder(i_i_i_i_i_o, j_i_i_i_i_o, i_i_i_i_i_i, j_i_i_i_i_i, )
+i_i_i_i_i_i_j_i_i_i_i_i_f = s[dense].fuse(i_i_i_i_i_i, j_i_i_i_i_i, )
+s[dense].vectorize(i_i_i_i_i_i_j_i_i_i_i_i_f)
+
+#==--------- Start schedule STAGE dense.wmma.accumulator.shared ----------==#
+# 参数：dense_shared_pos 控制compute_at的位置
+# dense_shared_pos=0 → j_o, =1 → j_i, =2 → j_i_i, 依此类推
+# 作用：控制累加器共享内存的计算位置，影响数据局部性
+s[dense_wmma_accumulator_shared].compute_at(s[dense], j_o)
+
+## Storage align - 内存对齐优化
+# 参数：dense.wmma.accumulator.shared_offset (0-15)
+# 作用：避免共享内存bank conflict，提高内存访问效率
+s[dense_wmma_accumulator_shared].storage_align(ax0, 0.000000, 1.000000)  # offset参数
+
+## Bind threadIdx.y
+## tile spatial 
+# 参数：dense.wmma.accumulator.sharedax0tileSpatial, dense.wmma.accumulator.sharedax1tileSpatial
+# 作用：累加器共享内存的空间分块
+ax0_o, ax0_i = s[dense_wmma_accumulator_shared].split(ax0, nparts = 1)  # nparts = sharedax0tileSpatial
+ax1_o, ax1_i = s[dense_wmma_accumulator_shared].split(ax1, nparts = 1)  # nparts = sharedax1tileSpatial
+s[dense_wmma_accumulator_shared].reorder(ax0_o, ax1_o, ax0_i, ax1_i, )
+ax0_o_ax1_o_f = s[dense_wmma_accumulator_shared].fuse(ax0_o, ax1_o, )
+s[dense_wmma_accumulator_shared].bind(ax0_o_ax1_o_f, te.thread_axis("threadIdx.y"))
+
+## Tensor core store - TensorCore存储指令
+# 参数：wmma_m, wmma_n 决定TensorCore矩阵尺寸 (16x16, 32x8, 8x32等)
+ax0_i_o, ax0_i_i = s[dense_wmma_accumulator_shared].split(ax0_i, factor = 16)  # factor = wmma_m
+ax1_i_o, ax1_i_i = s[dense_wmma_accumulator_shared].split(ax1_i, factor = 16)  # factor = wmma_n
+s[dense_wmma_accumulator_shared].reorder(ax0_i_o, ax1_i_o, ax0_i_i, ax1_i_i, )
+s[dense_wmma_accumulator_shared].tensorize(ax0_i_i, intrin_wmma_store_matrix(
+[sc_n0, 1], [lc_n0, 1], (16, 16, 16), float16, [16, 16], [16, 16], 
+))
+
+#==--------- Start schedule STAGE dense.wmma.accumulator ----------==#
+# 参数：dense.wmma.accumulator.shared_local_pos 控制本地计算位置 (通常=1)
+s[dense_wmma_accumulator].compute_at(s[dense_wmma_accumulator_shared], ax0_o_ax1_o_f)
+
+## general tile - K维分块优化
+## tile 
+# 参数：dense.wmma.accumulatori.ctileAll, dense.wmma.accumulatorj.ctileAll, dense.wmma.accumulatorktileAll
+# 作用：第一级K维分块，影响计算和内存访问的粒度
+i_c_o, i_c_i = s[dense_wmma_accumulator].split(i_c, nparts = 1)  # nparts = accumulatori.ctileAll
+j_c_o, j_c_i = s[dense_wmma_accumulator].split(j_c, nparts = 1)  # nparts = accumulatorj.ctileAll
+k_o, k_i = s[dense_wmma_accumulator].split(k, nparts = 1)        # nparts = accumulatorktileAll
+s[dense_wmma_accumulator].reorder(i_c_o, j_c_o, k_o, i_c_i, j_c_i, k_i, )
+
+## tile 
+# 参数：dense.wmma.accumulatori.c.innertileAll, dense.wmma.accumulatorj.c.innertileAll, dense.wmma.accumulatork.innertileAll
+# 作用：第二级K维分块
+i_c_i_o, i_c_i_i = s[dense_wmma_accumulator].split(i_c_i, nparts = 1)  # nparts = accumulatori.c.innertileAll
+j_c_i_o, j_c_i_i = s[dense_wmma_accumulator].split(j_c_i, nparts = 1)  # nparts = accumulatorj.c.innertileAll
+k_i_o, k_i_i = s[dense_wmma_accumulator].split(k_i, nparts = 1)        # nparts = accumulatork.innertileAll
+s[dense_wmma_accumulator].reorder(i_c_i_o, j_c_i_o, k_i_o, i_c_i_i, j_c_i_i, k_i_i, )
+
+## tile 
+# 参数：dense.wmma.accumulatori.c.inner.innertileAll, dense.wmma.accumulatorj.c.inner.innertileAll, dense.wmma.accumulatork.inner.innertileAll
+# 作用：第三级K维分块
+i_c_i_i_o, i_c_i_i_i = s[dense_wmma_accumulator].split(i_c_i_i, nparts = 1)  # nparts = accumulatori.c.inner.innertileAll
+j_c_i_i_o, j_c_i_i_i = s[dense_wmma_accumulator].split(j_c_i_i, nparts = 1)  # nparts = accumulatorj.c.inner.innertileAll
+k_i_i_o, k_i_i_i = s[dense_wmma_accumulator].split(k_i_i, nparts = 1)        # nparts = accumulatork.inner.innertileAll
+s[dense_wmma_accumulator].reorder(i_c_i_i_o, j_c_i_i_o, k_i_i_o, i_c_i_i_i, j_c_i_i_i, k_i_i_i, )
+
+## Tensor core compute - TensorCore计算指令
+# 参数：wmma_m, wmma_n, wmma_k 决定TensorCore GEMM指令的矩阵尺寸
+# 可选组合：(16,16,16), (32,8,16), (8,32,16) 等
+i_c_i_i_i_o, i_c_i_i_i_i = s[dense_wmma_accumulator].split(i_c_i_i_i, factor = 16)  # factor = wmma_m
+j_c_i_i_i_o, j_c_i_i_i_i = s[dense_wmma_accumulator].split(j_c_i_i_i, factor = 16)  # factor = wmma_n
+k_i_i_i_o, k_i_i_i_i = s[dense_wmma_accumulator].split(k_i_i_i, factor = 16)        # factor = wmma_k
+s[dense_wmma_accumulator].reorder(i_c_i_i_i_o, j_c_i_i_i_o, k_i_i_i_o, i_c_i_i_i_i, j_c_i_i_i_i, k_i_i_i_i, )
+s[dense_wmma_accumulator].tensorize(i_c_i_i_i_i, intrin_wmma_gemm(
+Tensor(shape=[16, 16], op.name=wmma_A), Tensor(shape=[16, 16], op.name=wmma_B), Tensor(shape=[16, 16], op.name=wmma_C), [la_k0, 1], [lb_k0, 1], [lc_n0, 1], (16, 16, 16), 
+))
+
+#==--------- Start schedule STAGE B.shared.wmma.matrix_b ----------==#
+# 参数：dense.wmma.accumulator_local_pos 控制WMMA片段的计算位置
+# 取值影响：=0→k_o, =1→k_i, =2→k_i_i, =3→k_i_i_i
+s[B_shared_wmma_matrix_b].compute_at(s[dense_wmma_accumulator], k_o)
+
+## Tensor core loadB - TensorCore B矩阵加载指令
+ax0_o, ax0_i = s[B_shared_wmma_matrix_b].split(ax0, factor = 16)  # factor = wmma_k
+ax1_o, ax1_i = s[B_shared_wmma_matrix_b].split(ax1, factor = 16)  # factor = wmma_n
+s[B_shared_wmma_matrix_b].reorder(ax0_o, ax1_o, ax0_i, ax1_i, )
+s[B_shared_wmma_matrix_b].tensorize(ax0_i, intrin_wmma_load_matrix_W(
+[lb_k0, 1], [sb_k0, 1], (16, 16, 16), col_major, [16, 16], [16, 16], float16, 
+))
+
+#==--------- Start schedule STAGE B.shared ----------==#
+# 参数：dense.wmma.accumulator_shared_pos 控制B共享内存的计算位置
+s[B_shared].compute_at(s[dense_wmma_accumulator], k_o)
+
+## Storage align - B矩阵共享内存对齐
+# 参数：B.shared_offset (0-15) 用于避免bank conflict
+s[B_shared].storage_align(ax0, 0.000000, 1.000000)  # offset = B.shared_offset
+ax0_ax1_f = s[B_shared].fuse(ax0, ax1, )
+ax0_ax1_f_o, ax0_ax1_f_i = s[B_shared].split(ax0_ax1_f, factor = 1)
+# 参数：B.shared_vectorize 控制向量化因子 (1,2,4,8)
+s[B_shared].vectorize(ax0_ax1_f_i)  # factor = B.shared_vectorize
+ax0_ax1_f_o_o, ax0_ax1_f_o_i = s[B_shared].split(ax0_ax1_f_o, factor = 1)
+s[B_shared].bind(ax0_ax1_f_o_i, te.thread_axis("threadIdx.x"))
+ax0_ax1_f_o_o_o, ax0_ax1_f_o_o_i = s[B_shared].split(ax0_ax1_f_o_o, factor = 1)
+s[B_shared].bind(ax0_ax1_f_o_o_i, te.thread_axis("threadIdx.y"))
+
+#==--------- Start schedule STAGE A.shared.wmma.matrix_a ----------==#
+s[A_shared_wmma_matrix_a].compute_at(s[dense_wmma_accumulator], k_o)
+
+## Tensor core loadA - TensorCore A矩阵加载指令
+ax0_o, ax0_i = s[A_shared_wmma_matrix_a].split(ax0, factor = 16)  # factor = wmma_m
+ax1_o, ax1_i = s[A_shared_wmma_matrix_a].split(ax1, factor = 16)  # factor = wmma_k
+s[A_shared_wmma_matrix_a].reorder(ax0_o, ax1_o, ax0_i, ax1_i, )
+s[A_shared_wmma_matrix_a].tensorize(ax0_i, intrin_wmma_load_matrix_A(
+[la_k0, 1], [sa_k0, 1], (16, 16, 16), row_major, [16, 16], [16, 16], float16, 
+))
+
+#==--------- Start schedule STAGE A.shared ----------==#
+# A矩阵共享内存调度，与B矩阵类似
+s[A_shared].compute_at(s[dense_wmma_accumulator], k_o)
+
+## Storage align - A矩阵共享内存对齐
+# 参数：A.shared_offset (0-15) 用于避免bank conflict
+s[A_shared].storage_align(ax0, 0.000000, 1.000000)  # offset = A.shared_offset
+ax0_ax1_f = s[A_shared].fuse(ax0, ax1, )
+ax0_ax1_f_o, ax0_ax1_f_i = s[A_shared].split(ax0_ax1_f, factor = 1)
+# 参数：A.shared_vectorize 控制向量化因子 (1,2,4,8)
+s[A_shared].vectorize(ax0_ax1_f_i)  # factor = A.shared_vectorize
+ax0_ax1_f_o_o, ax0_ax1_f_o_i = s[A_shared].split(ax0_ax1_f_o, factor = 1)
+s[A_shared].bind(ax0_ax1_f_o_i, te.thread_axis("threadIdx.x"))
+ax0_ax1_f_o_o_o, ax0_ax1_f_o_o_i = s[A_shared].split(ax0_ax1_f_o_o, factor = 1)
+s[A_shared].bind(ax0_ax1_f_o_o_i, te.thread_axis("threadIdx.y"))
+硬件约束
+
+GPU: 支持TensorCore的GPU(如V100/A100)
+内存层次: 全局内存 → 共享内存 → 寄存器/WMMA片段
+TensorCore支持的矩阵尺寸: 16x16x16, 32x8x16, 8x32x16等组合
+线程块限制: threadIdx.x建议为32(内存合并访问), threadIdx.y*threadIdx.x ≤ 1024

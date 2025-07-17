@@ -840,11 +840,20 @@ ffi.generate_code_for_state(task.ansor_task, sym_state, True)   Sketch类
 ffi.extract_backbone
 ffi.subst_by_name       SymTask类中的get_flops方法 TaskPerfFunc类
 ffi.get_feature_pack    Sketch类中的fetch_features方法 SketchPerfFunc类
+ffi.state_from_config   SketchPerfFunc类中的make_measure_inputs方法 measure_configs_latency_方法
+ffi.measure_performance measure_configs_latency_方法
 
 
 
-
-
-
+felix.GetFeaturePack            ✔
+felix.linearExprAsPrimExpr
+felix.GenerateAllSymSketches    ✔
+felix.ExtractBackBone           ✔
+felix.PrintTrStep
+felix.GenerateCodeForState      ✔
+felix.GetLoopBounds
+felix.ExtractConfigDict
+felix.StateFromConfig           ✔
+felix.MeasurePerformance        ✔
 
 

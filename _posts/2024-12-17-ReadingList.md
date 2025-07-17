@@ -264,6 +264,14 @@ Across Devices for Deep Learning Tensor Programs](https://aclanthology.org/2023.
 
 - <img src="https://img.shields.io/badge/16-pages-green.svg" alt="16-pages" align="left"> [IntelliGen: Instruction-Level Auto-tuning for Tensor  Program with Monotonic Memory Optimization](https://dl.acm.org/doi/pdf/10.1145/3696443.3708967) - Zixuan Ma, Haojie Wang, Jingze Xing, Shuhong Huang, Liyan Zheng, Chen Zhang, Huanqi Cao, Kezhao Huang, Mingshu Zhai, Shizhi Tang, Penghan Wang, Jidong Zhai, CGO 2025
 
+- <img src="https://img.shields.io/badge/17-pages-green.svg" alt="17-pages" align="left"> [KPerfIR: Towards an Open and Compiler-centric Ecosystem for GPU Kernel Performance Tooling on Modern AI Workloads](https://www.usenix.org/system/files/osdi25-guan.pdf) - Yue Guan, Yuanwei Fang, Keren Zhou, Corbin Robeck， Manman Ren, Zhongkai Yu, Yufei Ding, Adnan Aziz, OSDI 2025
+
+- <img src="https://img.shields.io/badge/19-pages-green.svg" alt="19-pages" align="left"> [Mirage: A Multi-Level Superoptimizer for Tensor Programs](https://www.usenix.org/system/files/osdi25-wu-mengdi.pdf) - Mengdi Wu, Xinhao Cheng, Shengyu Liu, Chunan Shi, Jianan Ji, Man Kit Ao, Praveen Velliengiri, Xupeng Miao, Oded Padon, Zhihao Jia, OSDI 2025
+
+- <img src="https://img.shields.io/badge/18-pages-green.svg" alt="18-pages" align="left"> [Bayesian Code Diffusion for Efficient Automatic Deep Learning Program Optimization](https://www.usenix.org/system/files/osdi25-jeong.pdf) - Isu Jeong, Seulki Lee, OSDI 2025
+
+- <img src="https://img.shields.io/badge/18-pages-green.svg" alt="18-pages" align="left"> [QiMeng-Xpiler: Transcompiling Tensor Programs for Deep Learning Systems with a Neural-Symbolic Approach](https://www.usenix.org/system/files/osdi25-dong.pdf) - Shouyang Dong, Yuanbo Wen, Jun Bi, Di Huang, Jiaming Guo, Jianxing Xu, Ruibai Xu, Xinkai Song, Yifan Hao, Ling Li, Xuehai Zhou, Tianshi Chen, Qi Guo, Yunji Chen, OSDI 2025
+
 Automatic [![number](https://img.shields.io/badge/27-38-blue.svg?style=flat)](https://github.com/home-assistant/home-assistant-iOS/blob/master/LICENSE)
 - <img src="https://img.shields.io/badge/14-pages-green.svg" alt="14-pages" align="left"> [AMOS: Enabling Automatic Mapping for Tensor Computations On Spatial Accelerators with Hardware Abstraction](https://dl.acm.org/doi/pdf/10.1145/3470496.3527440) - Size Zheng, Renze Chen, Anjiang Wei, Yicheng Jin, Qin Han, Liqiang Lu, Bingyang Wu, Xiuhong Li, Shengen Yan, Yun Liang, ISCA, 2022 ![Check](https://img.shields.io/badge/✓-done-green)
 
