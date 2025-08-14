@@ -162,6 +162,11 @@ Dynamic Tensor Programs [![number](https://img.shields.io/badge/0-11-blue.svg?st
 
 - <img src="https://img.shields.io/badge/30-pages-green.svg" alt="30-pages" align="left"> [FTuner: A Fast Dynamic Shape Tensors Program Auto-Tuner for Deep Learning Compilers](https://arxiv.org/pdf/2407.21418) - Pengyu Mu, Linquan Wei, Rui Wang, Yi Liu, arxiv, 2024
 
+- <img src="https://img.shields.io/badge/13-pages-green.svg" alt="13-pages" align="left"> [Deep Learning Operators Performance Tuning for Changeable Sized Input Data on Tensor Accelerate Hardware](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10929012) - Pengyu Mu, Yi Liu, Rui Wang, Guoxiang Liu, Hangcheng An, Qianhe Zhao, Hailong Yang, Chenhao Xie, Zhongzhi Luan, Chunye Gong, Depei Qian, TC, 2025
+
+- <img src="https://img.shields.io/badge/13-pages-green.svg" alt="13-pages" align="left"> [HAOTuner: A Hardware Adaptive Operator Auto-Tuner for Dynamic Shape Tensor Compilers](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10160123) - Pengyu Mu, Yi Liu, Rui Wang, Guoxiang Liu, Zhonghao Sun, Hailong Yang, Zhongzhi Luan,  Depei Qian, TC, 2023
+
+
 Sparse Tensor Program Optimization [![number](https://img.shields.io/badge/2-2-blue.svg?style=flat)](https://github.com/home-assistant/home-assistant-iOS/blob/master/LICENSE)
 - <img src="https://img.shields.io/badge/30-pages-green.svg" alt="30-pages" align="left"> [A Sparse Iteration Space Transformation Framework for Sparse Tensor Algebra](https://dl.acm.org/doi/pdf/10.1145/3428226) - Ryan Senanayake, Changwan Hong, Ziheng Wang, Amalee Wilson, Stephen Chou, Shaoaib Kamil, Saman Amarasinghe, Fredrik Kjolstad, OOPSLA, 2020 ![Check](https://img.shields.io/badge/✓-done-green)
 

@@ -701,4 +701,11 @@ ComputeReusePAM
 
 PAMDataLoader:
 
+cmake -DCMAKE_BUILD_TYPE=Debug ..
+
+
+
+Stmt部分代码生成逻辑
+/src/te/schedule/schedule_ops.cc文件中的MakePipeline函数
+生成producer代码→处理双缓冲优化→组合Producer和Consumer→添加内存管理→添加作用域标记(标记该operation的存储作用域)
 

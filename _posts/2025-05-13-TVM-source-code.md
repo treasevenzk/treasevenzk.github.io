@@ -664,6 +664,10 @@ buffer[index.v0] = value.v0;
 buffer[index.v1] = value.v1;
 buffer[index.v2] = value.v2;
 ```
+**BufferRealizeNode的依赖**
+无前置依赖:可以独立创建缓冲区、 后续依赖:为后续的BufferStore/BufferLoad提供基础
+**BufferStoreNode的依赖**
+前置依赖: 必须在对应的BufferRealize作用域内、运行时依赖: 缓冲区必须已经分配内存
 
 BufferStoreNode: 向多缓冲区的指定位置写入数据值，提供高级的、语义化的缓冲区访问接口
 ```
@@ -964,32 +968,136 @@ Rewrite Simplify(更新重写简化器): 在重写简化器中记录变量var绑
 Canonical Simplify(更新标准化简化器): 在标准化简化器中记录变量var绑定到new_var,缓存变量的标准化表示，避免重复标准化计算
 
 
+```
+auto pass_list = Array<tvm::transform::Pass>();
+// Phase 0
+pass_list.push_back(tir::transform::InjectPrefetch());
+pass_list.push_back(tir::transform::StorageFlatten(64, instrument_bound_checkers));
+// Phase 1
+pass_list.push_back(tir::transform::NarrowDataType(32));
+pass_list.push_back(tir::transform::Simplify());
+pass_list.push_back(tir::transform::VectorizeLoop(!disable_vectorize));
+pass_list.push_back(tir::transform::InjectVirtualThread());
+pass_list.push_back(tir::transform::StorageRewrite());
+pass_list.push_back(tir::transform::Simplify());
+tvm::Map<String, tvm::PrimExpr> gpu_params{
+    {"max_shared_memory_per_block", task->hardware_params->max_shared_memory_per_block},
+    {"max_local_memory_per_block", task->hardware_params->max_local_memory_per_block},
+    {"max_threads_per_block", task->hardware_params->max_threads_per_block},
+    {"max_vector_bytes", task->hardware_params->vector_unit_bytes},
+    {"max_vthread", task->hardware_params->max_vthread_extent},
+};
+pass_list.push_back(tir::transform::VerifyGPUCode(gpu_params));
+const auto& optimize = tir::transform::Sequential(pass_list);
+optimize(mod);
+```
+上面这段代码的详解:
+需经历的代码文件: tir/transform.h、tir/transfroms/文件夹底下对应pass的.cc文件
+tir::transform::Sequential(pass_list) 对应 ir/tranforms.h → ir/transform.cc
+每个pass里面都有CreatePrimFuncPass函数 在/tir/ir/transform.cc 经历过程 CreatePrimFuncPass → PrimFuncPass::PrimFuncPass → PrimFuncPassNode::operator() 注意在这里面pass_func传递过来的是一个函数
+然后经历每个每个pass，访问Stmt
 
 
 
+TVM里面某个变量是ObjectRef类型，但实际上它有具体的类型，可采用下面的方法进行gdb调试查看
+假设你有一个AttrStmtNode* 指针，命名为 attr_stmt
+先检查node的实际类型
+p attr_stmt->node.get()->GetTypeKey()
+或者检查类型索引
+p attr_stmt->node.get()->type_index_
+
+$85 = {static npos = 18446744073709551615, _M_dataplus = {<std::allocator<char>> = {<__gnu_cxx::new_allocator<char>> = {<No data fields>}, <No data fields>}, _M_p = 0x7cd56f3fd780 "tir.IterVar"}, _M_string_length = 11, {_M_local_buf = "tir.IterVar\000\325|\000", 
+    _M_allocated_capacity = 8243122550632245620}}
+
+将ObjectRef转换为IterVar
+p ((tvm::tir::IterVarNode*)attr_stmt->node.get())->var->name_hint.c_str()
 
 
 
+ir/transform.cc:242
+IRModule Pass::operator()(IRModule mod) const {
+  const PassNode* node = operator->();
+  ICHECK(node != nullptr);
+  PassProfile::EnterPass(node->Info()->name);
+  auto ret = node->operator()(std::move(mod));
+  PassProfile::ExitPass();
+  return std::move(ret);
+}
 
 
+ir/transform.h:314
+PassNode
+IRModule operator()(IRModule mod) const {
+  return this->operator()(std::move(mod), PassContext::Current());
+}
 
 
+ir/transform.cc:531
+IRModule SequentialNode::operator()(IRModule mod, const PassContext& pass_ctx) const {
+  for (const Pass& pass : passes) {
+    ICHECK(pass.defined()) << "Found undefined pass for optimization.";
+    const PassInfo& pass_info = pass->Info();
+    if (!pass_ctx.PassEnabled(pass_info)) continue;
+    // resolve dependencies
+    for (const auto& it : pass_info->required) {
+      mod = GetPass(it)(std::move(mod), pass_ctx);
+    }
+    mod = pass(std::move(mod), pass_ctx);
+  }
+  return mod;
+}
+
+ir/transform.cc:251
+IRModule Pass::operator()(IRModule mod, const PassContext& pass_ctx) const {
+  const PassNode* node = operator->();
+  ICHECK(node != nullptr);
+  PassProfile::EnterPass(node->Info()->name);
+  auto ret = node->operator()(std::move(mod), pass_ctx);
+  PassProfile::ExitPass();
+  return std::move(ret);
+}
 
 
+tir/ir/transform.cc:89
+IRModule PrimFuncPassNode::operator()(IRModule mod, const PassContext& pass_ctx) const {
+  const PassInfo& pass_info = Info();
+  ICHECK(mod.defined());
+  pass_ctx.Trace(mod, pass_info, true);
+  std::vector<ObjectRef> deleted_list;
+  IRModuleNode* mod_ptr = mod.CopyOnWrite();
+  auto* func_dict = mod_ptr->functions.CopyOnWrite();
+  // directly loop over the underlying dict
+  for (auto& kv : *func_dict) {
+    // only picks up tir::PrimFunc
+    if (kv.second->IsInstance<PrimFuncNode>()) {
+      // move out the function so that it is the only copy.
+      PrimFunc func = Downcast<PrimFunc>(std::move(kv.second));
+      func = pass_func(std::move(func), mod, pass_ctx);
+      kv.second = std::move(func);
+
+      if (!kv.second.defined()) {
+        deleted_list.push_back(kv.first);
+      }
+    }
+  }
+
+  // automatic removal of None
+  for (const auto& gv : deleted_list) {
+    func_dict->erase(gv);
+  }
+  pass_ctx.Trace(mod, pass_info, false);
+  return mod;
+}
 
 
+packed_func.h:1505
+template <typename R, typename... Args>
+TVM_ALWAYS_INLINE R TypedPackedFunc<R(Args...)>::operator()(Args... args) const {
+  return detail::typed_packed_call_dispatcher<R>::run(packed_, std::forward<Args>(args)...);
+}
 
 
-
-
-
-
-
-
-
-
-
-
+Copy-on-Write 写时复制: (多个变量可以共享同一份数据，只有在需要修改时才创建副本)
 
 
 
