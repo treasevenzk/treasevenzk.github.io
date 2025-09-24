@@ -1104,19 +1104,203 @@ Copy-on-Write 写时复制: (多个变量可以共享同一份数据，只有在
 
 
 
+C[32,1000]=A[32,2048]*B[2048,1000]
 
 
 
 
+p0            p1
+|             |
+p0.shared     p1.shared
+      |        | 
+      |        |
+      ——————————
+          |
+    T.matmul.nn.local
+          |
+      T.matmul.nn
+
+cache_write
+T.matmul.nn.local
+split*4 i0.c.inner、i0.c.outer.inner、i0.c.outer.outer.inner、i0.c.outer.outer.outer.inner、i0.c.outer.outer.outer.outer
+split*4 i1.c.inner、i1.c.outer.inner、i1.c.outer.outer.inner、i1.c.outer.outer.outer.inner、i1.c.outer.outer.outer.outer
+split*2 k.inner、k.outer.inner、k.outer.outer
+reorder
+
+i0.c.outer.outer.outer.outer
+i1.c.outer.outer.outer.outer
+i0.c.outer.outer.outer.inner
+i1.c.outer.outer.outer.inner
+------------------------------
+i0.c.outer.outer.inner
+i1.c.outer.outer.inner
+k.outer.outer
+k.outer.inner
+i0.c.outer.inner
+i1.c.outer.inner
+k.inner
+i0.c.inner
+i1.c.inner
+
+T.matmul.nn
+split*3   i0.inner、i0.outer.inner、i0.outer.outer.inner、i0.outer.outer.outer
+split*3   i1.inner、i1.outer.inner、i1.outer.outer.inner、i1.outer.outer.outer
+
+i0.outer.outer.outer  blockIdx.x
+i1.outer.outer.outer
+i0.outer.outer.inner  vthread
+i1.outer.outer.inner
+i0.outer.inner      threadIdx.x
+i1.outer.inner
+------------------------
+i0.inner  
+i1.inner
+
+compute_at
+
+cache_read
+compute_at
+
+cache_read
+compute_at
+
+fuse
+Annotation
+
+fuse
+annotation
+
+fuse
+annotation
+
+fuse(p1.shared) ~~ax0.ax1.fused~~
+split(p1.shared)  ax0.ax1.fused.inner、~~ax0.ax1.fused.outer~~
+Annotation vectorize
+followFusedSplit  ax0.ax1.fused.outer.inner、ax0.ax1.fused.outer.outer
+Annotation kThreadx
+
+fuse(p0.shared) ~~ax0.ax1.fused~~
+split(p0.shared)  ax0.ax.fused.inner、~~ax0.ax1.fused.outer~~
+Annotation vectorize
+followFusedSplit  ax0.ax1.fused.outer.inner、ax0.ax1.fused.outer.outer
+Annotation kThreadx
+
+Pragma
 
 
+BufferRealize   T.matmul.nn (32, 1000)
+AttrStmt    blockIdx.x     16=4*4 
+            vthread        5=1*5
+            threadIdx.x    100=2*50
+BufferRealize   T.matmul.nn.local (32, 1000)
+SeqStmt
+- AttrStmt   pragma           512
+  AttrStmt   pragma_explict  
+  SeqStmt
+  - For           i0.c.outer.inner.init   4
+    BufferStore   T.matmul.nn.local             (blockIdx.x%4)*250+(vthread*50)+threadIdx.x%50    (blockIdx//4)*8+(threadIdx.x//50)*4+io.c.outer.inner.init
+    
+  - For           k.outer.outer     64
+    BufferRealize p0.shared
+    SeqStmt
+    - For ax0.ax1.fused.outer.outer   3
+      AttrStmt      threadIdx.x       100
+      IfThenElse
+      BufferStore   p0.shared     (blockIdx.x//4)*8+(ax0.ax1.fused.outer.outer*100+threadIdx.x)//32 (k.outer.outer*32)+((ax0.ax1.fused.outer.outer*4)+threadIdx.x)%32
+    - BufferRealize p1.shared
+      SeqStmt
+      - For ax0.ax1.fused.outer.outer   80
+        AttrStmt  threadIdx.x           100
+        BufferStore p1.shared    (k.outer.outer*32)+((ax0.ax1.fused.outer.outer*100)+threadIdx.x)//250  (blockIdx.x%4)*250+((ax0.ax1.fused.outer.outer*100)+threadIdx.x)%250       
+      - For k.outer.inner       32
+        For i0.c.outer.inner    4
+        BufferStore   T.matmul.nn.local   (blockIdx.x//4)*8+(threadIdx.x//50)*4+i0.c.outer.inner   (blockIdx.x%4)*250+vthread*50+threadIdx.x%50
+                                          p0.shared   (blockIdx.x//4)*8+(threadIdx.x//50)*4+i0.c.outer.inner    k.outer.outer*32+k.outer.inner
+                                          p1.shared   k.outer.outer*32+k.outer.inner    (blockIdx.x%4)*250+vthread*50+threadIdx%50
+- For i0.inner  4
+  BufferStore T.matmul.nn   (blockIdx.x//4)*8+(threadIdx.x//50)*4+i0.inner    (blockIdx.x%4)*250+(vthread*50)+(threadIdx.x%50)
 
 
+  4*2048=8192
+
+---------------------------
+```
+  BufferRealize   T.matmul.nn (32, 1000)
+  AttrStmt blockIdx.x   2=1*2
+  AttrStmt vthread      8=4*2
+  AttrStmt threadIdx.x  100=2*50
+  BufferRealize   T.mtmul.nn.local (32, 1000)
+  SeqStmt
+  - AttrStmt  pragma  512
+    AttrStmt  pragma_explicit
+    SeqStmt
+    - For     i1.c.outer.inner.init   5
+      For     i0.c.inner.init         4
+      BufferStore   T.matmul.nn.local   (32, 1000)    (vthread//2)*8+(threadIdx.x//50)*4+i0.c.inner.init    (blockIdx.x*500)+(vthread%2)*250+(threadIdx.x%50)*5+i1.c.outer.inner.init
+                              T.matmul.nn.local(kWrite)
+      i0.c.inner.init                 4*1
+      i1.c.outer.inner.init           4*5
+      threadIdx.x                     8*250
+      vthread                         32*500
+      blockIdx.x                      32*1000
+      T.matmul.nn.local   kNoReuse   0    0    0    stride=1
+
+    - For     k.outer.outer     128
+      BufferRealize p0.shared (32, 2048)
+      SeqStmt
+      - For ax0.ax1.fused.outer.outer   6
+        AttrStmt  threadIdx.x           100
+        IfThenElse
+        BufferStore p0.shared   (32, 2048)      ((ax0.ax1.fused.outer.outer*100)+threadIdx.x)//16    (k.outer.outer*16)+(ax0.ax1.fused.outer.outer*4+threadIdx.x)%16
+                                        p0(kRead)     p0.shared(kWrite)        
+        threadIdx.x                   7*16              7*16
+        ax0.ax1.fused.outer.outer     38*16             38*16
+        k.outer.outer                 38*2048           38*2048
+        threadIdx.x                   38*2048           38*2048
+        vthread                       38*2048           38*2048
+        blockIdx.x                    38*2048           38*2048  
+        p0        kLoopMultipleRead   76800   622592(38*2048*4*2)    100    stride=1
+        p0.shared kLoopMultipleRead   76800   622592(38*2048*4*2)    100    stride=1
 
 
+      - BufferRealize p1.shared   (2048, 1000)
+        SeqStmt
+        - For  ax0.ax1.fused.outer.outer  80
+          AttrStmt  threadIdx.x           100
+          BufferStore   p1.shared   (2048, 1000)  (k.outer.outer*16)+(ax0.ax1.fused.outer.outer//5)   (blockIdx.x*50)+(ax0.ax1.fused.outer.outer%5)*100+threadIdx.x
+                                        p1(kRead)       p1.shared(kWrite)
+          threadIdx.x                   1*100             1*100
+          ax0.ax1.fused.outer.outer     16*500            16*500
+          k.outer.outer                 2048*500          2048*500
+          threadIdx.x                   2048*500          2048*500
+          vthread                       2048*500          2048*500
+          blockIdx.x                    2048*1000         2048*1000
 
+        - For  k.outer.inner      4
+          For  i1.c.outer.inner   5
+          For  k.inner            4
+          For  i0.c.inner         4
+          BufferStore   T.matmul.nn.local (32, 1000)
+                        T.matmul.nn.local      (vthread//2)*8+(threadIdx.x//50)*4+i0.c.inner    (blockIdx.x*500)+(vthread%2)*250+(blockIdx.x%50)*5+i1.c.outer.inner
+                        p0.shared              (k.outer.outer*16)+(k.outer.inner*4)+k.inner     (blockIdx.x*500)+(vthread%2)*250+(threadIdx.x%50)*5+i1.c.outer.inner
+                        p1.shared              (vthread//2)*8+(threadIdx.x//50)*4+i0.c.inner    (k.outer.outer*16)+(k.outer.inner*4)+k.inner
+                                p0.shared(kRead)      p1.shared(kRead)      T.matmul.nn.local(kReadWrite)      
+          i0.c.inner            1*1                   4*1                   4*1
+          k.inner               4*1                   4*4                   4*1
+          i1.c.outer.inner      4*5                   4*4                   4*5
+          k.outer.inner         16*5                  4*16                  4*5
+          k.outer.outer         2048*5                4*2048                4*5
+          threadIdx.x           2048*250              8*2048                8*250
+          vthread               2048*500              32*2048               32*500
+          blockIdx.x            2048*1000             32*2048               32*1000
 
-
-
-
-
+  - For i0.inner  4
+    For i1.inner  5
+    BufferStore   T.matmul.nn   (32, 1000)    (vthread//2)*8+(threadIdx.x//50)*4+i0.inner     (blockIdx.x*500)+(vthread%2)*250+(threadIdx.x%50)*5+i1.inner
+                    T.matmul.nn.local(kRead)        T.matmul.nn(kWrtie)
+    i1.inner        1*5                             1*5
+    i0.inner        4*5                             4*5
+    threadIdx.x     8*250                           8*250
+    vthread         32*500                          32*500
+    blockIdx.x      32*1000                         32*1000
+```
