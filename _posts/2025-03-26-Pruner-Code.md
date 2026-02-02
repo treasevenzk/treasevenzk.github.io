@@ -88,397 +88,6 @@ search_policy
 126+124+1242+790+503=2785
 
 
-python
-63+23+280+539+471+478+619+355+1321+393+281+596+837+450+281=6987
-26+201+66+915+747+147+200+1255+741=4298
-
-```
-编译流程
-[  0%] Creating directories for 'project_libbacktrace'
-[  0%] Building CXX object CMakeFiles/tvm_objs.dir/src/arith/int_set.cc.o
-[  0%] Building CXX object CMakeFiles/tvm_objs.dir/src/arith/canonical_simplify.cc.o
-[  0%] Building CXX object CMakeFiles/tvm_objs.dir/src/arith/const_int_bound.cc.o
-[  0%] Building CXX object CMakeFiles/tvm_objs.dir/src/arith/detect_linear_equation.cc.o
-[  1%] Building CXX object CMakeFiles/tvm_objs.dir/src/arith/domain_touched.cc.o
-[  1%] Building CXX object CMakeFiles/tvm_objs.dir/src/arith/ir_mutator_with_analyzer.cc.o
-[  2%] Building CXX object CMakeFiles/tvm_objs.dir/src/arith/iter_affine_map.cc.o
-[  2%] Building CXX object CMakeFiles/tvm_objs.dir/src/arith/modular_set.cc.o
-[  2%] Building CXX object CMakeFiles/tvm_objs.dir/src/arith/rewrite_simplify.cc.o
-[  2%] Building CXX object CMakeFiles/tvm_objs.dir/src/arith/solve_linear_equation.cc.o
-[  3%] Building CXX object CMakeFiles/tvm_objs.dir/src/arith/solve_linear_inequality.cc.o
-[  4%] Building CXX object CMakeFiles/tvm_objs.dir/src/arith/bound_deducer.cc.o
-[  4%] Building CXX object CMakeFiles/tvm_objs.dir/src/auto_scheduler/compute_dag.cc.o
-[  4%] Building CXX object CMakeFiles/tvm_objs.dir/src/auto_scheduler/cost_model.cc.o
-[  4%] Building CXX object CMakeFiles/tvm_objs.dir/src/arith/int_constraints.cc.o
-[  5%] Building CXX object CMakeFiles/tvm_objs.dir/src/auto_scheduler/feature.cc.o
-[  5%] Building CXX object CMakeFiles/tvm_objs.dir/src/auto_scheduler/feature_pam.cc.o
-[  5%] Building CXX object CMakeFiles/tvm_objs.dir/src/arith/analyzer.cc.o
-[  5%] Building CXX object CMakeFiles/tvm_objs.dir/src/auto_scheduler/auto_schedule.cc.o
-[  7%] Building CXX object CMakeFiles/tvm_objs.dir/src/auto_scheduler/feature_psa.cc.o
-[  8%] Building CXX object CMakeFiles/tvm_objs.dir/src/auto_scheduler/loop_state.cc.o
-[  8%] Building CXX object CMakeFiles/tvm_objs.dir/src/auto_scheduler/measure.cc.o
-[  8%] Building CXX object CMakeFiles/tvm_objs.dir/src/auto_scheduler/measure_record.cc.o
-[  8%] Building CXX object CMakeFiles/tvm_objs.dir/src/auto_scheduler/search_policy/empty_policy.cc.o
-[  9%] Building CXX object CMakeFiles/tvm_objs.dir/src/auto_scheduler/search_policy/search_policy.cc.o
-[  9%] Building CXX object CMakeFiles/tvm_objs.dir/src/auto_scheduler/search_policy/sketch_policy.cc.o
-[  9%] Building CXX object CMakeFiles/tvm_objs.dir/src/auto_scheduler/search_policy/sketch_policy_rules.cc.o
-[  9%] Building CXX object CMakeFiles/tvm_objs.dir/src/auto_scheduler/search_policy/utils.cc.o
-[ 10%] Building CXX object CMakeFiles/tvm_objs.dir/src/auto_scheduler/search_task.cc.o
-[ 10%] Building CXX object CMakeFiles/tvm_objs.dir/src/auto_scheduler/transform_step.cc.o
-[ 10%] Building CXX object CMakeFiles/tvm_objs.dir/src/auto_scheduler/utils.cc.o
-[ 10%] Building CXX object CMakeFiles/tvm_objs.dir/src/autotvm/feature_visitor.cc.o
-[ 11%] Building CXX object CMakeFiles/tvm_objs.dir/src/autotvm/touch_extractor.cc.o
-[ 11%] Building CXX object CMakeFiles/tvm_objs.dir/src/driver/driver_api.cc.o
-[ 11%] Building CXX object CMakeFiles/tvm_objs.dir/src/ir/adt.cc.o
-[ 13%] Building CXX object CMakeFiles/tvm_objs.dir/src/ir/attrs.cc.o
-[ 14%] Building CXX object CMakeFiles/tvm_objs.dir/src/ir/diagnostic.cc.o
-[ 15%] Building CXX object CMakeFiles/tvm_objs.dir/src/ir/env_func.cc.o
-[ 15%] Building CXX object CMakeFiles/tvm_objs.dir/src/ir/error.cc.o
-[ 15%] Building CXX object CMakeFiles/tvm_objs.dir/src/ir/expr.cc.o
-[ 16%] Building CXX object CMakeFiles/tvm_objs.dir/src/ir/function.cc.o
-[ 16%] Building CXX object CMakeFiles/tvm_objs.dir/src/ir/module.cc.o
-[ 16%] Building CXX object CMakeFiles/tvm_objs.dir/src/ir/op.cc.o
-[ 16%] Building CXX object CMakeFiles/tvm_objs.dir/src/ir/span.cc.o
-[ 18%] Building CXX object CMakeFiles/tvm_objs.dir/src/ir/tensor_type.cc.o
-[ 18%] Building CXX object CMakeFiles/tvm_objs.dir/src/ir/transform.cc.o
-[ 18%] Building CXX object CMakeFiles/tvm_objs.dir/src/ir/type.cc.o
-[ 18%] Building CXX object CMakeFiles/tvm_objs.dir/src/ir/type_functor.cc.o
-[ 19%] Building CXX object CMakeFiles/tvm_objs.dir/src/ir/type_relation.cc.o
-[ 19%] Building CXX object CMakeFiles/tvm_objs.dir/src/node/reflection.cc.o
-[ 19%] Building CXX object CMakeFiles/tvm_objs.dir/src/node/repr_printer.cc.o
-[ 20%] Building CXX object CMakeFiles/tvm_objs.dir/src/node/serialization.cc.o
-[ 20%] Building CXX object CMakeFiles/tvm_objs.dir/src/node/structural_equal.cc.o
-[ 21%] Building CXX object CMakeFiles/tvm_objs.dir/src/node/structural_hash.cc.o
-[ 21%] Building CXX object CMakeFiles/tvm_objs.dir/src/parser/meta_ref.cc.o
-[ 22%] Building CXX object CMakeFiles/tvm_objs.dir/src/parser/parser.cc.o
-[ 23%] Building CXX object CMakeFiles/tvm_objs.dir/src/parser/source_map.cc.o
-[ 23%] Building CXX object CMakeFiles/tvm_objs.dir/src/parser/span_check.cc.o
-[ 24%] Building CXX object CMakeFiles/tvm_objs.dir/src/printer/doc.cc.o
-[ 27%] Building CXX object CMakeFiles/tvm_objs.dir/src/printer/text_printer.cc.o
-[ 27%] Building CXX object CMakeFiles/tvm_objs.dir/src/printer/relay_text_printer.cc.o
-[ 27%] Building CXX object CMakeFiles/tvm_objs.dir/src/printer/tir_text_printer.cc.o
-[ 27%] Building CXX object CMakeFiles/tvm_objs.dir/src/printer/tvmscript_printer.cc.o
-[ 28%] Building CXX object CMakeFiles/tvm_objs.dir/src/support/ffi_testing.cc.o
-[ 28%] Building CXX object CMakeFiles/tvm_objs.dir/src/support/hexdump.cc.o
-[ 28%] Building CXX object CMakeFiles/tvm_objs.dir/src/support/libinfo.cc.o
-[ 29%] Building CXX object CMakeFiles/tvm_objs.dir/src/support/parallel_for.cc.o
-[ 30%] Building CXX object CMakeFiles/tvm_objs.dir/src/te/autodiff/ad_simplify.cc.o
-[ 30%] Building CXX object CMakeFiles/tvm_objs.dir/src/te/autodiff/ad_utils.cc.o
-[ 30%] Building CXX object CMakeFiles/tvm_objs.dir/src/te/autodiff/adjoint.cc.o
-[ 30%] Building CXX object CMakeFiles/tvm_objs.dir/src/te/autodiff/jacobian.cc.o
-[ 32%] Building CXX object CMakeFiles/tvm_objs.dir/src/te/operation/compute_op.cc.o
-[ 32%] Building CXX object CMakeFiles/tvm_objs.dir/src/te/operation/cross_thread_reduction.cc.o
-[ 32%] Building CXX object CMakeFiles/tvm_objs.dir/src/te/operation/extern_op.cc.o
-[ 32%] Building CXX object CMakeFiles/tvm_objs.dir/src/te/operation/hybrid_op.cc.o
-[ 33%] Building CXX object CMakeFiles/tvm_objs.dir/src/te/operation/op_utils.cc.o
-[ 33%] Building CXX object CMakeFiles/tvm_objs.dir/src/te/operation/placeholder_op.cc.o
-[ 33%] Building CXX object CMakeFiles/tvm_objs.dir/src/te/operation/scan_op.cc.o
-[ 33%] Building CXX object CMakeFiles/tvm_objs.dir/src/te/operation/tensor_compute_op.cc.o
-[ 34%] Building CXX object CMakeFiles/tvm_objs.dir/src/te/operation/tensorize.cc.o
-[ 34%] Building CXX object CMakeFiles/tvm_objs.dir/src/te/schedule/auto_inline_elem_wise.cc.o
-[ 34%] Building CXX object CMakeFiles/tvm_objs.dir/src/te/schedule/bound.cc.o
-[ 35%] Building CXX object CMakeFiles/tvm_objs.dir/src/te/schedule/graph.cc.o
-[ 35%] Building CXX object CMakeFiles/tvm_objs.dir/src/te/schedule/message_passing.cc.o
-[ 35%] Building CXX object CMakeFiles/tvm_objs.dir/src/te/schedule/operation_inline.cc.o
-[ 35%] Building CXX object CMakeFiles/tvm_objs.dir/src/te/schedule/schedule_dataflow_rewrite.cc.o
-[ 36%] Building CXX object CMakeFiles/tvm_objs.dir/src/te/schedule/schedule_lang.cc.o
-[ 36%] Building CXX object CMakeFiles/tvm_objs.dir/src/te/schedule/schedule_ops.cc.o
-[ 36%] Building CXX object CMakeFiles/tvm_objs.dir/src/te/schedule/schedule_postproc_rewrite_for_tensor_core.cc.o
-[ 36%] Building CXX object CMakeFiles/tvm_objs.dir/src/te/schedule/schedule_postproc_to_primfunc.cc.o
-[ 37%] Building CXX object CMakeFiles/tvm_objs.dir/src/te/schedule/verify_compact_buffer.cc.o
-[ 37%] Building CXX object CMakeFiles/tvm_objs.dir/src/te/tensor.cc.o
-[ 37%] Building CXX object CMakeFiles/tvm_objs.dir/src/tir/analysis/deep_equal.cc.o
-[ 37%] Building CXX object CMakeFiles/tvm_objs.dir/src/tir/analysis/side_effect.cc.o
-[ 38%] Building CXX object CMakeFiles/tvm_objs.dir/src/tir/analysis/var_touch.cc.o
-[ 38%] Building CXX object CMakeFiles/tvm_objs.dir/src/tir/analysis/verify_gpu_code.cc.o
-[ 38%] Building CXX object CMakeFiles/tvm_objs.dir/src/tir/analysis/verify_memory.cc.o
-[ 38%] Building CXX object CMakeFiles/tvm_objs.dir/src/tir/analysis/verify_ssa.cc.o
-[ 39%] Building CXX object CMakeFiles/tvm_objs.dir/src/tir/ir/buffer.cc.o
-[ 39%] Building CXX object CMakeFiles/tvm_objs.dir/src/tir/ir/data_layout.cc.o
-[ 39%] Building CXX object CMakeFiles/tvm_objs.dir/src/tir/ir/expr.cc.o
-[ 39%] Building CXX object CMakeFiles/tvm_objs.dir/src/tir/ir/expr_functor.cc.o
-[ 40%] Building CXX object CMakeFiles/tvm_objs.dir/src/tir/ir/function.cc.o
-[ 40%] Building CXX object CMakeFiles/tvm_objs.dir/src/tir/ir/stmt.cc.o
-[ 40%] Building CXX object CMakeFiles/tvm_objs.dir/src/tir/ir/stmt_functor.cc.o
-[ 40%] Building CXX object CMakeFiles/tvm_objs.dir/src/tir/ir/transform.cc.o
-[ 41%] Building CXX object CMakeFiles/tvm_objs.dir/src/tir/op/builtin.cc.o
-[ 41%] Building CXX object CMakeFiles/tvm_objs.dir/src/tir/op/op.cc.o
-[ 41%] Building CXX object CMakeFiles/tvm_objs.dir/src/tir/op/runtime.cc.o
-[ 42%] Building CXX object CMakeFiles/tvm_objs.dir/src/tir/transforms/arg_binder.cc.o
-[ 42%] Building CXX object CMakeFiles/tvm_objs.dir/src/tir/transforms/bf16_legalize.cc.o
-[ 42%] Building CXX object CMakeFiles/tvm_objs.dir/src/tir/transforms/bound_checker.cc.o
-[ 42%] Building CXX object CMakeFiles/tvm_objs.dir/src/tir/transforms/combine_context_call.cc.o
-[ 43%] Building CXX object CMakeFiles/tvm_objs.dir/src/tir/transforms/coproc_sync.cc.o
-[ 43%] Building CXX object CMakeFiles/tvm_objs.dir/src/tir/transforms/decorate_device_scope.cc.o
-[ 43%] Building CXX object CMakeFiles/tvm_objs.dir/src/tir/transforms/hoist_if_then_else.cc.o
-[ 43%] Building CXX object CMakeFiles/tvm_objs.dir/src/tir/transforms/inject_copy_intrin.cc.o
-[ 44%] Building CXX object CMakeFiles/tvm_objs.dir/src/tir/transforms/inject_double_buffer.cc.o
-[ 44%] Building CXX object CMakeFiles/tvm_objs.dir/src/tir/transforms/inject_prefetch.cc.o
-[ 44%] Building CXX object CMakeFiles/tvm_objs.dir/src/tir/transforms/inject_virtual_thread.cc.o
-[ 44%] Building CXX object CMakeFiles/tvm_objs.dir/src/tir/transforms/ir_utils.cc.o
-[ 45%] Building CXX object CMakeFiles/tvm_objs.dir/src/tir/transforms/lift_attr_scope.cc.o
-[ 45%] Building CXX object CMakeFiles/tvm_objs.dir/src/tir/transforms/loop_partition.cc.o
-[ 45%] Building CXX object CMakeFiles/tvm_objs.dir/src/tir/transforms/lower_custom_datatypes.cc.o
-[ 45%] Building CXX object CMakeFiles/tvm_objs.dir/src/tir/transforms/lower_device_storage_access_info.cc.o
-[ 46%] Building CXX object CMakeFiles/tvm_objs.dir/src/tir/transforms/lower_intrin.cc.o
-[ 46%] Building CXX object CMakeFiles/tvm_objs.dir/src/tir/transforms/lower_thread_allreduce.cc.o
-[ 46%] Building CXX object CMakeFiles/tvm_objs.dir/src/tir/transforms/lower_tvm_builtin.cc.o
-[ 46%] Building CXX object CMakeFiles/tvm_objs.dir/src/tir/transforms/lower_warp_memory.cc.o
-[ 47%] Building CXX object CMakeFiles/tvm_objs.dir/src/tir/transforms/make_packed_api.cc.o
-[ 47%] Building CXX object CMakeFiles/tvm_objs.dir/src/tir/transforms/narrow_datatype.cc.o
-[ 47%] Building CXX object CMakeFiles/tvm_objs.dir/src/tir/transforms/remap_thread_axis.cc.o
-[ 47%] Building CXX object CMakeFiles/tvm_objs.dir/src/tir/transforms/remove_no_op.cc.o
-[ 48%] Building CXX object CMakeFiles/tvm_objs.dir/src/tir/transforms/rewrite_unsafe_select.cc.o
-[ 48%] Building CXX object CMakeFiles/tvm_objs.dir/src/tir/transforms/simplify.cc.o
-[ 48%] Building CXX object CMakeFiles/tvm_objs.dir/src/tir/transforms/skip_assert.cc.o
-[ 48%] Building CXX object CMakeFiles/tvm_objs.dir/src/tir/transforms/split_host_device.cc.o
-[ 49%] Building CXX object CMakeFiles/tvm_objs.dir/src/tir/transforms/storage_access.cc.o
-[ 49%] Building CXX object CMakeFiles/tvm_objs.dir/src/tir/transforms/storage_flatten.cc.o
-[ 49%] Building CXX object CMakeFiles/tvm_objs.dir/src/tir/transforms/storage_rewrite.cc.o
-[ 50%] Building CXX object CMakeFiles/tvm_objs.dir/src/tir/transforms/tensorcore_infer_fragment.cc.o
-[ 50%] Building CXX object CMakeFiles/tvm_objs.dir/src/tir/transforms/thread_storage_sync.cc.o
-[ 50%] Building CXX object CMakeFiles/tvm_objs.dir/src/tir/transforms/unroll_loop.cc.o
-[ 50%] Building CXX object CMakeFiles/tvm_objs.dir/src/tir/transforms/vectorize_loop.cc.o
-[ 51%] Building CXX object CMakeFiles/tvm_objs.dir/src/topi/broadcast.cc.o
-[ 51%] Building CXX object CMakeFiles/tvm_objs.dir/src/topi/elemwise.cc.o
-[ 51%] Building CXX object CMakeFiles/tvm_objs.dir/src/topi/nn.cc.o
-[ 51%] Building CXX object CMakeFiles/tvm_objs.dir/src/topi/reduction.cc.o
-[ 52%] Building CXX object CMakeFiles/tvm_objs.dir/src/topi/schedule.cc.o
-[ 52%] Building CXX object CMakeFiles/tvm_objs.dir/src/topi/transform.cc.o
-[ 52%] Building CXX object CMakeFiles/tvm_objs.dir/src/topi/vision.cc.o
-[ 52%] Building CXX object CMakeFiles/tvm_objs.dir/src/target/codegen.cc.o
-[ 53%] Building CXX object CMakeFiles/tvm_objs.dir/src/target/func_registry_generator.cc.o
-[ 53%] Building CXX object CMakeFiles/tvm_objs.dir/src/target/generic_func.cc.o
-[ 53%] Building CXX object CMakeFiles/tvm_objs.dir/src/target/intrin_rule.cc.o
-[ 53%] Building CXX object CMakeFiles/tvm_objs.dir/src/target/metadata_module.cc.o
-[ 54%] Building CXX object CMakeFiles/tvm_objs.dir/src/target/source/codegen_aocl.cc.o
-[ 54%] Building CXX object CMakeFiles/tvm_objs.dir/src/target/source/codegen_c.cc.o
-[ 54%] Building CXX object CMakeFiles/tvm_objs.dir/src/target/source/codegen_c_host.cc.o
-[ 54%] Building CXX object CMakeFiles/tvm_objs.dir/src/target/source/codegen_cuda.cc.o
-[ 55%] Building CXX object CMakeFiles/tvm_objs.dir/src/target/source/codegen_metal.cc.o
-[ 55%] Building CXX object CMakeFiles/tvm_objs.dir/src/target/source/codegen_opencl.cc.o
-[ 55%] Building CXX object CMakeFiles/tvm_objs.dir/src/target/source/codegen_params.cc.o
-[ 55%] Building CXX object CMakeFiles/tvm_objs.dir/src/target/source/codegen_source_base.cc.o
-[ 56%] Building CXX object CMakeFiles/tvm_objs.dir/src/target/source/codegen_vhls.cc.o
-[ 56%] Building CXX object CMakeFiles/tvm_objs.dir/src/target/source/intrin_rule_aocl.cc.o
-[ 56%] Building CXX object CMakeFiles/tvm_objs.dir/src/target/source/intrin_rule_cuda.cc.o
-[ 56%] Building CXX object CMakeFiles/tvm_objs.dir/src/target/source/intrin_rule_metal.cc.o
-[ 57%] Building CXX object CMakeFiles/tvm_objs.dir/src/target/source/intrin_rule_opencl.cc.o
-[ 57%] Building CXX object CMakeFiles/tvm_objs.dir/src/target/source/intrin_rule_vhls.cc.o
-[ 57%] Building CXX object CMakeFiles/tvm_objs.dir/src/target/source/source_module.cc.o
-[ 58%] Building CXX object CMakeFiles/tvm_objs.dir/src/target/tag.cc.o
-[ 58%] Building CXX object CMakeFiles/tvm_objs.dir/src/target/target.cc.o
-[ 58%] Building CXX object CMakeFiles/tvm_objs.dir/src/target/target_info.cc.o
-[ 58%] Building CXX object CMakeFiles/tvm_objs.dir/src/target/target_kind.cc.o
-[ 59%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/op/algorithm/argsort.cc.o
-[ 59%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/op/algorithm/sort.cc.o
-[ 59%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/op/algorithm/topk.cc.o
-[ 59%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/op/annotation/annotation.cc.o
-[ 60%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/op/debug.cc.o
-[ 60%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/op/dyn/algorithm/topk.cc.o
-[ 60%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/op/dyn/image/resize.cc.o
-[ 60%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/op/dyn/nn/pad.cc.o
-[ 61%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/op/dyn/nn/upsampling.cc.o
-[ 61%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/op/dyn/tensor/transform.cc.o
-[ 61%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/op/image/dilation2d.cc.o
-[ 61%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/op/image/grid_sample.cc.o
-[ 62%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/op/image/resize.cc.o
-[ 62%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/op/memory/memory.cc.o
-[ 62%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/op/nn/bitserial.cc.o
-[ 62%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/op/nn/convolution.cc.o
-[ 63%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/op/nn/correlation.cc.o
-[ 63%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/op/nn/nn.cc.o
-[ 63%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/op/nn/pad.cc.o
-[ 63%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/op/nn/pooling.cc.o
-[ 64%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/op/nn/sparse.cc.o
-[ 64%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/op/nn/upsampling.cc.o
-[ 64%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/op/random/kernel.cc.o
-[ 65%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/op/tensor/binary.cc.o
-[ 65%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/op/tensor/reduce.cc.o
-[ 65%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/op/tensor/transform.cc.o
-[ 65%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/op/tensor/unary.cc.o
-[ 66%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/op/type_relations.cc.o
-[ 66%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/op/vision/multibox_op.cc.o
-[ 66%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/op/vision/nms.cc.o
-[ 66%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/op/vision/rcnn_op.cc.o
-[ 67%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/op/vision/yolo.cc.o
-[ 67%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/op/vm/vm.cc.o
-[ 67%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/analysis/annotated_region_set.cc.o
-[ 67%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/analysis/call_graph.cc.o
-[ 68%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/analysis/context_analysis.cc.o
-[ 68%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/analysis/dependency_graph.cc.o
-[ 68%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/analysis/extract_fused_functions.cc.o
-[ 68%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/analysis/feature.cc.o
-[ 69%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/analysis/get_calibration_data.cc.o
-[ 69%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/analysis/kind_check.cc.o
-[ 69%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/analysis/mac_count.cc.o
-[ 69%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/analysis/match_exhaustion.cc.o
-[ 70%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/analysis/type_solver.cc.o
-[ 70%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/analysis/util.cc.o
-[ 70%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/analysis/well_formed.cc.o
-[ 70%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/quantize/annotate.cc.o
-[ 71%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/quantize/calibrate.cc.o
-[ 71%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/quantize/partition.cc.o
-[ 71%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/quantize/quantize.cc.o
-[ 71%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/quantize/realize.cc.o
-[ 72%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/transforms/alter_op_layout.cc.o
-[ 72%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/transforms/annotate_target.cc.o
-[ 72%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/transforms/auto_scheduler_layout_rewrite.cc.o
-[ 73%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/transforms/canonicalize_cast.cc.o
-[ 73%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/transforms/canonicalize_ops.cc.o
-[ 73%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/transforms/combine_parallel_batch_matmul.cc.o
-[ 73%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/transforms/combine_parallel_conv2d.cc.o
-[ 74%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/transforms/combine_parallel_dense.cc.o
-[ 74%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/transforms/combine_parallel_op.cc.o
-[ 74%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/transforms/combine_parallel_op_batch.cc.o
-[ 74%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/transforms/convert_layout.cc.o
-[ 75%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/transforms/convert_sparse_dense.cc.o
-[ 75%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/transforms/de_duplicate.cc.o
-[ 75%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/transforms/dead_code.cc.o
-[ 75%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/transforms/defunctionalization.cc.o
-[ 76%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/transforms/defuse_ops.cc.o
-[ 76%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/transforms/device_annotation.cc.o
-[ 76%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/transforms/dynamic_to_static.cc.o
-[ 76%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/transforms/eliminate_common_subexpr.cc.o
-[ 77%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/transforms/eta_expand.cc.o
-[ 77%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/transforms/expr_subst.cc.o
-[ 77%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/transforms/fast_math.cc.o
-[ 77%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/transforms/first_order_gradient.cc.o
-[ 78%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/transforms/fold_constant.cc.o
-[ 78%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/transforms/fold_explicit_padding.cc.o
-[ 78%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/transforms/fold_scale_axis.cc.o
-[ 78%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/transforms/forward_rewrite.cc.o
-[ 79%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/transforms/fuse_ops.cc.o
-[ 79%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/transforms/higher_order_gradient.cc.o
-[ 79%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/transforms/inline.cc.o
-[ 79%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/transforms/lazy_gradient_init.cc.o
-[ 80%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/transforms/legalize.cc.o
-[ 80%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/transforms/memory_alloc.cc.o
-[ 80%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/transforms/merge_compiler_regions.cc.o
-[ 81%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/transforms/merge_composite.cc.o
-[ 81%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/transforms/partial_eval.cc.o
-[ 81%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/transforms/partition_graph.cc.o
-[ 81%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/transforms/simplify_expr.cc.o
-[ 82%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/transforms/simplify_fc_transpose.cc.o
-[ 82%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/transforms/simplify_inference.cc.o
-[ 82%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/transforms/to_a_normal_form.cc.o
-[ 82%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/transforms/to_basic_block_normal_form.cc.o
-[ 83%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/transforms/to_cps.cc.o
-[ 83%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/transforms/to_graph_normal_form.cc.o
-[ 83%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/transforms/type_infer.cc.o
-[ 83%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/backend/build_module.cc.o
-[ 84%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/backend/compile_engine.cc.o
-[ 84%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/backend/graph_plan_memory.cc.o
-[ 84%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/backend/graph_runtime_codegen.cc.o
-[ 84%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/backend/interpreter.cc.o
-[ 85%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/backend/param_dict.cc.o
-[ 85%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/backend/vm/compiler.cc.o
-[ 85%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/backend/vm/inline_primitives.cc.o
-[ 85%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/backend/vm/lambda_lift.cc.o
-[ 86%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/backend/vm/removed_unused_funcs.cc.o
-[ 86%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/ir/adt.cc.o
-[ 86%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/ir/base.cc.o
-[ 86%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/ir/dataflow_matcher.cc.o
-[ 87%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/ir/dataflow_pattern.cc.o
-[ 87%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/ir/dataflow_pattern_functor.cc.o
-[ 87%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/ir/expr.cc.o
-[ 88%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/ir/expr_functor.cc.o
-[ 88%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/ir/function.cc.o
-[ 88%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/ir/indexed_graph.cc.o
-[ 88%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/ir/op_strategy.cc.o
-[ 89%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/ir/pattern_functor.cc.o
-[ 89%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/ir/transform.cc.o
-[ 89%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/qnn/op/add.cc.o
-[ 89%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/qnn/op/concatenate.cc.o
-[ 90%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/qnn/op/convolution.cc.o
-[ 90%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/qnn/op/convolution_transpose.cc.o
-[ 90%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/qnn/op/dense.cc.o
-[ 90%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/qnn/op/dequantize.cc.o
-[ 91%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/qnn/op/mul.cc.o
-[ 91%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/qnn/op/quantize.cc.o
-[ 91%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/qnn/op/requantize.cc.o
-[ 91%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/qnn/op/simulated_dequantize.cc.o
-[ 92%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/qnn/op/simulated_quantize.cc.o
-[ 92%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/qnn/op/subtract.cc.o
-[ 92%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/qnn/pass/legalize.cc.o
-[ 92%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/qnn/utils.cc.o
-[ 93%] Building CXX object CMakeFiles/tvm_objs.dir/src/target/datatype/registry.cc.o
-[ 93%] Building CXX object CMakeFiles/tvm_objs.dir/src/target/datatype/myfloat/myfloat.cc.o
-[ 93%] Building CXX object CMakeFiles/tvm_objs.dir/src/target/stackvm/codegen_stackvm.cc.o
-[ 93%] Building CXX object CMakeFiles/tvm_objs.dir/src/runtime/stackvm/stackvm.cc.o
-[ 94%] Building CXX object CMakeFiles/tvm_objs.dir/src/runtime/stackvm/stackvm_module.cc.o
-[ 94%] Building CXX object CMakeFiles/tvm_objs.dir/src/target/opt/build_cuda_on.cc.o
-[ 94%] Building CXX object CMakeFiles/tvm_objs.dir/src/target/opt/build_hexagon_off.cc.o
-[ 94%] Building CXX object CMakeFiles/tvm_objs.dir/src/target/opt/build_sdaccel_off.cc.o
-[ 95%] Building CXX object CMakeFiles/tvm_objs.dir/src/target/opt/build_aocl_off.cc.o
-[ 95%] Building CXX object CMakeFiles/tvm_objs.dir/src/target/opt/build_opencl_off.cc.o
-[ 95%] Building CXX object CMakeFiles/tvm_objs.dir/src/target/opt/build_metal_off.cc.o
-[ 96%] Building CXX object CMakeFiles/tvm_objs.dir/src/target/opt/build_rocm_off.cc.o
-[ 96%] Building CXX object CMakeFiles/tvm_objs.dir/src/target/llvm/codegen_amdgpu.cc.o
-[ 96%] Building CXX object CMakeFiles/tvm_objs.dir/src/target/llvm/codegen_arm.cc.o
-[ 96%] Building CXX object CMakeFiles/tvm_objs.dir/src/target/llvm/codegen_blob.cc.o
-[ 97%] Building CXX object CMakeFiles/tvm_objs.dir/src/target/llvm/codegen_cpu.cc.o
-[ 97%] Building CXX object CMakeFiles/tvm_objs.dir/src/target/llvm/codegen_hexagon.cc.o
-[ 97%] Building CXX object CMakeFiles/tvm_objs.dir/src/target/llvm/codegen_llvm.cc.o
-[ 97%] Building CXX object CMakeFiles/tvm_objs.dir/src/target/llvm/codegen_nvptx.cc.o
-[ 98%] Building CXX object CMakeFiles/tvm_objs.dir/src/target/llvm/codegen_params.cc.o
-[ 98%] Building CXX object CMakeFiles/tvm_objs.dir/src/target/llvm/codegen_x86_64.cc.o
-[ 98%] Building CXX object CMakeFiles/tvm_objs.dir/src/target/llvm/intrin_rule_hexagon.cc.o
-[ 98%] Building CXX object CMakeFiles/tvm_objs.dir/src/target/llvm/intrin_rule_llvm.cc.o
-[ 99%] Building CXX object CMakeFiles/tvm_objs.dir/src/target/llvm/intrin_rule_nvptx.cc.o
-[ 99%] Building CXX object CMakeFiles/tvm_objs.dir/src/target/llvm/intrin_rule_rocm.cc.o
-[ 99%] Building CXX object CMakeFiles/tvm_objs.dir/src/target/llvm/llvm_common.cc.o
-[ 99%] Building CXX object CMakeFiles/tvm_objs.dir/src/target/llvm/llvm_module.cc.o
-[100%] Building CXX object CMakeFiles/tvm_objs.dir/src/relay/backend/contrib/codegen_c/codegen.cc.o
-[100%] Building CXX object CMakeFiles/tvm_objs.dir/src/contrib/hybrid/codegen_hybrid.cc.o
-[100%] Built target tvm_objs
-[100%] Linking CXX shared library libtvm.so
-[100%] Built target tvm
-
-
-
-[ 11%] Building CXX object CMakeFiles/tvm_runtime_objs.dir/src/runtime/builtin_fp16.cc.o
-[ 12%] Building CXX object CMakeFiles/tvm_runtime_objs.dir/src/runtime/c_runtime_api.cc.o
-[ 12%] Building CXX object CMakeFiles/tvm_runtime_objs.dir/src/runtime/container.cc.o
-[ 12%] Building CXX object CMakeFiles/tvm_runtime_objs.dir/src/runtime/cpu_device_api.cc.o
-[ 12%] Building CXX object CMakeFiles/tvm_runtime_objs.dir/src/runtime/dso_library.cc.o
-[ 13%] Building CXX object CMakeFiles/tvm_runtime_objs.dir/src/runtime/file_utils.cc.o
-[ 13%] Building CXX object CMakeFiles/tvm_runtime_objs.dir/src/runtime/library_module.cc.o
-[ 13%] Building CXX object CMakeFiles/tvm_runtime_objs.dir/src/runtime/logging.cc.o
-[ 14%] Building CXX object CMakeFiles/tvm_runtime_objs.dir/src/runtime/metadata_module.cc.o
-[ 15%] Building CXX object CMakeFiles/tvm_runtime_objs.dir/src/runtime/module.cc.o
-[ 15%] Building CXX object CMakeFiles/tvm_runtime_objs.dir/src/runtime/ndarray.cc.o
-[ 16%] Building CXX object CMakeFiles/tvm_runtime_objs.dir/src/runtime/object.cc.o
-[ 17%] Building CXX object CMakeFiles/tvm_runtime_objs.dir/src/runtime/profiling.cc.o
-[ 17%] Building CXX object CMakeFiles/tvm_runtime_objs.dir/src/runtime/registry.cc.o
-[ 18%] Building CXX object CMakeFiles/tvm_runtime_objs.dir/src/runtime/system_library.cc.o
-[ 18%] Building CXX object CMakeFiles/tvm_runtime_objs.dir/src/runtime/thread_pool.cc.o
-[ 21%] Building CXX object CMakeFiles/tvm_runtime_objs.dir/src/runtime/threading_backend.cc.o
-[ 21%] Building CXX object CMakeFiles/tvm_runtime_objs.dir/src/runtime/vm/bytecode.cc.o
-[ 21%] Building CXX object CMakeFiles/tvm_runtime_objs.dir/src/runtime/vm/executable.cc.o
-[ 21%] Building CXX object CMakeFiles/tvm_runtime_objs.dir/src/runtime/vm/memory_manager.cc.o
-[ 23%] Building CXX object CMakeFiles/tvm_runtime_objs.dir/src/runtime/vm/vm.cc.o
-[ 23%] Building CXX object CMakeFiles/tvm_runtime_objs.dir/src/runtime/workspace_pool.cc.o
-[ 23%] Building CXX object CMakeFiles/tvm_runtime_objs.dir/src/runtime/rpc/rpc_channel.cc.o
-[ 23%] Building CXX object CMakeFiles/tvm_runtime_objs.dir/src/runtime/rpc/rpc_device_api.cc.o
-[ 24%] Building CXX object CMakeFiles/tvm_runtime_objs.dir/src/runtime/rpc/rpc_endpoint.cc.o
-[ 24%] Building CXX object CMakeFiles/tvm_runtime_objs.dir/src/runtime/rpc/rpc_event_impl.cc.o
-[ 24%] Building CXX object CMakeFiles/tvm_runtime_objs.dir/src/runtime/rpc/rpc_local_session.cc.o
-[ 24%] Building CXX object CMakeFiles/tvm_runtime_objs.dir/src/runtime/rpc/rpc_module.cc.o
-[ 25%] Building CXX object CMakeFiles/tvm_runtime_objs.dir/src/runtime/rpc/rpc_pipe_impl.cc.o
-[ 25%] Building CXX object CMakeFiles/tvm_runtime_objs.dir/src/runtime/rpc/rpc_server_env.cc.o
-[ 25%] Building CXX object CMakeFiles/tvm_runtime_objs.dir/src/runtime/rpc/rpc_session.cc.o
-[ 25%] Building CXX object CMakeFiles/tvm_runtime_objs.dir/src/runtime/rpc/rpc_socket_impl.cc.o
-[ 26%] Building CXX object CMakeFiles/tvm_runtime_objs.dir/src/runtime/graph/graph_runtime.cc.o
-[ 26%] Building CXX object CMakeFiles/tvm_runtime_objs.dir/src/runtime/graph/graph_runtime_factory.cc.o
-[ 27%] Building CXX object CMakeFiles/tvm_runtime_objs.dir/src/runtime/graph/debug/graph_runtime_debug.cc.o
-[ 27%] Building CXX object CMakeFiles/tvm_runtime_objs.dir/src/runtime/vm/profiler/vm.cc.o
-[ 29%] Building CXX object CMakeFiles/tvm_runtime_objs.dir/src/runtime/cuda/cuda_device_api.cc.o
-[ 29%] Building CXX object CMakeFiles/tvm_runtime_objs.dir/src/runtime/cuda/cuda_module.cc.o
-[ 30%] Building CXX object CMakeFiles/tvm_runtime_objs.dir/src/runtime/contrib/random/random.cc.o
-[ 31%] Building CXX object CMakeFiles/tvm_runtime_objs.dir/src/runtime/contrib/sort/sort.cc.o
-```
-
 
 从relay_integration.py文件中
 grc.codegen -> GraphRuntimeCodegen.Codegen -> heads_ = VisitExpr(func->body) -> std::vector<GraphNodeRef> VisitExpr_(const CallNode* call_node) -> GraphAddCallNode -> CachedFunc lowered_func = (*pf1)(compile_engine_, key)
@@ -708,4 +317,888 @@ cmake -DCMAKE_BUILD_TYPE=Debug ..
 Stmt部分代码生成逻辑
 /src/te/schedule/schedule_ops.cc文件中的MakePipeline函数
 生成producer代码→处理双缓冲优化→组合Producer和Consumer→添加内存管理→添加作用域标记(标记该operation的存储作用域)
+
+python nltsp_train_single_gpu.py --dataset pkl_dataset/nltsp_dataset_t4_2213_4000_train.pkl --lr 0.00001 --epochs 50 --batch_size 2048 --weight_decay 1e-6 --num_workers 0 --model_name lstm --output_path
+
+
+这是familyseer里面的时间消耗
+Feature extraction scheduling time: 0.00138906 s
+Feature extraction PrimFunc generation time: 0.00133408 s
+Feature extraction GPU PrimFunc optimization time: 0.00326738 s
+Feature extraction GPU PrimFunc simplify time: 0.000801187 s
+
+
+[Timing] GetPerStoreFeaturesWorkerFuncPAM schedule preparation duration: 0.0299267 seconds
+[Timing] GetPerStoreFeaturesWorkerFuncPAM TIR lowering duration: 0.0293026 seconds
+[Timing] GetPerStoreFeaturesWorkerFuncPAM GPU simplify duration: 0.0192356 seconds
+
+
+Epoch: 25       Batch: 2        Train Loss: 6.4319      Valid Loss: 0.0000      Train Speed: 74556      LR: 7.0000e-04
+Epoch: 30       Batch: 2        Train Loss: 5.5979      Valid Loss: 0.0000      Train Speed: 75089      LR: 7.0000e-04
+Epoch: 35       Batch: 2        Train Loss: 4.6660      Valid Loss: 0.0000      Train Speed: 73864      LR: 7.0000e-04
+Epoch: 40       Batch: 2        Train Loss: 3.9200      Valid Loss: 0.0000      Train Speed: 75691      LR: 7.0000e-04
+Epoch: 45       Batch: 2        Train Loss: 3.3814      Valid Loss: 0.0000      Train Speed: 73603      LR: 7.0000e-04
+Epoch: 49       Batch: 2        Train Loss: 3.0914      Valid Loss: 0.0000      Train Speed: 73732      LR: 7.0000e-04
+Time elapsed for training: 1.11 s
+----------------------------------------------------------------------
+------------------------------  [ Task Scheduler ]
+----------------------------------------------------------------------
+|  ID  | Latency (ms) | Speed (GFLOPS) | Trials |
+-------------------------------------------------
+|    0 |        0.007 |         140.65 |     64 |
+|    1 |        0.003 |          -0.00 |     64 |
+|    2 |        0.075 |        1895.78 |     64 |
+|    3 |        0.073 |        1954.60 |     64 |
+|    4 |        0.048 |        2418.39 |     64 |
+|    5 |        0.045 |        2541.35 |     64 |
+|    6 |        0.048 |        2384.08 |     64 |
+|    7 |        0.028 |        4138.69 |     64 |
+|    8 |        0.036 |        3536.24 |     64 |
+|    9 |        0.030 |        4172.04 |     64 |
+|   10 |        0.019 |        6124.79 |     64 |
+|   11 |        0.031 |        4128.14 |     64 |
+|   12 |        0.027 |        4791.33 |     64 |
+|   13 |        0.005 |         384.06 |     64 |
+|   14 |        0.025 |        9393.75 |     64 |
+|   15 |        0.004 |        2894.39 |     64 |
+|   16 |        0.005 |        2501.15 |     64 |
+|   17 |        0.008 |        1669.34 |     64 |
+-------------------------------------------------
+Estimated total latency: 0.733 ms       Trials: 1148    Used time : 2453 s      Next ID: 2
+----------------------------------------------------------------------
+------------------------------  [ Search ]
+----------------------------------------------------------------------
+Sample Initial Population       #s: 106 fail_ct: 2966   Time elapsed: 9.50
+population size #682
+GA Iter: 0      Max score: 7.9665       Min score: 1.4323       #Pop: 128       #M+: 0  #M-: 0
+GA Iter: 1      Max score: 7.9665       Min score: 2.1087       #Pop: 128       #M+: 657        #M-: 0
+EvolutionarySearch      #s: 128 Time elapsed: 23.69
+----------------------------------------------------------------------
+------------------------------  [ Measure ]
+----------------------------------------------------------------------
+Get 64 programs to measure:
+........................................****************************************
+........................************************
+Time elapsed for measurement: 87.64 s
+----------------------------------------------------------------------
+------------------------------  [ Train cost model ]
+----------------------------------------------------------------------
+============================================================
+Fit a net. Train size: 1212
+Epoch: 0        Batch: 2        Train Loss: 47.2170     Valid Loss: 0.0000      Train Speed: 72011      LR: 7.0000e-04
+Epoch: 5        Batch: 2        Train Loss: 28.6984     Valid Loss: 0.0000      Train Speed: 78799      LR: 7.0000e-04
+Epoch: 10       Batch: 2        Train Loss: 18.4288     Valid Loss: 0.0000      Train Speed: 76118      LR: 7.0000e-04
+Epoch: 15       Batch: 2        Train Loss: 12.8795     Valid Loss: 0.0000      Train Speed: 77379      LR: 7.0000e-04
+Epoch: 20       Batch: 2        Train Loss: 9.6044      Valid Loss: 0.0000      Train Speed: 78933      LR: 7.0000e-04
+Epoch: 25       Batch: 2        Train Loss: 7.7994      Valid Loss: 0.0000      Train Speed: 76455      LR: 7.0000e-04
+Epoch: 30       Batch: 2        Train Loss: 6.4344      Valid Loss: 0.0000      Train Speed: 77612      LR: 7.0000e-04
+Epoch: 35       Batch: 2        Train Loss: 5.5447      Valid Loss: 0.0000      Train Speed: 77389      LR: 7.0000e-04
+Epoch: 40       Batch: 2        Train Loss: 4.5888      Valid Loss: 0.0000      Train Speed: 77683      LR: 7.0000e-04
+Epoch: 45       Batch: 2        Train Loss: 3.8623      Valid Loss: 0.0000      Train Speed: 79452      LR: 7.0000e-04
+Epoch: 49       Batch: 2        Train Loss: 3.9384      Valid Loss: 0.0000      Train Speed: 75142      LR: 7.0000e-04
+Time elapsed for training: 1.60 s
+----------------------------------------------------------------------
+------------------------------  [ Task Scheduler ]
+----------------------------------------------------------------------
+|  ID  | Latency (ms) | Speed (GFLOPS) | Trials |
+-------------------------------------------------
+|    0 |        0.007 |         140.65 |     64 |
+|    1 |        0.003 |          -0.00 |     64 |
+|    2 |        0.067 |        2107.21 |    128 |
+|    3 |        0.073 |        1954.60 |     64 |
+|    4 |        0.048 |        2418.39 |     64 |
+|    5 |        0.045 |        2541.35 |     64 |
+|    6 |        0.048 |        2384.08 |     64 |
+|    7 |        0.028 |        4138.69 |     64 |
+|    8 |        0.036 |        3536.24 |     64 |
+|    9 |        0.030 |        4172.04 |     64 |
+|   10 |        0.019 |        6124.79 |     64 |
+|   11 |        0.031 |        4128.14 |     64 |
+|   12 |        0.027 |        4791.33 |     64 |
+|   13 |        0.005 |         384.06 |     64 |
+|   14 |        0.025 |        9393.75 |     64 |
+|   15 |        0.004 |        2894.39 |     64 |
+|   16 |        0.005 |        2501.15 |     64 |
+|   17 |        0.008 |        1669.34 |     64 |
+-------------------------------------------------
+Estimated total latency: 0.718 ms       Trials: 1212    Used time : 2575 s      Next ID: 5
+----------------------------------------------------------------------
+------------------------------  [ Search ]
+----------------------------------------------------------------------
+Sample Initial Population       #s: 63  fail_ct: 1473   Time elapsed: 4.51
+population size #639
+GA Iter: 0      Max score: 6.7143       Min score: 1.5333       #Pop: 128       #M+: 0  #M-: 0
+GA Iter: 1      Max score: 6.7143       Min score: 1.6203       #Pop: 128       #M+: 659        #M-: 0
+EvolutionarySearch      #s: 128 Time elapsed: 23.01
+----------------------------------------------------------------------
+------------------------------  [ Measure ]
+----------------------------------------------------------------------
+Get 64 programs to measure:
+........................................****************************************
+........................************************
+Time elapsed for measurement: 79.18 s
+----------------------------------------------------------------------
+------------------------------  [ Train cost model ]
+----------------------------------------------------------------------
+============================================================
+Fit a net. Train size: 1276
+Epoch: 0        Batch: 2        Train Loss: 30.0443     Valid Loss: 0.0000      Train Speed: 73478      LR: 7.0000e-04
+Epoch: 5        Batch: 2        Train Loss: 20.4762     Valid Loss: 0.0000      Train Speed: 80362      LR: 7.0000e-04
+Epoch: 10       Batch: 2        Train Loss: 14.0835     Valid Loss: 0.0000      Train Speed: 80394      LR: 7.0000e-04
+Epoch: 15       Batch: 2        Train Loss: 10.3320     Valid Loss: 0.0000      Train Speed: 79079      LR: 7.0000e-04
+Epoch: 20       Batch: 2        Train Loss: 8.0076      Valid Loss: 0.0000      Train Speed: 81289      LR: 7.0000e-04
+Epoch: 25       Batch: 2        Train Loss: 6.4663      Valid Loss: 0.0000      Train Speed: 81113      LR: 7.0000e-04
+Epoch: 30       Batch: 2        Train Loss: 5.3676      Valid Loss: 0.0000      Train Speed: 82131      LR: 7.0000e-04
+Epoch: 35       Batch: 2        Train Loss: 4.7543      Valid Loss: 0.0000      Train Speed: 82244      LR: 7.0000e-04
+Epoch: 40       Batch: 2        Train Loss: 3.9336      Valid Loss: 0.0000      Train Speed: 77659      LR: 7.0000e-04
+Epoch: 45       Batch: 2        Train Loss: 3.3320      Valid Loss: 0.0000      Train Speed: 82082      LR: 7.0000e-04
+Epoch: 49       Batch: 2        Train Loss: 2.9635      Valid Loss: 0.0000      Train Speed: 78867      LR: 7.0000e-04
+Time elapsed for training: 1.55 s
+----------------------------------------------------------------------
+------------------------------  [ Task Scheduler ]
+----------------------------------------------------------------------
+|  ID  | Latency (ms) | Speed (GFLOPS) | Trials |
+-------------------------------------------------
+|    0 |        0.007 |         140.65 |     64 |
+|    1 |        0.003 |          -0.00 |     64 |
+|    2 |        0.067 |        2107.21 |    128 |
+|    3 |        0.073 |        1954.60 |     64 |
+|    4 |        0.048 |        2418.39 |     64 |
+|    5 |        0.045 |        2574.95 |    128 |
+|    6 |        0.048 |        2384.08 |     64 |
+|    7 |        0.028 |        4138.69 |     64 |
+|    8 |        0.036 |        3536.24 |     64 |
+|    9 |        0.030 |        4172.04 |     64 |
+|   10 |        0.019 |        6124.79 |     64 |
+|   11 |        0.031 |        4128.14 |     64 |
+|   12 |        0.027 |        4791.33 |     64 |
+|   13 |        0.005 |         384.06 |     64 |
+|   14 |        0.025 |        9393.75 |     64 |
+|   15 |        0.004 |        2894.39 |     64 |
+|   16 |        0.005 |        2501.15 |     64 |
+|   17 |        0.008 |        1669.34 |     64 |
+-------------------------------------------------
+Estimated total latency: 0.716 ms       Trials: 1276    Used time : 2684 s      Next ID: 3
+----------------------------------------------------------------------
+------------------------------  [ Search ]
+----------------------------------------------------------------------
+Sample Initial Population       #s: 55  fail_ct: 1481   Time elapsed: 4.75
+population size #631
+GA Iter: 0      Max score: 5.5637       Min score: 0.0982       #Pop: 128       #M+: 0  #M-: 0
+GA Iter: 1      Max score: 5.5637       Min score: 0.5250       #Pop: 128       #M+: 668        #M-: 0
+EvolutionarySearch      #s: 128 Time elapsed: 22.99
+----------------------------------------------------------------------
+------------------------------  [ Measure ]
+----------------------------------------------------------------------
+Get 64 programs to measure:
+........................................****************************************
+........................************************
+Time elapsed for measurement: 83.05 s
+----------------------------------------------------------------------
+------------------------------  [ Train cost model ]
+----------------------------------------------------------------------
+============================================================
+Fit a net. Train size: 1340
+Epoch: 0        Batch: 2        Train Loss: 54.1033     Valid Loss: 0.0000      Train Speed: 70001      LR: 7.0000e-04
+Epoch: 5        Batch: 2        Train Loss: 32.9122     Valid Loss: 0.0000      Train Speed: 80919      LR: 7.0000e-04
+Epoch: 10       Batch: 2        Train Loss: 20.9582     Valid Loss: 0.0000      Train Speed: 83655      LR: 7.0000e-04
+Epoch: 15       Batch: 2        Train Loss: 14.5191     Valid Loss: 0.0000      Train Speed: 83573      LR: 7.0000e-04
+Epoch: 20       Batch: 2        Train Loss: 10.7394     Valid Loss: 0.0000      Train Speed: 80369      LR: 7.0000e-04
+Epoch: 25       Batch: 2        Train Loss: 8.9057      Valid Loss: 0.0000      Train Speed: 83646      LR: 7.0000e-04
+Epoch: 30       Batch: 2        Train Loss: 7.1385      Valid Loss: 0.0000      Train Speed: 78043      LR: 7.0000e-04
+Epoch: 35       Batch: 2        Train Loss: 5.8344      Valid Loss: 0.0000      Train Speed: 85028      LR: 7.0000e-04
+Epoch: 40       Batch: 2        Train Loss: 4.6283      Valid Loss: 0.0000      Train Speed: 83383      LR: 7.0000e-04
+Epoch: 45       Batch: 2        Train Loss: 3.7746      Valid Loss: 0.0000      Train Speed: 84869      LR: 7.0000e-04
+Epoch: 49       Batch: 2        Train Loss: 3.4655      Valid Loss: 0.0000      Train Speed: 83288      LR: 7.0000e-04
+Time elapsed for training: 1.52 s
+----------------------------------------------------------------------
+------------------------------  [ Task Scheduler ]
+----------------------------------------------------------------------
+|  ID  | Latency (ms) | Speed (GFLOPS) | Trials |
+-------------------------------------------------
+|    0 |        0.007 |         140.65 |     64 |
+|    1 |        0.003 |          -0.00 |     64 |
+|    2 |        0.067 |        2107.21 |    128 |
+|    3 |        0.066 |        2169.05 |    128 |
+|    4 |        0.048 |        2418.39 |     64 |
+|    5 |        0.045 |        2574.95 |    128 |
+|    6 |        0.048 |        2384.08 |     64 |
+|    7 |        0.028 |        4138.69 |     64 |
+|    8 |        0.036 |        3536.24 |     64 |
+|    9 |        0.030 |        4172.04 |     64 |
+|   10 |        0.019 |        6124.79 |     64 |
+|   11 |        0.031 |        4128.14 |     64 |
+|   12 |        0.027 |        4791.33 |     64 |
+|   13 |        0.005 |         384.06 |     64 |
+|   14 |        0.025 |        9393.75 |     64 |
+|   15 |        0.004 |        2894.39 |     64 |
+|   16 |        0.005 |        2501.15 |     64 |
+|   17 |        0.008 |        1669.34 |     64 |
+-------------------------------------------------
+Estimated total latency: 0.709 ms       Trials: 1340    Used time : 2796 s      Next ID: 8
+----------------------------------------------------------------------
+------------------------------  [ Search ]
+----------------------------------------------------------------------
+Sample Initial Population       #s: 67  fail_ct: 1469   Time elapsed: 4.73
+population size #643
+GA Iter: 0      Max score: 4.6718       Min score: -0.0716      #Pop: 128       #M+: 0  #M-: 0
+GA Iter: 1      Max score: 4.6718       Min score: 0.0518       #Pop: 128       #M+: 655        #M-: 0
+EvolutionarySearch      #s: 128 Time elapsed: 27.23
+----------------------------------------------------------------------
+------------------------------  [ Measure ]
+----------------------------------------------------------------------
+Get 64 programs to measure:
+........................................****************************************
+........................************************
+Time elapsed for measurement: 78.18 s
+----------------------------------------------------------------------
+------------------------------  [ Train cost model ]
+----------------------------------------------------------------------
+============================================================
+Fit a net. Train size: 1404
+Epoch: 0        Batch: 2        Train Loss: 47.8604     Valid Loss: 0.0000      Train Speed: 76721      LR: 7.0000e-04
+Epoch: 5        Batch: 2        Train Loss: 30.1485     Valid Loss: 0.0000      Train Speed: 86506      LR: 7.0000e-04
+Epoch: 10       Batch: 2        Train Loss: 19.2889     Valid Loss: 0.0000      Train Speed: 85454      LR: 7.0000e-04
+Epoch: 15       Batch: 2        Train Loss: 13.3028     Valid Loss: 0.0000      Train Speed: 86691      LR: 7.0000e-04
+Epoch: 20       Batch: 2        Train Loss: 10.3571     Valid Loss: 0.0000      Train Speed: 84595      LR: 7.0000e-04
+Epoch: 25       Batch: 2        Train Loss: 8.0546      Valid Loss: 0.0000      Train Speed: 86106      LR: 7.0000e-04
+Epoch: 30       Batch: 2        Train Loss: 7.1820      Valid Loss: 0.0000      Train Speed: 85908      LR: 7.0000e-04
+Epoch: 35       Batch: 2        Train Loss: 6.1032      Valid Loss: 0.0000      Train Speed: 88013      LR: 7.0000e-04
+Epoch: 40       Batch: 2        Train Loss: 5.2370      Valid Loss: 0.0000      Train Speed: 74779      LR: 7.0000e-04
+Epoch: 45       Batch: 2        Train Loss: 4.4783      Valid Loss: 0.0000      Train Speed: 85769      LR: 7.0000e-04
+Epoch: 49       Batch: 2        Train Loss: 3.8160      Valid Loss: 0.0000      Train Speed: 83932      LR: 7.0000e-04
+Time elapsed for training: 1.74 s
+----------------------------------------------------------------------
+------------------------------  [ Task Scheduler ]
+----------------------------------------------------------------------
+|  ID  | Latency (ms) | Speed (GFLOPS) | Trials |
+-------------------------------------------------
+|    0 |        0.007 |         140.65 |     64 |
+|    1 |        0.003 |          -0.00 |     64 |
+|    2 |        0.067 |        2107.21 |    128 |
+|    3 |        0.066 |        2169.05 |    128 |
+|    4 |        0.048 |        2418.39 |     64 |
+|    5 |        0.045 |        2574.95 |    128 |
+|    6 |        0.048 |        2384.08 |     64 |
+|    7 |        0.028 |        4138.69 |     64 |
+|    8 |        0.036 |        3536.24 |    128 |
+|    9 |        0.030 |        4172.04 |     64 |
+|   10 |        0.019 |        6124.79 |     64 |
+|   11 |        0.031 |        4128.14 |     64 |
+|   12 |        0.027 |        4791.33 |     64 |
+|   13 |        0.005 |         384.06 |     64 |
+|   14 |        0.025 |        9393.75 |     64 |
+|   15 |        0.004 |        2894.39 |     64 |
+|   16 |        0.005 |        2501.15 |     64 |
+|   17 |        0.008 |        1669.34 |     64 |
+-------------------------------------------------
+Estimated total latency: 0.709 ms       Trials: 1404    Used time : 2909 s      Next ID: 2
+----------------------------------------------------------------------
+------------------------------  [ Search ]
+----------------------------------------------------------------------
+Sample Initial Population       #s: 58  fail_ct: 1478   Time elapsed: 4.59
+====== Potential Space Generation =======
+GA Iter: 0      Max score: 74.1306      Min score: 0.2023       #Pop: 58        #M+: 0  #M-: 0
+GA Iter: 2      Max score: 80.6114      Min score: 36.3119      #Pop: 512       #M+: 874        #M-: 0
+====== Potential Space Generation Time elapsed: 32.88 ======
+population size #698
+GA Iter: 0      Max score: 4.8583       Min score: 0.7039       #Pop: 128       #M+: 0  #M-: 0
+GA Iter: 1      Max score: 4.8583       Min score: 1.2972       #Pop: 128       #M+: 643        #M-: 0
+EvolutionarySearch      #s: 128 Time elapsed: 25.23
+----------------------------------------------------------------------
+------------------------------  [ Measure ]
+----------------------------------------------------------------------
+Get 64 programs to measure:
+........................................****************************************
+........................************************
+Time elapsed for measurement: 83.40 s
+----------------------------------------------------------------------
+------------------------------  [ Train cost model ]
+----------------------------------------------------------------------
+============================================================
+Fit a net. Train size: 1468
+Epoch: 0        Batch: 2        Train Loss: 34.4571     Valid Loss: 0.0000      Train Speed: 82124      LR: 7.0000e-04
+Epoch: 5        Batch: 2        Train Loss: 23.6823     Valid Loss: 0.0000      Train Speed: 87684      LR: 7.0000e-04
+Epoch: 10       Batch: 2        Train Loss: 16.8717     Valid Loss: 0.0000      Train Speed: 86870      LR: 7.0000e-04
+Epoch: 15       Batch: 2        Train Loss: 12.8139     Valid Loss: 0.0000      Train Speed: 86560      LR: 7.0000e-04
+Epoch: 20       Batch: 2        Train Loss: 9.8892      Valid Loss: 0.0000      Train Speed: 88070      LR: 7.0000e-04
+Epoch: 25       Batch: 2        Train Loss: 8.3835      Valid Loss: 0.0000      Train Speed: 87775      LR: 7.0000e-04
+Epoch: 30       Batch: 2        Train Loss: 7.0684      Valid Loss: 0.0000      Train Speed: 87000      LR: 7.0000e-04
+Epoch: 35       Batch: 2        Train Loss: 5.9390      Valid Loss: 0.0000      Train Speed: 86159      LR: 7.0000e-04
+Epoch: 40       Batch: 2        Train Loss: 5.0638      Valid Loss: 0.0000      Train Speed: 87596      LR: 7.0000e-04
+Epoch: 45       Batch: 2        Train Loss: 4.3574      Valid Loss: 0.0000      Train Speed: 86168      LR: 7.0000e-04
+Epoch: 49       Batch: 2        Train Loss: 3.8210      Valid Loss: 0.0000      Train Speed: 85189      LR: 7.0000e-04
+Time elapsed for training: 1.70 s
+----------------------------------------------------------------------
+------------------------------  [ Task Scheduler ]
+----------------------------------------------------------------------
+|  ID  | Latency (ms) | Speed (GFLOPS) | Trials |
+-------------------------------------------------
+|    0 |        0.007 |         140.65 |     64 |
+|    1 |        0.003 |          -0.00 |     64 |
+|    2 |        0.067 |        2107.21 |    192 |
+|    3 |        0.066 |        2169.05 |    128 |
+|    4 |        0.048 |        2418.39 |     64 |
+|    5 |        0.045 |        2574.95 |    128 |
+|    6 |        0.048 |        2384.08 |     64 |
+|    7 |        0.028 |        4138.69 |     64 |
+|    8 |        0.036 |        3536.24 |    128 |
+|    9 |        0.030 |        4172.04 |     64 |
+|   10 |        0.019 |        6124.79 |     64 |
+|   11 |        0.031 |        4128.14 |     64 |
+|   12 |        0.027 |        4791.33 |     64 |
+|   13 |        0.005 |         384.06 |     64 |
+|   14 |        0.025 |        9393.75 |     64 |
+|   15 |        0.004 |        2894.39 |     64 |
+|   16 |        0.005 |        2501.15 |     64 |
+|   17 |        0.008 |        1669.34 |     64 |
+-------------------------------------------------
+Estimated total latency: 0.709 ms       Trials: 1468    Used time : 3057 s      Next ID: 11
+----------------------------------------------------------------------
+------------------------------  [ Search ]
+----------------------------------------------------------------------
+Sample Initial Population       #s: 69  fail_ct: 1467   Time elapsed: 4.72
+population size #645
+GA Iter: 0      Max score: 8.4413       Min score: 0.7802       #Pop: 128       #M+: 0  #M-: 0
+GA Iter: 1      Max score: 8.4413       Min score: 1.5546       #Pop: 128       #M+: 640        #M-: 0
+EvolutionarySearch      #s: 128 Time elapsed: 27.21
+----------------------------------------------------------------------
+------------------------------  [ Measure ]
+----------------------------------------------------------------------
+Get 64 programs to measure:
+........................................********************************E********
+........................************************
+Time elapsed for measurement: 94.66 s
+----------------------------------------------------------------------
+------------------------------  [ Train cost model ]
+----------------------------------------------------------------------
+============================================================
+Fit a net. Train size: 1532
+Epoch: 0        Batch: 2        Train Loss: 55.9508     Valid Loss: 0.0000      Train Speed: 83987      LR: 7.0000e-04
+Epoch: 5        Batch: 2        Train Loss: 35.3849     Valid Loss: 0.0000      Train Speed: 90520      LR: 7.0000e-04
+Epoch: 10       Batch: 2        Train Loss: 22.7989     Valid Loss: 0.0000      Train Speed: 89679      LR: 7.0000e-04
+Epoch: 15       Batch: 2        Train Loss: 15.7621     Valid Loss: 0.0000      Train Speed: 89909      LR: 7.0000e-04
+Epoch: 20       Batch: 2        Train Loss: 11.6395     Valid Loss: 0.0000      Train Speed: 90611      LR: 7.0000e-04
+Epoch: 25       Batch: 2        Train Loss: 9.0670      Valid Loss: 0.0000      Train Speed: 90532      LR: 7.0000e-04
+Epoch: 30       Batch: 2        Train Loss: 7.5595      Valid Loss: 0.0000      Train Speed: 90393      LR: 7.0000e-04
+Epoch: 35       Batch: 2        Train Loss: 6.2645      Valid Loss: 0.0000      Train Speed: 90399      LR: 7.0000e-04
+Epoch: 40       Batch: 2        Train Loss: 5.4346      Valid Loss: 0.0000      Train Speed: 88295      LR: 7.0000e-04
+Epoch: 45       Batch: 2        Train Loss: 4.6396      Valid Loss: 0.0000      Train Speed: 88312      LR: 7.0000e-04
+Epoch: 49       Batch: 2        Train Loss: 4.1413      Valid Loss: 0.0000      Train Speed: 89066      LR: 7.0000e-04
+Time elapsed for training: 1.66 s
+----------------------------------------------------------------------
+------------------------------  [ Task Scheduler ]
+----------------------------------------------------------------------
+|  ID  | Latency (ms) | Speed (GFLOPS) | Trials |
+-------------------------------------------------
+|    0 |        0.007 |         140.65 |     64 |
+|    1 |        0.003 |          -0.00 |     64 |
+|    2 |        0.067 |        2107.21 |    192 |
+|    3 |        0.066 |        2169.05 |    128 |
+|    4 |        0.048 |        2418.39 |     64 |
+|    5 |        0.045 |        2574.95 |    128 |
+|    6 |        0.048 |        2384.08 |     64 |
+|    7 |        0.028 |        4138.69 |     64 |
+|    8 |        0.036 |        3536.24 |    128 |
+|    9 |        0.030 |        4172.04 |     64 |
+|   10 |        0.019 |        6124.79 |     64 |
+|   11 |        0.031 |        4128.14 |    128 |
+|   12 |        0.027 |        4791.33 |     64 |
+|   13 |        0.005 |         384.06 |     64 |
+|   14 |        0.025 |        9393.75 |     64 |
+|   15 |        0.004 |        2894.39 |     64 |
+|   16 |        0.005 |        2501.15 |     64 |
+|   17 |        0.008 |        1669.34 |     64 |
+-------------------------------------------------
+Estimated total latency: 0.709 ms       Trials: 1532    Used time : 3185 s      Next ID: 12
+----------------------------------------------------------------------
+------------------------------  [ Search ]
+----------------------------------------------------------------------
+Sample Initial Population       #s: 66  fail_ct: 1470   Time elapsed: 4.77
+population size #642
+GA Iter: 0      Max score: 4.9452       Min score: -0.3728      #Pop: 128       #M+: 0  #M-: 0
+GA Iter: 1      Max score: 4.9452       Min score: 0.7258       #Pop: 128       #M+: 641        #M-: 0
+EvolutionarySearch      #s: 128 Time elapsed: 25.62
+----------------------------------------------------------------------
+------------------------------  [ Measure ]
+----------------------------------------------------------------------
+Get 64 programs to measure:
+........................................****************************************
+........................********************E****
+Time elapsed for measurement: 95.65 s
+----------------------------------------------------------------------
+------------------------------  [ Train cost model ]
+----------------------------------------------------------------------
+============================================================
+Fit a net. Train size: 1596
+Epoch: 0        Batch: 3        Train Loss: 61.1070     Valid Loss: 0.0000      Train Speed: 69757      LR: 7.0000e-04
+Epoch: 5        Batch: 3        Train Loss: 29.9950     Valid Loss: 0.0000      Train Speed: 75573      LR: 7.0000e-04
+Epoch: 10       Batch: 3        Train Loss: 16.5962     Valid Loss: 0.0000      Train Speed: 74764      LR: 7.0000e-04
+Epoch: 15       Batch: 3        Train Loss: 10.5702     Valid Loss: 0.0000      Train Speed: 73363      LR: 7.0000e-04
+Epoch: 20       Batch: 3        Train Loss: 7.6404      Valid Loss: 0.0000      Train Speed: 76791      LR: 7.0000e-04
+Epoch: 25       Batch: 3        Train Loss: 5.8989      Valid Loss: 0.0000      Train Speed: 76309      LR: 7.0000e-04
+Epoch: 30       Batch: 3        Train Loss: 5.5136      Valid Loss: 0.0000      Train Speed: 76385      LR: 7.0000e-04
+Epoch: 35       Batch: 3        Train Loss: 4.3631      Valid Loss: 0.0000      Train Speed: 76392      LR: 7.0000e-04
+Epoch: 40       Batch: 3        Train Loss: 3.6620      Valid Loss: 0.0000      Train Speed: 77412      LR: 7.0000e-04
+Epoch: 45       Batch: 3        Train Loss: 3.3463      Valid Loss: 0.0000      Train Speed: 75999      LR: 7.0000e-04
+Epoch: 49       Batch: 3        Train Loss: 2.9232      Valid Loss: 0.0000      Train Speed: 76102      LR: 7.0000e-04
+Time elapsed for training: 1.89 s
+----------------------------------------------------------------------
+------------------------------  [ Task Scheduler ]
+----------------------------------------------------------------------
+|  ID  | Latency (ms) | Speed (GFLOPS) | Trials |
+-------------------------------------------------
+|    0 |        0.007 |         140.65 |     64 |
+|    1 |        0.003 |          -0.00 |     64 |
+|    2 |        0.067 |        2107.21 |    192 |
+|    3 |        0.066 |        2169.05 |    128 |
+|    4 |        0.048 |        2418.39 |     64 |
+|    5 |        0.045 |        2574.95 |    128 |
+|    6 |        0.048 |        2384.08 |     64 |
+|    7 |        0.028 |        4138.69 |     64 |
+|    8 |        0.036 |        3536.24 |    128 |
+|    9 |        0.030 |        4172.04 |     64 |
+|   10 |        0.019 |        6124.79 |     64 |
+|   11 |        0.031 |        4128.14 |    128 |
+|   12 |        0.026 |        4940.72 |    128 |
+|   13 |        0.005 |         384.06 |     64 |
+|   14 |        0.025 |        9393.75 |     64 |
+|   15 |        0.004 |        2894.39 |     64 |
+|   16 |        0.005 |        2501.15 |     64 |
+|   17 |        0.008 |        1669.34 |     64 |
+-------------------------------------------------
+Estimated total latency: 0.708 ms       Trials: 1596    Used time : 3314 s      Next ID: 6
+----------------------------------------------------------------------
+------------------------------  [ Search ]
+----------------------------------------------------------------------
+Sample Initial Population       #s: 60  fail_ct: 1476   Time elapsed: 4.17
+population size #636
+GA Iter: 0      Max score: 5.9491       Min score: 0.3691       #Pop: 128       #M+: 0  #M-: 0
+GA Iter: 1      Max score: 5.9491       Min score: 1.4012       #Pop: 128       #M+: 661        #M-: 0
+EvolutionarySearch      #s: 128 Time elapsed: 24.05
+----------------------------------------------------------------------
+------------------------------  [ Measure ]
+----------------------------------------------------------------------
+Get 64 programs to measure:
+........................................****************************************
+........................************************
+Time elapsed for measurement: 81.90 s
+----------------------------------------------------------------------
+------------------------------  [ Train cost model ]
+----------------------------------------------------------------------
+============================================================
+Fit a net. Train size: 1660
+Epoch: 0        Batch: 3        Train Loss: 34.0673     Valid Loss: 0.0000      Train Speed: 74187      LR: 7.0000e-04
+Epoch: 5        Batch: 3        Train Loss: 20.0955     Valid Loss: 0.0000      Train Speed: 77268      LR: 7.0000e-04
+Epoch: 10       Batch: 3        Train Loss: 13.1691     Valid Loss: 0.0000      Train Speed: 77901      LR: 7.0000e-04
+Epoch: 15       Batch: 3        Train Loss: 9.5755      Valid Loss: 0.0000      Train Speed: 78476      LR: 7.0000e-04
+Epoch: 20       Batch: 3        Train Loss: 7.3863      Valid Loss: 0.0000      Train Speed: 78507      LR: 7.0000e-04
+Epoch: 25       Batch: 3        Train Loss: 5.9216      Valid Loss: 0.0000      Train Speed: 80797      LR: 7.0000e-04
+Epoch: 30       Batch: 3        Train Loss: 4.8602      Valid Loss: 0.0000      Train Speed: 74851      LR: 7.0000e-04
+Epoch: 35       Batch: 3        Train Loss: 4.3220      Valid Loss: 0.0000      Train Speed: 81605      LR: 7.0000e-04
+Epoch: 40       Batch: 3        Train Loss: 3.6073      Valid Loss: 0.0000      Train Speed: 77568      LR: 7.0000e-04
+Epoch: 45       Batch: 3        Train Loss: 3.0761      Valid Loss: 0.0000      Train Speed: 79305      LR: 7.0000e-04
+Epoch: 49       Batch: 3        Train Loss: 2.6045      Valid Loss: 0.0000      Train Speed: 79136      LR: 7.0000e-04
+Time elapsed for training: 1.88 s
+----------------------------------------------------------------------
+------------------------------  [ Task Scheduler ]
+----------------------------------------------------------------------
+|  ID  | Latency (ms) | Speed (GFLOPS) | Trials |
+-------------------------------------------------
+|    0 |        0.007 |         140.65 |     64 |
+|    1 |        0.003 |          -0.00 |     64 |
+|    2 |        0.067 |        2107.21 |    192 |
+|    3 |        0.066 |        2169.05 |    128 |
+|    4 |        0.048 |        2418.39 |     64 |
+|    5 |        0.045 |        2574.95 |    128 |
+|    6 |        0.047 |        2428.18 |    128 |
+|    7 |        0.028 |        4138.69 |     64 |
+|    8 |        0.036 |        3536.24 |    128 |
+|    9 |        0.030 |        4172.04 |     64 |
+|   10 |        0.019 |        6124.79 |     64 |
+|   11 |        0.031 |        4128.14 |    128 |
+|   12 |        0.026 |        4940.72 |    128 |
+|   13 |        0.005 |         384.06 |     64 |
+|   14 |        0.025 |        9393.75 |     64 |
+|   15 |        0.004 |        2894.39 |     64 |
+|   16 |        0.005 |        2501.15 |     64 |
+|   17 |        0.008 |        1669.34 |     64 |
+-------------------------------------------------
+Estimated total latency: 0.707 ms       Trials: 1660    Used time : 3426 s      Next ID: 4
+----------------------------------------------------------------------
+------------------------------  [ Search ]
+----------------------------------------------------------------------
+Sample Initial Population       #s: 59  fail_ct: 1477   Time elapsed: 1.91
+population size #635
+GA Iter: 0      Max score: 7.6809       Min score: -0.1834      #Pop: 128       #M+: 0  #M-: 0
+GA Iter: 1      Max score: 7.6809       Min score: 0.8037       #Pop: 128       #M+: 643        #M-: 0
+EvolutionarySearch      #s: 128 Time elapsed: 10.21
+----------------------------------------------------------------------
+------------------------------  [ Measure ]
+----------------------------------------------------------------------
+Get 64 programs to measure:
+........................................****************************************
+........................************************
+Time elapsed for measurement: 76.52 s
+----------------------------------------------------------------------
+------------------------------  [ Train cost model ]
+----------------------------------------------------------------------
+============================================================
+Fit a net. Train size: 1724
+Epoch: 0        Batch: 3        Train Loss: 32.0682     Valid Loss: 0.0000      Train Speed: 75331      LR: 7.0000e-04
+Epoch: 5        Batch: 3        Train Loss: 20.6682     Valid Loss: 0.0000      Train Speed: 78448      LR: 7.0000e-04
+Epoch: 10       Batch: 3        Train Loss: 13.4937     Valid Loss: 0.0000      Train Speed: 77405      LR: 7.0000e-04
+Epoch: 15       Batch: 3        Train Loss: 9.1033      Valid Loss: 0.0000      Train Speed: 82537      LR: 7.0000e-04
+Epoch: 20       Batch: 3        Train Loss: 6.7688      Valid Loss: 0.0000      Train Speed: 80998      LR: 7.0000e-04
+Epoch: 25       Batch: 3        Train Loss: 5.4483      Valid Loss: 0.0000      Train Speed: 82823      LR: 7.0000e-04
+Epoch: 30       Batch: 3        Train Loss: 5.1606      Valid Loss: 0.0000      Train Speed: 82933      LR: 7.0000e-04
+Epoch: 35       Batch: 3        Train Loss: 4.9405      Valid Loss: 0.0000      Train Speed: 81095      LR: 7.0000e-04
+Epoch: 40       Batch: 3        Train Loss: 4.1596      Valid Loss: 0.0000      Train Speed: 82194      LR: 7.0000e-04
+Epoch: 45       Batch: 3        Train Loss: 3.4958      Valid Loss: 0.0000      Train Speed: 82811      LR: 7.0000e-04
+Epoch: 49       Batch: 3        Train Loss: 2.9679      Valid Loss: 0.0000      Train Speed: 83159      LR: 7.0000e-04
+Time elapsed for training: 1.50 s
+----------------------------------------------------------------------
+------------------------------  [ Task Scheduler ]
+----------------------------------------------------------------------
+|  ID  | Latency (ms) | Speed (GFLOPS) | Trials |
+-------------------------------------------------
+|    0 |        0.007 |         140.65 |     64 |
+|    1 |        0.003 |          -0.00 |     64 |
+|    2 |        0.067 |        2107.21 |    192 |
+|    3 |        0.066 |        2169.05 |    128 |
+|    4 |        0.048 |        2418.39 |    128 |
+|    5 |        0.045 |        2574.95 |    128 |
+|    6 |        0.047 |        2428.18 |    128 |
+|    7 |        0.028 |        4138.69 |     64 |
+|    8 |        0.036 |        3536.24 |    128 |
+|    9 |        0.030 |        4172.04 |     64 |
+|   10 |        0.019 |        6124.79 |     64 |
+|   11 |        0.031 |        4128.14 |    128 |
+|   12 |        0.026 |        4940.72 |    128 |
+|   13 |        0.005 |         384.06 |     64 |
+|   14 |        0.025 |        9393.75 |     64 |
+|   15 |        0.004 |        2894.39 |     64 |
+|   16 |        0.005 |        2501.15 |     64 |
+|   17 |        0.008 |        1669.34 |     64 |
+-------------------------------------------------
+Estimated total latency: 0.707 ms       Trials: 1724    Used time : 3516 s      Next ID: 2
+----------------------------------------------------------------------
+------------------------------  [ Search ]
+----------------------------------------------------------------------
+Sample Initial Population       #s: 95  fail_ct: 2977   Time elapsed: 9.46
+population size #760
+GA Iter: 0      Max score: 2.2357       Min score: -1.6562      #Pop: 128       #M+: 0  #M-: 0
+GA Iter: 1      Max score: 2.2357       Min score: -0.4254      #Pop: 128       #M+: 650        #M-: 0
+EvolutionarySearch      #s: 128 Time elapsed: 26.06
+----------------------------------------------------------------------
+------------------------------  [ Measure ]
+----------------------------------------------------------------------
+Get 64 programs to measure:
+........................................****************************************
+........................***********************
+Time elapsed for measurement: 85.54 s
+----------------------------------------------------------------------
+------------------------------  [ Train cost model ]
+----------------------------------------------------------------------
+============================================================
+Fit a net. Train size: 1788
+Epoch: 0        Batch: 3        Train Loss: 39.1814     Valid Loss: 0.0000      Train Speed: 75150      LR: 7.0000e-04
+Epoch: 5        Batch: 3        Train Loss: 22.6132     Valid Loss: 0.0000      Train Speed: 83008      LR: 7.0000e-04
+Epoch: 10       Batch: 3        Train Loss: 14.5144     Valid Loss: 0.0000      Train Speed: 82424      LR: 7.0000e-04
+Epoch: 15       Batch: 3        Train Loss: 10.7569     Valid Loss: 0.0000      Train Speed: 83447      LR: 7.0000e-04
+Epoch: 20       Batch: 3        Train Loss: 8.7402      Valid Loss: 0.0000      Train Speed: 80820      LR: 7.0000e-04
+Epoch: 25       Batch: 3        Train Loss: 6.7386      Valid Loss: 0.0000      Train Speed: 84131      LR: 7.0000e-04
+Epoch: 30       Batch: 3        Train Loss: 5.3740      Valid Loss: 0.0000      Train Speed: 84297      LR: 7.0000e-04
+Epoch: 35       Batch: 3        Train Loss: 4.3987      Valid Loss: 0.0000      Train Speed: 83992      LR: 7.0000e-04
+Epoch: 40       Batch: 3        Train Loss: 3.7216      Valid Loss: 0.0000      Train Speed: 82991      LR: 7.0000e-04
+Epoch: 45       Batch: 3        Train Loss: 3.4020      Valid Loss: 0.0000      Train Speed: 81114      LR: 7.0000e-04
+Epoch: 49       Batch: 3        Train Loss: 2.9265      Valid Loss: 0.0000      Train Speed: 82769      LR: 7.0000e-04
+Time elapsed for training: 1.89 s
+----------------------------------------------------------------------
+------------------------------  [ Task Scheduler ]
+----------------------------------------------------------------------
+|  ID  | Latency (ms) | Speed (GFLOPS) | Trials |
+-------------------------------------------------
+|    0 |        0.007 |         140.65 |     64 |
+|    1 |        0.003 |          -0.00 |     64 |
+|    2 |        0.057 |        2514.75 |    256 |
+|    3 |        0.066 |        2169.05 |    128 |
+|    4 |        0.048 |        2418.39 |    128 |
+|    5 |        0.045 |        2574.95 |    128 |
+|    6 |        0.047 |        2428.18 |    128 |
+|    7 |        0.028 |        4138.69 |     64 |
+|    8 |        0.036 |        3536.24 |    128 |
+|    9 |        0.030 |        4172.04 |     64 |
+|   10 |        0.019 |        6124.79 |     64 |
+|   11 |        0.031 |        4128.14 |    128 |
+|   12 |        0.026 |        4940.72 |    128 |
+|   13 |        0.005 |         384.06 |     64 |
+|   14 |        0.025 |        9393.75 |     64 |
+|   15 |        0.004 |        2894.39 |     64 |
+|   16 |        0.005 |        2501.15 |     64 |
+|   17 |        0.008 |        1669.34 |     64 |
+-------------------------------------------------
+Estimated total latency: 0.685 ms       Trials: 1788    Used time : 3639 s      Next ID: 2
+----------------------------------------------------------------------
+------------------------------  [ Search ]
+----------------------------------------------------------------------
+Sample Initial Population       #s: 58  fail_ct: 1478   Time elapsed: 4.46
+====== Potential Space Generation =======
+GA Iter: 0      Max score: 71.0544      Min score: 0.0381       #Pop: 58        #M+: 0  #M-: 0
+GA Iter: 2      Max score: 83.5835      Min score: 35.6872      #Pop: 512       #M+: 874        #M-: 0
+====== Potential Space Generation Time elapsed: 34.09 ======
+population size #723
+GA Iter: 0      Max score: 8.2584       Min score: 1.1739       #Pop: 128       #M+: 0  #M-: 0
+GA Iter: 1      Max score: 8.2584       Min score: 2.4607       #Pop: 128       #M+: 651        #M-: 0
+EvolutionarySearch      #s: 128 Time elapsed: 24.66
+----------------------------------------------------------------------
+------------------------------  [ Measure ]
+----------------------------------------------------------------------
+Get 64 programs to measure:
+........................................****************************************
+........................************************
+Time elapsed for measurement: 87.37 s
+----------------------------------------------------------------------
+------------------------------  [ Train cost model ]
+----------------------------------------------------------------------
+============================================================
+Fit a net. Train size: 1852
+Epoch: 0        Batch: 3        Train Loss: 34.9243     Valid Loss: 0.0000      Train Speed: 79102      LR: 7.0000e-04
+Epoch: 5        Batch: 3        Train Loss: 22.0637     Valid Loss: 0.0000      Train Speed: 83457      LR: 7.0000e-04
+Epoch: 10       Batch: 3        Train Loss: 14.5229     Valid Loss: 0.0000      Train Speed: 83288      LR: 7.0000e-04
+Epoch: 15       Batch: 3        Train Loss: 10.1470     Valid Loss: 0.0000      Train Speed: 84502      LR: 7.0000e-04
+Epoch: 20       Batch: 3        Train Loss: 7.4818      Valid Loss: 0.0000      Train Speed: 84245      LR: 7.0000e-04
+Epoch: 25       Batch: 3        Train Loss: 5.8192      Valid Loss: 0.0000      Train Speed: 83561      LR: 7.0000e-04
+Epoch: 30       Batch: 3        Train Loss: 4.6474      Valid Loss: 0.0000      Train Speed: 83806      LR: 7.0000e-04
+Epoch: 35       Batch: 3        Train Loss: 3.8080      Valid Loss: 0.0000      Train Speed: 84833      LR: 7.0000e-04
+Epoch: 40       Batch: 3        Train Loss: 3.3210      Valid Loss: 0.0000      Train Speed: 82720      LR: 7.0000e-04
+Epoch: 45       Batch: 3        Train Loss: 2.8848      Valid Loss: 0.0000      Train Speed: 84983      LR: 7.0000e-04
+Epoch: 49       Batch: 3        Train Loss: 2.6064      Valid Loss: 0.0000      Train Speed: 85609      LR: 7.0000e-04
+Time elapsed for training: 1.87 s
+----------------------------------------------------------------------
+------------------------------  [ Task Scheduler ]
+----------------------------------------------------------------------
+|  ID  | Latency (ms) | Speed (GFLOPS) | Trials |
+-------------------------------------------------
+|    0 |        0.007 |         140.65 |     64 |
+|    1 |        0.003 |          -0.00 |     64 |
+|    2 |        0.054 |        2648.64 |    320 |
+|    3 |        0.066 |        2169.05 |    128 |
+|    4 |        0.048 |        2418.39 |    128 |
+|    5 |        0.045 |        2574.95 |    128 |
+|    6 |        0.047 |        2428.18 |    128 |
+|    7 |        0.028 |        4138.69 |     64 |
+|    8 |        0.036 |        3536.24 |    128 |
+|    9 |        0.030 |        4172.04 |     64 |
+|   10 |        0.019 |        6124.79 |     64 |
+|   11 |        0.031 |        4128.14 |    128 |
+|   12 |        0.026 |        4940.72 |    128 |
+|   13 |        0.005 |         384.06 |     64 |
+|   14 |        0.025 |        9393.75 |     64 |
+|   15 |        0.004 |        2894.39 |     64 |
+|   16 |        0.005 |        2501.15 |     64 |
+|   17 |        0.008 |        1669.34 |     64 |
+-------------------------------------------------
+Estimated total latency: 0.679 ms       Trials: 1852    Used time : 3792 s      Next ID: 5
+----------------------------------------------------------------------
+------------------------------  [ Search ]
+----------------------------------------------------------------------
+Sample Initial Population       #s: 55  fail_ct: 1481   Time elapsed: 4.27
+====== Potential Space Generation =======
+GA Iter: 0      Max score: 80.6307      Min score: 0.0524       #Pop: 55        #M+: 0  #M-: 0
+GA Iter: 2      Max score: 85.0933      Min score: 47.1866      #Pop: 512       #M+: 874        #M-: 0
+====== Potential Space Generation Time elapsed: 33.40 ======
+population size #695
+GA Iter: 0      Max score: 8.2583       Min score: 1.1018       #Pop: 128       #M+: 0  #M-: 0
+GA Iter: 1      Max score: 8.2583       Min score: 1.8254       #Pop: 128       #M+: 646        #M-: 0
+EvolutionarySearch      #s: 128 Time elapsed: 23.69
+----------------------------------------------------------------------
+------------------------------  [ Measure ]
+----------------------------------------------------------------------
+Get 64 programs to measure:
+........................................****************************************
+........................************************E
+Time elapsed for measurement: 76.81 s
+----------------------------------------------------------------------
+------------------------------  [ Train cost model ]
+----------------------------------------------------------------------
+============================================================
+Fit a net. Train size: 1916
+Epoch: 0        Batch: 3        Train Loss: 35.9319     Valid Loss: 0.0000      Train Speed: 79699      LR: 7.0000e-04
+Epoch: 5        Batch: 3        Train Loss: 22.7918     Valid Loss: 0.0000      Train Speed: 85383      LR: 7.0000e-04
+Epoch: 10       Batch: 3        Train Loss: 14.8491     Valid Loss: 0.0000      Train Speed: 86440      LR: 7.0000e-04
+Epoch: 15       Batch: 3        Train Loss: 10.7238     Valid Loss: 0.0000      Train Speed: 85004      LR: 7.0000e-04
+Epoch: 20       Batch: 3        Train Loss: 8.3768      Valid Loss: 0.0000      Train Speed: 86076      LR: 7.0000e-04
+Epoch: 25       Batch: 3        Train Loss: 6.4905      Valid Loss: 0.0000      Train Speed: 85978      LR: 7.0000e-04
+Epoch: 30       Batch: 3        Train Loss: 5.1914      Valid Loss: 0.0000      Train Speed: 87109      LR: 7.0000e-04
+Epoch: 35       Batch: 3        Train Loss: 4.2973      Valid Loss: 0.0000      Train Speed: 87162      LR: 7.0000e-04
+Epoch: 40       Batch: 3        Train Loss: 3.7243      Valid Loss: 0.0000      Train Speed: 87639      LR: 7.0000e-04
+Epoch: 45       Batch: 3        Train Loss: 3.0762      Valid Loss: 0.0000      Train Speed: 84144      LR: 7.0000e-04
+Epoch: 49       Batch: 3        Train Loss: 2.6472      Valid Loss: 0.0000      Train Speed: 87591      LR: 7.0000e-04
+Time elapsed for training: 1.86 s
+----------------------------------------------------------------------
+------------------------------  [ Task Scheduler ]
+----------------------------------------------------------------------
+|  ID  | Latency (ms) | Speed (GFLOPS) | Trials |
+-------------------------------------------------
+|    0 |        0.007 |         140.65 |     64 |
+|    1 |        0.003 |          -0.00 |     64 |
+|    2 |        0.054 |        2648.64 |    320 |
+|    3 |        0.066 |        2169.05 |    128 |
+|    4 |        0.048 |        2418.39 |    128 |
+|    5 |        0.039 |        2948.54 |    192 |
+|    6 |        0.047 |        2428.18 |    128 |
+|    7 |        0.028 |        4138.69 |     64 |
+|    8 |        0.036 |        3536.24 |    128 |
+|    9 |        0.030 |        4172.04 |     64 |
+|   10 |        0.019 |        6124.79 |     64 |
+|   11 |        0.031 |        4128.14 |    128 |
+|   12 |        0.026 |        4940.72 |    128 |
+|   13 |        0.005 |         384.06 |     64 |
+|   14 |        0.025 |        9393.75 |     64 |
+|   15 |        0.004 |        2894.39 |     64 |
+|   16 |        0.005 |        2501.15 |     64 |
+|   17 |        0.008 |        1669.34 |     64 |
+-------------------------------------------------
+Estimated total latency: 0.668 ms       Trials: 1916    Used time : 3932 s      Next ID: 8
+----------------------------------------------------------------------
+------------------------------  [ Search ]
+----------------------------------------------------------------------
+Sample Initial Population       #s: 64  fail_ct: 1472   Time elapsed: 4.75
+====== Potential Space Generation =======
+GA Iter: 0      Max score: 81.2065      Min score: 0.0090       #Pop: 64        #M+: 0  #M-: 0
+GA Iter: 2      Max score: 120.5216     Min score: 58.4200      #Pop: 512       #M+: 893        #M-: 0
+====== Potential Space Generation Time elapsed: 37.85 ======
+population size #704
+GA Iter: 0      Max score: 5.9917       Min score: -2.0006      #Pop: 128       #M+: 0  #M-: 0
+GA Iter: 1      Max score: 5.9917       Min score: 0.4408       #Pop: 128       #M+: 643        #M-: 0
+EvolutionarySearch      #s: 128 Time elapsed: 27.44
+----------------------------------------------------------------------
+------------------------------  [ Measure ]
+----------------------------------------------------------------------
+Get 64 programs to measure:
+........................................****************************************
+........................************************
+Time elapsed for measurement: 75.61 s
+----------------------------------------------------------------------
+------------------------------  [ Train cost model ]
+----------------------------------------------------------------------
+============================================================
+Fit a net. Train size: 1980
+Epoch: 0        Batch: 3        Train Loss: 44.5713     Valid Loss: 0.0000      Train Speed: 81389      LR: 7.0000e-04
+Epoch: 5        Batch: 3        Train Loss: 26.9889     Valid Loss: 0.0000      Train Speed: 80866      LR: 7.0000e-04
+Epoch: 10       Batch: 3        Train Loss: 17.7034     Valid Loss: 0.0000      Train Speed: 87245      LR: 7.0000e-04
+Epoch: 15       Batch: 3        Train Loss: 13.9445     Valid Loss: 0.0000      Train Speed: 88954      LR: 7.0000e-04
+Epoch: 20       Batch: 3        Train Loss: 10.1880     Valid Loss: 0.0000      Train Speed: 85809      LR: 7.0000e-04
+Epoch: 25       Batch: 3        Train Loss: 7.5026      Valid Loss: 0.0000      Train Speed: 89736      LR: 7.0000e-04
+Epoch: 30       Batch: 3        Train Loss: 5.8173      Valid Loss: 0.0000      Train Speed: 89414      LR: 7.0000e-04
+Epoch: 35       Batch: 3        Train Loss: 4.5843      Valid Loss: 0.0000      Train Speed: 88797      LR: 7.0000e-04
+Epoch: 40       Batch: 3        Train Loss: 4.1158      Valid Loss: 0.0000      Train Speed: 89560      LR: 7.0000e-04
+Epoch: 45       Batch: 3        Train Loss: 3.5026      Valid Loss: 0.0000      Train Speed: 89416      LR: 7.0000e-04
+Epoch: 49       Batch: 3        Train Loss: 3.0285      Valid Loss: 0.0000      Train Speed: 60728      LR: 7.0000e-04
+Time elapsed for training: 2.01 s
+----------------------------------------------------------------------
+------------------------------  [ Task Scheduler ]
+----------------------------------------------------------------------
+|  ID  | Latency (ms) | Speed (GFLOPS) | Trials |
+-------------------------------------------------
+|    0 |        0.007 |         140.65 |     64 |
+|    1 |        0.003 |          -0.00 |     64 |
+|    2 |        0.054 |        2648.64 |    320 |
+|    3 |        0.066 |        2169.05 |    128 |
+|    4 |        0.048 |        2418.39 |    128 |
+|    5 |        0.039 |        2948.54 |    192 |
+|    6 |        0.047 |        2428.18 |    128 |
+|    7 |        0.028 |        4138.69 |     64 |
+|    8 |        0.036 |        3536.24 |    192 |
+|    9 |        0.030 |        4172.04 |     64 |
+|   10 |        0.019 |        6124.79 |     64 |
+|   11 |        0.031 |        4128.14 |    128 |
+|   12 |        0.026 |        4940.72 |    128 |
+|   13 |        0.005 |         384.06 |     64 |
+|   14 |        0.025 |        9393.75 |     64 |
+|   15 |        0.004 |        2894.39 |     64 |
+|   16 |        0.005 |        2501.15 |     64 |
+|   17 |        0.008 |        1669.34 |     64 |
+-------------------------------------------------
+Estimated total latency: 0.668 ms       Trials: 1980    Used time : 4081 s      Next ID: 3
+----------------------------------------------------------------------
+------------------------------  [ Search ]
+----------------------------------------------------------------------
+Sample Initial Population       #s: 94  fail_ct: 2978   Time elapsed: 9.20
+====== Potential Space Generation =======
+GA Iter: 0      Max score: 59.4959      Min score: 0.0550       #Pop: 94        #M+: 0  #M-: 0
+GA Iter: 2      Max score: 80.6205      Min score: 37.0808      #Pop: 512       #M+: 872        #M-: 0
+====== Potential Space Generation Time elapsed: 34.42 ======
+population size #734
+GA Iter: 0      Max score: 7.2730       Min score: 0.9450       #Pop: 128       #M+: 0  #M-: 0
+GA Iter: 1      Max score: 7.2730       Min score: 2.0071       #Pop: 128       #M+: 659        #M-: 0
+EvolutionarySearch      #s: 128 Time elapsed: 25.09
+----------------------------------------------------------------------
+------------------------------  [ Measure ]
+----------------------------------------------------------------------
+Get 64 programs to measure:
+........................................****************************************
+........................************************
+Time elapsed for measurement: 86.07 s
+----------------------------------------------------------------------
+------------------------------  [ Train cost model ]
+----------------------------------------------------------------------
+============================================================
+Fit a net. Train size: 2044
+Epoch: 0        Batch: 3        Train Loss: 42.2754     Valid Loss: 0.0000      Train Speed: 81799      LR: 7.0000e-04
+Epoch: 5        Batch: 3        Train Loss: 25.8361     Valid Loss: 0.0000      Train Speed: 88407      LR: 7.0000e-04
+Epoch: 10       Batch: 3        Train Loss: 16.8245     Valid Loss: 0.0000      Train Speed: 88991      LR: 7.0000e-04
+Epoch: 15       Batch: 3        Train Loss: 12.2315     Valid Loss: 0.0000      Train Speed: 79775      LR: 7.0000e-04
+Epoch: 20       Batch: 3        Train Loss: 9.2761      Valid Loss: 0.0000      Train Speed: 89156      LR: 7.0000e-04
+Epoch: 25       Batch: 3        Train Loss: 7.3847      Valid Loss: 0.0000      Train Speed: 88443      LR: 7.0000e-04
+Epoch: 30       Batch: 3        Train Loss: 6.4856      Valid Loss: 0.0000      Train Speed: 87530      LR: 7.0000e-04
+Epoch: 35       Batch: 3        Train Loss: 5.4452      Valid Loss: 0.0000      Train Speed: 88886      LR: 7.0000e-04
+Epoch: 40       Batch: 3        Train Loss: 4.4460      Valid Loss: 0.0000      Train Speed: 88936      LR: 7.0000e-04
+Epoch: 45       Batch: 3        Train Loss: 3.7733      Valid Loss: 0.0000      Train Speed: 88922      LR: 7.0000e-04
+Epoch: 49       Batch: 3        Train Loss: 3.4538      Valid Loss: 0.0000      Train Speed: 90682      LR: 7.0000e-04
+Time elapsed for training: 2.00 s
+----------------------------------------------------------------------
+------------------------------  [ Task Scheduler ]
+----------------------------------------------------------------------
+|  ID  | Latency (ms) | Speed (GFLOPS) | Trials |
+-------------------------------------------------
+|    0 |        0.007 |         140.65 |     64 |
+|    1 |        0.003 |          -0.00 |     64 |
+|    2 |        0.054 |        2648.64 |    320 |
+|    3 |        0.052 |        2733.32 |    192 |
+|    4 |        0.048 |        2418.39 |    128 |
+|    5 |        0.039 |        2948.54 |    192 |
+|    6 |        0.047 |        2428.18 |    128 |
+|    7 |        0.028 |        4138.69 |     64 |
+|    8 |        0.036 |        3536.24 |    192 |
+|    9 |        0.030 |        4172.04 |     64 |
+|   10 |        0.019 |        6124.79 |     64 |
+|   11 |        0.031 |        4128.14 |    128 |
+|   12 |        0.026 |        4940.72 |    128 |
+|   13 |        0.005 |         384.06 |     64 |
+|   14 |        0.025 |        9393.75 |     64 |
+|   15 |        0.004 |        2894.39 |     64 |
+|   16 |        0.005 |        2501.15 |     64 |
+|   17 |        0.008 |        1669.34 |     64 |
+-------------------------------------------------
+Estimated total latency: 0.654 ms       Trials: 2044    Used time : 4238 s      Next ID: -1
+[04:32:37] /home/zk/Pruner/src/runtime/threading_backend.cc:217: warning: more than two frequencies detected!
+
+
+
+
+安装transformer==3.5.0步骤
+conda activate pruner
+
+# 用 conda 安装可以避免编译问题
+conda install -c conda-forge sentencepiece
+pip install transformers==3.5.0 --no-deps -i https://pypi.tuna.tsinghua.edu.cn/simple
+pip install tokenizers==0.9.4 -i https://pypi.tuna.tsinghua.edu.cn/simple
+
+
+
+
+
+
 

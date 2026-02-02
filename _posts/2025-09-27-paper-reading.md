@@ -198,6 +198,9 @@ Faster Attention with Better Parallelism and Work Partitioning](https://arxiv.or
 
 - <img src="https://img.shields.io/badge/19-pages-green.svg" alt="19-pages" align="left"> [Mirage: A Multi-Level Superoptimizer for Tensor Programs](https://www.usenix.org/system/files/osdi25-wu-mengdi.pdf) - Mengdi Wu, Xinhao Cheng, Shengyu Liu, Chunan Shi, Jianan Ji, Man Kit Ao, Praveen Velliengiri, Xupeng Miao, Oded Padon, Zhihao Jia, OSDI, 2025
 
+- <img src="https://img.shields.io/badge/26-pages-green.svg" alt="26-pages" align="left"> [Accelerating Parallel Structures in DNNs via Parallel Fusion and Operator Co-Optimization](https://dl.acm.org/doi/pdf/10.1145/3744906) - Zhanyuan Di, Leping Wang, Zhaojia Ma, En Shao, Jie Zhao, Ziyi Ren, Siyuan Feng, Dingwen Tao, Guangming Tan, Ninghui Sun, TACO, 2025
+
+
 Other reference 33 + 81 =114
 
 Devlin J, Chang MW, Lee K, Toutanova K. Bert: Pre-training of deep bidirectional transformers for language understanding. InProceedings of the 2019 conference of the North American chapter of the association for computational linguistics: human language technologies, volume 1 (long and short papers) 2019 Jun (pp. 4171-4186).

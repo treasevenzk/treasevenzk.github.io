@@ -314,3 +314,639 @@ felix.StateFromConfig           ✔
 felix.MeasurePerformance        ✔
 
 
+Optimizer类
+self.tasks = TaskPerfFunc inst.weight inst.idx
+
+
+felix经历的过程
+extract_tasks
+
+task task_weights
+grouped : SymbolicDAC TaskInstance(i, weight, param, task)
+task SymTask(sym_dag, ansor_dag)
+self.ansor_task ansor_policy = self.make_task_from_dag(sym_ansor_dag)
+sketches = ffi.generate_all_sym_sketches
+
+SymTaskAndInstances task instances
+
+SymTask
+self.ansor_task self.sketches
+
+SKetch
+self.code self.context
+self.backbone
+
+
+SymTaskAndInstances -> SymTask -> Sketch
+
+Optimizer
+self.tasks = TaskPerfFunc(SymTask, TaskInstance.sizes, MLPModelPLWrapper)
+
+
+
+
+
+FeaturePack
+variables: 多阶段变量存储容器
+linear_cons: 线性约束管理
+split_groups: 循环分割信息
+var_factors: 质数分解映射
+no_factoring: 控制标志
+
+RunRollingSimplify(): 滚动简化优化表达式， 如原始: x = a * b , y = x * c 简化后: y = a * b * c
+RunExDecompose(): 质数幂次分解  任意正整数n可分解为: n = 2^a * 3^ b * 5^c * 7^d * ... Felix将任意sp
+RunDiffTransform(): 可微分变换
+RunSizeSubstitution(): 具体尺寸替换
+IntoPythonFeaturePack(): 转换为Python对象
+
+vdefs: 所有变量定义
+features: 提取的特征表达式
+constraints: 约束条件
+ei_vars: 形状变量(shape variables), 如E0、E1(表示输入tensor的维度)
+vi_vars: 中间变量(Intermediate Variables)
+exp_decomp: 指数分解后的表达式
+vi_and_features: vi_vars和features的合并
+diff_approx: 可微近似表达式
+
+TIR Stmt + VarContext
+        ↓
+StmtSimplifier(简化语句)
+        ↓
+GetPerStoreFeatureExpr(提取特征)
+GetConstraints(提取约束)
+        ↓
+构造 FeaturePack(vdefs, features, constriants, split_groups)
+        ↓
+RunRollingSimplify(简化表达式) 拆分: vdefs → ei_vars + vi_vars
+                             合并: vi_vars + features → vi_and_features
+        ↓
+RunExpDecompose(指数分解) 生成exp_decomp, var_factors
+        ↓
+RunDiffTransform(可微分转换) 移除: floor
+                           应用: DiffableApprox
+                           生成: diff_approx, linear_cons
+        ↓
+保存/加载JSON
+        ↓
+RunSizeSubstitution(尺寸替换) 替换: ei_vars
+                            计算: split_groups_factos
+                            合并所有变量到: vdefs
+                            简化: linear_cons
+        ↓
+IntoPythonFeaturePack(转换为Python对象)
+        ↓
+FeaturePackPy(expressions, free_vars, linear_cons, var_factors)
+
+
+
+self.ansor_task, ansor_policy = self.make_task_from_dag(sym_ansor_dag)
+sketches = ffi.generate_all_sym_sketches(ansor_policy)
+self.sketches = [Sketch(self, sketch) for sketch in sketches]
+self.code self.context = ffi.generate_code_for_state(task.ansor_task, sym_state, True)
+self.backbone = ffi.extract_backbone(self.tr_steps)
+self.features = sketch.fetch_features(task_perf_f.sizes)
+features = ffi.get_feature_pack(self.code, self.context, HW_PARAMS, sizes, cache_line_sizes, max_n_buf, kprime_factorize, path.with_suffic(").as_posix())
+ansor.MeasureInput(task, ffi.state_from_config(task, self.sketch.tr_steps, c))
+
+ffi.measure_performance(measurer, [c.get_measure_input() for c in configs])
+
+
+["CHW", 2, "local"], 
+["SP", 2, 0, 512, [1, 4, 16, 1], 1], 
+["SP", 2, 5, 4096, [1, 16, 2, 4], 1], 
+["SP", 2, 10, 1024, [2, 2], 1], 
+["RE", 2, [0, 5, 1, 6, 2, 7, 10, 11, 3, 8, 12, 4, 9]], SSSRRSRS
+
+["FSP", 3, 0, 1, 3], 
+["FSP", 3, 4, 2, 3], 
+["RE", 3, [0, 4, 1, 5, 2, 6, 3, 7]], 
+["CA", 2, 3, 5], 
+
+["CHR", 1, "shared", [2]], 
+["CA", 2, 3, 6], 
+["CHR", 0, "shared", [3]], 
+["CA", 1, 4, 6], 
+
+["FU", 5, [0, 1]], 
+["AN", 5, 0, 5], 
+["FU", 5, [1, 2]], 
+["AN", 5, 1, 4], 
+["FU", 5, [2, 3]], 
+["AN", 5, 2, 6], 
+
+["FU", 3, [0, 1]], 
+["SP", 3, 0, 32, [2], 1], 
+["AN", 3, 1, 2], 
+["FFSP", 3, 0, [2, 1], 1, 1], 
+["AN", 3, 1, 6], 
+
+["FU", 1, [0, 1]], 
+["SP", 1, 0, 64, [2], 1], 
+["AN", 1, 1, 2], 
+["FFSP", 1, 0, [2, 1], 1, 1], 
+["AN", 1, 1, 6], 
+
+["PR", 4, 0, "auto_unroll_max_step$1024"]sour
+
+
+AN      AnnotationStep:         record_prefix_str、stage_id、iter_id、
+FU      FuseStep:               record_prefix_str、stage_id、fused_ids
+PR      PragmaStep:             record_prefix_str、stage_id、iter_id、          pragma_type
+RE      ReorderStep:            record_prefix_str、stage_id、after_ids
+SP      SplitStep:              record_prefix_str、stage_id、iter_id、          extent、        lengths、       inner_to_outer
+FSP     FolllowSplitStep:       record_prefix_str、stage_id、iter_id、          src_step_id、   n_split
+
+FFSP    FollowFusedSplitStep:   record_prefix_str、stage_id、iter_id、          src_step_id、   level、         factor_or_nparts
+SA      StorageAlignStep:       record_prefix_str、stage_id、iter_id、          factor、        offset
+CA      ComputeAtStep:          record_prefix_str、stage_id、target_stage_id、  target_iter_id
+CI      ComputeInlineStep:      record_prefix_str、stage_id
+CR      ComputeRootStep:        record_prefix_str、stage_id
+CHR     CacheReadStep:          record_prefix_str、stage_id、scope_name、       reader_stage_ids
+CHW     CacheWriteStep:         record_prefix_str、stage_id、scope_name
+RF      RfactorStep             record_prefix_str、stage_id、iter_id            factor_iter_id
+
+
+
+
+
+["CHW", 2, "local"], 
+["SP", 2, 0, 512, [1, 4, 16, 1], 1], 
+["SP", 2, 5, 4096, [1, 16, 2, 4], 1], 
+["SP", 2, 10, 1024, [4, 2], 1], 
+["RE", 2, [0, 5, 1, 6, 2, 7, 10, 11, 3, 8, 12, 4, 9]], 
+
+["FSP", 3, 0, 1, 3], 
+["FSP", 3, 4, 2, 3], 
+["RE", 3, [0, 4, 1, 5, 2, 6, 3, 7]], 
+["CA", 2, 3, 5], 
+["CHR", 1, "shared", [2]], 
+["CA", 2, 3, 6], 
+["CHR", 0, "shared", [3]], 
+["CA", 1, 4, 6],
+
+["FU", 5, [0, 1]], 
+["AN", 5, 0, 5], 
+["FU", 5, [1, 2]], 
+["AN", 5, 1, 4], 
+["FU", 5, [2, 3]], 
+["AN", 5, 2, 6],
+
+["FU", 3, [0, 1]], 
+["SP", 3, 0, 64, [2], 1], 
+["AN", 3, 1, 2], 
+["FFSP", 3, 0, [2, 1], 1, 1], 
+["AN", 3, 1, 6], 
+
+["FU", 1, [0, 1]], 
+["SP", 1, 0, 128, [2], 1], 
+["AN", 1, 1, 2], 
+["FFSP", 1, 0, [2, 1], 1, 1], 
+["AN", 1, 1, 6], 
+
+["PR", 4, 0, "auto_unroll_max_step$1024"]
+
+('resnet_50', [(1, 3, 224, 224)])
+[09:44:15] /home/zk/Pruner/src/runtime/threading_backend.cc:217: warning: more than two frequencies detected!
+========== Task 0  (workload key: ["9847f8cc0b305137f49f2c5c0c8ab25d", 1, 2048, 1000, 2048, 1000, 1, 1000]...) ==========
+placeholder = PLACEHOLDER [1, 2048]
+placeholder = PLACEHOLDER [1000, 2048]
+T_dense(i, j) += (placeholder[i, k]*placeholder[j, k])
+placeholder = PLACEHOLDER [1000]
+T_add(ax0, ax1) = (T_dense[ax0, ax1] + placeholder[ax1])
+
+6.27229e-05
+
+
+========== Task 1  (workload key: ["69115f188984ae34ede37c3b8ca40b43", 1, 7, 7, 2048, 1, 1, 1, 2048]...) ==========
+placeholder = PLACEHOLDER [1, 7, 7, 2048]
+tensor(ax0, ax1, ax2, ax3) += placeholder[ax0, ((ax1*7) + rv0), ((ax2*7) + rv1), ax3]
+tensor(ax0, ax1, ax2, ax3) = (tensor[ax0, ax1, ax2, ax3]/(float32((select((bool)1, ((ax1 + 1)*7), (((ax1 + 1)*7) + 1)) - (ax1*7)))*float32((select((bool)1, ((ax2 + 1)*7), (((ax2 + 1)*7) + 1)) - (ax2*7)))))
+
+3.62703e-06
+
+========== Task 2  (workload key: ["022e9ad925fa9d131944586979dafc0f", 1, 7, 7, 512, 1, 1, 512, 2048, 1, 1, 1, 2048, 1, 7, 7, 2048, 1, 7, 7, 2048]...) 3==========
+placeholder = PLACEHOLDER [1, 7, 7, 512]
+PaddedInput(i0, i1, i2, i3) = placeholder[i0, i1, i2, i3]
+placeholder = PLACEHOLDER [1, 1, 512, 2048]
+Conv2dOutput(nn, yy, xx, ff) += (PaddedInput[nn, (yy + ry), (xx + rx), rc]*placeholder[ry, rx, rc, ff])
+placeholder = PLACEHOLDER [1, 1, 1, 2048]
+T_add(ax0, ax1, ax2, ax3) = (Conv2dOutput[ax0, ax1, ax2, ax3] + placeholder[ax0, 0, 0, ax3])
+placeholder = PLACEHOLDER [1, 7, 7, 2048]
+T_add(ax0, ax1, ax2, ax3) = (T_add[ax0, ax1, ax2, ax3] + placeholder[ax0, ax1, ax2, ax3])
+T_relu(ax0, ax1, ax2, ax3) = max(T_add[ax0, ax1, ax2, ax3], 0f)
+
+1.99834e-05   80
+["SP", 3, 0, 1, [1, 1, 1, 1], 1], ["SP", 3, 5, 7, [1, 1, 7, 1], 1], ["SP", 3, 10, 7, [1, 7, 1, 1], 1], ["SP", 3, 15, 2048, [1, 8, 2, 1], 1], ["SP", 3, 20, 1, [1, 1], 1], ["SP", 3, 23, 1, [1, 1], 1], ["SP", 3, 26, 512, [8, 16], 1], 
+
+========== Task 7  (workload key: ["022e9ad925fa9d131944586979dafc0f", 1, 14, 14, 256, 1, 1, 256, 1024, 1, 1, 1, 1024, 1, 14, 14, 1024, 1, 14, 14, 1024]...) 6==========
+placeholder = PLACEHOLDER [1, 14, 14, 256]
+PaddedInput(i0, i1, i2, i3) = placeholder[i0, i1, i2, i3]
+placeholder = PLACEHOLDER [1, 1, 256, 1024]
+Conv2dOutput(nn, yy, xx, ff) += (PaddedInput[nn, (yy + ry), (xx + rx), rc]*placeholder[ry, rx, rc, ff])
+placeholder = PLACEHOLDER [1, 1, 1, 1024]
+T_add(ax0, ax1, ax2, ax3) = (Conv2dOutput[ax0, ax1, ax2, ax3] + placeholder[ax0, 0, 0, ax3])
+placeholder = PLACEHOLDER [1, 14, 14, 1024]
+T_add(ax0, ax1, ax2, ax3) = (T_add[ax0, ax1, ax2, ax3] + placeholder[ax0, ax1, ax2, ax3])
+T_relu(ax0, ax1, ax2, ax3) = max(T_add[ax0, ax1, ax2, ax3], 0f)
+
+1.52316e-05 120
+["SP", 3, 0, 1, [1, 1, 1, 1], 1], ["SP", 3, 5, 14, [1, 1, 1, 2], 1], ["SP", 3, 10, 14, [1, 7, 1, 2], 1], ["SP", 3, 15, 1024, [1, 16, 4, 1], 1], ["SP", 3, 20, 1, [1, 1], 1], ["SP", 3, 23, 1, [1, 1], 1], ["SP", 3, 26, 256, [32, 2], 1],
+
+
+========== Task 12  (workload key: ["022e9ad925fa9d131944586979dafc0f", 1, 28, 28, 128, 1, 1, 128, 512, 1, 1, 1, 512, 1, 28, 28, 512, 1, 28, 28, 512]...) 4==========
+placeholder = PLACEHOLDER [1, 28, 28, 128]
+PaddedInput(i0, i1, i2, i3) = placeholder[i0, i1, i2, i3]
+placeholder = PLACEHOLDER [1, 1, 128, 512]
+Conv2dOutput(nn, yy, xx, ff) += (PaddedInput[nn, (yy + ry), (xx + rx), rc]*placeholder[ry, rx, rc, ff])
+placeholder = PLACEHOLDER [1, 1, 1, 512]
+T_add(ax0, ax1, ax2, ax3) = (Conv2dOutput[ax0, ax1, ax2, ax3] + placeholder[ax0, 0, 0, ax3])
+placeholder = PLACEHOLDER [1, 28, 28, 512]
+T_add(ax0, ax1, ax2, ax3) = (T_add[ax0, ax1, ax2, ax3] + placeholder[ax0, ax1, ax2, ax3])
+T_relu(ax0, ax1, ax2, ax3) = max(T_add[ax0, ax1, ax2, ax3], 0f)
+
+1.42663e-05 80
+["SP", 3, 0, 1, [1, 1, 1, 1], 1], ["SP", 3, 5, 28, [1, 2, 7, 1], 1], ["SP", 3, 10, 28, [1, 4, 1, 1], 1], ["SP", 3, 15, 512, [4, 32, 1, 1], 1], ["SP", 3, 20, 1, [1, 1], 1], ["SP", 3, 23, 1, [1, 1], 1], ["SP", 3, 26, 128, [8, 4], 1]
+
+
+========== Task 17  (workload key: ["022e9ad925fa9d131944586979dafc0f", 1, 56, 56, 64, 1, 1, 64, 256, 1, 1, 1, 256, 1, 56, 56, 256, 1, 56, 56, 256]...) 3==========
+placeholder = PLACEHOLDER [1, 56, 56, 64]
+PaddedInput(i0, i1, i2, i3) = placeholder[i0, i1, i2, i3]
+placeholder = PLACEHOLDER [1, 1, 64, 256]
+Conv2dOutput(nn, yy, xx, ff) += (PaddedInput[nn, (yy + ry), (xx + rx), rc]*placeholder[ry, rx, rc, ff])
+placeholder = PLACEHOLDER [1, 1, 1, 256]
+T_add(ax0, ax1, ax2, ax3) = (Conv2dOutput[ax0, ax1, ax2, ax3] + placeholder[ax0, 0, 0, ax3])
+placeholder = PLACEHOLDER [1, 56, 56, 256]
+T_add(ax0, ax1, ax2, ax3) = (T_add[ax0, ax1, ax2, ax3] + placeholder[ax0, ax1, ax2, ax3])
+T_relu(ax0, ax1, ax2, ax3) = max(T_add[ax0, ax1, ax2, ax3], 0f)
+
+1.69547e-05 60
+["SP", 3, 0, 1, [1, 1, 1, 1], 1], ["SP", 3, 5, 56, [1, 1, 2, 2], 1], ["SP", 3, 10, 56, [1, 14, 1, 2], 1], ["SP", 3, 15, 256, [2, 16, 2, 1], 1], ["SP", 3, 20, 1, [1, 1], 1], ["SP", 3, 23, 1, [1, 1], 1], ["SP", 3, 26, 64, [16, 4], 1]
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+1.99834e-05   80
+["SP", 3, 0, 1, [1, 1, 1, 1], 1], ["SP", 3, 5, 7, [1, 1, 7, 1], 1], ["SP", 3, 10, 7, [1, 7, 1, 1], 1], ["SP", 3, 15, 2048, [1, 8, 2, 1], 1], ["SP", 3, 20, 1, [1, 1], 1], ["SP", 3, 23, 1, [1, 1], 1], ["SP", 3, 26, 512, [8, 16], 1], 
+
+1.42663e-05 80
+["SP", 3, 0, 1, [1, 1, 1, 1], 1], ["SP", 3, 5, 28, [1, 2, 7, 1], 1], ["SP", 3, 10, 28, [1, 4, 1, 1], 1], ["SP", 3, 15, 512, [4, 32, 1, 1], 1], ["SP", 3, 20, 1, [1, 1], 1], ["SP", 3, 23, 1, [1, 1], 1], ["SP", 3, 26, 128, [8, 4], 1]
+
+"CI" "CI" 
+"SP" "SP" "SP" "SP" "SP" "SP" "SP" "RE" 
+"FSP" "FSP" "FSP" "FSP" "RE" 
+"CA" 
+"CHR" "CA" "CHR" "CA" 
+"CI" 
+"FU" "AN" "FU" "AN" "FU" "AN" 
+"FU" "SP" "AN" "FFSP" "AN" 
+"FU" "SP" "AN" "FFSP" "AN" 
+"PR" "auto_unroll_max_step$64"
+
+
+========== Task 3  (workload key: ["3a69f9fbc63760d99e36b4c17b3bfc57", 1, 7, 7, 512, 4, 4, 512, 512, 1, 1, 1, 512, 1, 7, 7, 512]...) 2==========
+placeholder = PLACEHOLDER [1, 7, 7, 512]
+data_pad(i0, i1, i2, i3) = tir.if_then_else(((((i1 >= 1) && (i1 < 8)) && (i2 >= 1)) && (i2 < 8)), placeholder[i0, (i1 - 1), (i2 - 1), i3], 0f)
+input_tile(eps, nu, p, ci) = data_pad[floordiv(p, 16), ((floormod(floordiv(p, 4), 4)*2) + eps), ((floormod(p, 4)*2) + nu), ci]
+B(i, j) = select(((floormod(i, 4) == 3) && (floormod(j, 4) == 3)), 1f, select(((floormod(i, 4) == 3) && (floormod(j, 4) == 2)),  ..(OMITTED).. ormod(i, 4) == 0) && (floormod(j, 4) == 1)), 0f, select(((floormod(i, 4) == 0) && (floormod(j, 4) == 0)), 1f, 0f))))))))))))))))
+data_pack(eps, nu, p, ci) += ((input_tile[r_a, r_b, p, ci]*B[r_a, eps])*B[r_b, nu])
+placeholder = PLACEHOLDER [4, 4, 512, 512]
+bgemm(eps, nu, p, co) += (data_pack[eps, nu, p, ci]*placeholder[eps, nu, co, ci])
+A(i, j) = select(((floormod(i, 4) == 3) && (floormod(j, 2) == 1)), 1f, select(((floormod(i, 4) == 3) && (floormod(j, 2) == 0)),  ..(OMITTED).. ct(((floormod(i, 4) == 0) && (floormod(j, 2) == 1)), 0f, select(((floormod(i, 4) == 0) && (floormod(j, 2) == 0)), 1f, 0f))))))))
+inverse(vh, vw, p, co) += ((bgemm[r_a, r_b, p, co]*A[r_a, vh])*A[r_b, vw])
+conv2d_winograd(n, h, w, co) = inverse[floormod(h, 2), floormod(w, 2), ((((n*4)*4) + (floordiv(h, 2)*4)) + floordiv(w, 2)), co]
+placeholder = PLACEHOLDER [1, 1, 1, 512]
+T_add(ax0, ax1, ax2, ax3) = (conv2d_winograd[ax0, ax1, ax2, ax3] + placeholder[ax0, 0, 0, ax3])
+T_relu(ax0, ax1, ax2, ax3) = max(T_add[ax0, ax1, ax2, ax3], 0f)
+
+5.46359e-05 140
+
+
+========== Task 4  (workload key: ["6b7583cf23c7c37d3212cad9d06e58c1", 1, 7, 7, 2048, 1, 1, 2048, 512, 1, 1, 1, 512, 1, 7, 7, 512]...) 2==========
+placeholder = PLACEHOLDER [1, 7, 7, 2048]
+PaddedInput(i0, i1, i2, i3) = placeholder[i0, i1, i2, i3]
+placeholder = PLACEHOLDER [1, 1, 2048, 512]
+Conv2dOutput(nn, yy, xx, ff) += (PaddedInput[nn, (yy + ry), (xx + rx), rc]*placeholder[ry, rx, rc, ff])
+placeholder = PLACEHOLDER [1, 1, 1, 512]
+T_add(ax0, ax1, ax2, ax3) = (Conv2dOutput[ax0, ax1, ax2, ax3] + placeholder[ax0, 0, 0, ax3])
+T_relu(ax0, ax1, ax2, ax3) = max(T_add[ax0, ax1, ax2, ax3], 0f)
+
+4.04766e-05 100
+["SP", 3, 0, 1, [1, 1, 1, 1], 1], ["SP", 3, 5, 7, [1, 7, 1, 1], 1], ["SP", 3, 10, 7, [1, 1, 1, 1], 1], ["SP", 3, 15, 512, [1, 8, 1, 4], 1], ["SP", 3, 20, 1, [1, 1], 1], ["SP", 3, 23, 1, [1, 1], 1], ["SP", 3, 26, 2048, [16, 8], 1], 
+
+========== Task 6  (workload key: ["6b7583cf23c7c37d3212cad9d06e58c1", 1, 14, 14, 1024, 1, 1, 1024, 512, 1, 1, 1, 512, 1, 14, 14, 512]...) ==========
+placeholder = PLACEHOLDER [1, 14, 14, 1024]
+PaddedInput(i0, i1, i2, i3) = placeholder[i0, i1, i2, i3]
+placeholder = PLACEHOLDER [1, 1, 1024, 512]
+Conv2dOutput(nn, yy, xx, ff) += (PaddedInput[nn, (yy + ry), (xx + rx), rc]*placeholder[ry, rx, rc, ff])
+placeholder = PLACEHOLDER [1, 1, 1, 512]
+T_add(ax0, ax1, ax2, ax3) = (Conv2dOutput[ax0, ax1, ax2, ax3] + placeholder[ax0, 0, 0, ax3])
+T_relu(ax0, ax1, ax2, ax3) = max(T_add[ax0, ax1, ax2, ax3], 0f)
+
+3.13058e-05 50
+["SP", 3, 0, 1, [1, 1, 1, 1], 1], ["SP", 3, 5, 14, [1, 1, 7, 1], 1], ["SP", 3, 10, 14, [1, 7, 1, 1], 1], ["SP", 3, 15, 512, [1, 16, 2, 1], 1], ["SP", 3, 20, 1, [1, 1], 1], ["SP", 3, 23, 1, [1, 1], 1], ["SP", 3, 26, 1024, [2, 64], 1], 
+
+========== Task 9  (workload key: ["6b7583cf23c7c37d3212cad9d06e58c1", 1, 14, 14, 1024, 1, 1, 1024, 256, 1, 1, 1, 256, 1, 14, 14, 256]...) 5==========
+placeholder = PLACEHOLDER [1, 14, 14, 1024]
+PaddedInput(i0, i1, i2, i3) = placeholder[i0, i1, i2, i3]
+placeholder = PLACEHOLDER [1, 1, 1024, 256]
+Conv2dOutput(nn, yy, xx, ff) += (PaddedInput[nn, (yy + ry), (xx + rx), rc]*placeholder[ry, rx, rc, ff])
+placeholder = PLACEHOLDER [1, 1, 1, 256]
+T_add(ax0, ax1, ax2, ax3) = (Conv2dOutput[ax0, ax1, ax2, ax3] + placeholder[ax0, 0, 0, ax3])
+T_relu(ax0, ax1, ax2, ax3) = max(T_add[ax0, ax1, ax2, ax3], 0f)
+
+2.1559e-05 140
+["SP", 3, 0, 1, [1, 1, 1, 1], 1], ["SP", 3, 5, 14, [1, 7, 2, 1], 1], ["SP", 3, 10, 14, [1, 1, 2, 1], 1], ["SP", 3, 15, 256, [1, 16, 2, 1], 1], ["SP", 3, 20, 1, [1, 1], 1], ["SP", 3, 23, 1, [1, 1], 1], ["SP", 3, 26, 1024, [2, 64], 1], 
+
+========== Task 11  (workload key: ["6b7583cf23c7c37d3212cad9d06e58c1", 1, 28, 28, 512, 1, 1, 512, 256, 1, 1, 1, 256, 1, 28, 28, 256]...) ==========
+placeholder = PLACEHOLDER [1, 28, 28, 512]
+PaddedInput(i0, i1, i2, i3) = placeholder[i0, i1, i2, i3]
+placeholder = PLACEHOLDER [1, 1, 512, 256]
+Conv2dOutput(nn, yy, xx, ff) += (PaddedInput[nn, (yy + ry), (xx + rx), rc]*placeholder[ry, rx, rc, ff])
+placeholder = PLACEHOLDER [1, 1, 1, 256]
+T_add(ax0, ax1, ax2, ax3) = (Conv2dOutput[ax0, ax1, ax2, ax3] + placeholder[ax0, 0, 0, ax3])
+T_relu(ax0, ax1, ax2, ax3) = max(T_add[ax0, ax1, ax2, ax3], 0f)
+
+2.74661e-05 50
+["SP", 3, 0, 1, [1, 1, 1, 1], 1], ["SP", 3, 5, 28, [1, 7, 2, 2], 1], ["SP", 3, 10, 28, [1, 1, 2, 1], 1], ["SP", 3, 15, 256, [2, 32, 1, 1], 1], ["SP", 3, 20, 1, [1, 1], 1], ["SP", 3, 23, 1, [1, 1], 1], ["SP", 3, 26, 512, [32, 2], 1],
+
+
+
+========== Task 14  (workload key: ["6b7583cf23c7c37d3212cad9d06e58c1", 1, 28, 28, 512, 1, 1, 512, 128, 1, 1, 1, 128, 1, 28, 28, 128]...) 3==========
+placeholder = PLACEHOLDER [1, 28, 28, 512]
+PaddedInput(i0, i1, i2, i3) = placeholder[i0, i1, i2, i3]
+placeholder = PLACEHOLDER [1, 1, 512, 128]
+Conv2dOutput(nn, yy, xx, ff) += (PaddedInput[nn, (yy + ry), (xx + rx), rc]*placeholder[ry, rx, rc, ff])
+placeholder = PLACEHOLDER [1, 1, 1, 128]
+T_add(ax0, ax1, ax2, ax3) = (Conv2dOutput[ax0, ax1, ax2, ax3] + placeholder[ax0, 0, 0, ax3])
+T_relu(ax0, ax1, ax2, ax3) = max(T_add[ax0, ax1, ax2, ax3], 0f)
+
+1.99953e-05 80
+["SP", 3, 0, 1, [1, 1, 1, 1], 1], ["SP", 3, 5, 28, [1, 4, 1, 1], 1], ["SP", 3, 10, 28, [2, 1, 2, 1], 1], ["SP", 3, 15, 128, [1, 32, 2, 1], 1], ["SP", 3, 20, 1, [1, 1], 1], ["SP", 3, 23, 1, [1, 1], 1], ["SP", 3, 26, 512, [8, 8], 1],
+
+========== Task 16  (workload key: ["6b7583cf23c7c37d3212cad9d06e58c1", 1, 56, 56, 256, 1, 1, 256, 128, 1, 1, 1, 128, 1, 56, 56, 128]...) ==========
+placeholder = PLACEHOLDER [1, 56, 56, 256]
+PaddedInput(i0, i1, i2, i3) = placeholder[i0, i1, i2, i3]
+placeholder = PLACEHOLDER [1, 1, 256, 128]
+Conv2dOutput(nn, yy, xx, ff) += (PaddedInput[nn, (yy + ry), (xx + rx), rc]*placeholder[ry, rx, rc, ff])
+placeholder = PLACEHOLDER [1, 1, 1, 128]
+T_add(ax0, ax1, ax2, ax3) = (Conv2dOutput[ax0, ax1, ax2, ax3] + placeholder[ax0, 0, 0, ax3])
+T_relu(ax0, ax1, ax2, ax3) = max(T_add[ax0, ax1, ax2, ax3], 0f)
+
+2.50949e-05 100
+["SP", 3, 0, 1, [1, 1, 1, 1], 1], ["SP", 3, 5, 56, [1, 1, 1, 1], 1], ["SP", 3, 10, 56, [1, 2, 14, 1], 1], ["SP", 3, 15, 128, [4, 32, 1, 1], 1], ["SP", 3, 20, 1, [1, 1], 1], ["SP", 3, 23, 1, [1, 1], 1], ["SP", 3, 26, 256, [4, 4], 1], 
+
+
+========== Task 19  (workload key: ["6b7583cf23c7c37d3212cad9d06e58c1", 1, 56, 56, 256, 1, 1, 256, 64, 1, 1, 1, 64, 1, 56, 56, 64]...) 2==========
+placeholder = PLACEHOLDER [1, 56, 56, 256]
+PaddedInput(i0, i1, i2, i3) = placeholder[i0, i1, i2, i3]
+placeholder = PLACEHOLDER [1, 1, 256, 64]
+Conv2dOutput(nn, yy, xx, ff) += (PaddedInput[nn, (yy + ry), (xx + rx), rc]*placeholder[ry, rx, rc, ff])
+placeholder = PLACEHOLDER [1, 1, 1, 64]
+T_add(ax0, ax1, ax2, ax3) = (Conv2dOutput[ax0, ax1, ax2, ax3] + placeholder[ax0, 0, 0, ax3])
+T_relu(ax0, ax1, ax2, ax3) = max(T_add[ax0, ax1, ax2, ax3], 0f)
+
+1.50793e-05 50
+["SP", 3, 0, 1, [1, 1, 1, 1], 1], ["SP", 3, 5, 56, [1, 1, 1, 1], 1], ["SP", 3, 10, 56, [1, 7, 4, 1], 1], ["SP", 3, 15, 64, [2, 16, 2, 1], 1], ["SP", 3, 20, 1, [1, 1], 1], ["SP", 3, 23, 1, [1, 1], 1], ["SP", 3, 26, 256, [16, 4], 1], 
+
+
+========== Task 20  (workload key: ["6b7583cf23c7c37d3212cad9d06e58c1", 1, 56, 56, 64, 1, 1, 64, 64, 1, 1, 1, 64, 1, 56, 56, 64]...) ==========
+placeholder = PLACEHOLDER [1, 56, 56, 64]
+PaddedInput(i0, i1, i2, i3) = placeholder[i0, i1, i2, i3]
+placeholder = PLACEHOLDER [1, 1, 64, 64]
+Conv2dOutput(nn, yy, xx, ff) += (PaddedInput[nn, (yy + ry), (xx + rx), rc]*placeholder[ry, rx, rc, ff])
+placeholder = PLACEHOLDER [1, 1, 1, 64]
+T_add(ax0, ax1, ax2, ax3) = (Conv2dOutput[ax0, ax1, ax2, ax3] + placeholder[ax0, 0, 0, ax3])
+T_relu(ax0, ax1, ax2, ax3) = max(T_add[ax0, ax1, ax2, ax3], 0f)
+
+5.01663e-06 10
+["SP", 3, 0, 1, [1, 1, 1, 1], 1], ["SP", 3, 5, 56, [2, 2, 1, 1], 1], ["SP", 3, 10, 56, [1, 4, 1, 2], 1], ["SP", 3, 15, 64, [1, 16, 2, 1], 1], ["SP", 3, 20, 1, [1, 1], 1], ["SP", 3, 23, 1, [1, 1], 1], ["SP", 3, 26, 64, [32, 2], 1], 
+
+
+========== Task 5  (workload key: ["12b88bedece6984af589a28b43e0f3c4", 1, 14, 14, 512, 3, 3, 512, 512, 1, 1, 1, 512, 1, 7, 7, 512]...) ==========
+placeholder = PLACEHOLDER [1, 14, 14, 512]
+PaddedInput(i0, i1, i2, i3) = tir.if_then_else(((((i1 >= 1) && (i1 < 15)) && (i2 >= 1)) && (i2 < 15)), placeholder[i0, (i1 - 1), (i2 - 1), i3], 0f)
+placeholder = PLACEHOLDER [3, 3, 512, 512]
+Conv2dOutput(nn, yy, xx, ff) += (PaddedInput[nn, ((yy*2) + ry), ((xx*2) + rx), rc]*placeholder[ry, rx, rc, ff])
+placeholder = PLACEHOLDER [1, 1, 1, 512]
+T_add(ax0, ax1, ax2, ax3) = (Conv2dOutput[ax0, ax1, ax2, ax3] + placeholder[ax0, 0, 0, ax3])
+T_relu(ax0, ax1, ax2, ax3) = max(T_add[ax0, ax1, ax2, ax3], 0f)
+
+7.9156e-05 100
+["SP", 3, 0, 1, [1, 1, 1, 1], 1], ["SP", 3, 5, 7, [1, 7, 1, 1], 1], ["SP", 3, 10, 7, [1, 1, 1, 7], 1], ["SP", 3, 15, 512, [1, 16, 1, 1], 1], ["SP", 3, 20, 3, [1, 3], 1], ["SP", 3, 23, 3, [1, 3], 1], ["SP", 3, 26, 512, [8, 2], 1],
+
+========== Task 10  (workload key: ["12b88bedece6984af589a28b43e0f3c4", 1, 28, 28, 256, 3, 3, 256, 256, 1, 1, 1, 256, 1, 14, 14, 256]...) ==========
+placeholder = PLACEHOLDER [1, 28, 28, 256]
+PaddedInput(i0, i1, i2, i3) = tir.if_then_else(((((i1 >= 1) && (i1 < 29)) && (i2 >= 1)) && (i2 < 29)), placeholder[i0, (i1 - 1), (i2 - 1), i3], 0f)
+placeholder = PLACEHOLDER [3, 3, 256, 256]
+Conv2dOutput(nn, yy, xx, ff) += (PaddedInput[nn, ((yy*2) + ry), ((xx*2) + rx), rc]*placeholder[ry, rx, rc, ff])
+placeholder = PLACEHOLDER [1, 1, 1, 256]
+T_add(ax0, ax1, ax2, ax3) = (Conv2dOutput[ax0, ax1, ax2, ax3] + placeholder[ax0, 0, 0, ax3])
+T_relu(ax0, ax1, ax2, ax3) = max(T_add[ax0, ax1, ax2, ax3], 0f)
+
+4.67301e-05 70
+["SP", 3, 0, 1, [1, 1, 1, 1], 1], ["SP", 3, 5, 14, [1, 7, 2, 1], 1], ["SP", 3, 10, 14, [1, 1, 2, 1], 1], ["SP", 3, 15, 256, [1, 16, 2, 1], 1], ["SP", 3, 20, 3, [1, 3], 1], ["SP", 3, 23, 3, [1, 1], 1], ["SP", 3, 26, 256, [2, 32], 1],
+
+========== Task 15  (workload key: ["12b88bedece6984af589a28b43e0f3c4", 1, 56, 56, 128, 3, 3, 128, 128, 1, 1, 1, 128, 1, 28, 28, 128]...) ==========
+placeholder = PLACEHOLDER [1, 56, 56, 128]
+PaddedInput(i0, i1, i2, i3) = tir.if_then_else(((((i1 >= 1) && (i1 < 57)) && (i2 >= 1)) && (i2 < 57)), placeholder[i0, (i1 - 1), (i2 - 1), i3], 0f)
+placeholder = PLACEHOLDER [3, 3, 128, 128]
+Conv2dOutput(nn, yy, xx, ff) += (PaddedInput[nn, ((yy*2) + ry), ((xx*2) + rx), rc]*placeholder[ry, rx, rc, ff])
+placeholder = PLACEHOLDER [1, 1, 1, 128]
+T_add(ax0, ax1, ax2, ax3) = (Conv2dOutput[ax0, ax1, ax2, ax3] + placeholder[ax0, 0, 0, ax3])
+T_relu(ax0, ax1, ax2, ax3) = max(T_add[ax0, ax1, ax2, ax3], 0f)
+
+4.1521e-05 50
+["SP", 3, 0, 1, [1, 1, 1, 1], 1], ["SP", 3, 5, 28, [1, 1, 1, 1], 1], ["SP", 3, 10, 28, [1, 14, 2, 1], 1], ["SP", 3, 15, 128, [1, 16, 2, 1], 1], ["SP", 3, 20, 3, [1, 3], 1], ["SP", 3, 23, 3, [3, 1], 1], ["SP", 3, 26, 128, [8, 2], 1],
+
+
+========== Task 22  (workload key: ["12b88bedece6984af589a28b43e0f3c4", 1, 224, 224, 3, 7, 7, 3, 64, 1, 1, 1, 64, 1, 112, 112, 64]...) ==========
+placeholder = PLACEHOLDER [1, 224, 224, 3]
+PaddedInput(i0, i1, i2, i3) = tir.if_then_else(((((i1 >= 3) && (i1 < 227)) && (i2 >= 3)) && (i2 < 227)), placeholder[i0, (i1 - 3), (i2 - 3), i3], 0f)
+placeholder = PLACEHOLDER [7, 7, 3, 64]
+Conv2dOutput(nn, yy, xx, ff) += (PaddedInput[nn, ((yy*2) + ry), ((xx*2) + rx), rc]*placeholder[ry, rx, rc, ff])
+placeholder = PLACEHOLDER [1, 1, 1, 64]
+T_add(ax0, ax1, ax2, ax3) = (Conv2dOutput[ax0, ax1, ax2, ax3] + placeholder[ax0, 0, 0, ax3])
+T_relu(ax0, ax1, ax2, ax3) = max(T_add[ax0, ax1, ax2, ax3], 0f)
+
+2.34164e-05 50
+["SP", 3, 0, 1, [1, 1, 1, 1], 1], ["SP", 3, 5, 112, [1, 7, 2, 1], 1], ["SP", 3, 10, 112, [1, 1, 2, 2], 1], ["SP", 3, 15, 64, [2, 32, 1, 1], 1], ["SP", 3, 20, 7, [7, 1], 1], ["SP", 3, 23, 7, [1, 7], 1], ["SP", 3, 26, 3, [1, 1], 1],
+
+
+
+
+
+
+
+
+========== Task 8  (workload key: ["b8b52b9be9df6102466a22a014c44c1f", 1, 14, 14, 256, 4, 4, 256, 256, 1, 1, 1, 256, 1, 14, 14, 256]...) 5==========
+placeholder = PLACEHOLDER [1, 14, 14, 256]
+data_pad(i0, i1, i2, i3) = tir.if_then_else(((((i1 >= 1) && (i1 < 15)) && (i2 >= 1)) && (i2 < 15)), placeholder[i0, (i1 - 1), (i2 - 1), i3], 0f)
+input_tile(eps, nu, p, ci) = data_pad[floordiv(p, 49), ((floormod(floordiv(p, 7), 7)*2) + eps), ((floormod(p, 7)*2) + nu), ci]
+B(i, j) = select(((floormod(i, 4) == 3) && (floormod(j, 4) == 3)), 1f, select(((floormod(i, 4) == 3) && (floormod(j, 4) == 2)),  ..(OMITTED).. ormod(i, 4) == 0) && (floormod(j, 4) == 1)), 0f, select(((floormod(i, 4) == 0) && (floormod(j, 4) == 0)), 1f, 0f))))))))))))))))
+data_pack(eps, nu, p, ci) += ((input_tile[r_a, r_b, p, ci]*B[r_a, eps])*B[r_b, nu])
+placeholder = PLACEHOLDER [4, 4, 256, 256]
+bgemm(eps, nu, p, co) += (data_pack[eps, nu, p, ci]*placeholder[eps, nu, co, ci])
+A(i, j) = select(((floormod(i, 4) == 3) && (floormod(j, 2) == 1)), 1f, select(((floormod(i, 4) == 3) && (floormod(j, 2) == 0)),  ..(OMITTED).. ct(((floormod(i, 4) == 0) && (floormod(j, 2) == 1)), 0f, select(((floormod(i, 4) == 0) && (floormod(j, 2) == 0)), 1f, 0f))))))))
+inverse(vh, vw, p, co) += ((bgemm[r_a, r_b, p, co]*A[r_a, vh])*A[r_b, vw])
+conv2d_winograd(n, h, w, co) = inverse[floormod(h, 2), floormod(w, 2), ((((n*7)*7) + (floordiv(h, 2)*7)) + floordiv(w, 2)), co]
+placeholder = PLACEHOLDER [1, 1, 1, 256]
+T_add(ax0, ax1, ax2, ax3) = (conv2d_winograd[ax0, ax1, ax2, ax3] + placeholder[ax0, 0, 0, ax3])
+T_relu(ax0, ax1, ax2, ax3) = max(T_add[ax0, ax1, ax2, ax3], 0f)
+
+2.9158e-05 180
+
+========== Task 13  (workload key: ["e4cdf917b876dbdd64488c3818d9c141", 1, 28, 28, 128, 4, 4, 128, 128, 1, 1, 1, 128, 1, 28, 28, 128]...) 3==========
+placeholder = PLACEHOLDER [1, 28, 28, 128]
+data_pad(i0, i1, i2, i3) = tir.if_then_else(((((i1 >= 1) && (i1 < 29)) && (i2 >= 1)) && (i2 < 29)), placeholder[i0, (i1 - 1), (i2 - 1), i3], 0f)
+input_tile(eps, nu, p, ci) = data_pad[floordiv(p, 196), ((floormod(floordiv(p, 14), 14)*2) + eps), ((floormod(p, 14)*2) + nu), ci]
+B(i, j) = select(((floormod(i, 4) == 3) && (floormod(j, 4) == 3)), 1f, select(((floormod(i, 4) == 3) && (floormod(j, 4) == 2)),  ..(OMITTED).. ormod(i, 4) == 0) && (floormod(j, 4) == 1)), 0f, select(((floormod(i, 4) == 0) && (floormod(j, 4) == 0)), 1f, 0f))))))))))))))))
+data_pack(eps, nu, p, ci) += ((input_tile[r_a, r_b, p, ci]*B[r_a, eps])*B[r_b, nu])
+placeholder = PLACEHOLDER [4, 4, 128, 128]
+bgemm(eps, nu, p, co) += (data_pack[eps, nu, p, ci]*placeholder[eps, nu, co, ci])
+A(i, j) = select(((floormod(i, 4) == 3) && (floormod(j, 2) == 1)), 1f, select(((floormod(i, 4) == 3) && (floormod(j, 2) == 0)),  ..(OMITTED).. ct(((floormod(i, 4) == 0) && (floormod(j, 2) == 1)), 0f, select(((floormod(i, 4) == 0) && (floormod(j, 2) == 0)), 1f, 0f))))))))
+inverse(vh, vw, p, co) += ((bgemm[r_a, r_b, p, co]*A[r_a, vh])*A[r_b, vw])
+conv2d_winograd(n, h, w, co) = inverse[floormod(h, 2), floormod(w, 2), ((((n*14)*14) + (floordiv(h, 2)*14)) + floordiv(w, 2)), co]
+placeholder = PLACEHOLDER [1, 1, 1, 128]
+T_add(ax0, ax1, ax2, ax3) = (conv2d_winograd[ax0, ax1, ax2, ax3] + placeholder[ax0, 0, 0, ax3])
+T_relu(ax0, ax1, ax2, ax3) = max(T_add[ax0, ax1, ax2, ax3], 0f)
+
+3.42814e-05 100
+
+========== Task 18  (workload key: ["b818b53148cd450f86569dfc3e04cb8a", 1, 56, 56, 64, 6, 6, 64, 64, 1, 1, 1, 64, 1, 56, 56, 64]...) 3==========
+placeholder = PLACEHOLDER [1, 56, 56, 64]
+data_pad(i0, i1, i2, i3) = tir.if_then_else(((((i1 >= 1) && (i1 < 57)) && (i2 >= 1)) && (i2 < 57)), placeholder[i0, (i1 - 1), (i2 - 1), i3], 0f)
+input_tile(eps, nu, p, ci) = data_pad[floordiv(p, 196), ((floormod(floordiv(p, 14), 14)*4) + eps), ((floormod(p, 14)*4) + nu), ci]
+B(i, j) = select(((floormod(i, 6) == 5) && (floormod(j, 6) == 5)), 1f, select(((floormod(i, 6) == 5) && (floormod(j, 6) == 4)),  ..(OMITTED)..  (floormod(j, 6) == 1)), 0f, select(((floormod(i, 6) == 0) && (floormod(j, 6) == 0)), 1f, 0f))))))))))))))))))))))))))))))))))))
+data_pack(eps, nu, p, ci) += ((input_tile[r_a, r_b, p, ci]*B[r_a, eps])*B[r_b, nu])
+placeholder = PLACEHOLDER [6, 6, 64, 64]
+bgemm(eps, nu, p, co) += (data_pack[eps, nu, p, ci]*placeholder[eps, nu, co, ci])
+A(i, j) = select(((floormod(i, 6) == 5) && (floormod(j, 4) == 3)), 1f, select(((floormod(i, 6) == 5) && (floormod(j, 4) == 2)),  ..(OMITTED)..  6) == 0) && (floormod(j, 4) == 1)), 0f, select(((floormod(i, 6) == 0) && (floormod(j, 4) == 0)), 1f, 0f))))))))))))))))))))))))
+inverse(vh, vw, p, co) += ((bgemm[r_a, r_b, p, co]*A[r_a, vh])*A[r_b, vw])
+conv2d_winograd(n, h, w, co) = inverse[floormod(h, 4), floormod(w, 4), ((((n*14)*14) + (floordiv(h, 4)*14)) + floordiv(w, 4)), co]
+placeholder = PLACEHOLDER [1, 1, 1, 64]
+T_add(ax0, ax1, ax2, ax3) = (conv2d_winograd[ax0, ax1, ax2, ax3] + placeholder[ax0, 0, 0, ax3])
+T_relu(ax0, ax1, ax2, ax3) = max(T_add[ax0, ax1, ax2, ax3], 0f)
+
+2.29611e-05 100
+
+========== Task 21  (workload key: ["23b8a36aee55cd70eeb0706ebd25dcf3", 1, 112, 112, 64, 1, 56, 56, 64]...) ==========
+placeholder = PLACEHOLDER [1, 112, 112, 64]
+pad_temp(ax0, ax1, ax2, ax3) = tir.if_then_else(((((ax1 >= 1) && (ax1 < 113)) && (ax2 >= 1)) && (ax2 < 113)), placeholder[ax0, (ax1 - 1), (ax2 - 1), ax3], -3.40282e+38f)
+tensor(ax0, ax1, ax2, ax3) max= pad_temp[ax0, ((ax1*2) + dh), ((ax2*2) + dw), ax3]
+
+5.75706e-06 10
+
+========== Task 23  (workload key: ["9f4c6b76f51d20e5c3bfb1817edd446e", 1, 56, 56, 64, 1, 1, 64, 256, 1, 1, 1, 256, 1, 56, 56, 256]...) ==========
+placeholder = PLACEHOLDER [1, 56, 56, 64]
+PaddedInput(i0, i1, i2, i3) = placeholder[i0, i1, i2, i3]
+placeholder = PLACEHOLDER [1, 1, 64, 256]
+Conv2dOutput(nn, yy, xx, ff) += (PaddedInput[nn, (yy + ry), (xx + rx), rc]*placeholder[ry, rx, rc, ff])
+placeholder = PLACEHOLDER [1, 1, 1, 256]
+T_add(ax0, ax1, ax2, ax3) = (Conv2dOutput[ax0, ax1, ax2, ax3] + placeholder[ax0, 0, 0, ax3])
+
+1.41949e-05 20
+["SP", 3, 0, 1, [1, 1, 1, 1], 1], ["SP", 3, 5, 56, [1, 1, 2, 1], 1], ["SP", 3, 10, 56, [1, 1, 1, 28], 1], ["SP", 3, 15, 256, [1, 128, 1, 1], 1], ["SP", 3, 20, 1, [1, 1], 1], ["SP", 3, 23, 1, [1, 1], 1], ["SP", 3, 26, 64, [4, 4], 1], 
+
+
+========== Task 24  (workload key: ["a12fbee7636d485f5404304276246b54", 1, 56, 56, 256, 1, 1, 256, 512, 1, 1, 1, 512, 1, 28, 28, 512]...) ==========
+placeholder = PLACEHOLDER [1, 56, 56, 256]
+PaddedInput(i0, i1, i2, i3) = placeholder[i0, i1, i2, i3]
+placeholder = PLACEHOLDER [1, 1, 256, 512]
+Conv2dOutput(nn, yy, xx, ff) += (PaddedInput[nn, ((yy*2) + ry), ((xx*2) + rx), rc]*placeholder[ry, rx, rc, ff])
+placeholder = PLACEHOLDER [1, 1, 1, 512]
+T_add(ax0, ax1, ax2, ax3) = (Conv2dOutput[ax0, ax1, ax2, ax3] + placeholder[ax0, 0, 0, ax3])
+
+2.84199e-05 50
+["SP", 3, 0, 1, [1, 1, 1, 1], 1], ["SP", 3, 5, 28, [1, 4, 1, 1], 1], ["SP", 3, 10, 28, [1, 1, 7, 1], 1], ["SP", 3, 15, 512, [2, 32, 2, 1], 1], ["SP", 3, 20, 1, [1, 1], 1], ["SP", 3, 23, 1, [1, 1], 1], ["SP", 3, 26, 256, [2, 8], 1]
+
+
+========== Task 25  (workload key: ["a12fbee7636d485f5404304276246b54", 1, 28, 28, 512, 1, 1, 512, 1024, 1, 1, 1, 1024, 1, 14, 14, 1024]...) ==========
+placeholder = PLACEHOLDER [1, 28, 28, 512]
+PaddedInput(i0, i1, i2, i3) = placeholder[i0, i1, i2, i3]
+placeholder = PLACEHOLDER [1, 1, 512, 1024]
+Conv2dOutput(nn, yy, xx, ff) += (PaddedInput[nn, ((yy*2) + ry), ((xx*2) + rx), rc]*placeholder[ry, rx, rc, ff])
+placeholder = PLACEHOLDER [1, 1, 1, 1024]
+T_add(ax0, ax1, ax2, ax3) = (Conv2dOutput[ax0, ax1, ax2, ax3] + placeholder[ax0, 0, 0, ax3])
+
+3.62962e-05 50
+["SP", 3, 0, 1, [1, 1, 1, 1], 1], ["SP", 3, 5, 14, [1, 1, 7, 2], 1], ["SP", 3, 10, 14, [1, 1, 1, 1], 1], ["SP", 3, 15, 1024, [1, 128, 1, 1], 1], ["SP", 3, 20, 1, [1, 1], 1], ["SP", 3, 23, 1, [1, 1], 1], ["SP", 3, 26, 512, [16, 4], 1], 
+
+========== Task 26  (workload key: ["a12fbee7636d485f5404304276246b54", 1, 14, 14, 1024, 1, 1, 1024, 2048, 1, 1, 1, 2048, 1, 7, 7, 2048]...) ==========
+placeholder = PLACEHOLDER [1, 14, 14, 1024]
+PaddedInput(i0, i1, i2, i3) = placeholder[i0, i1, i2, i3]
+placeholder = PLACEHOLDER [1, 1, 1024, 2048]
+Conv2dOutput(nn, yy, xx, ff) += (PaddedInput[nn, ((yy*2) + ry), ((xx*2) + rx), rc]*placeholder[ry, rx, rc, ff])
+placeholder = PLACEHOLDER [1, 1, 1, 2048]
+T_add(ax0, ax1, ax2, ax3) = (Conv2dOutput[ax0, ax1, ax2, ax3] + placeholder[ax0, 0, 0, ax3])
+
+5.49496e-05 70
+["SP", 3, 0, 1, [1, 1, 1, 1], 1], ["SP", 3, 5, 7, [1, 1, 1, 1], 1], ["SP", 3, 10, 7, [1, 1, 1, 7], 1], ["SP", 3, 15, 2048, [1, 64, 1, 1], 1], ["SP", 3, 20, 1, [1, 1], 1], ["SP", 3, 23, 1, [1, 1], 1], ["SP", 3, 26, 1024, [4, 16], 1],
+
+
+
+2、7、12、17
+
+1.99834e-05   80
+["SP", 3, 0, 1, [1, 1, 1, 1], 1], ["SP", 3, 5, 7, [1, 1, 7, 1], 1], ["SP", 3, 10, 7, [1, 7, 1, 1], 1], ["SP", 3, 15, 2048, [1, 8, 2, 1], 1], ["SP", 3, 20, 1, [1, 1], 1], ["SP", 3, 23, 1, [1, 1], 1], ["SP", 3, 26, 512, [8, 16], 1], 
+
+1.52316e-05 120
+["SP", 3, 0, 1, [1, 1, 1, 1], 1], ["SP", 3, 5, 14, [1, 1, 1, 2], 1], ["SP", 3, 10, 14, [1, 7, 1, 2], 1], ["SP", 3, 15, 1024, [1, 16, 4, 1], 1], ["SP", 3, 20, 1, [1, 1], 1], ["SP", 3, 23, 1, [1, 1], 1], ["SP", 3, 26, 256, [32, 2], 1],
+
+1.42663e-05 80
+["SP", 3, 0, 1, [1, 1, 1, 1], 1], ["SP", 3, 5, 28, [1, 2, 7, 1], 1], ["SP", 3, 10, 28, [1, 4, 1, 1], 1], ["SP", 3, 15, 512, [4, 32, 1, 1], 1], ["SP", 3, 20, 1, [1, 1], 1], ["SP", 3, 23, 1, [1, 1], 1], ["SP", 3, 26, 128, [8, 4], 1]
+
+1.69547e-05 60
+["SP", 3, 0, 1, [1, 1, 1, 1], 1], ["SP", 3, 5, 56, [1, 1, 2, 2], 1], ["SP", 3, 10, 56, [1, 14, 1, 2], 1], ["SP", 3, 15, 256, [2, 16, 2, 1], 1], ["SP", 3, 20, 1, [1, 1], 1], ["SP", 3, 23, 1, [1, 1], 1], ["SP", 3, 26, 64, [16, 4], 1]
+
+4、6、9、11、14、16、19、20、5、10、15、22
+
+4.04766e-05 100         4
+["SP", 3, 0, 1, [1, 1, 1, 1], 1], ["SP", 3, 5, 7, [1, 7, 1, 1], 1], ["SP", 3, 10, 7, [1, 1, 1, 1], 1], ["SP", 3, 15, 512, [1, 8, 1, 4], 1], ["SP", 3, 20, 1, [1, 1], 1], ["SP", 3, 23, 1, [1, 1], 1], ["SP", 3, 26, 2048, [16, 8], 1], 
+
+3.13058e-05 50          6
+["SP", 3, 0, 1, [1, 1, 1, 1], 1], ["SP", 3, 5, 14, [1, 1, 7, 1], 1], ["SP", 3, 10, 14, [1, 7, 1, 1], 1], ["SP", 3, 15, 512, [1, 16, 2, 1], 1], ["SP", 3, 20, 1, [1, 1], 1], ["SP", 3, 23, 1, [1, 1], 1], ["SP", 3, 26, 1024, [2, 64], 1], 
+
+
+2.1559e-05 140          9
+["SP", 3, 0, 1, [1, 1, 1, 1], 1], ["SP", 3, 5, 14, [1, 7, 2, 1], 1], ["SP", 3, 10, 14, [1, 1, 2, 1], 1], ["SP", 3, 15, 256, [1, 16, 2, 1], 1], ["SP", 3, 20, 1, [1, 1], 1], ["SP", 3, 23, 1, [1, 1], 1], ["SP", 3, 26, 1024, [2, 64], 1], 
+
+2.74661e-05 50          11
+["SP", 3, 0, 1, [1, 1, 1, 1], 1], ["SP", 3, 5, 28, [1, 7, 2, 2], 1], ["SP", 3, 10, 28, [1, 1, 2, 1], 1], ["SP", 3, 15, 256, [2, 32, 1, 1], 1], ["SP", 3, 20, 1, [1, 1], 1], ["SP", 3, 23, 1, [1, 1], 1], ["SP", 3, 26, 512, [32, 2], 1],
+
+1.99953e-05 80          14
+["SP", 3, 0, 1, [1, 1, 1, 1], 1], ["SP", 3, 5, 28, [1, 4, 1, 1], 1], ["SP", 3, 10, 28, [2, 1, 2, 1], 1], ["SP", 3, 15, 128, [1, 32, 2, 1], 1], ["SP", 3, 20, 1, [1, 1], 1], ["SP", 3, 23, 1, [1, 1], 1], ["SP", 3, 26, 512, [8, 8], 1],
+
+2.50949e-05 100         16
+["SP", 3, 0, 1, [1, 1, 1, 1], 1], ["SP", 3, 5, 56, [1, 1, 1, 1], 1], ["SP", 3, 10, 56, [1, 2, 14, 1], 1], ["SP", 3, 15, 128, [4, 32, 1, 1], 1], ["SP", 3, 20, 1, [1, 1], 1], ["SP", 3, 23, 1, [1, 1], 1], ["SP", 3, 26, 256, [4, 4], 1], 
+
+1.50793e-05 50          19
+["SP", 3, 0, 1, [1, 1, 1, 1], 1], ["SP", 3, 5, 56, [1, 1, 1, 1], 1], ["SP", 3, 10, 56, [1, 7, 4, 1], 1], ["SP", 3, 15, 64, [2, 16, 2, 1], 1], ["SP", 3, 20, 1, [1, 1], 1], ["SP", 3, 23, 1, [1, 1], 1], ["SP", 3, 26, 256, [16, 4], 1], 
+
+5.01663e-06 10          20
+["SP", 3, 0, 1, [1, 1, 1, 1], 1], ["SP", 3, 5, 56, [2, 2, 1, 1], 1], ["SP", 3, 10, 56, [1, 4, 1, 2], 1], ["SP", 3, 15, 64, [1, 16, 2, 1], 1], ["SP", 3, 20, 1, [1, 1], 1], ["SP", 3, 23, 1, [1, 1], 1], ["SP", 3, 26, 64, [32, 2], 1], 
+
+7.9156e-05 100          5
+["SP", 3, 0, 1, [1, 1, 1, 1], 1], ["SP", 3, 5, 7, [1, 7, 1, 1], 1], ["SP", 3, 10, 7, [1, 1, 1, 7], 1], ["SP", 3, 15, 512, [1, 16, 1, 1], 1], ["SP", 3, 20, 3, [1, 3], 1], ["SP", 3, 23, 3, [1, 3], 1], ["SP", 3, 26, 512, [8, 2], 1],
+
+4.67301e-05 70          10
+["SP", 3, 0, 1, [1, 1, 1, 1], 1], ["SP", 3, 5, 14, [1, 7, 2, 1], 1], ["SP", 3, 10, 14, [1, 1, 2, 1], 1], ["SP", 3, 15, 256, [1, 16, 2, 1], 1], ["SP", 3, 20, 3, [1, 3], 1], ["SP", 3, 23, 3, [1, 1], 1], ["SP", 3, 26, 256, [2, 32], 1],
+
+4.1521e-05 50           15
+["SP", 3, 0, 1, [1, 1, 1, 1], 1], ["SP", 3, 5, 28, [1, 1, 1, 1], 1], ["SP", 3, 10, 28, [1, 14, 2, 1], 1], ["SP", 3, 15, 128, [1, 16, 2, 1], 1], ["SP", 3, 20, 3, [1, 3], 1], ["SP", 3, 23, 3, [3, 1], 1], ["SP", 3, 26, 128, [8, 2], 1],
+
+2.34164e-05 50          22
+["SP", 3, 0, 1, [1, 1, 1, 1], 1], ["SP", 3, 5, 112, [1, 7, 2, 1], 1], ["SP", 3, 10, 112, [1, 1, 2, 2], 1], ["SP", 3, 15, 64, [2, 32, 1, 1], 1], ["SP", 3, 20, 7, [7, 1], 1], ["SP", 3, 23, 7, [1, 7], 1], ["SP", 3, 26, 3, [1, 1], 1],
+
+
+23、24、25、26
+
+1.41949e-05 20
+["SP", 3, 0, 1, [1, 1, 1, 1], 1], ["SP", 3, 5, 56, [1, 1, 2, 1], 1], ["SP", 3, 10, 56, [1, 1, 1, 28], 1], ["SP", 3, 15, 256, [1, 128, 1, 1], 1], ["SP", 3, 20, 1, [1, 1], 1], ["SP", 3, 23, 1, [1, 1], 1], ["SP", 3, 26, 64, [4, 4], 1], 
+
+2.84199e-05 50
+["SP", 3, 0, 1, [1, 1, 1, 1], 1], ["SP", 3, 5, 28, [1, 4, 1, 1], 1], ["SP", 3, 10, 28, [1, 1, 7, 1], 1], ["SP", 3, 15, 512, [2, 32, 2, 1], 1], ["SP", 3, 20, 1, [1, 1], 1], ["SP", 3, 23, 1, [1, 1], 1], ["SP", 3, 26, 256, [2, 8], 1]
+
+3.62962e-05 50
+["SP", 3, 0, 1, [1, 1, 1, 1], 1], ["SP", 3, 5, 14, [1, 1, 7, 2], 1], ["SP", 3, 10, 14, [1, 1, 1, 1], 1], ["SP", 3, 15, 1024, [1, 128, 1, 1], 1], ["SP", 3, 20, 1, [1, 1], 1], ["SP", 3, 23, 1, [1, 1], 1], ["SP", 3, 26, 512, [16, 4], 1], 
+
+5.49496e-05 70
+["SP", 3, 0, 1, [1, 1, 1, 1], 1], ["SP", 3, 5, 7, [1, 1, 1, 1], 1], ["SP", 3, 10, 7, [1, 1, 1, 7], 1], ["SP", 3, 15, 2048, [1, 64, 1, 1], 1], ["SP", 3, 20, 1, [1, 1], 1], ["SP", 3, 23, 1, [1, 1], 1], ["SP", 3, 26, 1024, [4, 16], 1],
